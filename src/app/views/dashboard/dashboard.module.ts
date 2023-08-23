@@ -15,12 +15,10 @@ import {
   TabsModule
 } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
-import { ChartjsModule } from '@coreui/angular-chartjs';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-
-import { WidgetsModule } from '../widgets/widgets.module';
+import { TableViewComponent } from '../table-view/table-view.component'
 
 @NgModule({
   imports: [
@@ -37,12 +35,10 @@ import { WidgetsModule } from '../widgets/widgets.module';
     FormModule,
     ButtonModule,
     ButtonGroupModule,
-    ChartjsModule,
     AvatarModule,
-    TableModule,
-    WidgetsModule
+    TableModule
   ],
-  declarations: [DashboardComponent]
+  declarations: [DashboardComponent, TableViewComponent]
 })
 export class DashboardModule {
 }
