@@ -10,7 +10,6 @@ export class AdminService {
   constructor(private http: HttpClient) { }
 
   getAllProperties() {
-    console.log(`${apiUrl}/admin/partner/getAllProperties`)
     return this.http.get(`${apiUrl}/admin/partner/getAllProperties`);
   }
 }
