@@ -6,6 +6,7 @@ import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';
 import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
+import { AdminModule } from './views/admin/admin.module'
 
 const routes: Routes = [
   {
@@ -99,6 +100,11 @@ const routes: Routes = [
     data: {
       title: 'Register Page'
     }
+  },
+  {
+    path: 'admin',
+    component: DefaultLayoutComponent,
+    loadChildren: () => import('./views/admin/admin.module').then((m) => m.AdminModule)
   },
   {path: '**', redirectTo: 'dashboard'}
 ];
