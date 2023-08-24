@@ -1,50 +1,99 @@
-<table cTable responsive="xxl">
-    <thead >
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Heading</th>
-      <th scope="col">Heading</th>
-      <th scope="col">Heading</th>
-      <th scope="col">Heading</th>
-      <th scope="col">Heading</th>
-      <th scope="col">Heading</th>
-      <th scope="col">Heading</th>
-      <th scope="col">Heading</th>
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Enter key" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="locationName">
+      <th mat-header-cell *matHeaderCellDef> Location Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.locationName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="corpName">
+      <th mat-header-cell *matHeaderCellDef> Corp Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.corpName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="propertyType">
+      <th mat-header-cell *matHeaderCellDef> Property Type </th>
+      <td mat-cell *matCellDef="let row"> {{row.propertyType}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="appSection">
+      <th mat-header-cell *matHeaderCellDef> App Section </th>
+      <td mat-cell *matCellDef="let row"> {{row.appSection}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="address1">
+      <th mat-header-cell *matHeaderCellDef> Address 1 </th>
+      <td mat-cell *matCellDef="let row"> {{row.address1}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="address2">
+      <th mat-header-cell *matHeaderCellDef> Address 2 </th>
+      <td mat-cell *matCellDef="let row"> {{row.address2}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef> City </th>
+      <td mat-cell *matCellDef="let row"> {{row.city}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="state">
+      <th mat-header-cell *matHeaderCellDef> State </th>
+      <td mat-cell *matCellDef="let row"> {{row.state}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="country">
+      <th mat-header-cell *matHeaderCellDef> Country </th>
+      <td mat-cell *matCellDef="let row"> {{row.country}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="zip">
+      <th mat-header-cell *matHeaderCellDef> Zip </th>
+      <td mat-cell *matCellDef="let row"> {{row.zip}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef> Phone </th>
+      <td mat-cell *matCellDef="let row"> {{row.phone}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="orgType">
+      <th mat-header-cell *matHeaderCellDef> Org Type </th>
+      <td mat-cell *matCellDef="let row"> {{row.orgType}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="groupCode">
+      <th mat-header-cell *matHeaderCellDef> Group Code </th>
+      <td mat-cell *matCellDef="let row"> {{row.groupCode}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="locationCompany">
+      <th mat-header-cell *matHeaderCellDef> Location Company </th>
+      <td mat-cell *matCellDef="let row"> {{row.locationCompany}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No records available</td>
     </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Cell</td>
-      <td>Cell</td>
-      <td>Cell</td>
-      <td>Cell</td>
-      <td>Cell</td>
-      <td>Cell</td>
-      <td>Cell</td>
-      <td>Cell</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Cell</td>
-      <td>Cell</td>
-      <td>Cell</td>
-      <td>Cell</td>
-      <td>Cell</td>
-      <td>Cell</td>
-      <td>Cell</td>
-      <td>Cell</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Cell</td>
-      <td>Cell</td>
-      <td>Cell</td>
-      <td>Cell</td>
-      <td>Cell</td>
-      <td>Cell</td>
-      <td>Cell</td>
-      <td>Cell</td>
-    </tr>
-    </tbody>
   </table>
+
+  <mat-paginator (page)="onPageChange($event)" [length]="totalRecords" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+

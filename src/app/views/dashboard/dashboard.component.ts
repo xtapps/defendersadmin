@@ -1,7 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { AdminService } from '../../services/admin.service'
 import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
 
 interface IUser {
@@ -22,11 +20,9 @@ interface IUser {
   templateUrl: 'dashboard.component.html',
   styleUrls: ['dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit {
 
-  private subscriptions: Subscription[] = [];
-
-  constructor(private adminService: AdminService, private chartsData: DashboardChartsData) {
+  constructor(private chartsData: DashboardChartsData) {
   }
 
   public users: IUser[] = [
@@ -116,7 +112,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   });
 
   ngOnInit(): void {
-    this.getAllProperties();
     this.initCharts();
   }
 
@@ -128,17 +123,5 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.trafficRadioGroup.setValue({ trafficRadio: value });
     this.chartsData.initMainChart(value);
     this.initCharts();
-  }
-
-  getAllProperties() {
-    const propSub = this.adminService.getAllProperties().subscribe(res => {
-      console.log(res); // Pass this response to the table view component and show the data as dynamically
-    });
-
-    this.subscriptions.push(propSub);
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }

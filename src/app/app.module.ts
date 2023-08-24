@@ -39,6 +39,7 @@ import {
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminModule } from './views/admin/admin.module';
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -76,7 +77,8 @@ const APP_CONTAINERS = [
     CardModule,
     NgScrollbarModule,
     TableModule,
-    HttpClientModule
+    HttpClientModule,
+    AdminModule
   ],
   providers: [
     {
