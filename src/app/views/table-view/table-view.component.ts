@@ -12,7 +12,20 @@ import { AdminService } from '../../services/admin.service';
 })
 export class TableViewComponent implements OnInit, OnDestroy {
 
-  displayedColumns: string[] = ['email', 'locationName', 'corpName', 'propertyType', 'appSection', 'address1', 'address2', 'city', 'state', 'country', 'zip', 'phone', 'orgType', 'description', 'groupCode', 'locationCompany'];
+  displayedColumns: string[] = [
+    'email',
+    'locationName',
+    'corpName',
+    'address1',
+    'address2',
+    'city',
+    'state',
+    'country',
+    'zip',
+    'phone',
+    'orgType',
+    'description'
+  ];
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator: MatPaginator = {} as MatPaginator;
@@ -28,7 +41,7 @@ export class TableViewComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService) { }
 
   ngOnInit(): void {
     this.getAllProperties();
