@@ -1,9 +1,8 @@
-<app-widgets-dropdown></app-widgets-dropdown>
 
 <c-row>
   <c-col xs>
     <c-card class="mb-4">
-      <c-card-header>Users</c-card-header>
+      <c-card-header>Defenders</c-card-header>
       <c-card-body>
         <table
           [hover]="true"
@@ -28,19 +27,15 @@
           <tbody>
             <tr *ngFor="let user of users; index as i">
               <td class="text-center">
-                <c-avatar
+                <!-- <c-avatar
                   size="md"
                   src="{{ user.avatar }}"
                   status="{{ user.status }}"
-                ></c-avatar>
+                ></c-avatar> -->
               </td>
               <td>
-                <div>{{ user.name }}</div>
-                <div class="small text-medium-emphasis text-nowrap">
-                  <span>
-                    {{ user.state }} | Registered: {{ user.registered }}
-                  </span>
-                </div>
+                <div>{{ user.username }}</div>
+                
               </td>
               <td class="text-center">
                 <svg

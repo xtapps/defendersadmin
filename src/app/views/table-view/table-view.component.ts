@@ -13,18 +13,13 @@ import { AdminService } from '../../services/admin.service';
 export class TableViewComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = [
-    'email',
-    'locationName',
     'corpName',
+    'locationName',
     'address1',
-    'address2',
     'city',
     'state',
-    'country',
     'zip',
     'phone',
-    'orgType',
-    'description'
   ];
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
