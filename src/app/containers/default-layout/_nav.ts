@@ -15,13 +15,13 @@ export const navItems: INavData[] = [
   //   name: 'Admin'
   // },
   {
-    name: 'Companies',
+    name: 'Partners',
     url: '/admin/home',
     iconComponent: { name: 'cil-home' }
   },
   {
     name: 'Locations',
-    url: 'locations',
+    url: '/admin/location',
     iconComponent: { name: 'cil-location-pin' }
   },
   {
@@ -30,8 +30,8 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-browser' }
   },
   {
-    name: 'apps',
-    url: 'Apps',
+    name: 'Apps',
+    url: 'apps',
     iconComponent: { name: 'cil-apps' }
   },
   {
@@ -51,7 +51,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Defenders',
-    url: 'defenders',
+    url: '/admin/defenders',
     iconComponent: { name: 'cil-home' }
   },
   {
