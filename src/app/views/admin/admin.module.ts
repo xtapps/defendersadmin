@@ -21,6 +21,7 @@ import { IconModule } from '@coreui/icons-angular';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ChartjsModule } from '@coreui/angular-chartjs';
 import { WidgetsModule } from '../widgets/widgets.module';
+import { AddNewComponent } from '../components/add-new/add-new.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { WidgetsModule } from '../widgets/widgets.module';
     AppsListComponent,
     CategoriesComponent,
     GroupCodesComponent,
-    DefendersListComponent
+    DefendersListComponent,
+    AddNewComponent
   ],
   imports: [
     CommonModule,

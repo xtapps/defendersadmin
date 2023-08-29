@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { AdminService } from '../../services/admin.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table-view',
@@ -36,7 +37,10 @@ export class TableViewComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
 
-  constructor(private adminService: AdminService) { }
+  constructor(
+    private adminService: AdminService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.getAllProperties();
@@ -68,6 +72,10 @@ export class TableViewComponent implements OnInit, OnDestroy {
     const offset = (event.previousPageIndex + 1) * this.pageSize;
     this.offset = offset + 1;
     this.getAllProperties();
+  }
+
+  addNew(): void {
+    this.router.navigateByUrl('/admin/add-new')
   }
 
   ngOnDestroy(): void {

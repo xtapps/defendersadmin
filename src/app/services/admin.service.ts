@@ -20,7 +20,15 @@ export class AdminService {
   }
 
   getLocations() {
-    return this.http.get(`${apiUrl}/partner/getPartnerWebsites`);
+    return this.http.get(`${apiUrl}/partner/getPartnerLocations?limit=10`);
+  }
+
+  getWebsites() {
+    return this.http.get(`${apiUrl}/partner/getPartnerWebsites?limit=10`);
+  }
+
+  getAllCategories() {
+    return this.http.get(`${apiUrl}/partner/getPartnerByCategory?limit=10`);
   }
   
   getAllDefendersList(){
