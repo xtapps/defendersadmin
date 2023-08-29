@@ -6,6 +6,7 @@ import { WebsitesComponent } from '../components/websites/websites.component';
 import { AppsListComponent } from '../components/apps-list/apps-list.component';
 import { CategoriesComponent } from '../components/categories/categories.component';
 import { DefendersListComponent } from '../components/defenders-list/defenders-list.component';
+import { AddNewComponent } from '../components/add-new/add-new.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,9 @@ const routes: Routes = [
   },
   {
     path: 'defenders', component: DefendersListComponent
+  },
+  {
+    path: 'add-new', component: AddNewComponent
   },
 ];
 

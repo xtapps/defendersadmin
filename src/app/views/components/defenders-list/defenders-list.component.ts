@@ -8,7 +8,6 @@ import { AdminService } from 'src/app/services/admin.service';
 })
 export class DefendersListComponent implements OnInit {
   constructor(private adminService: AdminService) {
-
   }
 
   users: any = []
@@ -22,5 +21,9 @@ export class DefendersListComponent implements OnInit {
       this.users = res;
       console.log(res);
     })
+  }
+
+  goToViePage(): void {
+
   }
 }

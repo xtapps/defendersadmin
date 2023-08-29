@@ -14,62 +14,47 @@
         >
           <thead cTableColor="light">
             <tr>
-              <th class="text-center">
+              <!-- <th class="text-center">
                 <svg cIcon name="cilPeople"></svg>
-              </th>
-              <th>User</th>
-              <th class="text-center">Country</th>
-              <th>Usage</th>
+              </th> -->
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
               <!-- <th class="text-center">Payment Method</th> -->
               <th>Activity</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let user of users; index as i">
-              <td class="text-center">
-                <!-- <c-avatar
+              <!-- <td class="text-center">
+                <c-avatar
                   size="md"
                   src="{{ user.avatar }}"
                   status="{{ user.status }}"
-                ></c-avatar> -->
-              </td>
+                ></c-avatar>
+              </td> -->
               <td>
-                <div>{{ user.username }}</div>
+                <div>{{ user.firstName }}</div>
                 
               </td>
-              <td class="text-center">
-                <svg
-                  cIcon
-                  id="{{ user.country + user.name }}"
-                  name="cif{{ user.country }}"
-                  size="xl"
-                  title="{{ user.country }}"
-                ></svg>
+              <td>
+                <div>{{ user.firstName }}</div>
+                
               </td>
               <td>
-                <div class="d-flex justify-content-between">
-                  <div class="float-start">
-                    <strong>{{ user.usage }}%</strong>
-                  </div>
-                  <div class="float-end ms-1 text-nowrap">
-                    <small class="text-medium-emphasis">
-                      {{ user.period }}
-                    </small>
-                  </div>
-                </div>
-                <c-progress thin>
-                  <c-progress-bar
-                    [value]="user.usage"
-                    color="{{ user.color }}"
-                  ></c-progress-bar>
-                </c-progress>
+                <div>{{ user.firstName }}</div>
+                
               </td>
+              
+             
               <!-- <td class="text-center">
                 <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg>
               </td> -->
               <td>
-                <div class="small text-medium-emphasis">Last login</div>
-                <div class="fw-semibold text-nowrap">{{ user.activity }}</div>
+                <!-- <div><svg cIcon name="cil-eye"></svg></div> -->
+                <div style="font-size: 13px; cursor: pointer;" (click)="goToViePage()">View</div>
+                <!-- <i class="cil-eye"></i> -->
+                <!-- <div class="fw-semibold text-nowrap">{{ user.chatPhoto }}</div> -->
               </td>
             </tr>
           </tbody>
