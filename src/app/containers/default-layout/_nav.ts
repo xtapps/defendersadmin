@@ -27,12 +27,12 @@ export const navItems: INavData[] = [
   {
     name: 'Websites',
     url: 'websites',
-    iconComponent: { name: 'cil-browser' }
+    iconComponent: { name: 'cil-home' }
   },
   {
     name: 'Apps',
     url: 'apps',
-    iconComponent: { name: 'cil-apps' }
+    iconComponent: { name: 'cil-home' }
   },
   {
     name: 'Franchises',
