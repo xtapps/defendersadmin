@@ -20,8 +20,11 @@
               <th>First Name</th>
               <th>Last Name</th>
               <th>Email</th>
-              <!-- <th class="text-center">Payment Method</th> -->
-              <th>Activity</th>
+              <th>Role</th>
+               <th>Zip</th>
+               <th>Phone</th>
+               <th>Branch</th>
+               <th>Activity</th>
             </tr>
           </thead>
           <tbody>
@@ -35,18 +38,25 @@
               </td> -->
               <td>
                 <div>{{ user.firstName }}</div>
-                
               </td>
               <td>
-                <div>{{ user.firstName }}</div>
-                
+                <div>{{ user.lastName }}</div>
               </td>
               <td>
-                <div>{{ user.firstName }}</div>
-                
+                <div>{{ user.defenderEmail }}</div>
               </td>
-              
-             
+              <td>
+                <div>{{ user.role }}</div>
+              </td>
+              <td>
+                <div>{{ user.zipcode }}</div>
+              </td>
+              <td>
+                <div>{{ user.contactPhone }}</div>
+              </td>
+              <td>
+                <div>{{ user.branch }}</div>
+              </td>
               <!-- <td class="text-center">
                 <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg>
               </td> -->
