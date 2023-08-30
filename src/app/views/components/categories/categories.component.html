@@ -1,33 +1,79 @@
 <div class="header_section">
-    <h4>Cagtegories</h4>
-    <button cButton color="primary" (click)="addNew()">Add</button>
-  </div>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-    
-    
-      <!-- Name Column -->
-      <ng-container matColumnDef="address1">
-        <th mat-header-cell *matHeaderCellDef> Address 1</th>
-        <td mat-cell *matCellDef="let element"> {{element.address1}} </td>
-      </ng-container>
-    
-      <!-- Weight Column -->
-      <ng-container matColumnDef="corpName">
-        <th mat-header-cell *matHeaderCellDef> corpName </th>
-        <td mat-cell *matCellDef="let element"> {{element.corpName}} </td>
-      </ng-container>
-    
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="symbol">
-        <th mat-header-cell *matHeaderCellDef> Symbol </th>
-        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-      </ng-container>
-    
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    
-    
+  <h4>Cagtegories</h4>
+  <button cButton color="primary" (click)="addNew()">Add</button>
+</div>
+
+<c-row>
+  <c-col xs>
+    <c-card class="mb-4">
+      <c-card-header>Ctegories</c-card-header>
+      <c-card-body>
+        <table
+          [hover]="true"
+          [responsive]="true"
+          [striped]="true"
+          align="middle"
+          cTable
+          class="mb-0 border"
+        >
+          <thead cTableColor="light">
+            <tr>
+              <!-- <th class="text-center">
+                <svg cIcon name="cilPeople"></svg>
+              </th> -->
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Role</th>
+               <th>Zip</th>
+               <th>Phone</th>
+               <th>Branch</th>
+               <th>Activity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of categories; index as i">
+              <!-- <td class="text-center">
+                <c-avatar
+                  size="md"
+                  src="{{ user.avatar }}"
+                  status="{{ user.status }}"
+                ></c-avatar>
+              </td> -->
+              <td>
+                <div>{{ user.firstName }}</div>
+              </td>
+              <td>
+                <div>{{ user.lastName }}</div>
+              </td>
+              <td>
+                <div>{{ user.defenderEmail }}</div>
+              </td>
+              <td>
+                <div>{{ user.role }}</div>
+              </td>
+              <td>
+                <div>{{ user.zipcode }}</div>
+              </td>
+              <td>
+                <div>{{ user.contactPhone }}</div>
+              </td>
+              <td>
+                <div>{{ user.branch }}</div>
+              </td>
+              <!-- <td class="text-center">
+                <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg>
+              </td> -->
+              <td>
+                <!-- <div><svg cIcon name="cil-eye"></svg></div> -->
+                <div style="font-size: 13px; cursor: pointer;" (click)="goToViePage()">View</div>
+                <!-- <i class="cil-eye"></i> -->
+                <!-- <div class="fw-semibold text-nowrap">{{ user.chatPhoto }}</div> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>

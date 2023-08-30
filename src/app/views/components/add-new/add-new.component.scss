@@ -1,11 +1,15 @@
-.main_container{}
-
-.flex{
+.flex {
     display: flex;
     gap: 10px;
     width: 100%;
 }
 
-.w-half{
+.w-half {
     width: 50%;
+}
+
+button {
+    display: block;
+    margin-left: auto;
+    margin-bottom: 10px;
 }

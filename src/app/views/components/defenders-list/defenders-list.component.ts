@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
@@ -7,7 +8,9 @@ import { AdminService } from 'src/app/services/admin.service';
   styleUrls: ['./defenders-list.component.scss']
 })
 export class DefendersListComponent implements OnInit {
-  constructor(private adminService: AdminService) {
+  constructor(
+    private adminService: AdminService,
+    private router: Router) {
   }
 
   users: any = []
@@ -21,6 +24,10 @@ export class DefendersListComponent implements OnInit {
       this.users = res;
       console.log(res);
     })
+  }
+
+  addNew(): void {
+    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'defenders' } });
   }
 
   goToViePage(): void {

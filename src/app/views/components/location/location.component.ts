@@ -30,6 +30,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class LocationComponent implements OnInit {
   displayedColumns: string[] = ['address1', 'corpName', 'symbol'];
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
+
+  locationList: any[]= [];
   constructor(private adminService: AdminService,
     private router: Router) {
 
@@ -48,7 +50,11 @@ export class LocationComponent implements OnInit {
   }
 
   addNew(): void {
-    this.router.navigateByUrl('/admin/add-new')
+    this.router.navigate(['/admin/add-new'], {queryParams:{type: 'location'}});
+  }
+
+  goToViePage(): void {
+    this.router.navigateByUrl('/view');
   }
 
 }

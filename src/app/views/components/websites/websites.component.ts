@@ -12,18 +12,23 @@ export class WebsitesComponent implements OnInit {
   displayedColumns: string[] = this.adminService.tempColumns;
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
+  websitesList: any[] = [];
+
   constructor(private adminService: AdminService,
     private router: Router) {
-
-
   }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource(this.adminService.tempDatas) 
+    this.dataSource = new MatTableDataSource(this.adminService.tempDatas)
   }
 
-  
+
   addNew(): void {
-    this.router.navigateByUrl('/admin/add-new')
+    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'website' } });
   }
+
+  goToViePage(): void {
+    this.router.navigateByUrl('/view');
+  }
+
 }

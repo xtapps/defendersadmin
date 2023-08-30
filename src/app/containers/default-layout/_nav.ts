@@ -26,27 +26,27 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Websites',
-    url: 'websites',
+    url: '/admin/websites',
     iconComponent: { name: 'cil-home' }
   },
   {
     name: 'Apps',
-    url: 'apps',
+    url: '/admin/apps',
     iconComponent: { name: 'cil-home' }
   },
   {
     name: 'Franchises',
-    url: 'franchises',
+    url: '/admin/franchises',
     iconComponent: { name: 'cil-home' }
   },
   {
     name: 'Categories',
-    url: 'categories',
+    url: '/admin/categories',
     iconComponent: { name: 'cil-home' }
   },
   {
     name: 'Group Codes',
-    url: 'group-code',
+    url: '/admin/group-codes',
     iconComponent: { name: 'cil-home' }
   },
   {

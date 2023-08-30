@@ -22,6 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ChartjsModule } from '@coreui/angular-chartjs';
 import { WidgetsModule } from '../widgets/widgets.module';
 import { AddNewComponent } from '../components/add-new/add-new.component';
+import { FranchisesListComponent } from '../components/franchises-list/franchises-list.component';
+import { ViewPageComponent } from '../components/view-page/view-page.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { AddNewComponent } from '../components/add-new/add-new.component';
     CategoriesComponent,
     GroupCodesComponent,
     DefendersListComponent,
-    AddNewComponent
+    AddNewComponent,
+    FranchisesListComponent,
+    ViewPageComponent
   ],
   imports: [
     CommonModule,
