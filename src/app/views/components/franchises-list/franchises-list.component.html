@@ -1,12 +1,12 @@
 <div class="header_section">
-    <h4>Apps</h4>
+    <h4>Franchises</h4>
     <button cButton color="primary" (click)="addNew()">Add</button>
   </div>
   
   <c-row>
     <c-col xs>
       <c-card class="mb-4">
-        <c-card-header>Apps</c-card-header>
+        <c-card-header>Franchises</c-card-header>
         <c-card-body>
           <table
             [hover]="true"
@@ -32,7 +32,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let user of appsList; index as i">
+              <tr *ngFor="let user of franchisesList; index as i">
                 <!-- <td class="text-center">
                   <c-avatar
                     size="md"

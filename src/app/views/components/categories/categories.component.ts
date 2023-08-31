@@ -12,9 +12,12 @@ export class CategoriesComponent {
 
   displayedColumns: string[] = ['address1', 'corpName', 'symbol'];
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
+
+  categories : any[] = [];
   constructor(private adminService: AdminService,
     private router: Router) {
   }
+  
 
   ngOnInit(): void {
     this.getAllCategories();
@@ -29,7 +32,11 @@ export class CategoriesComponent {
   }
 
   addNew(): void {
-    this.router.navigateByUrl('/admin/add-new')
+    this.router.navigate(['/admin/add-new'], {queryParams:{type: 'category'}});
   }
 
+  
+  goToViePage(): void {
+    this.router.navigateByUrl('/view');
+  }
 }

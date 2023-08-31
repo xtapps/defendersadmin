@@ -75,7 +75,7 @@ export class TableViewComponent implements OnInit, OnDestroy {
   }
 
   addNew(): void {
-    this.router.navigateByUrl('/admin/add-new')
+    this.router.navigate(['/admin/add-new'], {queryParams:{type: 'pertner'}});
   }
 
   ngOnDestroy(): void {
