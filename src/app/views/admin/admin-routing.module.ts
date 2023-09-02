@@ -13,6 +13,9 @@ import { ViewPageComponent } from '../components/view-page/view-page.component';
 
 const routes: Routes = [
   {
+    path: 'view', component: ViewPageComponent
+  },
+  {
     path: 'home',
     component: HomeComponent
   },
@@ -40,9 +43,7 @@ const routes: Routes = [
   {
     path: 'franchises', component: FranchisesListComponent
   },
-  {
-    path: 'view', component: ViewPageComponent
-  },
+ 
 ];
 
 @NgModule({
