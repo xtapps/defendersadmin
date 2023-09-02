@@ -19,7 +19,13 @@ export class WebsitesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource(this.adminService.tempDatas)
+    this.getWebsites();
+  }
+
+  getWebsites(): void {
+    this.adminService.getWebsites(10, 0).subscribe((res: any) => {
+      this.websitesList = res[0].properties;
+    });
   }
 
 
@@ -27,8 +33,10 @@ export class WebsitesComponent implements OnInit {
     this.router.navigate(['/admin/add-new'], { queryParams: { type: 'website' } });
   }
 
-  goToViePage(): void {
-    this.router.navigateByUrl('/view');
+  goToViewPage(index: number): void {
+    // Encode the JSON data and navigate to ViewComponent with it as a query parameter
+    const encodedData = encodeURIComponent(JSON.stringify(this.websitesList[index]));
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData } });
   }
 
 }
