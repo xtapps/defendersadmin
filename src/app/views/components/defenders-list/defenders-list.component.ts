@@ -14,15 +14,16 @@ export class DefendersListComponent implements OnInit {
   }
 
   users: any = []
+  isLoading = true;
 
   ngOnInit(): void {
     this.getAllDdefenders();
   }
 
   getAllDdefenders(): void {
-    this.adminService.getAllDefendersList().subscribe((res: any) => {
+    this.adminService.getAllDefendersList(13, 1).subscribe((res: any) => {
       this.users = res;
-      console.log(res);
+      this.isLoading = false;
     })
   }
 

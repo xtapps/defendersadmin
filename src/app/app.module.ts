@@ -44,7 +44,8 @@ import { AdminModule } from './views/admin/admin.module';
 const APP_CONTAINERS = [
   DefaultFooterComponent,
   DefaultHeaderComponent,
-  DefaultLayoutComponent
+  DefaultLayoutComponent,
+  
 ];
 
 @NgModule({

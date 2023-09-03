@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 
@@ -10,23 +9,19 @@ import { AdminService } from 'src/app/services/admin.service';
 })
 export class CategoriesComponent {
 
-  displayedColumns: string[] = ['address1', 'corpName', 'symbol'];
-  dataSource: MatTableDataSource<any> = new MatTableDataSource();
-
   categories : any[] = [];
+  isLoading = true;
   constructor(private adminService: AdminService,
     private router: Router) {
   }
   
-
   ngOnInit(): void {
     this.getAllCategories();
-    this.dataSource = new MatTableDataSource(this.adminService.tempDatas)
   }
 
   getAllCategories(): void {
     this.adminService.getAllCategories().subscribe((res: any) => {
-      this.dataSource = new MatTableDataSource(res.properties)
+      this.isLoading = false;
       console.log(res);
     })
   }

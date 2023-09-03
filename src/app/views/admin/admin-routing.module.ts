@@ -10,6 +10,9 @@ import { AddNewComponent } from '../components/add-new/add-new.component';
 import { FranchisesListComponent } from '../components/franchises-list/franchises-list.component';
 import { GroupCodesComponent } from '../components/group-codes/group-codes.component';
 import { ViewPageComponent } from '../components/view-page/view-page.component';
+import { JobBoardsComponent } from '../components/job-boards/job-boards.component';
+import { JobOpportunitiesComponent } from '../components/job-opportunities/job-opportunities.component';
+import { BusinessOpportunitiesComponent } from '../components/business-opportunities/business-opportunities.component';
 
 const routes: Routes = [
   {
@@ -42,6 +45,15 @@ const routes: Routes = [
   },
   {
     path: 'franchises', component: FranchisesListComponent
+  },
+  {
+    path: 'job-boards', component: JobBoardsComponent
+  },
+  {
+    path: 'job-opportunities', component: JobOpportunitiesComponent
+  },
+  {
+    path: 'business-opportunities', component: BusinessOpportunitiesComponent
   },
  
 ];

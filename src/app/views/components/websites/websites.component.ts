@@ -9,10 +9,10 @@ import { AdminService } from 'src/app/services/admin.service';
   styleUrls: ['./websites.component.scss']
 })
 export class WebsitesComponent implements OnInit {
-  displayedColumns: string[] = this.adminService.tempColumns;
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
   websitesList: any[] = [];
+  isLoading = true;
 
   constructor(private adminService: AdminService,
     private router: Router) {
@@ -23,7 +23,8 @@ export class WebsitesComponent implements OnInit {
   }
 
   getWebsites(): void {
-    this.adminService.getWebsites(10, 0).subscribe((res: any) => {
+    this.adminService.getWebsites(13, 1).subscribe((res: any) => {
+      this.isLoading = false;
       this.websitesList = res[0].properties;
     });
   }

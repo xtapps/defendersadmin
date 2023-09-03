@@ -17,6 +17,7 @@ export interface PeriodicElement {
 export class LocationComponent implements OnInit {
 
   locationList: any[]= [];
+  isLoading = true;
   constructor(
     private adminService: AdminService,
     private router: Router) {
@@ -27,7 +28,8 @@ export class LocationComponent implements OnInit {
   }
 
   getAllLocation(): void {
-    this.adminService.getLocations(10, 0).subscribe((res: any) => {
+    this.adminService.getLocations(13, 1).subscribe((res: any) => {
+      this.isLoading = false;
       this.locationList = res[0].properties;
     });
   }

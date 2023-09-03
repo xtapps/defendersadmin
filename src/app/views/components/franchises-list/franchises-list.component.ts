@@ -10,6 +10,7 @@ import { AdminService } from 'src/app/services/admin.service';
 export class FranchisesListComponent implements OnInit {
 
   franchisesList: any[]= [];
+  isLoading = true;
 
   constructor(
     private adminService: AdminService,
@@ -21,7 +22,8 @@ export class FranchisesListComponent implements OnInit {
   }
 
   getFranchisesList(): void {
-    this.adminService.getFranchises(10, 0).subscribe((res: any) => {
+    this.adminService.getFranchises(13, 0).subscribe((res: any) => {
+      this.isLoading = false;
       this.franchisesList = res.franchises;
     });
   }
