@@ -10,6 +10,7 @@ import { AdminService } from 'src/app/services/admin.service';
 export class AppsListComponent implements OnInit {
 
   appsList: any[]= [];
+  isLoading= true;
 
   constructor(
     private adminService: AdminService,
@@ -25,7 +26,8 @@ export class AppsListComponent implements OnInit {
   }
 
   getAppslIst(): void {
-    this.adminService.getApps(10, 0).subscribe((res: any) => {
+    this.adminService.getApps(13, 0).subscribe((res: any) => {
+      this.isLoading = false;
       this.appsList = res[0].properties;
     });
   }

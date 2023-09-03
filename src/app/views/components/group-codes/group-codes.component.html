@@ -1,45 +1,43 @@
-
 <div class="header_section">
-    <h4>Group Codes</h4>
-    <button cButton color="primary" (click)="addNew()">Add</button>
-  </div>
+  <h4>Group Codes</h4>
+  <button cButton color="primary" (click)="addNew()">Add</button>
+</div>
 <c-row>
-    <c-col xs>
-      <c-card class="mb-4">
-        <c-card-header>Group Codes</c-card-header>
-        <c-card-body>
-          <table
-            [hover]="true"
-            [responsive]="true"
-            [striped]="true"
-            align="middle"
-            cTable
-            class="mb-0 border"
-          >
+  <c-col xs>
+    <c-card class="mb-4">
+      <c-card-header>Group Codes</c-card-header>
+      <c-card-body>
+
+        <ng-container *ngIf="isLoading; else tableData">
+          <div class="skeleton-loader"></div>
+        </ng-container>
+
+        <ng-template #tableData>
+          <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
             <thead cTableColor="light">
               <tr>
                 <!-- <th class="text-center">
-                  <svg cIcon name="cilPeople"></svg>
-                </th> -->
+                    <svg cIcon name="cilPeople"></svg>
+                  </th> -->
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
                 <th>Role</th>
-                 <th>Zip</th>
-                 <th>Phone</th>
-                 <th>Branch</th>
-                 <th>Activity</th>
+                <th>Zip</th>
+                <th>Phone</th>
+                <th>Branch</th>
+                <th>Activity</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let user of groupCodes; index as i">
                 <!-- <td class="text-center">
-                  <c-avatar
-                    size="md"
-                    src="{{ user.avatar }}"
-                    status="{{ user.status }}"
-                  ></c-avatar>
-                </td> -->
+                    <c-avatar
+                      size="md"
+                      src="{{ user.avatar }}"
+                      status="{{ user.status }}"
+                    ></c-avatar>
+                  </td> -->
                 <td>
                   <div>{{ user.firstName }}</div>
                 </td>
@@ -62,8 +60,8 @@
                   <div>{{ user.branch }}</div>
                 </td>
                 <!-- <td class="text-center">
-                  <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg>
-                </td> -->
+                    <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg>
+                  </td> -->
                 <td>
                   <!-- <div><svg cIcon name="cil-eye"></svg></div> -->
                   <div style="font-size: 13px; cursor: pointer;" (click)="goToViePage()">View</div>
@@ -73,8 +71,8 @@
               </tr>
             </tbody>
           </table>
-        </c-card-body>
-      </c-card>
-    </c-col>
-  </c-row>
-  
+        </ng-template>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>

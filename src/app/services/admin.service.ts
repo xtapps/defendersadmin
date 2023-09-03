@@ -20,22 +20,22 @@ export class AdminService {
   }
 
   getLocations(limit: number, offset: number) {
-    const url = `${apiUrl}/properties/viewAll?reqParams=[{"value": "false", "key": "featured"}, {"value": "partner", "key": "propertyType"}]&${limit}&${offset}`;
+    const url = `${apiUrl}/properties/viewAll?reqParams=[{"value": "false", "key": "featured"}, {"value": "partner", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
     return this.http.get(url);
   }
 
   getWebsites(limit: number, offset: number) {
-    const url = `${apiUrl}/properties/viewAll?reqParams=[{"value": "false", "key": "featured"}, {"value": "website", "key": "propertyType"}]&${limit}&${offset}`;
+    const url = `${apiUrl}/properties/viewAll?reqParams=[{"value": "false", "key": "featured"}, {"value": "website", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
     return this.http.get(url);
   }
 
   getApps(limit: number, offset: number) {
-    const url = `${apiUrl}/properties/viewAll?reqParams=[{"value": "false", "key": "featured"}, {"value": "app", "key": "propertyType"}]&${limit}&${offset}`;
+    const url = `${apiUrl}/properties/viewAll?reqParams=[{"value": "false", "key": "featured"}, {"value": "app", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
     return this.http.get(url);
   }
 
   getFranchises(limit: number, offset: number) {
-    const url = `${apiUrl}/defender/franchises?reqParams=[{"value": "false", "key": "featured"}, {"value": "franchises", "key": "propertyType"}]&${limit}&${offset}`;
+    const url = `${apiUrl}/defender/franchises?reqParams=[{"value": "false", "key": "featured"}, {"value": "franchises", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
     return this.http.get(url);
   }
 
@@ -43,23 +43,16 @@ export class AdminService {
     return this.http.get(`${apiUrl}/partner/getPartnerByCategory?limit=10`);
   }
 
-  getAllDefendersList() {
-    return this.http.get(`${apiUrl}/getAllDefenders`);
+  getAllDefendersList(limit: number, offset: number) {
+    return this.http.get(`${apiUrl}/getAllDefenders/limit=${limit}&offset=${offset}`);
   }
 
-  tempColumns = ['position', 'name', 'weight', 'symbol'];
-  tempDatas = [
-    { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-    { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-    { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-    { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-    { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-    { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-    { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-    { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-    { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-    { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-  ];
+  getJobOpportunities(limit: number, offset: number){
+    return this.http.get(`${apiUrl}/defender/jobs?limit=${limit}&offset=${offset}`);
+  }
 
+  getJobBoards(limit: number, offset: number){
+    return this.http.get(`${apiUrl}defender/jobBoard?limit=${limit}&offset=${offset}`);
+  }
 
 }

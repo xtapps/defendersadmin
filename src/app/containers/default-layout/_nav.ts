@@ -59,6 +59,26 @@ export const navItems: INavData[] = [
     url: 'admin-users',
     iconComponent: { name: 'cil-user' }
   },
+  {
+    title: true,
+    name: 'Opportunities'
+  },
+  {
+    name: 'Job Boards',
+    url: '/admin/job-boards',
+    iconComponent: { name: 'cil-user' }
+  },
+  {
+    name: 'Job Opportunities',
+    url: '/admin/job-opportunities',
+    iconComponent: { name: 'cil-user' }
+  },
+  {
+    name: 'Business Opportunities',
+    url: '/admin/business-opportunities',
+    iconComponent: { name: 'cil-user' }
+  },
+
   // {
   //   title: true,
   //   name: 'Extras'
