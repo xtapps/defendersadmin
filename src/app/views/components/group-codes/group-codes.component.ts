@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-group-codes',
@@ -12,13 +13,19 @@ export class GroupCodesComponent implements OnInit {
   isLoading = true;
   
   constructor(
+    private adminService: AdminService,
     private router: Router
   ){}
 
   ngOnInit(): void {
-    setTimeout(() => {
+    this.getGroupCodes();
+  }
+
+  getGroupCodes(): void {
+    this.adminService.getGroupCodes(13, 1).subscribe((res: any) => {
       this.isLoading = false;
-    }, 2000);
+      this.groupCodes = res.franchises;
+    });
   }
 
   addNew(): void {

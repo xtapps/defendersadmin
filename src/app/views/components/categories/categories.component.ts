@@ -11,6 +11,8 @@ export class CategoriesComponent {
 
   categories : any[] = [];
   isLoading = true;
+  isExpanded = false;
+  index = 0;
   constructor(private adminService: AdminService,
     private router: Router) {
   }
@@ -22,6 +24,7 @@ export class CategoriesComponent {
   getAllCategories(): void {
     this.adminService.getAllCategories().subscribe((res: any) => {
       this.isLoading = false;
+      this.categories = res.categories;
       console.log(res);
     })
   }
@@ -30,8 +33,16 @@ export class CategoriesComponent {
     this.router.navigate(['/admin/add-new'], {queryParams:{type: 'category'}});
   }
 
+  showAll(index: number): void {
+    this.index = index;
+    this.isExpanded = !this.isExpanded;
+  }
+
   
-  goToViePage(): void {
-    this.router.navigateByUrl('/view');
+
+  goToViewPage(index:number): void {
+    // Encode the JSON data and navigate to ViewComponent with it as a query parameter
+    const encodedData = encodeURIComponent(JSON.stringify(this.categories[index]));
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData } });
   }
 }

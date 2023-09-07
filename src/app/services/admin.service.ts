@@ -40,11 +40,16 @@ export class AdminService {
   }
 
   getAllCategories() {
-    return this.http.get(`${apiUrl}/partner/getPartnerByCategory?limit=10`);
+    return this.http.get(`${apiUrl}/getCategories?limit=10`);
+  }
+
+
+  getGroupCodes(limit: number, offset: number) {
+    return this.http.get(`${apiUrl}/getGroupCodes?limit=${limit}&offset=${offset}`);
   }
 
   getAllDefendersList(limit: number, offset: number) {
-    return this.http.get(`${apiUrl}/getAllDefenders/limit=${limit}&offset=${offset}`);
+    return this.http.get(`${apiUrl}/getAllDefenders?limit=${limit}&offset=${offset}`);
   }
 
   getJobOpportunities(limit: number, offset: number){

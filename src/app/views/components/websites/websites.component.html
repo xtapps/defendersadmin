@@ -21,43 +21,35 @@
                 <!-- <th class="text-center">
                 <svg cIcon name="cilPeople"></svg>
               </th> -->
-                <th>Corp. Name</th>
+                <th>Name</th>
+                <th style="width: 100px;">Website</th>
                 <th>Email</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>State</th>
-                <th>Zip</th>
+                <th>App Sectoin</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let user of websitesList; index as i">
+              <tr *ngFor="let item of websitesList; index as i">
                 <td>
-                  <div>{{ user.corpName }}</div>
+                  <div>{{ item.locationName }}</div>
+                </td>
+                <td style="width: 100px;">
+                  <div>{{ item.website[0] }}</div>
                 </td>
                 <td>
-                  <div>{{ user.email }}</div>
+                  <div>{{ item.email }}</div>
                 </td>
                 <td>
-                  <div>{{ user.address1 }}</div>
-                </td>
-                <td>
-                  <div>{{ user.city }}</div>
-                </td>
-                <td>
-                  <div>{{ user.city }}</div>
-                </td>
-                <td>
-                  <div>{{ user.zip }}</div>
+                  <div>{{ item.appSection }}</div>
                 </td>
                 <!-- <td class="text-center">
-                <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg>
+                <svg cIcon name="cibCc{{ item.payment }}" size="xl"></svg>
               </td> -->
                 <td>
                   <!-- <div><svg cIcon name="cil-eye"></svg></div> -->
-                  <div style="font-size: 13px; cursor: pointer;" (click)="goToViewPage(i)">View</div>
+                  <div class="view-button"(click)="goToViewPage(i)">View</div>
                   <!-- <i class="cil-eye"></i> -->
-                  <!-- <div class="fw-semibold text-nowrap">{{ user.chatPhoto }}</div> -->
+                  <!-- <div class="fw-semibold text-nowrap">{{ item.chatPhoto }}</div> -->
                 </td>
               </tr>
             </tbody>

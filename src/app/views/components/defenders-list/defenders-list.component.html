@@ -21,12 +21,11 @@
               </th> -->
                 <th>First Name</th>
                 <th>Last Name</th>
+                <th>User Name</th>
                 <th>Email</th>
                 <th>Role</th>
-                <th>Zip</th>
-                <th>Phone</th>
                 <th>Branch</th>
-                <th>Activity</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -45,17 +44,15 @@
                   <div>{{ user.lastName }}</div>
                 </td>
                 <td>
+                  <div>{{ user.username }}</div>
+                </td>
+                <td>
                   <div>{{ user.defenderEmail }}</div>
                 </td>
                 <td>
                   <div>{{ user.role }}</div>
                 </td>
-                <td>
-                  <div>{{ user.zipcode }}</div>
-                </td>
-                <td>
-                  <div>{{ user.contactPhone }}</div>
-                </td>
+               
                 <td>
                   <div>{{ user.branch }}</div>
                 </td>
@@ -64,7 +61,7 @@
               </td> -->
                 <td>
                   <!-- <div><svg cIcon name="cil-eye"></svg></div> -->
-                  <div style="font-size: 13px; cursor: pointer;" (click)="goToViePage()">View</div>
+                  <div class="view-button" (click)="goToViePage()">View</div>
                   <!-- <i class="cil-eye"></i> -->
                   <!-- <div class="fw-semibold text-nowrap">{{ user.chatPhoto }}</div> -->
                 </td>
