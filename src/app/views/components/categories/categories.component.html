@@ -20,54 +20,39 @@
                 <!-- <th class="text-center">
                 <svg cIcon name="cilPeople"></svg>
               </th> -->
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Zip</th>
-                <th>Phone</th>
-                <th>Branch</th>
-                <th>Activity</th>
+                <th>Name</th>
+                <th>App Section</th>
+                <th>Category Type</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let user of categories; index as i">
+              <tr *ngFor="let item of categories; index as i">
                 <!-- <td class="text-center">
                 <c-avatar
                   size="md"
-                  src="{{ user.avatar }}"
-                  status="{{ user.status }}"
+                  src="{{ item.avatar }}"
+                  status="{{ item.status }}"
                 ></c-avatar>
               </td> -->
                 <td>
-                  <div>{{ user.firstName }}</div>
+                  <div>{{ item.categoryName }}</div>
                 </td>
                 <td>
-                  <div>{{ user.lastName }}</div>
+                  <div>{{ item.appSection }}</div>
                 </td>
                 <td>
-                  <div>{{ user.defenderEmail }}</div>
+                  <div>{{ item.categoryType }}</div>
                 </td>
-                <td>
-                  <div>{{ user.role }}</div>
-                </td>
-                <td>
-                  <div>{{ user.zipcode }}</div>
-                </td>
-                <td>
-                  <div>{{ user.contactPhone }}</div>
-                </td>
-                <td>
-                  <div>{{ user.branch }}</div>
-                </td>
+               
                 <!-- <td class="text-center">
-                <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg>
+                <svg cIcon name="cibCc{{ item.payment }}" size="xl"></svg>
               </td> -->
                 <td>
                   <!-- <div><svg cIcon name="cil-eye"></svg></div> -->
-                  <div style="font-size: 13px; cursor: pointer;" (click)="goToViePage()">View</div>
+                  <div class="view-button" (click)="goToViewPage(i)">View</div>
                   <!-- <i class="cil-eye"></i> -->
-                  <!-- <div class="fw-semibold text-nowrap">{{ user.chatPhoto }}</div> -->
+                  <!-- <div class="fw-semibold text-nowrap">{{ item.chatPhoto }}</div> -->
                 </td>
               </tr>
             </tbody>

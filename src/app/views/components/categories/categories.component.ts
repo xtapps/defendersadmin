@@ -22,6 +22,7 @@ export class CategoriesComponent {
   getAllCategories(): void {
     this.adminService.getAllCategories().subscribe((res: any) => {
       this.isLoading = false;
+      this.categories = res.categories;
       console.log(res);
     })
   }
@@ -31,7 +32,10 @@ export class CategoriesComponent {
   }
 
   
-  goToViePage(): void {
-    this.router.navigateByUrl('/view');
+
+  goToViewPage(index:number): void {
+    // Encode the JSON data and navigate to ViewComponent with it as a query parameter
+    const encodedData = encodeURIComponent(JSON.stringify(this.categories[index]));
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData } });
   }
 }
