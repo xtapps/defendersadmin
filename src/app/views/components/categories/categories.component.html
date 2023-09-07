@@ -23,6 +23,7 @@
                 <th>Name</th>
                 <th>App Section</th>
                 <th>Category Type</th>
+                <th>Sub Category</th>
                 <th></th>
               </tr>
             </thead>
@@ -43,6 +44,14 @@
                 </td>
                 <td>
                   <div>{{ item.categoryType }}</div>
+                </td>
+                <td>
+                  <div *ngIf="item.subCategories.length > 0" ><a (click)="showAll(i)" class="expand">Show {{!isExpanded ? 'all' : 'less'}}</a></div>
+                  <div *ngIf="item.subCategories.length > 0 && isExpanded && index ===  i" >
+                    <ul *ngFor="let sub of item.subCategories">
+                      <li>{{sub.category}}</li>
+                    </ul>
+                  </div>
                 </td>
                
                 <!-- <td class="text-center">

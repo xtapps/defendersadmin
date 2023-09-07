@@ -11,6 +11,8 @@ export class CategoriesComponent {
 
   categories : any[] = [];
   isLoading = true;
+  isExpanded = false;
+  index = 0;
   constructor(private adminService: AdminService,
     private router: Router) {
   }
@@ -29,6 +31,11 @@ export class CategoriesComponent {
 
   addNew(): void {
     this.router.navigate(['/admin/add-new'], {queryParams:{type: 'category'}});
+  }
+
+  showAll(index: number): void {
+    this.index = index;
+    this.isExpanded = !this.isExpanded;
   }
 
   
