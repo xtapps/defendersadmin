@@ -9,13 +9,13 @@ import { AdminService } from 'src/app/services/admin.service';
 })
 export class GroupCodesComponent implements OnInit {
 
-  groupCodes: any[]=[]
+  groupCodes: any[] = []
   isLoading = true;
-  
+
   constructor(
     private adminService: AdminService,
     private router: Router
-  ){}
+  ) { }
 
   ngOnInit(): void {
     this.getGroupCodes();
@@ -29,11 +29,21 @@ export class GroupCodesComponent implements OnInit {
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], {queryParams:{type: 'group-code'}});
+    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'group-code' } });
   }
 
   goToViePage(): void {
     this.router.navigateByUrl('/view');
+  }
+
+  deleteItem(): void {
+    var userResponse = confirm("Do you want to proceed?");
+
+    if (userResponse) {
+      alert("You chose to proceed!");
+    } else {
+      alert("You chose to cancel.");
+    }
   }
 
 }

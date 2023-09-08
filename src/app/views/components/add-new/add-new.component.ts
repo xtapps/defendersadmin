@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Route } from '@angular/router';
 import { from } from 'rxjs';
 
@@ -45,7 +45,7 @@ export class AddNewComponent implements OnInit {
       country: [''],
       county: [''],
       phone: [''],
-      email: [''],
+      email: ['', [Validators.email]],
       website: [''],
       localContact: [''],
       franchiseTag: [''],

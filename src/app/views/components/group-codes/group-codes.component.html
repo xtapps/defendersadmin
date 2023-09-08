@@ -63,10 +63,10 @@
                     <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg>
                   </td> -->
                 <td>
-                  <!-- <div><svg cIcon name="cil-eye"></svg></div> -->
-                  <div class="view-button" (click)="goToViePage()">View</div>
-                  <!-- <i class="cil-eye"></i> -->
-                  <!-- <div class="fw-semibold text-nowrap">{{ user.chatPhoto }}</div> -->
+                  <div >
+                    <span class="view-button" (click)="goToViePage()">View</span>
+                    <span style="margin-left: 10px;" class="view-button"(click)="deleteItem()">Delete</span>
+                  </div>
                 </td>
               </tr>
             </tbody>
