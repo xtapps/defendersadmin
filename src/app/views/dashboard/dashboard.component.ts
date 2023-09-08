@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
+import { AdminService } from 'src/app/services/admin.service';
 
 interface IUser {
   name: string;
@@ -15,15 +16,20 @@ interface IUser {
   status: string;
   color: string;
 }
-
 @Component({
   templateUrl: 'dashboard.component.html',
   styleUrls: ['dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private chartsData: DashboardChartsData) {
-  }
+  isLoading = false;
+
+  constructor(
+    private chartsData: DashboardChartsData,
+    private adminService: AdminService
+  ) { }
+
+  usersList: any[] = [];
 
   public users: IUser[] = [
     {
@@ -43,7 +49,7 @@ export class DashboardComponent implements OnInit {
       name: 'Avram Tarasios',
       state: 'Recurring ',
       registered: 'Jan 1, 2021',
-      country: 'Br',
+      country: 'Us',
       usage: 10,
       period: 'Jun 11, 2021 - Jul 10, 2021',
       payment: 'Visa',
@@ -56,7 +62,7 @@ export class DashboardComponent implements OnInit {
       name: 'Quintin Ed',
       state: 'New',
       registered: 'Jan 1, 2021',
-      country: 'In',
+      country: 'Us',
       usage: 74,
       period: 'Jun 11, 2021 - Jul 10, 2021',
       payment: 'Stripe',
@@ -69,7 +75,7 @@ export class DashboardComponent implements OnInit {
       name: 'Enéas Kwadwo',
       state: 'Sleep',
       registered: 'Jan 1, 2021',
-      country: 'Fr',
+      country: 'Us',
       usage: 98,
       period: 'Jun 11, 2021 - Jul 10, 2021',
       payment: 'Paypal',
@@ -82,7 +88,7 @@ export class DashboardComponent implements OnInit {
       name: 'Agapetus Tadeáš',
       state: 'New',
       registered: 'Jan 1, 2021',
-      country: 'Es',
+      country: 'Us',
       usage: 22,
       period: 'Jun 11, 2021 - Jul 10, 2021',
       payment: 'ApplePay',
@@ -95,7 +101,7 @@ export class DashboardComponent implements OnInit {
       name: 'Friderik Dávid',
       state: 'New',
       registered: 'Jan 1, 2021',
-      country: 'Pl',
+      country: 'Us',
       usage: 43,
       period: 'Jun 11, 2021 - Jul 10, 2021',
       payment: 'Amex',
@@ -113,6 +119,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.initCharts();
+    this.getAllDdefenders();
   }
 
   initCharts(): void {
@@ -124,4 +131,13 @@ export class DashboardComponent implements OnInit {
     this.chartsData.initMainChart(value);
     this.initCharts();
   }
+
+  getAllDdefenders(): void {
+    this.adminService.getAllDefendersList(13, 1).subscribe((res: any) => {
+      this.usersList = res;
+      this.isLoading = false;
+    })
+  }
+
+
 }

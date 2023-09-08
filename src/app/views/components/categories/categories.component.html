@@ -29,13 +29,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of categories; index as i">
-                <!-- <td class="text-center">
-                <c-avatar
-                  size="md"
-                  src="{{ item.avatar }}"
-                  status="{{ item.status }}"
-                ></c-avatar>
-              </td> -->
+             
                 <td>
                   <div>{{ item.categoryName }}</div>
                 </td>
@@ -58,15 +52,18 @@
                 <svg cIcon name="cibCc{{ item.payment }}" size="xl"></svg>
               </td> -->
                 <td>
-                  <!-- <div><svg cIcon name="cil-eye"></svg></div> -->
-                  <div class="view-button" (click)="goToViewPage(i)">View</div>
-                  <!-- <i class="cil-eye"></i> -->
-                  <!-- <div class="fw-semibold text-nowrap">{{ item.chatPhoto }}</div> -->
+                  <div >
+                    <span class="view-button" (click)="goToViewPage(i)">View</span>
+                    <span style="margin-left: 10px;" class="view-button"(click)="deleteItem()">Delete</span>
+                  </div>
                 </td>
               </tr>
             </tbody>
           </table>
         </ng-template>
+
+        <app-custom-pagination [currentPage]="offset+1" (nextClickEvent)="nextClickEvent($event)" (previousClickEvent)="previousClickEvent($event)"></app-custom-pagination>
+      
       </c-card-body>
     </c-card>
   </c-col>

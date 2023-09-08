@@ -39,8 +39,8 @@ export class AdminService {
     return this.http.get(url);
   }
 
-  getAllCategories() {
-    return this.http.get(`${apiUrl}/getCategories?limit=10`);
+  getAllCategories(limit: number, offset: number) {
+    return this.http.get(`${apiUrl}/getCategories?limit=${limit}&offset=${offset}`);
   }
 
 
@@ -59,5 +59,13 @@ export class AdminService {
   getJobBoards(limit: number, offset: number){
     return this.http.get(`${apiUrl}defender/jobBoard?limit=${limit}&offset=${offset}`);
   }
+
+  // Delete APIS
+
+  deleteCategory(id: string){
+    return this.http.delete(`${apiUrl}/admin/removeCategory/ ${id}`);
+  }
+  
+
 
 }

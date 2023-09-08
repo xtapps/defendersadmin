@@ -15,13 +15,16 @@ export class DefendersListComponent implements OnInit {
 
   users: any = []
   isLoading = true;
+  public pageSize: number = 13;
+  public offset: number = 0;
 
   ngOnInit(): void {
     this.getAllDdefenders();
   }
 
   getAllDdefenders(): void {
-    this.adminService.getAllDefendersList(13, 1).subscribe((res: any) => {
+    this.isLoading = true;
+    this.adminService.getAllDefendersList(this.pageSize, this.offset).subscribe((res: any) => {
       this.users = res;
       this.isLoading = false;
     })
@@ -31,7 +34,23 @@ export class DefendersListComponent implements OnInit {
     this.router.navigate(['/admin/add-new'], { queryParams: { type: 'defenders' } });
   }
 
-  goToViePage(): void {
-
+  goToViewPage(index: number): void {
+    const encodedData = encodeURIComponent(JSON.stringify(this.users[index]));
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData } });
   }
+
+  previousClickEvent(event: boolean): void {
+    if (this.offset > 0 && event) {
+      this.offset -= 1;
+      // You can add any additional logic here when the "previous" button is clicked.
+      this.getAllDdefenders();
+    }
+   }
+
+   nextClickEvent(event: boolean): void {
+    if(event){
+      this.offset += 1;
+      this.getAllDdefenders();
+    }
+   }
 }

@@ -11,6 +11,8 @@ export class AppsListComponent implements OnInit {
 
   appsList: any[]= [];
   isLoading= true;
+  public pageSize: number = 13;
+  public offset: number = 0;
 
   constructor(
     private adminService: AdminService,
@@ -26,7 +28,8 @@ export class AppsListComponent implements OnInit {
   }
 
   getAppslIst(): void {
-    this.adminService.getApps(13, 0).subscribe((res: any) => {
+    this.isLoading = true;
+    this.adminService.getApps(this.pageSize, this.offset).subscribe((res: any) => {
       this.isLoading = false;
       this.appsList = res[0].properties;
     });
@@ -37,5 +40,20 @@ export class AppsListComponent implements OnInit {
     const encodedData = encodeURIComponent(JSON.stringify(this.appsList[index]));
     this.router.navigate(['admin/view'], { queryParams: { data: encodedData } });
   }
+
+  previousClickEvent(event: boolean): void {
+    if (this.offset > 0 && event) {
+      this.offset -= 1;
+      // You can add any additional logic here when the "previous" button is clicked.
+      this.getAppslIst();
+    }
+   }
+
+   nextClickEvent(event: boolean): void {
+    if(event){
+      this.offset += 1;
+      this.getAppslIst();
+    }
+   }
 
 }

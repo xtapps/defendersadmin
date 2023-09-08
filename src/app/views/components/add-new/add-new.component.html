@@ -7,174 +7,198 @@
 
 <c-row>
     <c-col xs>
-      <c-card class="mb-4">
-        <!-- <c-card-header>Business Opportunities</c-card-header> -->
-        <c-card-body>
-            <form cForm [formGroup]="form">
-                <div class="flex">
-                    <div class="mb-3 w-half">
-                        <label cLabel for="locatonName">Location Name</label>
-                        <input cFormControl id="locatonName" formControlName="locationName" placeholder="Location Name"
-                            type="text" />
-                    </div>
-                    <div class="mb-3 w-half">
-                        <label cLabel for="corpName">Corp Name</label>
-                        <input cFormControl id="corpName" formControlName="corpName" placeholder="Corp Name" type="text" />
-                    </div>
-                    <!-- <div class="mb-3 w-half">
+        <c-card class="mb-4">
+            <!-- <c-card-header>Business Opportunities</c-card-header> -->
+            <c-card-body>
+                <form cForm [formGroup]="form">
+                    <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="locatonName">Location Name</label>
+                            <input cFormControl id="locatonName" formControlName="locationName"
+                                placeholder="Location Name" type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="corpName">Corp Name</label>
+                            <input cFormControl id="corpName" formControlName="corpName" placeholder="Corp Name"
+                                type="text" />
+                        </div>
+                        <!-- <div class="mb-3 w-half">
                         <label cLabel for="propertyType">Property Type</label>
                         <input cFormControl id="propertyType" formControlName="propertyType" placeholder="Property Type"
                             type="text" />
                     </div> -->
-                </div>
-        
-                <div class="flex">
-        
-                    <div class="mb-3 w-half">
-                        <label cLabel for="appSection">App Section</label>
-                        <input cFormControl id="appSection" formControlName="appSection" placeholder="App Section"
-                            type="text" />
                     </div>
-                    <div class="mb-3 w-half">
-                        <label cLabel for="androidUrl">Organization Type</label>
-                        <input cFormControl id="androidUrl" formControlName="androidUrl" placeholder="Organization Type"
-                            type="text" />
-                    </div>
-                </div>
-        
-                <div class="flex">
-                    <div class="mb-3 w-half">
-                        <label cLabel for="orgType">Android URL</label>
-                        <input cFormControl id="orgType" formControlName="orgType" placeholder="Android URL"
-                            type="text" />
-                    </div>
-                    <div class="mb-3 w-half">
-                        <label cLabel for="appleUrl">Apple URL</label>
-                        <input cFormControl id="appleUrl" formControlName="appleUrl" placeholder="Apple URL"
-                            type="text" />
-                    </div>
-                </div>
-        
-                <div class="flex">
-                    <div class="mb-3 w-half">
-                        <label cLabel for="address1">Address Line 1</label>
-                        <input cFormControl id="address1" formControlName="address1" placeholder="Address Line 1"
-                            type="text" />
-                    </div>
-                    <div class="mb-3 w-half">
-                        <label cLabel for="address1">Address Line 2</label>
-                        <input cFormControl id="address1" formControlName="address2" placeholder="Address Line 2"
-                            type="text" />
-                    </div>
-                </div>
 
-                <div class="flex">
-                    <div class="mb-3 w-half">
-                        <label cLabel for="phone">Phone</label>
-                        <input cFormControl id="phone" formControlName="phone" placeholder="Phone" type="text" />
-                    </div>
-                    <div class="mb-3 w-half">
-                        <label cLabel for="email">Email</label>
-                        <input cFormControl id="email" formControlName="email" placeholder="name@gmail.com"
-                            type="email" />
-                    </div>
-                  
-                </div>
+                    <div class="flex">
 
-                <div class="flex">
-                    <div class="mb-3 w-half">
-                        <label cLabel for="website">Web Site</label>
-                        <input cFormControl id="website" formControlName="website" placeholder="Web Site"
-                            type="text" />
+                        <div class="mb-3 w-half">
+                            <label cLabel for="appSection">App Section</label>
+                            <!-- <input cFormControl id="appSection" formControlName="appSection" placeholder="App Section"
+                            type="text" /> -->
+                            <select name="" id="appSection">
+                                <option value="" selected disabled>select</option>
+                                <option value="value1">two</option>
+                                <option value="value1">three</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="androidUrl">Organization Type</label>
+                            <!-- <input cFormControl id="androidUrl" formControlName="androidUrl"
+                                placeholder="Organization Type" type="text" /> -->
+                            <select name="" id="appSection">
+                                <option value="" selected disabled>select</option>
+                                <option value="value1">one</option>
+                                <option value="value1">two</option>
+                                <option value="value1">three</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="mb-3 w-half">
-                        <label cLabel for="localContact">Local Contact</label>
-                        <input cFormControl id="localContact" formControlName="localContact" placeholder="Local Contact"
-                            type="text" />
+
+                    <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="orgType">Android URL</label>
+                            <input cFormControl id="orgType" formControlName="orgType" placeholder="Android URL"
+                                type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="appleUrl">Apple URL</label>
+                            <input cFormControl id="appleUrl" formControlName="appleUrl" placeholder="Apple URL"
+                                type="text" />
+                        </div>
                     </div>
-                    <div class="mb-3 w-half">
-                        <label cLabel for="franchiseTag">Franchise Tag</label>
-                        <input cFormControl id="franchiseTag" formControlName="franchiseTag" placeholder="Franchise Tag"
-                            type="text" />
+
+                    <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="address1">Address Line 1</label>
+                            <input cFormControl id="address1" formControlName="address1" placeholder="Address Line 1"
+                                type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="address1">Address Line 2</label>
+                            <input cFormControl id="address1" formControlName="address2" placeholder="Address Line 2"
+                                type="text" />
+                        </div>
                     </div>
-                    <div class="mb-3 w-half">
-                        <label cLabel for="umbrellaTag">Umbrella Tag</label>
-                        <input cFormControl id="umbrellaTag" formControlName="umbrellaTag" placeholder="Umbrella Tag"
-                            type="text" />
+
+                    <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="phone">Phone</label>
+                            <input cFormControl id="phone" formControlName="phone" placeholder="Phone" type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="email">Email</label>
+                            <input cFormControl id="email" formControlName="email" placeholder="name@gmail.com"
+                                type="email" />
+                        </div>
+
                     </div>
-                    <div class="mb-3 w-half">
-                        <label cLabel for="licenseNumber">License Number</label>
-                        <input cFormControl id="licenseNumber" formControlName="licenseNumber" placeholder="License Number"
-                            type="text" />
+
+                    <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="website">Web Site</label>
+                            <input cFormControl id="website" formControlName="website" placeholder="Web Site"
+                                type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="localContact">Local Contact</label>
+                            <input cFormControl id="localContact" formControlName="localContact"
+                                placeholder="Local Contact" type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="franchiseTag">Franchise Tag</label>
+                            <input cFormControl id="franchiseTag" formControlName="franchiseTag"
+                                placeholder="Franchise Tag" type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="umbrellaTag">Umbrella Tag</label>
+                            <input cFormControl id="umbrellaTag" formControlName="umbrellaTag"
+                                placeholder="Umbrella Tag" type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="licenseNumber">License Number</label>
+                            <input cFormControl id="licenseNumber" formControlName="licenseNumber"
+                                placeholder="License Number" type="text" />
+                        </div>
                     </div>
-                </div>
-        
-        
-                <div class="flex">
-                    <div class="mb-3 w-half">
-                        <label cLabel for="city">City</label>
-                        <input cFormControl id="city" formControlName="city" placeholder="City" type="text" />
+
+
+                    <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="city">City</label>
+                            <input cFormControl id="city" formControlName="city" placeholder="City" type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="state">State</label>
+                            <input cFormControl id="state" formControlName="state" placeholder="State" maxlength="2"
+                                type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="zip">Zip</label>
+                            <input cFormControl id="zip" formControlName="zip" placeholder="Zip" maxlength="5"
+                                type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="country">Country</label>
+                            <select formControlName="country" name="" id="appSection">
+                                <option value="us" selected>US</option>
+                                <option value="canada">Canada</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="county">County</label>
+                            <input cFormControl id="county" formControlName="county" placeholder="County" type="text" />
+                        </div>
                     </div>
-                    <div class="mb-3 w-half">
-                        <label cLabel for="state">State</label>
-                        <input cFormControl id="state" formControlName="state" placeholder="" type="text" />
+
+
+                    <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="discount">Discount</label>
+                            <input cFormControl id="discount" formControlName="discount" placeholder="Discount"
+                                type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="discountClaimer">Discount Claimer</label>
+                            <input cFormControl id="discountClaimer" formControlName="discountClaimer"
+                                placeholder="Discount Claimer" type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="groupCode">Group Code</label>
+                            <input cFormControl id="groupCode" formControlName="groupCode" placeholder="Group Code"
+                                type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="primeryCategory">Primary Category</label>
+                            <!-- <input cFormControl id="primeryCategory" formControlName="primeryCategory"
+                                placeholder="Primary Category" type="text" /> -->
+                            <select name="" id="appSection">
+                                <option value="" selected disabled>select</option>
+                                <option value="value1">two</option>
+                                <option value="value1">three</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="secondaryCategory">Secondary Category</label>
+                            <!-- <input cFormControl id="secondaryCategory" formControlName="secondaryCategory"
+                                placeholder="Secondary Category" type="text" /> -->
+                            <select name="" id="appSection">
+                                <option value="" selected disabled>select</option>
+                                <option value="value1">two</option>
+                                <option value="value1">three</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="mb-3 w-half">
-                        <label cLabel for="zip">Zip</label>
-                        <input cFormControl id="zip" formControlName="zip" placeholder="Zip" type="text" />
+
+                    <div class="mb-3">
+                        <label cLabel for="description">Description</label>
+                        <textarea cFormControl id="description" formControlName="description" rows="3"></textarea>
                     </div>
-                    <div class="mb-3 w-half">
-                        <label cLabel for="country">Country</label>
-                        <input cFormControl id="country" formControlName="country" placeholder="Country"
-                            type="text" />
+
+                    <div>
+                        <button cButton color="primary" (click)="onSubmit()">Submit</button>
                     </div>
-                    <div class="mb-3 w-half">
-                        <label cLabel for="county">County</label>
-                        <input cFormControl id="county" formControlName="county" placeholder="County" type="text" />
-                    </div>
-                </div>
-        
-                
-         
-        
-                <div class="flex">
-                    <div class="mb-3 w-half">
-                        <label cLabel for="discount">Discount</label>
-                        <input cFormControl id="discount" formControlName="discount" placeholder="Discount"
-                            type="text" />
-                    </div>
-                    <div class="mb-3 w-half">
-                        <label cLabel for="discountClaimer">Discount Claimer</label>
-                        <input cFormControl id="discountClaimer" formControlName="discountClaimer" placeholder="Discount Claimer"
-                            type="text" />
-                    </div>
-                    <div class="mb-3 w-half">
-                        <label cLabel for="groupCode">Group Code</label>
-                        <input cFormControl id="groupCode" formControlName="groupCode" placeholder="Group Code"
-                            type="text" />
-                    </div>
-                    <div class="mb-3 w-half">
-                        <label cLabel for="primeryCategory">Primary Category</label>
-                        <input cFormControl id="primeryCategory" formControlName="primeryCategory" placeholder="Primary Category"
-                            type="text" />
-                    </div>
-                    <div class="mb-3 w-half">
-                        <label cLabel for="secondaryCategory">Secondary Category</label>
-                        <input cFormControl id="secondaryCategory" formControlName="secondaryCategory" placeholder="Secondary Category"
-                            type="text" />
-                    </div>
-                </div>
-        
-                <div class="mb-3">
-                    <label cLabel for="description">Description</label>
-                    <textarea cFormControl id="description" formControlName="description" rows="3"></textarea>
-                </div>
-        
-                <div>
-                    <button cButton color="primary" (click)="onSubmit()">Submit</button>
-                </div>
-            </form>
-        </c-card-body>
-      </c-card>
+                </form>
+            </c-card-body>
+        </c-card>
     </c-col>
-  </c-row>
+</c-row>

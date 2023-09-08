@@ -3,7 +3,7 @@
 <c-row>
   <c-col xs>
     <c-card class="mb-4">
-      <c-card-header>Users</c-card-header>
+      <c-card-header>Defenders</c-card-header>
       <c-card-body>
         <table
           [hover]="true"
@@ -35,7 +35,8 @@
                 ></c-avatar>
               </td>
               <td>
-                <div>{{ user.name }}</div>
+                <!-- <div>{{ user.name }}</div> -->
+                <div>{{usersList[i]?.firstName + ' ' + usersList[i]?.firstName }}</div>
                 <div class="small text-medium-emphasis text-nowrap">
                   <span>
                     {{ user.state }} | Registered: {{ user.registered }}

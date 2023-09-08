@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Input,  Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-custom-pagination',
@@ -7,9 +7,10 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class CustomPaginationComponent {
 
+  @Input() currentPage = 1;
+  @Input() totalRecords  = 0;
   @Output() previousClickEvent = new EventEmitter<boolean>();
   @Output() nextClickEvent = new EventEmitter<boolean>();
-
 
   previous(): void{
     this.previousClickEvent.emit(true);

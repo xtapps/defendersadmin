@@ -59,6 +59,7 @@
             </tbody>
           </table>
         </ng-template>
+        <app-custom-pagination [currentPage]="offset+1" (nextClickEvent)="nextClickEvent($event)" (previousClickEvent)="previousClickEvent($event)"></app-custom-pagination>
 
       </c-card-body>
     </c-card>

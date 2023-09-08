@@ -34,7 +34,7 @@
                   <div>{{ item.locationName }}</div>
                 </td>
                 <td style="width: 100px;">
-                  <div>{{ item.website[0] }}</div>
+                  <div><a [href]="item.website[0]" target="_blank">{{ item.website[0] }}</a></div>
                 </td>
                 <td>
                   <div>{{ item.email }}</div>
@@ -55,6 +55,7 @@
             </tbody>
           </table>
         </ng-template>
+        <app-custom-pagination [currentPage]="offset+1" (nextClickEvent)="nextClickEvent($event)" (previousClickEvent)="previousClickEvent($event)"></app-custom-pagination>
 
       </c-card-body>
     </c-card>
