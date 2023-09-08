@@ -18,8 +18,8 @@
                         class="mb-0 border">
                         <thead cTableColor="light">
                             <tr>
-                                <th>Franch. Name</th>
-                                <th>Subscription Total</th>
+                                <th>Company Name</th>
+                                <th>Category</th>
                                 <th>Website</th>
                                 <th>Title</th>
                                 <th></th>
@@ -28,10 +28,10 @@
                         <tbody>
                             <tr *ngFor="let item of jobOpportunities; index as i">
                                 <td>
-                                    <div>{{ item.category }}</div>
+                                    <div>{{ item.jobCompanyName	 }}</div>
                                 </td>
                                 <td>
-                                    <div>{{ item.applyLink }}</div>
+                                    <div>{{ item.category }}</div>
                                 </td>
                                 <td>
                                     <div>{{ item.jobType }}</div>
