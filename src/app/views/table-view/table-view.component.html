@@ -17,7 +17,7 @@
           <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
             <thead cTableColor="light">
               <tr>
-                <th>Corp. Name</th>
+                <th>Partner Name</th>
                 <th>Email</th>
                 <th>Address</th>
                 <th>City</th>
@@ -29,7 +29,7 @@
             <tbody>
               <tr *ngFor="let user of partnersList; index as i">
                 <td>
-                  <div>{{ user.corpName }}</div>
+                  <div>{{ user.locationName	 }}</div>
                 </td>
                 <td>
                   <div>{{ user.email }}</div>
@@ -41,7 +41,7 @@
                   <div>{{ user.city }}</div>
                 </td>
                 <td>
-                  <div>{{ user.city }}</div>
+                  <div>{{ user.state }}</div>
                 </td>
                 <td>
                   <div>{{ user.zip }}</div>
