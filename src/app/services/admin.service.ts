@@ -60,9 +60,9 @@ export class AdminService {
     return this.http.get(`${apiUrl}defender/jobBoard?limit=${limit}&offset=${offset}`);
   }
   
-  getAllDefendersList(){
-    return this.http.get(`${apiUrl}/getAllDefenders`);
-  }
+  // getAllDefendersList(){
+  //   return this.http.get(`${apiUrl}/getAllDefenders`);
+  // }
   
   validateUser(params: any) {
     return this.http.post(`${apiUrl}/validate`, params);
