@@ -7,6 +7,7 @@ import { Page500Component } from './views/pages/page500/page500.component';
 import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
 import { AdminModule } from './views/admin/admin.module'
+import { ValidateUserComponent } from './views/validate-user/validate-user.component';
 
 const routes: Routes = [
   {
@@ -99,6 +100,13 @@ const routes: Routes = [
     component: RegisterComponent,
     data: {
       title: 'Register Page'
+    }
+  },
+  {
+    path: 'validate/:defenderId',
+    component: ValidateUserComponent,
+    data: {
+      title: 'Validate User Page'
     }
   },
   {

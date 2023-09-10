@@ -34,6 +34,10 @@ export class AdminService {
   getAllDefendersList(){
     return this.http.get(`${apiUrl}/getAllDefenders`);
   }
+  
+  validateUser(params: any) {
+    return this.http.post(`${apiUrl}/validate`, params);
+  }
 
   tempColumns = ['position', 'name', 'weight', 'symbol'];
   tempDatas = [

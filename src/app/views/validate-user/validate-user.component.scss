@@ -1,0 +1,17 @@
+@import './../../../scss/slim.min.css';
+
+.image-upload-container {
+    border: 2px dashed #ccc;
+    text-align: center;
+    padding: 20px;
+    cursor: pointer;
+  }
+  
+  .image-upload-container p {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  input[type="file"] {
+    display: none;
+  }
