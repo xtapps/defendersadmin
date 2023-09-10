@@ -26,27 +26,27 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Websites',
-    url: 'websites',
+    url: '/admin/websites',
     iconComponent: { name: 'cil-home' }
   },
   {
     name: 'Apps',
-    url: 'apps',
+    url: '/admin/apps',
     iconComponent: { name: 'cil-home' }
   },
   {
     name: 'Franchises',
-    url: 'franchises',
+    url: '/admin/franchises',
     iconComponent: { name: 'cil-home' }
   },
   {
     name: 'Categories',
-    url: 'categories',
+    url: '/admin/categories',
     iconComponent: { name: 'cil-home' }
   },
   {
     name: 'Group Codes',
-    url: 'group-code',
+    url: '/admin/group-codes',
     iconComponent: { name: 'cil-home' }
   },
   {
@@ -59,6 +59,26 @@ export const navItems: INavData[] = [
     url: 'admin-users',
     iconComponent: { name: 'cil-user' }
   },
+  {
+    title: true,
+    name: 'Opportunities'
+  },
+  {
+    name: 'Job Boards',
+    url: '/admin/job-boards',
+    iconComponent: { name: 'cil-user' }
+  },
+  {
+    name: 'Job Opportunities',
+    url: '/admin/job-opportunities',
+    iconComponent: { name: 'cil-user' }
+  },
+  {
+    name: 'Business Opportunities',
+    url: '/admin/business-opportunities',
+    iconComponent: { name: 'cil-user' }
+  },
+
   // {
   //   title: true,
   //   name: 'Extras'

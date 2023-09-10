@@ -19,21 +19,50 @@ export class AdminService {
     });
   }
 
-  getLocations() {
-    return this.http.get(`${apiUrl}/partner/getPartnerLocations?limit=10`);
+  getLocations(limit: number, offset: number) {
+    const url = `${apiUrl}/properties/viewAll?reqParams=[{"value": "false", "key": "featured"}, {"value": "partner", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
+    return this.http.get(url);
   }
 
-  getWebsites() {
-    return this.http.get(`${apiUrl}/partner/getPartnerWebsites?limit=10`);
+  getWebsites(limit: number, offset: number) {
+    const url = `${apiUrl}/properties/viewAll?reqParams=[{"value": "false", "key": "featured"}, {"value": "website", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
+    return this.http.get(url);
   }
 
-  getAllCategories() {
-    return this.http.get(`${apiUrl}/partner/getPartnerByCategory?limit=10`);
+  getApps(limit: number, offset: number) {
+    const url = `${apiUrl}/properties/viewAll?reqParams=[{"value": "false", "key": "featured"}, {"value": "app", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
+    return this.http.get(url);
+  }
+
+  getFranchises(limit: number, offset: number) {
+    const url = `${apiUrl}/defender/franchises?reqParams=[{"value": "false", "key": "featured"}, {"value": "franchises", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
+    return this.http.get(url);
+  }
+
+  getAllCategories(limit: number, offset: number) {
+    return this.http.get(`${apiUrl}/getCategories?limit=${limit}&offset=${offset}`);
+  }
+
+
+  getGroupCodes(limit: number, offset: number) {
+    return this.http.get(`${apiUrl}/getGroupCodes?limit=${limit}&offset=${offset}`);
+  }
+
+  getAllDefendersList(limit: number, offset: number) {
+    return this.http.get(`${apiUrl}/getAllDefenders?limit=${limit}&offset=${offset}`);
+  }
+
+  getJobOpportunities(limit: number, offset: number){
+    return this.http.get(`${apiUrl}/defender/jobs?limit=${limit}&offset=${offset}`);
+  }
+
+  getJobBoards(limit: number, offset: number){
+    return this.http.get(`${apiUrl}defender/jobBoard?limit=${limit}&offset=${offset}`);
   }
   
-  getAllDefendersList(){
-    return this.http.get(`${apiUrl}/getAllDefenders`);
-  }
+  // getAllDefendersList(){
+  //   return this.http.get(`${apiUrl}/getAllDefenders`);
+  // }
   
   validateUser(params: any) {
     return this.http.post(`${apiUrl}/validate`, params);
@@ -53,5 +82,12 @@ export class AdminService {
     {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
   ];
 
+  // Delete APIS
+
+  deleteCategory(id: string){
+    return this.http.delete(`${apiUrl}/admin/removeCategory/ ${id}`);
+  }
   
+
+
 }

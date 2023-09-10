@@ -1,0 +1,24 @@
+<div class="header_section">
+    <h4>Details</h4>
+    <button cButton color="primary" (click)="goBack()">Back</button>
+</div>
+
+<c-row>
+    <c-col xs>
+        <c-card class="mb-4">
+            <c-card-header>Details</c-card-header>
+            <c-card-body>
+                <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+                    <tbody>
+                        <ng-container *ngFor="let pair of getObjectKeyValues(receivedData)">
+                            <tr>
+                                <th>{{ pair.key }}</th>
+                                <td>{{ pair.value }}</td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>

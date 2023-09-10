@@ -45,7 +45,8 @@ import { ValidateUserComponent } from './views/validate-user/validate-user.compo
 const APP_CONTAINERS = [
   DefaultFooterComponent,
   DefaultHeaderComponent,
-  DefaultLayoutComponent
+  DefaultLayoutComponent,
+  
 ];
 
 @NgModule({

@@ -3,14 +3,14 @@ import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
-  selector: 'app-apps-list',
-  templateUrl: './apps-list.component.html',
-  styleUrls: ['./apps-list.component.scss']
+  selector: 'app-franchises-list',
+  templateUrl: './franchises-list.component.html',
+  styleUrls: ['./franchises-list.component.scss']
 })
-export class AppsListComponent implements OnInit {
+export class FranchisesListComponent implements OnInit {
 
-  appsList: any[]= [];
-  isLoading= true;
+  franchisesList: any[]= [];
+  isLoading = true;
   public pageSize: number = 13;
   public offset: number = 0;
 
@@ -20,24 +20,25 @@ export class AppsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAppslIst();
+    this.getFranchisesList();
   }
 
-  addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'app' } });
-  }
-
-  getAppslIst(): void {
+  getFranchisesList(): void {
     this.isLoading = true;
-    this.adminService.getApps(this.pageSize, this.offset).subscribe((res: any) => {
+    this.adminService.getFranchises(this.pageSize, this.offset).subscribe((res: any) => {
       this.isLoading = false;
-      this.appsList = res[0].properties;
+      this.franchisesList = res.franchises;
     });
   }
 
+  addNew(): void {
+    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'franchises' } });
+  }
+
+
   goToViewPage(index:number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
-    const encodedData = encodeURIComponent(JSON.stringify(this.appsList[index]));
+    const encodedData = encodeURIComponent(JSON.stringify(this.franchisesList[index]));
     this.router.navigate(['admin/view'], { queryParams: { data: encodedData } });
   }
 
@@ -45,14 +46,14 @@ export class AppsListComponent implements OnInit {
     if (this.offset > 0 && event) {
       this.offset -= 1;
       // You can add any additional logic here when the "previous" button is clicked.
-      this.getAppslIst();
+      this.getFranchisesList();
     }
    }
 
    nextClickEvent(event: boolean): void {
     if(event){
       this.offset += 1;
-      this.getAppslIst();
+      this.getFranchisesList();
     }
    }
 
