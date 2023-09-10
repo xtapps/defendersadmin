@@ -18,13 +18,13 @@ export class JobBoardsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getJobBoards();
+    this.getJobBoards();
   }
 
   getJobBoards(): void {
-    this.adminService.getJobBoards(13, 1).subscribe((res: any) => {
+    this.adminService.getJobBoards(13,1).subscribe((res: any) => {
       this.isLoading = false;
-      this.jodBoards = res.franchises;
+      this.jodBoards = res.jobs;
     });
   }
 

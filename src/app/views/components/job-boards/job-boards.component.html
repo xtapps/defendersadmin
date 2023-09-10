@@ -20,8 +20,7 @@
                   <!-- <th class="text-center">
                     <svg cIcon name="cilPeople"></svg>
                   </th> -->
-                  <th>Franch. Name</th>
-                  <th>Subscription Total</th>
+                  <th>Title</th>
                   <th>Website</th>
                   <th></th>
                 </tr>
@@ -29,10 +28,7 @@
               <tbody>
                 <tr *ngFor="let item of jodBoards; index as i">
                   <td>
-                    <div>{{ item.franchiseName }}</div>
-                  </td>
-                  <td>
-                    <div>{{ item.subscriptionTotal }}</div>
+                    <div>{{ item.title }}</div>
                   </td>
                   <td>
                       <div>{{ item.website }}</div>

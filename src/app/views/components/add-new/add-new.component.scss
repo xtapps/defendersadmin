@@ -21,3 +21,11 @@ select{
     border-radius: 6px;
     padding-left: 10px;
 }
+
+.invalid_field{
+    border: 1px solid red;
+}
+.error_msg{
+    color: red;;
+    font-size: 13px;
+}
