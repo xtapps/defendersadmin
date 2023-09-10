@@ -57,7 +57,7 @@ export class AdminService {
   }
 
   getJobBoards(limit: number, offset: number){
-    return this.http.get(`${apiUrl}defender/jobBoard?limit=${limit}&offset=${offset}`);
+    return this.http.get(`${apiUrl}/defender/jobBoard?limit=${limit}&offset=${offset}`);
   }
   
   // getAllDefendersList(){
@@ -81,6 +81,12 @@ export class AdminService {
     {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
     {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
   ];
+
+  //Create
+
+  createPartner(payloadData: any){
+    return this.http.post<any>(`${apiUrl}/createProperties`, payloadData);
+  }
 
   // Delete APIS
 
