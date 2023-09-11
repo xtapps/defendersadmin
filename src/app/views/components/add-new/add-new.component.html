@@ -14,43 +14,43 @@
                     <div class="flex">
                         <div class="mb-3 w-half">
                             <label cLabel for="locatonName">Location Name</label>
-                            <input cFormControl id="locatonName" formControlName="locationName"
-                                placeholder="Location Name" type="text" />
+                            <input [ngClass]="{'invalid_field': checkValidation('locationName')}" cFormControl
+                                id="locatonName" formControlName="locationName" placeholder="Location Name"
+                                type="text" />
+                            <label class="error_msg" *ngIf="checkValidation('locationName')">This
+                                field is required</label>
                         </div>
                         <div class="mb-3 w-half">
                             <label cLabel for="corpName">Corp Name</label>
-                            <input cFormControl id="corpName" formControlName="corpName" placeholder="Corp Name"
-                                type="text" />
+                            <input [ngClass]="{'invalid_field': checkValidation('corpName')}" cFormControl id="corpName"
+                                formControlName="corpName" placeholder="Corp Name" type="text" />
+                            <label class="error_msg" *ngIf="checkValidation('corpName')">This
+                                field is required</label>
                         </div>
-                        <!-- <div class="mb-3 w-half">
-                        <label cLabel for="propertyType">Property Type</label>
-                        <input cFormControl id="propertyType" formControlName="propertyType" placeholder="Property Type"
-                            type="text" />
-                    </div> -->
+
                     </div>
 
                     <div class="flex">
 
                         <div class="mb-3 w-half">
                             <label cLabel for="appSection">App Section</label>
-                            <!-- <input cFormControl id="appSection" formControlName="appSection" placeholder="App Section"
-                            type="text" /> -->
-                            <select name="" id="appSection">
+                            <select [ngClass]="{'invalid_field': checkValidation('appSection')}" name="" id="appSection"
+                                formControlName="appSection">
                                 <option value="" selected disabled>select</option>
-                                <option value="value1">two</option>
-                                <option value="value1">three</option>
+                                <option value="partner">Partner</option>
                             </select>
+                            <label class="error_msg" *ngIf="checkValidation('appSection')">This
+                                field is required</label>
                         </div>
                         <div class="mb-3 w-half">
                             <label cLabel for="androidUrl">Organization Type</label>
-                            <!-- <input cFormControl id="androidUrl" formControlName="androidUrl"
-                                placeholder="Organization Type" type="text" /> -->
-                            <select name="" id="appSection">
+                            <select [ngClass]="{'invalid_field': checkValidation('orgType')}" name="" id="orgType"
+                                formControlName="orgType">
                                 <option value="" selected disabled>select</option>
-                                <option value="value1">one</option>
-                                <option value="value1">two</option>
-                                <option value="value1">three</option>
+                                <option value="commercial">Commercial</option>
                             </select>
+                            <label class="error_msg" *ngIf="checkValidation('orgType')">This
+                                field is required</label>
                         </div>
                     </div>
 
@@ -140,7 +140,7 @@
                         <div class="mb-3 w-half">
                             <label cLabel for="country">Country</label>
                             <select formControlName="country" name="" id="appSection">
-                                <option value="us" selected>US</option>
+                                <option value="us">US</option>
                                 <option value="canada">Canada</option>
                             </select>
                         </div>
@@ -169,22 +169,19 @@
                         </div>
                         <div class="mb-3 w-half">
                             <label cLabel for="primeryCategory">Primary Category</label>
-                            <!-- <input cFormControl id="primeryCategory" formControlName="primeryCategory"
-                                placeholder="Primary Category" type="text" /> -->
-                            <select name="" id="appSection">
+                            <select name="" id="primeryCategory" formControlName="primeryCategory" #value
+                                (change)="getPrimaryCategory(value)">
                                 <option value="" selected disabled>select</option>
-                                <option value="value1">two</option>
-                                <option value="value1">three</option>
+                                <option *ngFor="let item of parimaryCategories" [value]="item._id">{{item.categoryName}}
+                                </option>
                             </select>
                         </div>
                         <div class="mb-3 w-half">
                             <label cLabel for="secondaryCategory">Secondary Category</label>
-                            <!-- <input cFormControl id="secondaryCategory" formControlName="secondaryCategory"
-                                placeholder="Secondary Category" type="text" /> -->
-                            <select name="" id="appSection">
+                            <select name="" id="secondaryCategory" formControlName="secondaryCategory">
                                 <option value="" selected disabled>select</option>
-                                <option value="value1">two</option>
-                                <option value="value1">three</option>
+                                <option *ngFor="let item of secondaryCategories" [value]="item._id">{{item.category}}
+                                </option>
                             </select>
                         </div>
                     </div>
