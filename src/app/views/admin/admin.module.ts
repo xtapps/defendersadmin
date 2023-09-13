@@ -28,6 +28,10 @@ import { JobBoardsComponent } from '../components/job-boards/job-boards.componen
 import { JobOpportunitiesComponent } from '../components/job-opportunities/job-opportunities.component';
 import { BusinessOpportunitiesComponent } from '../components/business-opportunities/business-opportunities.component';
 import { CustomPaginationComponent } from '../components/custom-pagination/custom-pagination.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { AddNewPartnerComponent } from '../components/add-new-froms/add-new-partner/add-new-partner.component';
+import { AddNewAppComponent } from '../components/add-new-froms/add-new-app/add-new-app.component';
+import { AddNewFranchisesComponent } from '../components/add-new-froms/add-new-franchises/add-new-franchises.component';
 
 
 @NgModule({
@@ -46,7 +50,10 @@ import { CustomPaginationComponent } from '../components/custom-pagination/custo
     JobBoardsComponent,
     JobOpportunitiesComponent,
     BusinessOpportunitiesComponent,
-    CustomPaginationComponent
+    CustomPaginationComponent,
+    AddNewPartnerComponent,
+    AddNewAppComponent,
+    AddNewFranchisesComponent
   ],
   imports: [
     CommonModule,
@@ -71,7 +78,8 @@ import { CustomPaginationComponent } from '../components/custom-pagination/custo
     AvatarModule,
     TableModule,
     ChartjsModule,
-    WidgetsModule
+    WidgetsModule,
+    NgSelectModule
   ]
 })
 export class AdminModule { }

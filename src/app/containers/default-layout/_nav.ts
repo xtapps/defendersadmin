@@ -78,6 +78,44 @@ export const navItems: INavData[] = [
     url: '/admin/business-opportunities',
     iconComponent: { name: 'cil-user' }
   },
+  {
+    title: true,
+    name: 'Non Profits'
+  },
+  {
+    name: 'Military',
+    url: '/non-profits/military',
+    iconComponent: { name: 'cil-user' }
+  },
+  {
+    name: 'First Responder',
+    url: '/non-profits/first-responder',
+    iconComponent: { name: 'cil-user' }
+  },
+  {
+    name: 'Chaplain',
+    url: '/non-profits/chaplain',
+    iconComponent: { name: 'cil-user' }
+  },
+  {
+    name: 'Other',
+    url: '/non-profits/other',
+    iconComponent: { name: 'cil-user' }
+  },
+  {
+    title: true,
+    name: 'Kids Corner'
+  },
+  {
+    name: 'Games',
+    url: '',
+    iconComponent: { name: 'cil-user' }
+  },
+  {
+    name: 'Books Plus',
+    url: '',
+    iconComponent: { name: 'cil-user' }
+  },
 
   // {
   //   title: true,

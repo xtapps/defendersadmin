@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { apiUrl } from '../../config/config'
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -86,6 +87,14 @@ export class AdminService {
 
   createPartner(payloadData: any){
     return this.http.post<any>(`${apiUrl}/createProperties`, payloadData);
+  }
+
+  createFranchises(payloadData: any): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/createFranchises`, payloadData);
+  }
+
+  uploadProfile(payloadData: FormData){
+    return this.http.post<any>(`${apiUrl}/admin/partner/uploadProfile`, payloadData);
   }
 
   // Delete APIS
