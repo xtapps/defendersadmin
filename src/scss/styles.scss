@@ -23,5 +23,6 @@ $enable-rtl: true;
 @import "custom";
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
 @import './slim.min.css';

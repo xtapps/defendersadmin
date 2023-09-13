@@ -72,6 +72,16 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/pages/pages.module').then((m) => m.PagesModule)
       },
+      {
+        path: 'non-profits',
+        loadChildren: () =>
+          import('./views/non-profits/non-profits.module').then((m) => m.NonProfitsModule)
+      },
+      {
+        path: 'kids-corner',
+        loadChildren: () =>
+          import('./views/kids-corner/kids-corner.module').then((m) => m.KidsCornerModule)
+      },
     ]
   },
   {
