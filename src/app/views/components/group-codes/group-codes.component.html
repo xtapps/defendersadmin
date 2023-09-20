@@ -30,49 +30,51 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let user of groupCodes; index as i">
+              <tr *ngFor="let item of groupCodes; index as i">
                 <!-- <td class="text-center">
                     <c-avatar
                       size="md"
-                      src="{{ user.avatar }}"
-                      status="{{ user.status }}"
+                      src="{{ item.avatar }}"
+                      status="{{ item.status }}"
                     ></c-avatar>
                   </td> -->
                 <td>
-                  <div>{{ user.firstName }}</div>
+                  <div>{{ item.firstName }}</div>
                 </td>
                 <td>
-                  <div>{{ user.lastName }}</div>
+                  <div>{{ item.lastName }}</div>
                 </td>
                 <td>
-                  <div>{{ user.defenderEmail }}</div>
+                  <div>{{ item.defenderEmail }}</div>
                 </td>
                 <td>
-                  <div>{{ user.role }}</div>
+                  <div>{{ item.role }}</div>
                 </td>
                 <td>
-                  <div>{{ user.zipcode }}</div>
+                  <div>{{ item.zipcode }}</div>
                 </td>
                 <td>
-                  <div>{{ user.contactPhone }}</div>
+                  <div>{{ item.contactPhone }}</div>
                 </td>
                 <td>
-                  <div>{{ user.branch }}</div>
+                  <div>{{ item.branch }}</div>
                 </td>
                 <!-- <td class="text-center">
-                    <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg>
+                    <svg cIcon name="cibCc{{ item.payment }}" size="xl"></svg>
                   </td> -->
                 <td>
-                  <div >
+                  <div>
                     <span class="view-button" (click)="goToViePage()">View</span>
-                    <span style="margin-left: 10px;" class="view-button"(click)="deleteItem()">Delete</span>
+                    <span style="margin-left: 10px;" class="view-button delete-btn" (click)="deleteItem(item._id)">Delete</span>
                   </div>
                 </td>
               </tr>
             </tbody>
           </table>
         </ng-template>
+
       </c-card-body>
     </c-card>
+
   </c-col>
 </c-row>

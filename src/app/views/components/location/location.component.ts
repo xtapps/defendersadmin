@@ -16,10 +16,11 @@ export interface PeriodicElement {
 })
 export class LocationComponent implements OnInit {
 
-  locationList: any[]= [];
+  locationList: any[] = [];
   isLoading = true;
   public pageSize: number = 13;
   public offset: number = 0;
+  totalCount = 0;
   constructor(
     private adminService: AdminService,
     private router: Router) {
@@ -34,17 +35,18 @@ export class LocationComponent implements OnInit {
     this.adminService.getLocations(this.pageSize, this.offset).subscribe((res: any) => {
       this.isLoading = false;
       this.locationList = res[0].properties;
+      this.totalCount = res[0].totalRecords;
     });
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], {queryParams:{type: 'location'}});
+    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'location' } });
   }
 
   goToViewPage(index: number): void {
-   // Encode the JSON data and navigate to ViewComponent with it as a query parameter
-   const encodedData = encodeURIComponent(JSON.stringify(this.locationList[index]));
-   this.router.navigate(['admin/view'], { queryParams: { data: encodedData } });
+    // Encode the JSON data and navigate to ViewComponent with it as a query parameter
+    const encodedData = encodeURIComponent(JSON.stringify(this.locationList[index]));
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData } });
   }
 
   previousClickEvent(event: boolean): void {
@@ -53,13 +55,17 @@ export class LocationComponent implements OnInit {
       // You can add any additional logic here when the "previous" button is clicked.
       this.getAllLocation();
     }
-   }
+  }
 
-   nextClickEvent(event: boolean): void {
-    if(event){
+  nextClickEvent(event: boolean): void {
+    if (event) {
+      const lastPage = Math.ceil(this.totalCount / this.pageSize);
+      if (lastPage <= this.offset) {
+        return;
+      }
       this.offset += 1;
       this.getAllLocation();
     }
-   }
+  }
 
 }

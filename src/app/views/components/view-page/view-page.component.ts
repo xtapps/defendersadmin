@@ -11,6 +11,7 @@ export class ViewPageComponent  implements OnInit{
 
   appsList: any[]=[];
   receivedData: any;
+  type!: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,6 +22,7 @@ export class ViewPageComponent  implements OnInit{
   ngOnInit() {
     // Retrieve the JSON data from the query parameter and decode it
     const encodedData = this.route.snapshot.queryParamMap.get('data');
+    this.type = this.route.snapshot.queryParamMap.get('type') || '';
     if (encodedData) {
       this.receivedData = JSON.parse(decodeURIComponent(encodedData));
       console.log(this.receivedData);

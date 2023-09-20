@@ -32,6 +32,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { AddNewPartnerComponent } from '../components/add-new-froms/add-new-partner/add-new-partner.component';
 import { AddNewAppComponent } from '../components/add-new-froms/add-new-app/add-new-app.component';
 import { AddNewFranchisesComponent } from '../components/add-new-froms/add-new-franchises/add-new-franchises.component';
+import { AddNewWebsiteComponent } from '../components/add-new-froms/add-new-website/add-new-website.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { AddNewFranchisesComponent } from '../components/add-new-froms/add-new-f
     CustomPaginationComponent,
     AddNewPartnerComponent,
     AddNewAppComponent,
-    AddNewFranchisesComponent
+    AddNewFranchisesComponent,
+    AddNewWebsiteComponent
   ],
   imports: [
     CommonModule,

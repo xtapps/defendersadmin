@@ -15,6 +15,7 @@ export class WebsitesComponent implements OnInit {
   isLoading = true;
   public pageSize: number = 13;
   public offset: number = 0;
+  totalCount = 0;
 
   constructor(private adminService: AdminService,
     private router: Router) {
@@ -29,6 +30,7 @@ export class WebsitesComponent implements OnInit {
     this.adminService.getWebsites(this.pageSize, this.offset).subscribe((res: any) => {
       this.isLoading = false;
       this.websitesList = res[0].properties;
+      this.totalCount = res[0].totalRecords;
     });
   }
 
@@ -49,13 +51,18 @@ export class WebsitesComponent implements OnInit {
       // You can add any additional logic here when the "previous" button is clicked.
       this.getWebsites();
     }
-   }
+  }
 
-   nextClickEvent(event: boolean): void {
-    if(event){
+  nextClickEvent(event: boolean): void {
+    if (event) {
+      const lastPage = Math.ceil(this.totalCount / this.pageSize);
+      if (lastPage <= this.offset) {
+        return;
+      }
       this.offset += 1;
+      console.log(lastPage);
       this.getWebsites();
     }
-   }
+  }
 
 }
