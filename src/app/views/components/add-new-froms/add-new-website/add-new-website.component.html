@@ -1,0 +1,66 @@
+<div class="main_container">
+    <div>
+        <h4>Add New {{propertyType | titlecase}}</h4>
+    </div>
+
+</div>
+
+<c-row>
+    <c-col xs>
+        <c-card class="mb-4">
+            <!-- <c-card-header>Business Opportunities</c-card-header> -->
+            <c-card-body>
+                <form cForm [formGroup]="form">
+                    <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="locatonName">Name</label>
+                            <input [ngClass]="{'invalid_field': checkValidation('name')}" cFormControl id="locatonName"
+                                formControlName="name" placeholder="Name" type="text" />
+                            <label class="error_msg" *ngIf="checkValidation('name')">This
+                                field is required</label>
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="website">Website</label>
+                            <input cFormControl id="website" formControlName="website"
+                                placeholder="www.webiste-name.com" type="email" />
+                        </div>
+
+                    </div>
+
+                    <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="locatonName">Discount</label>
+                            <input cFormControl id="locatonName" formControlName="discount" placeholder="Discount"
+                                type="text" />
+
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="website">Discount Disclaimer</label>
+                            <input cFormControl id="website" formControlName="discountDisclaimer"
+                                placeholder="Discount Disclaimer" type="text" />
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label cLabel for="description">Description</label>
+                        <textarea cFormControl id="description" formControlName="description" rows="3"></textarea>
+                    </div>
+
+                    <div class="container">
+                        <div class="file-upload-wrapper w-half" [attr.data-text]="fileName ? fileName : 'Upload File!'"
+                            [ngClass]="{'invalid_field': checkValidation('image')}">
+                            <input name="file-upload-field" accept=".png" (change)="onFileChange($event)" type="file"
+                                class="file-upload-field" value="">
+                        </div>
+                        <label class="error_msg" *ngIf="checkValidation('image')">This
+                            field is required</label>
+                    </div>
+                    <div>
+                        <button cButton color="primary" (click)="onSubmit()">Submit</button>
+                    </div>
+                </form>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>

@@ -28,35 +28,40 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let user of appsList; index as i">
+              <tr *ngFor="let item of appsList; index as i">
                 <td>
-                  <div>{{ user.corpName }}</div>
+                  <div>{{ item.corpName }}</div>
                 </td>
                 <!-- <td>
-                  <div>{{ user.appSection }}</div>
+                  <div>{{ item.appSection }}</div>
                 </td> -->
                 <td>
-                  <div><a [href]="user.androidURL" target="_blank">{{ user.androidURL }}</a></div>
+                  <div><a [href]="item.androidURL" target="_blank">{{ item.androidURL }}</a></div>
                 </td>
                 <td>
-                  <div><a [href]="user.appleURL"  target="_blank">{{ user.appleURL }}</a></div>
+                  <div><a [href]="item.appleURL" target="_blank">{{ item.appleURL }}</a></div>
                 </td>
 
 
                 <!-- <td class="text-center">
-                  <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg>
+                  <svg cIcon name="cibCc{{ item.payment }}" size="xl"></svg>
                 </td> -->
                 <td>
                   <!-- <div><svg cIcon name="cil-eye"></svg></div> -->
-                  <div class="view-button" (click)="goToViewPage(i)">View</div>
+                  <div style="display: flex;">
+                    <span class="view-button" (click)="goToViewPage(i)">View</span>
+                    <span style="margin-left: 10px;" class="" (click)="deleteItem(item._id)"><img width="20px"
+                        src="../../../../assets/images/trash.svg" alt=""></span>
+                  </div>
                   <!-- <i class="cil-eye"></i> -->
-                  <!-- <div class="fw-semibold text-nowrap">{{ user.chatPhoto }}</div> -->
+                  <!-- <div class="fw-semibold text-nowrap">{{ item.chatPhoto }}</div> -->
                 </td>
               </tr>
             </tbody>
           </table>
         </ng-template>
-        <app-custom-pagination [currentPage]="offset+1" (nextClickEvent)="nextClickEvent($event)" (previousClickEvent)="previousClickEvent($event)"></app-custom-pagination>
+        <app-custom-pagination [currentPage]="offset+1" (nextClickEvent)="nextClickEvent($event)"
+          (previousClickEvent)="previousClickEvent($event)"></app-custom-pagination>
 
 
 

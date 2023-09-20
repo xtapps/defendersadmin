@@ -13,7 +13,10 @@
                         <ng-container *ngFor="let pair of getObjectKeyValues(receivedData)">
                             <tr>
                                 <th>{{ pair.key }}</th>
-                                <td>{{ pair.value }}</td>
+                                <td>{{ (pair.key === 'logo' || pair.key === 'chatPhoto') ? '' : pair.value }} 
+                                    <img style="width: 150px;" *ngIf="pair.key === 'logo' && type === 'job-boards'" [src]="pair.value" alt="">
+                                    <img style="width: 150px;" *ngIf="pair.key === 'chatPhoto'" [src]="pair.value" alt="">
+                                </td>
                             </tr>
                         </ng-container>
                     </tbody>

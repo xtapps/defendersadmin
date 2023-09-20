@@ -41,9 +41,6 @@ import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminModule } from './views/admin/admin.module';
 import { ValidateUserComponent } from './views/validate-user/validate-user.component';
-import { AddNewPartnerComponent } from './views/components/add-new-froms/add-new-partner/add-new-partner.component';
-import { AddNewAppComponent } from './views/components/add-new-froms/add-new-app/add-new-app.component';
-import { AddNewFranchisesComponent } from './views/components/add-new-froms/add-new-franchises/add-new-franchises.component';
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,

@@ -95,6 +95,10 @@ export class TableViewComponent implements OnInit, OnDestroy {
 
    nextClickEvent(event: boolean): void {
     if(event){
+      const lastPage = Math.ceil(this.totalRecords / this.pageSize);
+      if (lastPage <= this.offset) {
+        return;
+      }
       this.offset += 1;
       this.getAllProperties();
     }
