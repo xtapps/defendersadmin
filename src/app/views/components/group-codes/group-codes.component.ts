@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
@@ -7,10 +8,12 @@ import { AdminService } from 'src/app/services/admin.service';
   templateUrl: './group-codes.component.html',
   styleUrls: ['./group-codes.component.scss']
 })
-export class GroupCodesComponent implements OnInit {
+export class GroupCodesComponent implements OnInit, OnDestroy {
 
   groupCodes: any[] = []
+  subscription: Subscription[] = [];
   isLoading = true;
+  totalCount = 0;
 
   constructor(
     private adminService: AdminService,
@@ -24,7 +27,9 @@ export class GroupCodesComponent implements OnInit {
   getGroupCodes(): void {
     this.adminService.getGroupCodes(13, 1).subscribe((res: any) => {
       this.isLoading = false;
-      this.groupCodes = res.franchises;
+      this.groupCodes = res.groupCodes;
+      this.totalCount = res.totalCount;
+
     });
   }
 
@@ -36,14 +41,28 @@ export class GroupCodesComponent implements OnInit {
     this.router.navigateByUrl('/view');
   }
 
-  deleteItem(): void {
+  deleteItem(id: string): void {
     var userResponse = confirm("Do you want to proceed?");
-
     if (userResponse) {
-      alert("You chose to proceed!");
-    } else {
-      alert("You chose to cancel.");
+      return;
+      this.deleteGroupodeItem(id);
     }
+  }
+
+  deleteGroupodeItem(id: string): void {
+    this.subscription.push(
+      this.adminService.deleteGroupCode(id).subscribe({
+        next: (res => {
+          if (res) {
+            alert('Group Code item deleted Successfully!');
+          }
+        })
+      })
+    )
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.forEach(el => { el.unsubscribe() });
   }
 
 }

@@ -1,15 +1,15 @@
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, finalize } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
-  selector: 'app-add-new-app',
-  templateUrl: './add-new-app.component.html',
-  styleUrls: ['./add-new-app.component.scss']
+  selector: 'app-add-new-website',
+  templateUrl: './add-new-website.component.html',
+  styleUrls: ['./add-new-website.component.scss']
 })
-export class AddNewAppComponent implements OnInit, OnDestroy {
+export class AddNewWebsiteComponent {
 
   form!: FormGroup;
   propertyType!: string;
@@ -35,20 +35,13 @@ export class AddNewAppComponent implements OnInit, OnDestroy {
   initForm(): void {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required]],
-      locationName: [''],
       image: ['', [Validators.required]],
-      androidURL: [''],
-      appleURL: [''],
-      email: [''],
+      website: [''],
       propertyType: [''],
       orgType: ['commercial'],
-      corpName: [''],
       description: [''],
-      appSection: ['entertainment'],
-      website: ['www.gmail.com'],
-      isActive: [true],
-      isVetOwned: [false],
-      locationActive: [true]
+      discount: [''],
+      discountDisclaimer: ['']
     })
   }
 
@@ -68,42 +61,24 @@ export class AddNewAppComponent implements OnInit, OnDestroy {
         data[control] = ' ';
       } else {
         data[control] = this.form.controls[control].value;
-        data['corpName'] = this.form.controls['name'].value
-        data['locationName'] = this.form.controls['name'].value
       }
     }
 
     console.log(data);
-    // return;
+    return;
     this.loading = true;
     this.subscription.push(
       this.adminService.createPartner(data).pipe(
         finalize(() => { this.loading = false })
       ).subscribe(res => {
         console.log(res);
-        this.uploadImage(res);
+        this.router.navigateByUrl('/admin/franchises');
       })
     )
 
   }
 
-  uploadImage(data: any): void {
-    console.log(this.form.value);
-
-    const fromValue = this.form.value;
-    const formData = new FormData();
-    formData.append('propertyId', data._id);
-    // formData.append('propertyId', '650b4dd86b4a95695b39ba00');
-    formData.append('image', fromValue.image);
-    this.subscription.push(
-      this.adminService.uploadProfile(formData).subscribe(res => {
-        console.log(res);
-        this.router.navigateByUrl('/admin/apps');
-      })
-    );
-  }
-
-
+  
 
   onFileChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;

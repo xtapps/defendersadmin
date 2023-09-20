@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
@@ -7,12 +8,15 @@ import { AdminService } from 'src/app/services/admin.service';
   templateUrl: './franchises-list.component.html',
   styleUrls: ['./franchises-list.component.scss']
 })
-export class FranchisesListComponent implements OnInit {
+export class FranchisesListComponent implements OnInit, OnDestroy {
 
-  franchisesList: any[]= [];
+  franchisesList: any[] = [];
+  subscription: Subscription[] = [];
+
   isLoading = true;
   public pageSize: number = 13;
   public offset: number = 0;
+  totalCount = 0;
 
   constructor(
     private adminService: AdminService,
@@ -28,6 +32,7 @@ export class FranchisesListComponent implements OnInit {
     this.adminService.getFranchises(this.pageSize, this.offset).subscribe((res: any) => {
       this.isLoading = false;
       this.franchisesList = res.franchises;
+      this.totalCount = res.totalCount;
     });
   }
 
@@ -36,7 +41,7 @@ export class FranchisesListComponent implements OnInit {
   }
 
 
-  goToViewPage(index:number): void {
+  goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.franchisesList[index]));
     this.router.navigate(['admin/view'], { queryParams: { data: encodedData } });
@@ -48,13 +53,42 @@ export class FranchisesListComponent implements OnInit {
       // You can add any additional logic here when the "previous" button is clicked.
       this.getFranchisesList();
     }
-   }
+  }
 
-   nextClickEvent(event: boolean): void {
-    if(event){
+  nextClickEvent(event: boolean): void {
+    if (event) {
+      const lastPage = Math.ceil(this.totalCount / this.pageSize);
+      if (lastPage <= this.offset) {
+        return;
+      }
       this.offset += 1;
       this.getFranchisesList();
     }
-   }
+  }
+
+  deleteItem(id: string): void {
+    var userResponse = confirm("Do you want to proceed?");
+    if (userResponse) {
+      alert("You chose to proceed!");
+      return;
+      this.deleteFranchises(id);
+    }
+  }
+
+  deleteFranchises(id: string): void {
+    this.subscription.push(
+      this.adminService.deleteFranchises(id).subscribe({
+        next:(res => {
+          if(res){
+            alert('Franchises item deleted Successfully!');
+          }
+        })
+      })
+    )
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.forEach(el => { el.unsubscribe() });
+  }
 
 }
