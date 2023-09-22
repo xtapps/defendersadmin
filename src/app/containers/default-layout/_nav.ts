@@ -6,218 +6,121 @@ export const navItems: INavData[] = [
     url: '/dashboard',
     iconComponent: { name: 'cil-speedometer' },
     badge: {
-      color: 'info',
-      text: 'NEW'
+      color: '',
+      text: ''
     }
+  },
+  // {
+  //   title: true,
+  //   name: 'Admin'
+  // },
+  {
+    name: 'Partners',
+    url: '/admin/home',
+    iconComponent: { name: 'cil-home' }
+  },
+  {
+    name: 'Locations',
+    url: '/admin/location',
+    iconComponent: { name: 'cil-location-pin' }
+  },
+  {
+    name: 'Websites',
+    url: '/admin/websites',
+    iconComponent: { name: 'cil-home' }
+  },
+  {
+    name: 'Apps',
+    url: '/admin/apps',
+    iconComponent: { name: 'cil-home' }
+  },
+  {
+    name: 'Franchises',
+    url: '/admin/franchises',
+    iconComponent: { name: 'cil-home' }
+  },
+  {
+    name: 'Categories',
+    url: '/admin/categories',
+    iconComponent: { name: 'cil-home' }
+  },
+  {
+    name: 'Group Codes',
+    url: '/admin/group-codes',
+    iconComponent: { name: 'cil-home' }
+  },
+  {
+    name: 'Defenders',
+    url: '/admin/defenders',
+    iconComponent: { name: 'cil-home' }
+  },
+  {
+    name: 'Admin Users',
+    url: 'admin-users',
+    iconComponent: { name: 'cil-user' }
   },
   {
     title: true,
-    name: 'Theme'
+    name: 'Opportunities'
   },
   {
-    name: 'Colors',
-    url: '/theme/colors',
-    iconComponent: { name: 'cil-drop' }
+    name: 'Job Boards',
+    url: '/admin/job-boards',
+    iconComponent: { name: 'cil-user' }
   },
   {
-    name: 'Typography',
-    url: '/theme/typography',
-    linkProps: { fragment: 'someAnchor' },
-    iconComponent: { name: 'cil-pencil' }
+    name: 'Job Opportunities',
+    url: '/admin/job-opportunities',
+    iconComponent: { name: 'cil-user' }
   },
   {
-    name: 'Components',
-    title: true
-  },
-  {
-    name: 'Base',
-    url: '/base',
-    iconComponent: { name: 'cil-puzzle' },
-    children: [
-      {
-        name: 'Accordion',
-        url: '/base/accordion'
-      },
-      {
-        name: 'Breadcrumbs',
-        url: '/base/breadcrumbs'
-      },
-      {
-        name: 'Cards',
-        url: '/base/cards'
-      },
-      {
-        name: 'Carousel',
-        url: '/base/carousel'
-      },
-      {
-        name: 'Collapse',
-        url: '/base/collapse'
-      },
-      {
-        name: 'List Group',
-        url: '/base/list-group'
-      },
-      {
-        name: 'Navs & Tabs',
-        url: '/base/navs'
-      },
-      {
-        name: 'Pagination',
-        url: '/base/pagination'
-      },
-      {
-        name: 'Placeholder',
-        url: '/base/placeholder'
-      },
-      {
-        name: 'Popovers',
-        url: '/base/popovers'
-      },
-      {
-        name: 'Progress',
-        url: '/base/progress'
-      },
-      {
-        name: 'Spinners',
-        url: '/base/spinners'
-      },
-      {
-        name: 'Tables',
-        url: '/base/tables'
-      },
-      {
-        name: 'Tabs',
-        url: '/base/tabs'
-      },
-      {
-        name: 'Tooltips',
-        url: '/base/tooltips'
-      }
-    ]
-  },
-  {
-    name: 'Buttons',
-    url: '/buttons',
-    iconComponent: { name: 'cil-cursor' },
-    children: [
-      {
-        name: 'Buttons',
-        url: '/buttons/buttons'
-      },
-      {
-        name: 'Button groups',
-        url: '/buttons/button-groups'
-      },
-      {
-        name: 'Dropdowns',
-        url: '/buttons/dropdowns'
-      },
-    ]
-  },
-  {
-    name: 'Forms',
-    url: '/forms',
-    iconComponent: { name: 'cil-notes' },
-    children: [
-      {
-        name: 'Form Control',
-        url: '/forms/form-control'
-      },
-      {
-        name: 'Select',
-        url: '/forms/select'
-      },
-      {
-        name: 'Checks & Radios',
-        url: '/forms/checks-radios'
-      },
-      {
-        name: 'Range',
-        url: '/forms/range'
-      },
-      {
-        name: 'Input Group',
-        url: '/forms/input-group'
-      },
-      {
-        name: 'Floating Labels',
-        url: '/forms/floating-labels'
-      },
-      {
-        name: 'Layout',
-        url: '/forms/layout'
-      },
-      {
-        name: 'Validation',
-        url: '/forms/validation'
-      }
-    ]
-  },
-  {
-    name: 'Charts',
-    url: '/charts',
-    iconComponent: { name: 'cil-chart-pie' }
-  },
-  {
-    name: 'Icons',
-    iconComponent: { name: 'cil-star' },
-    url: '/icons',
-    children: [
-      {
-        name: 'CoreUI Free',
-        url: '/icons/coreui-icons',
-        badge: {
-          color: 'success',
-          text: 'FREE'
-        }
-      },
-      {
-        name: 'CoreUI Flags',
-        url: '/icons/flags'
-      },
-      {
-        name: 'CoreUI Brands',
-        url: '/icons/brands'
-      }
-    ]
-  },
-  {
-    name: 'Notifications',
-    url: '/notifications',
-    iconComponent: { name: 'cil-bell' },
-    children: [
-      {
-        name: 'Alerts',
-        url: '/notifications/alerts'
-      },
-      {
-        name: 'Badges',
-        url: '/notifications/badges'
-      },
-      {
-        name: 'Modal',
-        url: '/notifications/modal'
-      },
-      {
-        name: 'Toast',
-        url: '/notifications/toasts'
-      }
-    ]
-  },
-  {
-    name: 'Widgets',
-    url: '/widgets',
-    iconComponent: { name: 'cil-calculator' },
-    badge: {
-      color: 'info',
-      text: 'NEW'
-    }
+    name: 'Business Opportunities',
+    url: '/admin/business-opportunities',
+    iconComponent: { name: 'cil-user' }
   },
   {
     title: true,
-    name: 'Extras'
+    name: 'Non Profits'
   },
+  {
+    name: 'Military',
+    url: '/non-profits/military',
+    iconComponent: { name: 'cil-user' }
+  },
+  {
+    name: 'First Responder',
+    url: '/non-profits/first-responder',
+    iconComponent: { name: 'cil-user' }
+  },
+  {
+    name: 'Chaplain',
+    url: '/non-profits/chaplain',
+    iconComponent: { name: 'cil-user' }
+  },
+  {
+    name: 'Other',
+    url: '/non-profits/other',
+    iconComponent: { name: 'cil-user' }
+  },
+  {
+    title: true,
+    name: 'Kids Corner'
+  },
+  {
+    name: 'Games',
+    url: '',
+    iconComponent: { name: 'cil-user' }
+  },
+  {
+    name: 'Books Plus',
+    url: '',
+    iconComponent: { name: 'cil-user' }
+  },
+
+  // {
+  //   title: true,
+  //   name: 'Extras'
+  // },
   {
     name: 'Pages',
     url: '/login',
@@ -226,18 +129,6 @@ export const navItems: INavData[] = [
       {
         name: 'Login',
         url: '/login'
-      },
-      {
-        name: 'Register',
-        url: '/register'
-      },
-      {
-        name: 'Error 404',
-        url: '/404'
-      },
-      {
-        name: 'Error 500',
-        url: '/500'
       }
     ]
   },

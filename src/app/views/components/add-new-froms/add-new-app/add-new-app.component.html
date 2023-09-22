@@ -1,0 +1,130 @@
+<div class="main_container">
+    <div>
+        <h4>Add New {{propertyType | titlecase}}</h4>
+    </div>
+
+</div>
+
+<c-row>
+    <c-col xs>
+        <c-card class="mb-4">
+            <!-- <c-card-header>Business Opportunities</c-card-header> -->
+            <c-card-body>
+                <form cForm [formGroup]="form">
+                    <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="locatonName">Name</label>
+                            <input [ngClass]="{'invalid_field': checkValidation('name')}" cFormControl
+                                id="locatonName" formControlName="name" placeholder="Name"
+                                type="text" />
+                            <label class="error_msg" *ngIf="checkValidation('name')">This
+                                field is required</label>
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="email">Email</label>
+                            <input cFormControl id="email" formControlName="email" placeholder="name@gmail.com"
+                                type="email" />
+                        </div>
+
+                    </div>
+
+                    <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="orgType">Android URL</label>
+                            <input cFormControl id="orgType" formControlName="androidURL" placeholder="Android URL"
+                                type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="appleUrl">Apple URL</label>
+                            <input cFormControl id="appleUrl" formControlName="appleURL" placeholder="Apple URL"
+                                type="text" />
+                        </div>
+                    </div>
+
+                    <!-- <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="address1">Address Line 1</label>
+                            <input cFormControl id="address1" formControlName="address1" placeholder="Address Line 1"
+                                type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="address1">Address Line 2</label>
+                            <input cFormControl id="address1" formControlName="address2" placeholder="Address Line 2"
+                                type="text" />
+                        </div>
+                    </div> -->
+
+                    <!-- <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="city">City</label>
+                            <input cFormControl id="city" formControlName="city" placeholder="City" type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="state">State</label>
+                            <input cFormControl id="state" formControlName="state" placeholder="State" maxlength="2"
+                                type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="zip">Zip</label>
+                            <input cFormControl id="zip" formControlName="zip" placeholder="Zip" maxlength="5"
+                                type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="country">Country</label>
+                            <select formControlName="country" name="" id="appSection">
+                                <option value="us">US</option>
+                                <option value="canada">Canada</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="county">County</label>
+                            <input cFormControl id="county" formControlName="county" placeholder="County" type="text" />
+                        </div>
+                    </div> -->
+
+
+                    
+
+                    <!-- <div class="flex">
+                            <div class="mb-3 w-half">
+                                <label cLabel for="franchiseTag">Franchise Tag</label>
+                                <input cFormControl id="franchiseTag" formControlName="franchiseTag"
+                                    placeholder="Franchise Tag" type="text" />
+                            </div>
+                            <div class="mb-3 w-half">
+                                <label cLabel for="umbrellaTag">Umbrella Tag</label>
+                                <input cFormControl id="umbrellaTag" formControlName="umbrellaTag"
+                                    placeholder="Umbrella Tag" type="text" />
+                            </div>
+                            <div class="mb-3 w-half">
+                                <label cLabel for="licenseNumber">License Number</label>
+                                <input cFormControl id="licenseNumber" formControlName="licenseNumber"
+                                    placeholder="License Number" type="text" />
+                            </div>
+                    </div> -->
+
+
+                    
+
+                    <div class="mb-3">
+                        <label cLabel for="description">Description</label>
+                        <textarea cFormControl id="description" formControlName="description" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="container">
+                        <div class="file-upload-wrapper w-half"  [attr.data-text]="fileName ? fileName : 'Upload File!'" [ngClass]="{'invalid_field': checkValidation('image')}">
+                            <input name="file-upload-field" accept=".png" (change)="onFileChange($event)" type="file"
+                                class="file-upload-field" value="">
+                        </div>
+                        <label class="error_msg" *ngIf="checkValidation('image')">This
+                            field is required</label>
+                        <button cButton color="primary" (click)="onSubmit()">Submit</button>
+                    </div>
+                    <div>
+                        <!-- <button cButton color="primary" (click)="uploadImage()">upload</button> -->
+                    </div>
+                </form>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>

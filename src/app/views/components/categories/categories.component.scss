@@ -1,0 +1,19 @@
+.header_section{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.expand{
+    color: blue;
+    cursor: pointer;
+}
+
+.expanded_div{
+    background: aqua;
+    /* position: absolute; */
+    width: 95%;
+    max-height: 500px;
+    left: 18px;
+    overflow: scroll;
+}

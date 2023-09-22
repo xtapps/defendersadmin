@@ -1,0 +1,11 @@
+.header_section{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+/* Add this CSS to your stylesheet */
+.table-container table tr td:nth-child(2),
+.table-container table tr th:nth-child(2) {
+  width: 100px; /* Adjust the width as needed */
+}

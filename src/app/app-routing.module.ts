@@ -6,6 +6,8 @@ import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';
 import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
+import { AdminModule } from './views/admin/admin.module'
+import { ValidateUserComponent } from './views/validate-user/validate-user.component';
 
 const routes: Routes = [
   {
@@ -70,6 +72,16 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/pages/pages.module').then((m) => m.PagesModule)
       },
+      {
+        path: 'non-profits',
+        loadChildren: () =>
+          import('./views/non-profits/non-profits.module').then((m) => m.NonProfitsModule)
+      },
+      {
+        path: 'kids-corner',
+        loadChildren: () =>
+          import('./views/kids-corner/kids-corner.module').then((m) => m.KidsCornerModule)
+      },
     ]
   },
   {
@@ -99,6 +111,18 @@ const routes: Routes = [
     data: {
       title: 'Register Page'
     }
+  },
+  {
+    path: 'validate/:defenderId',
+    component: ValidateUserComponent,
+    data: {
+      title: 'Validate User Page'
+    }
+  },
+  {
+    path: 'admin',
+    component: DefaultLayoutComponent,
+    loadChildren: () => import('./views/admin/admin.module').then((m) => m.AdminModule)
   },
   {path: '**', redirectTo: 'dashboard'}
 ];

@@ -1,0 +1,80 @@
+<div class="header_section">
+  <h4>Group Codes</h4>
+  <button cButton color="primary" (click)="addNew()">Add</button>
+</div>
+<c-row>
+  <c-col xs>
+    <c-card class="mb-4">
+      <!-- <c-card-header>Group Codes</c-card-header> -->
+      <c-card-body>
+
+        <ng-container *ngIf="isLoading; else tableData">
+          <div class="skeleton-loader"></div>
+        </ng-container>
+
+        <ng-template #tableData>
+          <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+            <thead cTableColor="light">
+              <tr>
+                <!-- <th class="text-center">
+                    <svg cIcon name="cilPeople"></svg>
+                  </th> -->
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Zip</th>
+                <th>Phone</th>
+                <th>Branch</th>
+                <th>Activity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of groupCodes; index as i">
+                <!-- <td class="text-center">
+                    <c-avatar
+                      size="md"
+                      src="{{ item.avatar }}"
+                      status="{{ item.status }}"
+                    ></c-avatar>
+                  </td> -->
+                <td>
+                  <div>{{ item.firstName }}</div>
+                </td>
+                <td>
+                  <div>{{ item.lastName }}</div>
+                </td>
+                <td>
+                  <div>{{ item.defenderEmail }}</div>
+                </td>
+                <td>
+                  <div>{{ item.role }}</div>
+                </td>
+                <td>
+                  <div>{{ item.zipcode }}</div>
+                </td>
+                <td>
+                  <div>{{ item.contactPhone }}</div>
+                </td>
+                <td>
+                  <div>{{ item.branch }}</div>
+                </td>
+                <!-- <td class="text-center">
+                    <svg cIcon name="cibCc{{ item.payment }}" size="xl"></svg>
+                  </td> -->
+                <td>
+                  <div>
+                    <span class="view-button" (click)="goToViePage()">View</span>
+                    <span style="margin-left: 10px;" class="view-button delete-btn" (click)="deleteItem(item._id)">Delete</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+
+      </c-card-body>
+    </c-card>
+
+  </c-col>
+</c-row>

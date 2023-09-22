@@ -1,0 +1,67 @@
+<div class="header_section">
+  <h4>Locations</h4>
+  <!-- <button cButton color="primary" (click)="addNew()">Add</button> -->
+</div>
+
+<c-row>
+  <c-col xs>
+    <c-card class="mb-4">
+      <!-- <c-card-header>Locations</c-card-header> -->
+      <c-card-body>
+
+        <ng-container *ngIf="isLoading; else tableData">
+          <div class="skeleton-loader"></div>
+        </ng-container>
+
+        <ng-template #tableData>
+          <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+            <thead cTableColor="light">
+              <tr>
+                <th>Corp. Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of locationList; index as i">
+                <td>
+                  <div>{{ user.corpName }}</div>
+                </td>
+                <td>
+                  <div>{{ user.email }}</div>
+                </td>
+                <td>
+                  <div>{{ user.address1 }}</div>
+                </td>
+                <td>
+                  <div>{{ user.city }}</div>
+                </td>
+                <td>
+                  <div>{{ user.city }}</div>
+                </td>
+                <td>
+                  <div>{{ user.zip }}</div>
+                </td>
+                <!-- <td class="text-center">
+                  <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg>
+                </td> -->
+                <td>
+                  <!-- <div><svg cIcon name="cil-eye"></svg></div> -->
+                  <div class="view-button" (click)="goToViewPage(i)">View</div>
+                  <!-- <i class="cil-eye"></i> -->
+                  <!-- <div class="fw-semibold text-nowrap">{{ user.chatPhoto }}</div> -->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+        <app-custom-pagination [currentPage]="offset+1" (nextClickEvent)="nextClickEvent($event)" (previousClickEvent)="previousClickEvent($event)"></app-custom-pagination>
+
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
