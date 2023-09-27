@@ -1,21 +1,40 @@
 <div class="header_section">
-    <h4>Details</h4>
+    <h4>{{type | titlecase}} Details</h4>
     <button cButton color="primary" (click)="goBack()">Back</button>
 </div>
 
 <c-row>
     <c-col xs>
         <c-card class="mb-4">
-            <c-card-header>Details</c-card-header>
+            <c-card-header>{{type | titlecase}} Details</c-card-header>
             <c-card-body>
                 <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
                     <tbody>
                         <ng-container *ngFor="let pair of getObjectKeyValues(receivedData)">
                             <tr>
                                 <th>{{ pair.key }}</th>
-                                <td>{{ (pair.key === 'logo' || pair.key === 'chatPhoto') ? '' : pair.value }} 
-                                    <img style="width: 150px;" *ngIf="pair.key === 'logo' && type === 'job-boards'" [src]="pair.value" alt="">
-                                    <img style="width: 150px;" *ngIf="pair.key === 'chatPhoto'" [src]="pair.value" alt="">
+                                <td>{{
+                                    (pair.key === 'logo' ||
+                                    pair.key === 'chatPhoto' ||
+                                    pair.key === 'images' ||
+                                    pair.key === 'website' ||
+                                    pair.key === 'appleIcon' ||
+                                    pair.key === 'androidIcon'
+                                    )
+                                    ? '' : pair?.value }}
+
+                                    <img style="width: 150px;" *ngIf="pair.key === 'logo' && type === 'job-boards'"
+                                        [src]="pair.value" alt="">
+
+                                    <img style="width: 150px;" *ngIf="
+                                     pair.key === 'images' ||
+                                     pair.key === 'chatPhoto' ||
+                                     pair.key === 'images' ||
+                                     pair.key === 'appleIcon' ||
+                                     pair.key === 'androidIcon'
+                                     " [src]="pair.value" alt="">
+
+                                    <a [href]="[pair?.value]" *ngIf="pair.key === 'website'">{{pair?.value}}</a>
                                 </td>
                             </tr>
                         </ng-container>

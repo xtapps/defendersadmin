@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { apiUrl } from '../../config/config'
 import { Observable } from 'rxjs';
+import { IApiRes } from '../models/model';
 
 @Injectable({
   providedIn: 'root'
@@ -62,8 +63,26 @@ export class AdminService {
   }
 
   getMilitary(limit: number, offset: number) {
-    const url = `${apiUrl}/properties/viewAll?reqParams=[{"value": "false", "key": "featured"}, {"value": "kids", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
+    const url = `${apiUrl}/properties/viewAll?reqParams=[{"value": "false", "key": "featured"}, {"value": "military", "key": "charity"}]&limit=${limit}&offset=${offset}`;
     return this.http.get(url);
+  }
+  getMilitary12(limit: number, offset: number) {
+    const url = `${apiUrl}/properties/viewAll?reqParams=[{"key":"appSection","value":"books"},{"key":"propertyType","value":"kids"}]&limit=${limit}&offset=${offset}`;
+    return this.http.get(url);
+  }
+
+  /**
+   * Retrieves properties based on the specified application section, property type, limit, and offset.
+   *
+   * @param {string} appSection - The application section to filter properties.
+   * @param {string} propertyType - The type of properties to retrieve.
+   * @param {number} limit - The maximum number of properties to return.
+   * @param {number} offset - The number of properties to skip before starting to return the properties.
+   * 
+   * @returns {Observable<any>} An observable that emits the response containing the properties.
+   */
+  getProperties(properties: { appSection: string, propertyType: string }, limit: number, offset: number): Observable<IApiRes[]> {
+    return this.http.get<IApiRes[]>(`${apiUrl}/properties/viewAll?reqParams=[{"key":"appSection","value":"${properties.appSection}"},{"key":"propertyType","value":"${properties.propertyType}"}]&limit=${limit}&offset=${offset}`);
   }
 
   // getAllDefendersList(){

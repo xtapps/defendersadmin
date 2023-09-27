@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
@@ -7,16 +8,18 @@ import { AdminService } from 'src/app/services/admin.service';
   templateUrl: './defenders-list.component.html',
   styleUrls: ['./defenders-list.component.scss']
 })
-export class DefendersListComponent implements OnInit {
+export class DefendersListComponent implements OnInit, OnDestroy {
+
+  users: any = [];
+  subscription: Subscription[] = [];
+  isLoading = true;
+  public pageSize: number = 13;
+  public offset: number = 0;
+
   constructor(
     private adminService: AdminService,
     private router: Router) {
   }
-
-  users: any = []
-  isLoading = true;
-  public pageSize: number = 13;
-  public offset: number = 0;
 
   ngOnInit(): void {
     this.getAllDdefenders();
@@ -45,12 +48,16 @@ export class DefendersListComponent implements OnInit {
       // You can add any additional logic here when the "previous" button is clicked.
       this.getAllDdefenders();
     }
-   }
+  }
 
-   nextClickEvent(event: boolean): void {
-    if(event){
+  nextClickEvent(event: boolean): void {
+    if (event) {
       this.offset += 1;
       this.getAllDdefenders();
     }
-   }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.forEach(el => el.unsubscribe());
+  }
 }

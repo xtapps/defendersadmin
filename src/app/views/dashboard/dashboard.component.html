@@ -15,9 +15,9 @@
         >
           <thead cTableColor="light">
             <tr>
-              <th class="text-center">
+              <!-- <th class="text-center">
                 <svg cIcon name="cilPeople"></svg>
-              </th>
+              </th> -->
               <th>User</th>
               <th class="text-center">Country</th>
               <th>Usage</th>
@@ -27,13 +27,13 @@
           </thead>
           <tbody>
             <tr *ngFor="let user of users; index as i">
-              <td class="text-center">
+              <!-- <td class="text-center">
                 <c-avatar
                   size="md"
                   src="{{ user.avatar }}"
                   status="{{ user.status }}"
                 ></c-avatar>
-              </td>
+              </td> -->
               <td>
                 <!-- <div>{{ user.name }}</div> -->
                 <div>{{usersList[i]?.firstName + ' ' + usersList[i]?.firstName }}</div>

@@ -10,30 +10,53 @@ import { AdminService } from 'src/app/services/admin.service';
 })
 export class OtherComponent {
 
-  jodBoards: any[] = [];
+  othersList: any[] = [];
   isLoading = true;
   subscription: Subscription[] = [];
+  limit = 13;
+  offset = 1;
+  totalRecords = 0;
 
   constructor(
     private adminService: AdminService,
-    private router: Router) {
-  }
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.getJobBoards();
+    this.getOthersList();
   }
 
-  getJobBoards(): void {
-    this.adminService.getMilitary(13, 1).subscribe((res: any) => {
+  getOthersList(): void {
+    const properties = {
+      appSection: 'other',
+      propertyType: 'charity'
+    }
+
+    this.adminService.getProperties(properties, this.limit, this.offset).subscribe(res => {
       this.isLoading = false;
-      this.jodBoards = res.jobBoards;
+      this.othersList = res[0]?.properties;
+      this.totalRecords = res[0]?.totalRecords;
     });
   }
 
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
-    const encodedData = encodeURIComponent(JSON.stringify(this.jodBoards[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'job-boards' } });
+    const encodedData = encodeURIComponent(JSON.stringify(this.othersList[index]));
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'others' } });
+  }
+
+  previousClickEvent(event: boolean): void {
+    if (this.offset > 0 && event) {
+      this.offset -= 1;
+      this.getOthersList();
+    }
+  }
+
+  nextClickEvent(event: boolean): void {
+    if (event) {
+      this.offset += 1;
+      this.getOthersList();
+    }
   }
 
   ngOnDestroy(): void {

@@ -1,49 +1,52 @@
 <div class="header_section">
-    <h4>First Responder</h4>
-    <!-- <button cButton color="primary" (click)="addNew()">Add</button> -->
-  </div>
-  
-  <c-row>
-    <c-col xs>
-      <c-card class="mb-4">
-        <!-- <c-card-header>Job Boards</c-card-header> -->
-        <c-card-body>
-  
-          <ng-container *ngIf="isLoading; else tableData">
-            <div class="skeleton-loader"></div>
-          </ng-container>
-  
-          <ng-template #tableData>
-            <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
-              <thead cTableColor="light">
-                <tr>
-                  <!-- <th class="text-center">
+  <h4>First Responder</h4>
+  <!-- <button cButton color="primary" (click)="addNew()">Add</button> -->
+</div>
+
+<c-row>
+  <c-col xs>
+    <c-card class="mb-4">
+      <!-- <c-card-header>Job Boards</c-card-header> -->
+      <c-card-body>
+
+        <ng-container *ngIf="isLoading; else tableData">
+          <div class="skeleton-loader"></div>
+        </ng-container>
+
+        <ng-template #tableData>
+          <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+            <thead cTableColor="light">
+              <tr>
+                <!-- <th class="text-center">
                     <svg cIcon name="cilPeople"></svg>
                   </th> -->
-                  <th>Title</th>
-                  <th>Website</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of jodBoards; index as i">
-                  <td>
-                    <div>{{ item.title }}</div>
-                  </td>
-                  <td>
-                      <div>{{ item.website }}</div>
-                  </td>
-                  <td>
-                    <!-- <div><svg cIcon name="cil-eye"></svg></div> -->
-                    <div class="view-button" (click)="goToViewPage(i)">View</div>
-                    <!-- <i class="cil-eye"></i> -->
-                    <!-- <div class="fw-semibold text-nowrap">{{ item.chatPhoto }}</div> -->
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </ng-template>
-        </c-card-body>
-      </c-card>
-    </c-col>
-  </c-row>
+                <th>Title</th>
+                <th>Website</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of firstResponderList; index as i">
+                <td>
+                  <div>{{ item.title }}</div>
+                </td>
+                <td>
+                  <div>{{ item.website }}</div>
+                </td>
+                <td>
+                  <!-- <div><svg cIcon name="cil-eye"></svg></div> -->
+                  <div class="view-button" (click)="goToViewPage(i)">View</div>
+                  <!-- <i class="cil-eye"></i> -->
+                  <!-- <div class="fw-semibold text-nowrap">{{ item.chatPhoto }}</div> -->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+        <app-custom-pagination [currentPage]="offset" [totalRecords]="totalRecords" [pageSize]="limit"
+          (nextClickEvent)="nextClickEvent($event)" (previousClickEvent)="previousClickEvent($event)">
+        </app-custom-pagination>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>

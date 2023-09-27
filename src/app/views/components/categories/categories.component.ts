@@ -17,7 +17,8 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   index = 0;
   public pageSize: number = 13;
   public offset: number = 0;
-  totalCount = 0;
+  totalRecords = 0;
+  limit = 13;
 
   constructor(private adminService: AdminService,
     private router: Router) {
@@ -29,12 +30,13 @@ export class CategoriesComponent implements OnInit, OnDestroy {
 
   getAllCategories(): void {
     this.isLoading = true;
-    this.adminService.getAllCategories(this.pageSize, this.offset).subscribe((res: any) => {
-      this.isLoading = false;
-      this.categories = res.categories;
-      this.totalCount = res[0].totalCount;
-
-    })
+    this.subscription.push(
+      this.adminService.getAllCategories(this.pageSize, this.offset).subscribe((res: any) => {
+        this.isLoading = false;
+        this.categories = res?.categories;
+        this.totalRecords = res?.totalCount;
+      })
+    );
   }
 
   addNew(): void {
@@ -46,7 +48,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     this.isExpanded = !this.isExpanded;
   }
 
-  deleteItem(id:string): void {
+  deleteItem(id: string): void {
     var userResponse = confirm("Do you want to proceed?");
     if (userResponse) {
       alert("You chose to proceed!");
@@ -58,8 +60,8 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   deleteCategoryItem(id: string): void {
     this.subscription.push(
       this.adminService.deleteCategory(id).subscribe({
-        next:(res => {
-          if(res){
+        next: (res => {
+          if (res) {
             alert('Category item deleted Successfully!');
           }
         })
@@ -70,7 +72,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.categories[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData } });
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'category' } });
   }
 
   previousClickEvent(event: boolean): void {
@@ -83,10 +85,6 @@ export class CategoriesComponent implements OnInit, OnDestroy {
 
   nextClickEvent(event: boolean): void {
     if (event) {
-      const lastPage = Math.ceil(this.totalCount / this.pageSize);
-      if (lastPage <= this.offset) {
-        return;
-      }
       this.offset += 1;
       this.getAllCategories();
     }
