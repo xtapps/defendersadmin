@@ -85,9 +85,9 @@ export class AdminService {
     return this.http.get<IApiRes[]>(`${apiUrl}/properties/viewAll?reqParams=[{"key":"appSection","value":"${properties.appSection}"},{"key":"propertyType","value":"${properties.propertyType}"}]&limit=${limit}&offset=${offset}`);
   }
 
-  // getAllDefendersList(){
-  //   return this.http.get(`${apiUrl}/getAllDefenders`);
-  // }
+  getUserStatus(status: number, limit: number, offset: number):Observable<any>{
+    return this.http.get<any>(`${apiUrl}/getAllDefenders?reqParams[{"key": 'userStatus', "value": ${status}}]&limit=${limit}&offset=${offset}`);
+  }
 
   validateUser(params: any) {
     return this.http.post(`${apiUrl}/validate`, params);

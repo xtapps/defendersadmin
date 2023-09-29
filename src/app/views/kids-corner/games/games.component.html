@@ -43,7 +43,7 @@
             </tbody>
           </table>
         </ng-template>
-        <app-custom-pagination [currentPage]="offset" [totalRecords]="totalRecords" [pageSize]="limit"
+        <app-custom-pagination [currentPage]="offset + 1" [totalRecords]="totalRecords" [pageSize]="limit"
           (nextClickEvent)="nextClickEvent($event)" (previousClickEvent)="previousClickEvent($event)">
         </app-custom-pagination>
 
