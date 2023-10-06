@@ -14,6 +14,9 @@ export class GroupCodesComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = [];
   isLoading = true;
   totalCount = 0;
+  limit = 13;
+  offset = 1;
+  totalRecords = 0;
 
   constructor(
     private adminService: AdminService,
@@ -25,12 +28,14 @@ export class GroupCodesComponent implements OnInit, OnDestroy {
   }
 
   getGroupCodes(): void {
-    this.adminService.getGroupCodes(13, 1).subscribe((res: any) => {
-      this.isLoading = false;
-      this.groupCodes = res.groupCodes;
-      this.totalCount = res.totalCount;
-
-    });
+    this.isLoading = true;
+    this.subscription.push(
+      this.adminService.getGroupCodes(this.limit, this.offset).subscribe((res: any) => {
+        this.isLoading = false;
+        this.groupCodes = res?.groupCodes;
+        this.totalCount = res?.totalCount;
+      })
+    );
   }
 
   addNew(): void {
@@ -59,6 +64,20 @@ export class GroupCodesComponent implements OnInit, OnDestroy {
         })
       })
     )
+  }
+
+  previousClickEvent(event: boolean): void {
+    if (this.offset > 0 && event) {
+      this.offset -= 1;
+      this.getGroupCodes();
+    }
+  }
+
+  nextClickEvent(event: boolean): void {
+    if (event) {
+      this.offset += 1;
+      this.getGroupCodes();
+    }
   }
 
   ngOnDestroy(): void {

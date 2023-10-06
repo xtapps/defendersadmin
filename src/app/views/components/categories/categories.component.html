@@ -29,7 +29,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of categories; index as i">
-             
+
                 <td>
                   <div>{{ item.categoryName }}</div>
                 </td>
@@ -40,21 +40,26 @@
                   <div>{{ item.categoryType }}</div>
                 </td>
                 <td>
-                  <div *ngIf="item.subCategories.length > 0" ><a (click)="showAll(i)" class="expand">Show {{!isExpanded ? 'all' : 'less'}}</a></div>
-                  <div *ngIf="item.subCategories.length > 0 && isExpanded && index ===  i" >
+                  <div *ngIf="item.subCategories.length > 0"><a (click)="showAll(i)" class="expand">Show {{!isExpanded ?
+                      'all' : 'less'}}</a></div>
+                  <div *ngIf="item.subCategories.length > 0 && isExpanded && index ===  i">
                     <ul *ngFor="let sub of item.subCategories">
                       <li>{{sub.category}}</li>
                     </ul>
                   </div>
                 </td>
-               
+
                 <!-- <td class="text-center">
                 <svg cIcon name="cibCc{{ item.payment }}" size="xl"></svg>
               </td> -->
                 <td>
-                  <div >
+                  <div style="display: flex;">
                     <span class="view-button" (click)="goToViewPage(i)">View</span>
-                    <span style="margin-left: 10px;" class="view-button"(click)="deleteItem(item._id)">Delete</span>
+                    <span style="margin-left: 20px;" class="" (click)="editItem(item)"><img width="20px"
+                        src="../../../../assets/images/edit.svg" alt=""></span>
+
+                    <span style="margin-left: 10px;" class="" (click)="deleteItem(item._id)"><img width="20px"
+                        src="../../../../assets/images/trash.svg" alt=""></span>
                   </div>
                 </td>
               </tr>
@@ -62,8 +67,10 @@
           </table>
         </ng-template>
 
-        <app-custom-pagination [currentPage]="offset+1" (nextClickEvent)="nextClickEvent($event)" (previousClickEvent)="previousClickEvent($event)"></app-custom-pagination>
-      
+        <app-custom-pagination [currentPage]="offset" [totalRecords]="totalRecords" [pageSize]="limit"
+          (nextClickEvent)="nextClickEvent($event)" (previousClickEvent)="previousClickEvent($event)">
+        </app-custom-pagination>
+
       </c-card-body>
     </c-card>
   </c-col>

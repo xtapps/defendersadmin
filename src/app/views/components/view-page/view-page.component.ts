@@ -26,7 +26,6 @@ export class ViewPageComponent  implements OnInit{
     if (encodedData) {
       this.receivedData = JSON.parse(decodeURIComponent(encodedData));
       console.log(this.receivedData);
-      
     }
   }
 
@@ -37,7 +36,5 @@ export class ViewPageComponent  implements OnInit{
   goBack() {
     this.location.back();
   }
-  
-  
 
 }

@@ -29,11 +29,13 @@ export class FranchisesListComponent implements OnInit, OnDestroy {
 
   getFranchisesList(): void {
     this.isLoading = true;
-    this.adminService.getFranchises(this.pageSize, this.offset).subscribe((res: any) => {
-      this.isLoading = false;
-      this.franchisesList = res.franchises;
-      this.totalCount = res.totalCount;
-    });
+    this.subscription.push(
+      this.adminService.getFranchises(this.pageSize, this.offset).subscribe((res: any) => {
+        this.isLoading = false;
+        this.franchisesList = res.franchises;
+        this.totalCount = res.totalCount;
+      })
+    );
   }
 
   addNew(): void {
@@ -44,7 +46,7 @@ export class FranchisesListComponent implements OnInit, OnDestroy {
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.franchisesList[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData } });
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'franchises' } });
   }
 
   previousClickEvent(event: boolean): void {
@@ -78,13 +80,18 @@ export class FranchisesListComponent implements OnInit, OnDestroy {
   deleteFranchises(id: string): void {
     this.subscription.push(
       this.adminService.deleteFranchises(id).subscribe({
-        next:(res => {
-          if(res){
+        next: (res => {
+          if (res) {
             alert('Franchises item deleted Successfully!');
           }
         })
       })
     )
+  }
+
+  editItem(item: any): void {
+    const encodedData = encodeURIComponent(JSON.stringify(item));
+    this.router.navigate(['admin/add-new'], { queryParams: { data: encodedData, type: 'franchises' } });
   }
 
   ngOnDestroy(): void {

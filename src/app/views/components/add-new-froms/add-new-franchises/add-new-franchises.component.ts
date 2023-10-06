@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 
@@ -14,13 +14,23 @@ export class AddNewFranchisesComponent implements OnInit, OnDestroy {
   form!: FormGroup;
   fileName = '';
   subscription: Subscription[] = [];
+  receivedData: any;
+  editMode = false;
 
   private formBuilder = inject(FormBuilder);
   private adminService = inject(AdminService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
+
 
   ngOnInit(): void {
     this.initForm();
+    const encodedData = this.route.snapshot.queryParamMap.get('data');
+    if (encodedData) {
+      this.editMode = true;
+      this.receivedData = JSON.parse(decodeURIComponent(encodedData));
+      this.setFormValues(this.receivedData);
+    }
   }
 
   initForm(): void {
@@ -28,6 +38,15 @@ export class AddNewFranchisesComponent implements OnInit, OnDestroy {
       name: ['', [Validators.required]],
       image: ['', [Validators.required]],
       website: [''],
+    })
+  }
+
+  setFormValues(datas: any): void {
+    console.log(datas);
+
+    this.form.patchValue({
+      name: datas.franchiseName,
+      website: datas.website
     })
   }
 
@@ -45,6 +64,14 @@ export class AddNewFranchisesComponent implements OnInit, OnDestroy {
     } else {
       this.fileName = ''; // Reset if no file selected
       this.form.controls['image'].setValue('');
+    }
+  }
+
+  submit(): void {
+    if (this.editMode) {
+      this.onUpdate();
+    } else {
+      this.onSubmit();
     }
   }
 
@@ -71,6 +98,26 @@ export class AddNewFranchisesComponent implements OnInit, OnDestroy {
       })
     )
 
+  }
+
+  onUpdate(): void {
+    const data: any = {};
+    for (const control in this.form.controls) {
+      if (this.form.controls[control].value === '' || this.form.controls[control].value === null) {
+        data[control] = ' ';
+      } else {
+        data[control] = this.form.controls[control].value;
+      }
+    }
+    data['id'] = this.receivedData._id;
+    console.log(data);
+    this.subscription.push(
+      this.adminService.updateFranchises(data).subscribe(res => {
+        if (res.succeess) {
+          alert('Updated Successfully');
+        }
+      })
+    )
   }
 
 

@@ -1,0 +1,29 @@
+<div class="main_container">
+    <div>
+        <h4>{{editMode ? 'Update' : 'Add'}} New Job Board</h4>
+    </div>
+
+</div>
+
+<c-row>
+    <c-col xs>
+        <c-card class="mb-4">
+            <!-- <c-card-header>Business Opportunities</c-card-header> -->
+            <c-card-body>
+                <form cForm [formGroup]="form">
+                    <div class="container">
+                        <div class="file-upload-wrapper w-half"  [attr.data-text]="fileName ? fileName : 'Upload File!'" [ngClass]="{'invalid_field': checkValidation('image')}">
+                            <input name="file-upload-field" accept=".png" (change)="onFileChange($event)" type="file"
+                                class="file-upload-field" value="">
+                        </div>
+                        <label class="error_msg" *ngIf="checkValidation('image')">This
+                            field is required</label>
+                        <button cButton color="primary" (click)="onSubmit()">{{editMode ? 'Update' : 'Add'}}</button>
+                    </div>
+                    <div>
+                    </div>
+                </form>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>

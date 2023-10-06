@@ -11,6 +11,8 @@ import { AdminRoutingModule } from '../admin/admin-routing.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { CustomPaginationComponent } from '../../shared/custom-pagination/custom-pagination.component';
+import { SharedAdminModule } from 'src/app/shared/shared-admin.module';
 
 const routes: Routes = [
   {
@@ -35,8 +37,7 @@ const routes: Routes = [
     MilitaryComponent,
     FirstResponderComponent,
     ChaplainComponent,
-    OtherComponent,
-  ],
+    OtherComponent  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -47,6 +48,7 @@ const routes: Routes = [
     MatTooltipModule,
     GridModule,
     TableModule,
+    SharedAdminModule
   ]
 })
 export class NonProfitsModule { }

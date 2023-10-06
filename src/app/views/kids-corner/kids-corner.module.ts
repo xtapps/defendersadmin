@@ -8,6 +8,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AdminRoutingModule } from '../admin/admin-routing.module';
+import { SharedAdminModule } from 'src/app/shared/shared-admin.module';
 
 
 const routes: Routes = [
@@ -38,6 +39,7 @@ const routes: Routes = [
     MatTooltipModule,
     GridModule,
     TableModule,
+    SharedAdminModule
   ]
 })
 export class KidsCornerModule { }
