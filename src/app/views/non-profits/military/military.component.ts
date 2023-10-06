@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, finalize } from 'rxjs';
 import { IApiRes } from 'src/app/models/model';
 import { AdminService } from 'src/app/services/admin.service';
 
@@ -15,7 +15,7 @@ export class MilitaryComponent implements OnInit, OnDestroy {
   isLoading = true;
   subscription: Subscription[] = [];
   limit = 13;
-  offset = 1;
+  offset = 0;
   totalRecords = 0;
 
   constructor(
@@ -42,7 +42,7 @@ export class MilitaryComponent implements OnInit, OnDestroy {
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.militaryList[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'job-boards' } });
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'military' } });
   }
 
   previousClickEvent(event: boolean): void {
@@ -57,6 +57,32 @@ export class MilitaryComponent implements OnInit, OnDestroy {
       this.offset += 1;
       this.getMilitaryList();
     }
+  }
+
+  deleteItem(id: string): void {
+    var userResponse = confirm("Do you want to proceed?");
+    if (userResponse) {
+      alert("You chose to proceed!");
+      return;
+      this.onDelete(id);
+    }
+  }
+
+  onDelete(id: string): void {
+    this.isLoading = true;
+    this.subscription.push(
+      this.adminService.deleteProperties(id).pipe(
+        finalize(() => {this.isLoading = false;})
+      ).subscribe(res => {
+        if(res.success){
+          this.getMilitaryList();
+        }
+      })
+    )
+  }
+
+  addNew(): void {
+    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'military' } });
   }
 
   ngOnDestroy(): void {

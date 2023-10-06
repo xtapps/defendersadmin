@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
-import { Subscription } from 'rxjs';
+import { Subscription, finalize } from 'rxjs';
 
 @Component({
   selector: 'app-websites',
@@ -61,6 +61,28 @@ export class WebsitesComponent implements OnInit, OnDestroy {
       this.offset += 1;
       this.getWebsites();
     }
+  }
+
+  deleteItem(id: string): void {
+    var userResponse = confirm("Do you want to proceed?");
+    if (userResponse) {
+      alert("You chose to proceed!");
+      return;
+      this.onDelete(id);
+    }
+  }
+
+  onDelete(id: string): void {
+    this.isLoading = true;
+    this.subscription.push(
+      this.adminService.deleteProperties(id).pipe(
+        finalize(() => {this.isLoading = false;})
+      ).subscribe(res => {
+        if(res.success){
+          this.getWebsites();
+        }
+      })
+    )
   }
 
   ngOnDestroy(): void {

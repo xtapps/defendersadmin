@@ -89,6 +89,11 @@ export class FranchisesListComponent implements OnInit, OnDestroy {
     )
   }
 
+  editItem(item: any): void {
+    const encodedData = encodeURIComponent(JSON.stringify(item));
+    this.router.navigate(['admin/add-new'], { queryParams: { data: encodedData, type: 'franchises' } });
+  }
+
   ngOnDestroy(): void {
     this.subscription.forEach(el => { el.unsubscribe() });
   }

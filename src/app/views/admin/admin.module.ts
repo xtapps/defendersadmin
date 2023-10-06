@@ -33,6 +33,8 @@ import { AddNewAppComponent } from '../components/add-new-froms/add-new-app/add-
 import { AddNewFranchisesComponent } from '../components/add-new-froms/add-new-franchises/add-new-franchises.component';
 import { AddNewWebsiteComponent } from '../components/add-new-froms/add-new-website/add-new-website.component';
 import { SharedAdminModule } from '../../shared/shared-admin.module'
+import { AddJobBoadrsComponent } from '../components/add-job-boadrs/add-job-boadrs.component';
+import { AddNewCategoryComponent } from '../components/add-new-category/add-new-category.component';
 
 
 @NgModule({
@@ -54,7 +56,9 @@ import { SharedAdminModule } from '../../shared/shared-admin.module'
     AddNewPartnerComponent,
     AddNewAppComponent,
     AddNewFranchisesComponent,
-    AddNewWebsiteComponent
+    AddNewWebsiteComponent,
+    AddNewCategoryComponent,
+    AddJobBoadrsComponent
   ],
   imports: [
     CommonModule,

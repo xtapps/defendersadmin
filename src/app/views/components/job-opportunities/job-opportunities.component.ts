@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription, finalize } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
@@ -7,9 +8,10 @@ import { AdminService } from 'src/app/services/admin.service';
   templateUrl: './job-opportunities.component.html',
   styleUrls: ['./job-opportunities.component.scss']
 })
-export class JobOpportunitiesComponent {
+export class JobOpportunitiesComponent implements OnInit, OnDestroy {
 
   jobOpportunities: any[]= [];
+  subscription: Subscription[] = [];
   isLoading = true;
 
   constructor(
@@ -32,6 +34,32 @@ export class JobOpportunitiesComponent {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.jobOpportunities[index]));
     this.router.navigate(['admin/view'], { queryParams: { data: encodedData } });
+  }
+
+  deleteItem(id: string): void {
+    var userResponse = confirm("Do you want to proceed?");
+    if (userResponse) {
+      alert("You chose to proceed!");
+      return;
+      this.onDelete(id);
+    }
+  }
+
+  onDelete(id: string): void {
+    this.isLoading = true;
+    this.subscription.push(
+      this.adminService.deleteJob(id).pipe(
+        finalize(() => {this.isLoading = false;})
+      ).subscribe(res => {
+        if(res.success){
+          this.getJobOpportunities();
+        }
+      })
+    )
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.forEach(el => { el.unsubscribe() });
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, finalize } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
@@ -55,6 +55,28 @@ export class DefendersListComponent implements OnInit, OnDestroy {
       this.offset += 1;
       this.getAllDdefenders();
     }
+  }
+
+  deleteItem(id: string): void {
+    var userResponse = confirm("Do you want to proceed?");
+    if (userResponse) {
+      alert("You chose to proceed!");
+      return;
+      this.onDelete(id);
+    }
+  }
+
+  onDelete(id: string): void {
+    this.isLoading = true;
+    this.subscription.push(
+      this.adminService.deleteProperties(id).pipe(
+        finalize(() => {this.isLoading = false;})
+      ).subscribe(res => {
+        if(res.success){
+          this.getAllDdefenders();
+        }
+      })
+    )
   }
 
   ngOnDestroy(): void {

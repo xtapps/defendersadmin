@@ -40,10 +40,11 @@
                                     <div>{{ item.title }}</div>
                                 </td>
                                 <td>
-                                    <!-- <div><svg cIcon name="cil-eye"></svg></div> -->
-                                    <div class="view-button" (click)="goToViewPage(i)">View</div>
-                                    <!-- <i class="cil-eye"></i> -->
-                                    <!-- <div class="fw-semibold text-nowrap">{{ item.chatPhoto }}</div> -->
+                                    <div style="display: flex;">
+                                        <span class="view-button" (click)="goToViewPage(i)">View</span>
+                                        <span style="margin-left: 10px;" class="" (click)="deleteItem(item._id)"><img width="20px"
+                                            src="../../../../assets/images/trash.svg" alt=""></span>
+                                      </div>
                                 </td>
                             </tr>
                         </tbody>

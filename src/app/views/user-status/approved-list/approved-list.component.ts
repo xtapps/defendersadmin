@@ -57,6 +57,28 @@ export class ApprovedListComponent {
     }
   }
 
+  deleteItem(id: string): void {
+    var userResponse = confirm("Do you want to proceed?");
+    if (userResponse) {
+      alert("You chose to proceed!");
+      return;
+      this.onDelete(id);
+    }
+  }
+
+  onDelete(id: string): void {
+    this.isLoading = true;
+    this.subscription.push(
+      this.adminService.deleteProperties(id).pipe(
+        finalize(() => {this.isLoading = false;})
+      ).subscribe(res => {
+        if(res.success){
+          this.getApprovedList();
+        }
+      })
+    )
+  }
+
   ngOnDestroy(): void {
     this.subscription.forEach(el => { el.unsubscribe() });
   }

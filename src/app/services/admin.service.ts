@@ -85,8 +85,8 @@ export class AdminService {
     return this.http.get<IApiRes[]>(`${apiUrl}/properties/viewAll?reqParams=[{"key":"appSection","value":"${properties.appSection}"},{"key":"propertyType","value":"${properties.propertyType}"}]&limit=${limit}&offset=${offset}`);
   }
 
-  getUserStatus(status: number, limit: number, offset: number):Observable<any>{
-    return this.http.get<any>(`${apiUrl}/getAllDefenders?reqParams[{"key": 'userStatus', "value": ${status}}]&limit=${limit}&offset=${offset}`);
+  getUserStatus(status: number, limit: number, offset: number): Observable<any> {
+    return this.http.get<any>(`${apiUrl}/getAllDefenders?userStatus=${status}&limit=${limit}&offset=${offset}`);
   }
 
   validateUser(params: any) {
@@ -121,6 +121,10 @@ export class AdminService {
     return this.http.post<any>(`${apiUrl}/admin/partner/uploadProfile`, payloadData);
   }
 
+  createJobBoards(payloadData: FormData): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/createJobBoard`, payloadData);
+  }
+
   // Delete APIS
 
   deleteCategory(id: string) {
@@ -151,6 +155,28 @@ export class AdminService {
     return this.http.delete(`${apiUrl}/admin/removeProperty`, { body: deleteId })
   }
 
+
+  deleteProperties(id: string): Observable<any> {
+    return this.http.post<any>(`${apiUrl}/admin/removeProperty`, { id: id });
+  }
+
+  deleteJobBoads(id: string): Observable<any> {
+    return this.http.post<any>(`${apiUrl}/removeJobBoard`, { id: id });
+  }
+
+  deleteJob(id: string): Observable<any> {
+    return this.http.post<any>(`${apiUrl}/removeJob`, { id: id });
+  }
+
+  // updated Section
+
+  updateFranchises(body: any): Observable<any> {
+    return this.http.post<any>(`${apiUrl}/updateFranchises`, body);
+  }
+
+  updateCategories(body: any): Observable<any> {
+    return this.http.post<any>(`${apiUrl}/updateCategories`, body);
+  }
 
 
 }
