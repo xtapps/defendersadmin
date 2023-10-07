@@ -28,7 +28,7 @@ export class DefendersListComponent implements OnInit, OnDestroy {
   getAllDdefenders(): void {
     this.isLoading = true;
     this.adminService.getAllDefendersList(this.pageSize, this.offset).subscribe((res: any) => {
-      this.users = res;
+      this.users = res.defendersList;
       this.isLoading = false;
     })
   }

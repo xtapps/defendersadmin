@@ -15,7 +15,7 @@ export class GroupCodesComponent implements OnInit, OnDestroy {
   isLoading = true;
   totalCount = 0;
   limit = 13;
-  offset = 1;
+  offset = 0;
   totalRecords = 0;
 
   constructor(

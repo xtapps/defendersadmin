@@ -13,7 +13,7 @@ export class ProcessingListComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = [];
   processingList: any[] = [];
   limit = 13;
-  offset = 1;
+  offset = 0;
   totalRecords = 0;
   isLoading = false
 
@@ -32,7 +32,8 @@ export class ProcessingListComponent implements OnInit, OnDestroy {
       this.adminService.getUserStatus(0, this.limit, this.offset).pipe(
         finalize(() => { this.isLoading = false })
       ).subscribe(res => {
-        this.processingList = res;
+        this.processingList = res.defendersList;
+        this.totalRecords = res.totalCount;
       })
     );
   }

@@ -39,6 +39,14 @@ export class OtherComponent {
     });
   }
 
+  addNew(): void {
+    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'other', type: 'properties' } });
+  }
+
+  editItem(ev: any): void {
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'other', type: 'properties', editMode: 'true' } });
+  }
+
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.othersList[index]));

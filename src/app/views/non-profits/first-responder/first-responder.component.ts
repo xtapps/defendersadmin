@@ -41,6 +41,14 @@ export class FirstResponderComponent implements OnInit, OnDestroy {
     });
   }
 
+  addNew(): void {
+    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'firstResponder', type: 'properties' } });
+  }
+
+  editItem(ev: any): void {
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'firstResponder', type: 'properties', editMode: 'true' } });
+  }
+
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.firstResponderList[index]));
@@ -82,6 +90,7 @@ export class FirstResponderComponent implements OnInit, OnDestroy {
       })
     )
   }
+  
 
   ngOnDestroy(): void {
     this.subscription.forEach(el => el.unsubscribe());

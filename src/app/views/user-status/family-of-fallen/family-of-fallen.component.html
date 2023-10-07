@@ -1,5 +1,5 @@
 <div class="header_section">
-    <h4>Submited List</h4>
+    <h4>Processing List</h4>
     <!-- <button cButton color="primary" (click)="addNew()">Add</button> -->
   </div>
   
@@ -24,7 +24,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of submitedList; index as i">
+                <tr *ngFor="let item of familyFallenList; index as i">
                   <td>
                     <div>{{ item.firstName }}</div>
                   </td>
@@ -46,8 +46,7 @@
             </table>
           </ng-template>
           <app-custom-pagination [currentPage]="offset + 1" [totalRecords]="totalRecords" [pageSize]="limit"
-            (nextClickEvent)="nextClickEvent($event)"
-            (previousClickEvent)="previousClickEvent($event)">
+            (nextClickEvent)="nextClickEvent($event)" (previousClickEvent)="previousClickEvent($event)">
           </app-custom-pagination>
   
         </c-card-body>

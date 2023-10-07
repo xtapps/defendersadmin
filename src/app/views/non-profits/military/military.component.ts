@@ -63,7 +63,6 @@ export class MilitaryComponent implements OnInit, OnDestroy {
     var userResponse = confirm("Do you want to proceed?");
     if (userResponse) {
       alert("You chose to proceed!");
-      return;
       this.onDelete(id);
     }
   }
@@ -82,11 +81,15 @@ export class MilitaryComponent implements OnInit, OnDestroy {
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'military' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'military', type: 'properties' } });
   }
 
   ngOnDestroy(): void {
     this.subscription.forEach(el => el.unsubscribe());
+  }
+
+  editItem(ev: any): void {
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'military', type: 'properties', editMode: 'true' } });
   }
 
 }

@@ -13,7 +13,7 @@ export class SuspendedListComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = [];
   suspendedList: any[] = [];
   limit = 13;
-  offset = 1;
+  offset = 0;
   totalRecords = 0;
   isLoading = false
 
@@ -32,7 +32,8 @@ export class SuspendedListComponent implements OnInit, OnDestroy {
       this.adminService.getUserStatus(4, this.limit, this.offset).pipe(
         finalize(() => { this.isLoading = false })
       ).subscribe(res => {
-        this.suspendedList = res;
+        this.suspendedList = res.defendersList;
+        this.totalRecords = res.totalCount;
       })
     );
   }
