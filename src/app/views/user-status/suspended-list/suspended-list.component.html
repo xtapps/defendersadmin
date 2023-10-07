@@ -1,0 +1,56 @@
+<div class="header_section">
+    <h4>Suspended List</h4>
+    <!-- <button cButton color="primary" (click)="addNew()">Add</button> -->
+  </div>
+  
+  <c-row>
+    <c-col xs>
+      <c-card class="mb-4">
+        <!-- <c-card-header>Job Boards</c-card-header> -->
+        <c-card-body>
+  
+          <ng-container *ngIf="isLoading; else tableData">
+            <div class="skeleton-loader"></div>
+          </ng-container>
+  
+          <ng-template #tableData>
+            <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+              <thead cTableColor="light">
+                <tr>
+                  <th>First Name</th>
+                  <th>last Name</th>
+                  <th>Email</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of suspendedList; index as i">
+                  <td>
+                    <div>{{ item.firstName }}</div>
+                  </td>
+                  <td>
+                    <div>{{ item.lastName }}</div>
+                  </td>
+                  <td>
+                    <div>{{ item.defenderEmail }}</div>
+                  </td>
+                  <td>
+                    <div style="display: flex;">
+                      <span class="view-button" (click)="goToViewPage(i)">View</span>
+                      <span style="margin-left: 10px;" class="" (click)="deleteItem(item._id)"><img width="20px"
+                          src="../../../../assets/images/trash.svg" alt=""></span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </ng-template>
+          <app-custom-pagination [currentPage]="offset + 1" [totalRecords]="totalRecords" [pageSize]="limit"
+            (nextClickEvent)="nextClickEvent($event)"
+            (previousClickEvent)="previousClickEvent($event)">
+          </app-custom-pagination>
+  
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>

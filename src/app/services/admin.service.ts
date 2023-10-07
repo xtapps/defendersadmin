@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { apiUrl } from '../../config/config'
 import { Observable } from 'rxjs';
+import { IApiRes } from '../models/model';
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +51,7 @@ export class AdminService {
   }
 
   getAllDefendersList(limit: number, offset: number) {
-    return this.http.get(`${apiUrl}/getAllDefenders?limit=${limit}&offset=${offset}`);
+    return this.http.get(`${apiUrl}/getAllDefenders?userStatus=2&limit=${limit}&offset=${offset}`);
   }
 
   getJobOpportunities(limit: number, offset: number) {
@@ -62,13 +63,31 @@ export class AdminService {
   }
 
   getMilitary(limit: number, offset: number) {
-    const url = `${apiUrl}/properties/viewAll?reqParams=[{"value": "false", "key": "featured"}, {"value": "kids", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
+    const url = `${apiUrl}/properties/viewAll?reqParams=[{"value": "false", "key": "featured"}, {"value": "military", "key": "charity"}]&limit=${limit}&offset=${offset}`;
+    return this.http.get(url);
+  }
+  getMilitary12(limit: number, offset: number) {
+    const url = `${apiUrl}/properties/viewAll?reqParams=[{"key":"appSection","value":"books"},{"key":"propertyType","value":"kids"}]&limit=${limit}&offset=${offset}`;
     return this.http.get(url);
   }
 
-  // getAllDefendersList(){
-  //   return this.http.get(`${apiUrl}/getAllDefenders`);
-  // }
+  /**
+   * Retrieves properties based on the specified application section, property type, limit, and offset.
+   *
+   * @param {string} appSection - The application section to filter properties.
+   * @param {string} propertyType - The type of properties to retrieve.
+   * @param {number} limit - The maximum number of properties to return.
+   * @param {number} offset - The number of properties to skip before starting to return the properties.
+   * 
+   * @returns {Observable<any>} An observable that emits the response containing the properties.
+   */
+  getProperties(properties: { appSection: string, propertyType: string }, limit: number, offset: number): Observable<IApiRes[]> {
+    return this.http.get<IApiRes[]>(`${apiUrl}/properties/viewAll?reqParams=[{"key":"appSection","value":"${properties.appSection}"},{"key":"propertyType","value":"${properties.propertyType}"}]&limit=${limit}&offset=${offset}`);
+  }
+
+  getUserStatus(status: number, limit: number, offset: number): Observable<any> {
+    return this.http.get<any>(`${apiUrl}/getAllDefenders?userStatus=${status}&limit=${limit}&offset=${offset}`);
+  }
 
   validateUser(params: any) {
     return this.http.post(`${apiUrl}/validate`, params);
@@ -102,6 +121,18 @@ export class AdminService {
     return this.http.post<any>(`${apiUrl}/admin/partner/uploadProfile`, payloadData);
   }
 
+  createJobBoards(payloadData: FormData): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/createJobBoard`, payloadData);
+  }
+
+  createProperties(payloadData: any): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/createProperties`, payloadData);
+  }
+
+  updateProperties(payloadData: any): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/updateProperties`, payloadData);
+  }
+
   // Delete APIS
 
   deleteCategory(id: string) {
@@ -125,13 +156,38 @@ export class AdminService {
     return this.http.delete(`${apiUrl}/admin/removeFranchises`, { body: deleteId });
   }
 
-  deleteApps(id: string) {
+  deleteProperty(id: string) {
     const deleteId = {
       id: id
     };
     return this.http.delete(`${apiUrl}/admin/removeProperty`, { body: deleteId })
   }
 
+
+  deleteProperties(id: string): Observable<any> {
+    const payload = {
+      id: id
+    }
+    return this.http.delete<any>(`${apiUrl}/admin/removeProperty`, { body: payload });
+  }
+
+  deleteJobBoads(id: string): Observable<any> {
+    return this.http.post<any>(`${apiUrl}/removeJobBoard`, { id: id });
+  }
+
+  deleteJob(id: string): Observable<any> {
+    return this.http.post<any>(`${apiUrl}/removeJob`, { id: id });
+  }
+
+  // updated Section
+
+  updateFranchises(body: any): Observable<any> {
+    return this.http.post<any>(`${apiUrl}/updateFranchises`, body);
+  }
+
+  updateCategories(body: any): Observable<any> {
+    return this.http.post<any>(`${apiUrl}/updateCategories`, body);
+  }
 
 
 }

@@ -1,6 +1,6 @@
 <div class="main_container">
     <div>
-        <h4>Add New Franchises</h4>
+        <h4>{{editMode ? 'Edit' : 'Add'}} New Franchises</h4>
     </div>
 
 </div>
@@ -29,13 +29,13 @@
                     </div>
 
                     <div class="container">
-                        <div class="file-upload-wrapper w-half"  [attr.data-text]="fileName ? fileName : 'Upload File!'" [ngClass]="{'invalid_field': checkValidation('image')}">
+                        <div class="file-upload-wrapper w-half"  [attr.data-text]="fileName ? fileName : 'Upload File!'" [ngClass]="{'invalid_field': checkValidation('franchiseImage')}">
                             <input name="file-upload-field" accept=".png" (change)="onFileChange($event)" type="file"
                                 class="file-upload-field" value="">
                         </div>
-                        <label class="error_msg" *ngIf="checkValidation('image')">This
+                        <label class="error_msg" *ngIf="checkValidation('franchiseImage')">This
                             field is required</label>
-                        <button cButton color="primary" (click)="onSubmit()">Submit</button>
+                        <button cButton color="primary" (click)="submit()">Submit</button>
                     </div>
                     <div>
                     </div>

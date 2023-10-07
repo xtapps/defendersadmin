@@ -65,14 +65,17 @@
                 <td>
                   <div>
                     <span class="view-button" (click)="goToViePage()">View</span>
-                    <span style="margin-left: 10px;" class="view-button delete-btn" (click)="deleteItem(item._id)">Delete</span>
+                    <span style="margin-left: 10px;" class="view-button delete-btn"
+                      (click)="deleteItem(item._id)">Delete</span>
                   </div>
                 </td>
               </tr>
             </tbody>
           </table>
         </ng-template>
-
+        <app-custom-pagination [currentPage]="offset + 1" [totalRecords]="totalRecords" [pageSize]="limit"
+          (nextClickEvent)="nextClickEvent($event)" (previousClickEvent)="previousClickEvent($event)">
+        </app-custom-pagination>
       </c-card-body>
     </c-card>
 

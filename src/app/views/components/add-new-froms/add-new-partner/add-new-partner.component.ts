@@ -35,7 +35,6 @@ export class AddNewPartnerComponent implements OnInit, OnDestroy {
     this.initForm();
     this.getCategories();
     this.propertyType = this.activatedRoute.snapshot.queryParams['type'];
-    console.log(this.propertyType);
     this.form.patchValue({
       propertyType: this.propertyType
     })

@@ -134,7 +134,7 @@ export class DashboardComponent implements OnInit {
 
   getAllDdefenders(): void {
     this.adminService.getAllDefendersList(13, 1).subscribe((res: any) => {
-      this.usersList = res;
+      this.usersList = res.defendersList;
       this.isLoading = false;
     })
   }

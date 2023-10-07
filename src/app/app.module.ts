@@ -50,7 +50,7 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, ValidateUserComponent ],
+  declarations: [AppComponent, ...APP_CONTAINERS, ValidateUserComponent  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -81,7 +81,9 @@ const APP_CONTAINERS = [
     NgScrollbarModule,
     TableModule,
     HttpClientModule,
-    AdminModule
+    AdminModule,
+    
+    
   ],
   providers: [
     {

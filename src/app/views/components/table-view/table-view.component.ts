@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { AdminService } from '../../services/admin.service';
+import { AdminService } from '../../../services/admin.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -31,6 +31,7 @@ export class TableViewComponent implements OnInit, OnDestroy {
   public totalRecords: number = 0;
   public pageSize: number = 13;
   public offset: number = 0;
+  limit = 13;
 
   private searchText: string = '';
 
@@ -69,12 +70,6 @@ export class TableViewComponent implements OnInit, OnDestroy {
     }
   }
 
-  onPageChange(event: any) {
-    const offset = (event.previousPageIndex + 1) * this.pageSize;
-    this.offset = offset + 1;
-    this.getAllProperties();
-  }
-
   addNew(): void {
     this.router.navigate(['/admin/add-new'], {queryParams:{type: 'partner'}});
   }
@@ -82,7 +77,7 @@ export class TableViewComponent implements OnInit, OnDestroy {
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.partnersList[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData } });
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'partners' } });
    }
 
    previousClickEvent(event: boolean): void {
@@ -95,10 +90,6 @@ export class TableViewComponent implements OnInit, OnDestroy {
 
    nextClickEvent(event: boolean): void {
     if(event){
-      const lastPage = Math.ceil(this.totalRecords / this.pageSize);
-      if (lastPage <= this.offset) {
-        return;
-      }
       this.offset += 1;
       this.getAllProperties();
     }
