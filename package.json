@@ -1,14 +1,13 @@
 {
-  "name": "Gateway Defenders admin",
-  "version": "4.5.2",
-  "copyright": "Copyright 2023 creativeLabs Łukasz Holeczek",
-  "license": "MIT",
-  "author": "The CoreUI Team (https://github.com/orgs/coreui/people) and contributors",
-  "homepage": "https://coreui.io/angular",
-  "config": {
-    "coreui_library_short_version": "4.5",
-    "coreui_library_docs_url": "https://coreui.io/angular/docs/"
+  "name": "defendersadmin",
+  "version": "1.0.0",
+  "description": "Admin interface for the Gateway Defenders application",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xtapps/defendersadmin.git"
   },
+  "license": "MIT",
+  "author": "XtApps",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -38,6 +37,7 @@
     "@coreui/utils": "^2.0.2",
     "@ng-select/ng-select": "^11.1.1",
     "chart.js": "^3.9.1",
+    "express": "^4.18.2",
     "ngx-scrollbar": "^12.0.0",
     "rxjs": "~7.8.1",
     "tslib": "^2.3.0",
