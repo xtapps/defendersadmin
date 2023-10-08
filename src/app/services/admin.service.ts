@@ -51,7 +51,7 @@ export class AdminService {
   }
 
   getAllDefendersList(limit: number, offset: number) {
-    return this.http.get(`${apiUrl}/getAllDefenders?limit=${limit}&offset=${offset}`);
+    return this.http.get(`${apiUrl}/getAllDefenders?userStatus=2&limit=${limit}&offset=${offset}`);
   }
 
   getJobOpportunities(limit: number, offset: number) {
@@ -125,6 +125,14 @@ export class AdminService {
     return this.http.post<any>(`${apiUrl}/createJobBoard`, payloadData);
   }
 
+  createProperties(payloadData: any): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/createProperties`, payloadData);
+  }
+
+  updateProperties(payloadData: any): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/updateProperties`, payloadData);
+  }
+
   // Delete APIS
 
   deleteCategory(id: string) {
@@ -148,7 +156,7 @@ export class AdminService {
     return this.http.delete(`${apiUrl}/admin/removeFranchises`, { body: deleteId });
   }
 
-  deleteApps(id: string) {
+  deleteProperty(id: string) {
     const deleteId = {
       id: id
     };
@@ -157,7 +165,10 @@ export class AdminService {
 
 
   deleteProperties(id: string): Observable<any> {
-    return this.http.post<any>(`${apiUrl}/admin/removeProperty`, { id: id });
+    const payload = {
+      id: id
+    }
+    return this.http.delete<any>(`${apiUrl}/admin/removeProperty`, { body: payload });
   }
 
   deleteJobBoads(id: string): Observable<any> {

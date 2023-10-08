@@ -72,7 +72,7 @@ export class AppsListComponent implements OnInit, OnDestroy {
 
   deleteAppsItem(id: string): void {
     this.subscription.push(
-      this.adminService.deleteApps(id).subscribe({
+      this.adminService.deleteProperty(id).subscribe({
         next: (res => {
           if (res) {
             this.offset = 0;

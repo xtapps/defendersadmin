@@ -36,7 +36,7 @@ export class AddNewFranchisesComponent implements OnInit, OnDestroy {
   initForm(): void {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required]],
-      image: ['', [Validators.required]],
+      franchiseImage: [''],
       website: [''],
     })
   }
@@ -46,7 +46,8 @@ export class AddNewFranchisesComponent implements OnInit, OnDestroy {
 
     this.form.patchValue({
       name: datas.franchiseName,
-      website: datas.website
+      website: datas.website,
+      franchiseImage: datas.franchiseImage
     })
   }
 
@@ -60,10 +61,10 @@ export class AddNewFranchisesComponent implements OnInit, OnDestroy {
 
     if (files && files.length > 0) {
       this.fileName = files[0].name;
-      this.form.controls['image'].setValue(files[0]);
+      this.form.controls['franchiseImage'].setValue(files[0]);
     } else {
       this.fileName = ''; // Reset if no file selected
-      this.form.controls['image'].setValue('');
+      this.form.controls['franchiseImage'].setValue('');
     }
   }
 
@@ -102,14 +103,15 @@ export class AddNewFranchisesComponent implements OnInit, OnDestroy {
 
   onUpdate(): void {
     const data: any = {};
-    for (const control in this.form.controls) {
-      if (this.form.controls[control].value === '' || this.form.controls[control].value === null) {
-        data[control] = ' ';
-      } else {
-        data[control] = this.form.controls[control].value;
-      }
-    }
+    // for (const control in this.form.controls) {
+    //   if (this.form.controls[control].value === '' || this.form.controls[control].value === null) {
+    //     data[control] = ' ';
+    //   } else {
+    //     data[control] = this.form.controls[control].value;
+    //   }
+    // }
     data['id'] = this.receivedData._id;
+    data['name'] = 'test name'
     console.log(data);
     this.subscription.push(
       this.adminService.updateFranchises(data).subscribe(res => {

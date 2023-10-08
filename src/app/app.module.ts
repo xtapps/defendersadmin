@@ -41,9 +41,6 @@ import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminModule } from './views/admin/admin.module';
 import { ValidateUserComponent } from './views/validate-user/validate-user.component';
-import { AddNewCategoryComponent } from './views/components/add-new-category/add-new-category.component';
-import { AddJobBoadrsComponent } from './views/components/add-job-boadrs/add-job-boadrs.component';
-import { AddNewPropertiesComponent } from './views/components/add-new-froms/add-new-properties/add-new-properties.component';
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -53,7 +50,7 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, ValidateUserComponent, AddNewPropertiesComponent, ],
+  declarations: [AppComponent, ...APP_CONTAINERS, ValidateUserComponent  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

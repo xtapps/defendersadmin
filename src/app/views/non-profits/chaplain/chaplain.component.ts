@@ -39,6 +39,14 @@ export class ChaplainComponent {
     });
   }
 
+  addNew(): void {
+    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'chaplain', type: 'properties' } });
+  }
+
+  editItem(ev: any): void {
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'chaplain', type: 'properties', editMode: 'true' } });
+  }
+
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.chaplainList[index]));
@@ -62,8 +70,6 @@ export class ChaplainComponent {
   deleteItem(id: string): void {
     var userResponse = confirm("Do you want to proceed?");
     if (userResponse) {
-      alert("You chose to proceed!");
-      return;
       this.onDelete(id);
     }
   }

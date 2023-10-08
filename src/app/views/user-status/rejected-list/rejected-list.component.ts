@@ -13,7 +13,7 @@ export class RejectedListComponent implements OnInit, OnDestroy{
   subscription: Subscription[] = [];
   rejectedList: any[] = [];
   limit = 13;
-  offset = 1;
+  offset = 0;
   totalRecords = 0;
   isLoading = false
 
@@ -32,7 +32,8 @@ export class RejectedListComponent implements OnInit, OnDestroy{
       this.adminService.getUserStatus(3, this.limit, this.offset).pipe(
         finalize(() => { this.isLoading = false })
       ).subscribe(res => {
-        this.rejectedList = res;
+        this.rejectedList = res.defendersList;
+        this.totalRecords = res.totalCount;
       })
     );
   }

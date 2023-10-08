@@ -13,7 +13,7 @@ export class SubmitedListComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = [];
   submitedList: any[] = [];
   limit = 13;
-  offset = 1;
+  offset = 0;
   totalRecords = 0;
   isLoading = false
 
@@ -33,7 +33,8 @@ export class SubmitedListComponent implements OnInit, OnDestroy {
       this.adminService.getUserStatus(1, this.limit, this.offset).pipe(
         finalize(() => { this.isLoading = false })
       ).subscribe(res => {
-        this.submitedList = res;
+        this.submitedList = res.defendersList;
+        this.totalRecords = res.totalCount;
       })
     );
   }

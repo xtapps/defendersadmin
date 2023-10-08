@@ -5,6 +5,8 @@ import { ApprovedListComponent } from './approved-list/approved-list.component';
 import { RejectedListComponent } from './rejected-list/rejected-list.component';
 import { SubmitedListComponent } from './submited-list/submited-list.component';
 import { SuspendedListComponent } from './suspended-list/suspended-list.component';
+import { PlusOneComponent } from './plus-one/plus-one.component';
+import { FamilyOfFallenComponent } from './family-of-fallen/family-of-fallen.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedAdminModule } from 'src/app/shared/shared-admin.module';
 import { CardModule, GridModule, TableModule } from '@coreui/angular';
@@ -20,6 +22,8 @@ const routes: Routes = [
   { path: 'approved', component: ApprovedListComponent },
   { path: 'rejected', component: RejectedListComponent },
   { path: 'suspended', component: SuspendedListComponent },
+  { path: 'plus-one', component: PlusOneComponent },
+  { path: 'family-of-fallen', component: FamilyOfFallenComponent },
 ];
 
 @NgModule({
@@ -28,7 +32,9 @@ const routes: Routes = [
     ApprovedListComponent,
     RejectedListComponent,
     SubmitedListComponent,
-    SuspendedListComponent
+    SuspendedListComponent,
+    PlusOneComponent,
+    FamilyOfFallenComponent
   ],
   imports: [
     CommonModule,

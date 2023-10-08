@@ -70,6 +70,27 @@ export class LocationComponent implements OnInit, OnDestroy {
     }
   }
 
+  deleteItem(id: string): void {
+    var userResponse = confirm("Do you want to proceed?");
+    if (userResponse) {
+      this.deleteAppsItem(id);
+    }
+  }
+
+  deleteAppsItem(id: string): void {
+    this.subscription.push(
+      this.adminService.deleteProperty(id).subscribe({
+        next: (res => {
+          if (res) {
+            this.offset = 0;
+            this.getAllLocation();
+            alert('Location item deleted Successfully!');
+          }
+        })
+      })
+    )
+  }
+
   ngOnDestroy(): void {
     this.subscription.forEach(el => el.unsubscribe());
   }

@@ -173,6 +173,14 @@ export const navItems: INavData[] = [
         name: 'Suspended',
         url: '/user-status/suspended'
       },
+      {
+        name: 'Plus One',
+        url: '/user-status/plus-one'
+      },
+      {
+        name: 'Family of Fallen',
+        url: '/user-status/familiy-of-fallen'
+      },
     ]
   },
 
