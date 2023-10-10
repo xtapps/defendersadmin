@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, finalize } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
+import { RejectReasonModalComponent } from '../modals/reject-reason-modal/reject-reason-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-submited-list',
@@ -17,10 +19,10 @@ export class SubmitedListComponent implements OnInit, OnDestroy {
   totalRecords = 0;
   isLoading = false
 
-  
   constructor(
     private adminService: AdminService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -63,7 +65,6 @@ export class SubmitedListComponent implements OnInit, OnDestroy {
     var userResponse = confirm("Do you want to proceed?");
     if (userResponse) {
       alert("You chose to proceed!");
-      return;
       this.onDelete(id);
     }
   }
@@ -72,14 +73,64 @@ export class SubmitedListComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.subscription.push(
       this.adminService.deleteProperties(id).pipe(
-        finalize(() => {this.isLoading = false;})
+        finalize(() => { this.isLoading = false; })
       ).subscribe(res => {
-        if(res.success){
+        if (res.success) {
           this.getSubmitedList();
         }
       })
     )
   }
+
+  getChange(event: Event, item: any): void {
+    const selectedValue = event.target as HTMLInputElement;
+    console.log(selectedValue.value);
+
+    const userResponse = confirm(`Are you sure to proceed ${selectedValue.value}?`);
+    if (userResponse) {
+      if (selectedValue.value === 'approve') {
+        const data = {
+          userId: item._id,
+          userStatus: '2',
+        }
+        this.updateUserStatus(data);
+      } else if (selectedValue.value === 'reject') {
+        const data = {
+          userId: item._id,
+          userStatus: '3',
+        }
+        this.openRejectModal(data);
+      }
+    }
+  }
+
+  openRejectModal(item: any): void {
+    const modal = this.dialog.open(RejectReasonModalComponent, {
+      width: '500px',
+      disableClose: true,
+      data: {
+        id: item.userId,
+        status: item.userStatus
+      }
+    });
+    modal.afterClosed().subscribe(res => {
+      if (res.success) {
+        this.getSubmitedList();
+      }
+    })
+  }
+
+  updateUserStatus(data: any): void {
+    this.subscription.push(
+      this.adminService.updateUserStatus(data).subscribe(res => {
+        if (res.success) {
+          this.getSubmitedList();
+        }
+      })
+    );
+  }
+
+  
 
   ngOnDestroy(): void {
     this.subscription.forEach(el => { el.unsubscribe() });

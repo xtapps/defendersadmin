@@ -89,6 +89,10 @@ export class AdminService {
     return this.http.get<any>(`${apiUrl}/getAllDefenders?userStatus=${status}&limit=${limit}&offset=${offset}`);
   }
 
+  updateUserStatus(paylodData: any): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/paylodData`, paylodData);
+  }
+
   validateUser(params: any) {
     return this.http.post(`${apiUrl}/validate`, params);
   }

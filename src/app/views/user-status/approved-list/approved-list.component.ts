@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, finalize } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
+import { RejectReasonModalComponent } from '../modals/reject-reason-modal/reject-reason-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-approved-list',
@@ -19,7 +21,8 @@ export class ApprovedListComponent {
 
   constructor(
     private adminService: AdminService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -78,6 +81,29 @@ export class ApprovedListComponent {
         }
       })
     )
+  }
+
+  getChange(event: any, item: any): void {
+    const userResponse = confirm(`Are you to proceed ${event.target.value  === '3' ? 'reject' : 'suspend'}?`);
+    if (userResponse) {
+      this.openModal(event.target.value, item);
+    }
+  }
+
+  openModal(event: any, item: any): void {
+    const modal = this.dialog.open(RejectReasonModalComponent, {
+      width: '500px',
+      disableClose: true,
+      data:{
+        id: item._id,
+        status: event
+      }
+    });
+    modal.afterClosed().subscribe(res => {
+      if(res.success){
+        this.getApprovedList();
+      }
+    })
   }
 
   ngOnDestroy(): void {

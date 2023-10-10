@@ -1,7 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ModalComponent, ModalDialogComponent } from '@coreui/angular';
 import { Subscription, finalize } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
+import { RejectReasonModalComponent } from '../modals/reject-reason-modal/reject-reason-modal.component';
 
 @Component({
   selector: 'app-processing-list',
@@ -19,7 +22,8 @@ export class ProcessingListComponent implements OnInit, OnDestroy {
 
   constructor(
     private adminService: AdminService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -62,7 +66,6 @@ export class ProcessingListComponent implements OnInit, OnDestroy {
     var userResponse = confirm("Do you want to proceed?");
     if (userResponse) {
       alert("You chose to proceed!");
-      return;
       this.onDelete(id);
     }
   }
@@ -71,13 +74,36 @@ export class ProcessingListComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.subscription.push(
       this.adminService.deleteProperties(id).pipe(
-        finalize(() => {this.isLoading = false;})
+        finalize(() => { this.isLoading = false; })
       ).subscribe(res => {
-        if(res.success){
+        if (res.success) {
           this.getProcessingList();
         }
       })
     )
+  }
+
+  getChange(event: any, item: any): void {
+    const userResponse = confirm('Are you sure to reject?');
+    if (userResponse) {
+      this.openModal(event.target.value, item);
+    }
+  }
+
+  openModal(event: any, item: any): void {
+    const modal = this.dialog.open(RejectReasonModalComponent, {
+      width: '500px',
+      disableClose: true,
+      data: {
+        id: item._id,
+        status: event
+      }
+    })
+    modal.afterClosed().subscribe(res => {
+      if (res.success) {
+        this.getProcessingList();
+      }
+    })
   }
 
   ngOnDestroy(): void {

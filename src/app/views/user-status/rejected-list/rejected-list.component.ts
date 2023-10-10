@@ -80,6 +80,32 @@ export class RejectedListComponent implements OnInit, OnDestroy{
     )
   }
 
+  getChange(event: Event, item: any): void {
+    const selectedValue = event.target as HTMLInputElement;
+    console.log(selectedValue.value);
+
+    const userResponse = confirm(`Are you sure to proceed ${selectedValue.value}`);
+    if (userResponse) {
+      if (selectedValue.value === 'accept') {
+        const data = {
+          userId: item._id,
+          userStatus: '2',
+        }
+        this.updateUserStatus(data);
+      }
+    }
+  }
+
+  updateUserStatus(data: any): void {
+    this.subscription.push(
+      this.adminService.updateUserStatus(data).subscribe(res => {
+        if (res.success) {
+          this.getRejectedList();
+        }
+      })
+    );
+  }
+
   ngOnDestroy(): void {
     this.subscription.forEach(el => { el.unsubscribe() });
   }
