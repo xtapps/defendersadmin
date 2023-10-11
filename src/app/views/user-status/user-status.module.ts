@@ -14,6 +14,10 @@ import { AdminRoutingModule } from '../admin/admin-routing.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { RejectReasonModalComponent } from './modals/reject-reason-modal/reject-reason-modal.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', redirectTo: 'processing', pathMatch: 'full' },
@@ -34,7 +38,8 @@ const routes: Routes = [
     SubmitedListComponent,
     SuspendedListComponent,
     PlusOneComponent,
-    FamilyOfFallenComponent
+    FamilyOfFallenComponent,
+    RejectReasonModalComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +51,10 @@ const routes: Routes = [
     MatTooltipModule,
     GridModule,
     TableModule,
-    SharedAdminModule
+    SharedAdminModule,
+    MatDialogModule,
+    MatButtonModule,
+    ReactiveFormsModule,
   ]
 })
 export class UserStatusModule { }

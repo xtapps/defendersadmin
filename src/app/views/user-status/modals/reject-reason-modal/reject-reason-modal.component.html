@@ -1,0 +1,20 @@
+<div class="main_modal_container">
+    <div class="heder">
+        <div class="name">
+            Reason
+        </div>
+        <div class="close">
+            <p (click)="close()">X</p>
+        </div>
+    </div>
+    <form [formGroup]="form" class="example-form">
+        <mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
+            <mat-label>Reason</mat-label>
+            <textarea style="min-height: 100px;" formControlName="rejectReason" matInput placeholder="Write reason"></textarea>
+            <mat-error>This field id required</mat-error>
+        </mat-form-field>
+    </form>
+    <div class="button_div">
+        <button  (click)="onSubmit()" [disabled]="loading" mat-raised-button color="primary">{{loading ? 'Loading...' : 'Submit'}}</button>
+    </div>
+</div>
