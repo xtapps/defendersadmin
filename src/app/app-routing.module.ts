@@ -8,6 +8,7 @@ import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
 import { AdminModule } from './views/admin/admin.module'
 import { ValidateUserComponent } from './views/validate-user/validate-user.component';
+import { AuthGuard } from './services/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     data: {
       title: 'Home'
     },
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -127,7 +129,8 @@ const routes: Routes = [
   {
     path: 'admin',
     component: DefaultLayoutComponent,
-    loadChildren: () => import('./views/admin/admin.module').then((m) => m.AdminModule)
+    loadChildren: () => import('./views/admin/admin.module').then((m) => m.AdminModule),
+    canActivate: [AuthGuard]
   },
   {path: '**', redirectTo: 'dashboard'}
 ];
