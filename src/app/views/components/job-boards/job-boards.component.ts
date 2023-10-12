@@ -13,6 +13,9 @@ export class JobBoardsComponent implements OnInit, OnDestroy {
   jodBoards: any[] = [];
   isLoading = true;
   subscription: Subscription[] = [];
+  limit = 13;
+  offset = 0;
+  totalRecords = 0;
 
   constructor(
     private adminService: AdminService,
@@ -24,9 +27,11 @@ export class JobBoardsComponent implements OnInit, OnDestroy {
   }
 
   getJobBoards(): void {
-    this.adminService.getJobBoards(13, 1).subscribe((res: any) => {
+    this.adminService.getJobBoards(this.limit, this.offset).subscribe((res: any) => {
       this.isLoading = false;
       this.jodBoards = res.jobBoards;
+      this.totalRecords = res.totalCount;
+
     });
   }
 
@@ -39,8 +44,6 @@ export class JobBoardsComponent implements OnInit, OnDestroy {
   deleteItem(id: string): void {
     var userResponse = confirm("Do you want to proceed?");
     if (userResponse) {
-      alert("You chose to proceed!");
-      return;
       this.onDelete(id);
     }
   }
@@ -65,6 +68,20 @@ export class JobBoardsComponent implements OnInit, OnDestroy {
   editItem(item: any): void {
     const encodedData = encodeURIComponent(JSON.stringify(item));
     this.router.navigate(['admin/add-new'], { queryParams: { data: encodedData, type: 'job-boards' } });
+  }
+
+  previousClickEvent(event: boolean): void {
+    if (this.offset > 0 && event) {
+      this.offset -= 1;
+      this.getJobBoards();
+    }
+  }
+
+  nextClickEvent(event: boolean): void {
+    if (event) {
+      this.offset += 1;
+      this.getJobBoards();
+    }
   }
 
   ngOnDestroy(): void {

@@ -24,7 +24,7 @@ export class JobOpportunitiesComponent implements OnInit, OnDestroy {
   }
 
   getJobOpportunities(): void {
-    this.adminService.getJobOpportunities(13, 1).subscribe((res: any) => {
+    this.adminService.getJobOpportunities(13, 0).subscribe((res: any) => {
       this.isLoading = false;
       this.jobOpportunities = res.jobs;
     });

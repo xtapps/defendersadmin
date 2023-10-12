@@ -156,3 +156,14 @@ select {
         width: 100%;
     }
 }
+
+.edit-icon, .delete-icon{
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.header_section{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}

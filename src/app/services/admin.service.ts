@@ -22,7 +22,7 @@ export class AdminService {
   }
 
   getLocations(limit: number, offset: number) {
-    const url = `${apiUrl}/properties/viewAll?reqParams=[{"value": "false", "key": "featured"}, {"value": "partner", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
+    const url = `${apiUrl}/properties/viewAll?reqParams=[ {"value": "partner", "key": "appSection"}, {"value": "service", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
     return this.http.get(url);
   }
 
@@ -193,5 +193,12 @@ export class AdminService {
     return this.http.post<any>(`${apiUrl}/updateCategories`, body);
   }
 
+  createCategory(data: any): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/createCategories`, data);
+  }
+
+  updateCategory(data: any): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/updateCategories`, data);
+  }
 
 }

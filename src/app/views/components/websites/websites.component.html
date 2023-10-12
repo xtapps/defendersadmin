@@ -48,6 +48,8 @@
                 <td>
                   <div style="display: flex;">
                     <span class="view-button" (click)="goToViewPage(i)">View</span>
+                    <span class="edit-icon" (click)="editItem(item)"><img width="20px"
+                      src="../../../../assets/images/edit.svg" alt=""></span>
                     <span style="margin-left: 10px;" class="" (click)="deleteItem(item._id)"><img width="20px"
                         src="../../../../assets/images/trash.svg" alt=""></span>
                   </div>
@@ -56,7 +58,7 @@
             </tbody>
           </table>
         </ng-template>
-        <app-custom-pagination [currentPage]="offset" [totalRecords]="totalRecords" [pageSize]="limit"
+        <app-custom-pagination [currentPage]="offset + 1" [totalRecords]="totalRecords" [pageSize]="limit"
           (nextClickEvent)="nextClickEvent($event)" (previousClickEvent)="previousClickEvent($event)">
         </app-custom-pagination>
 
