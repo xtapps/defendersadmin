@@ -95,6 +95,10 @@ export class TableViewComponent implements OnInit, OnDestroy {
     }
    }
 
+   editItem(ev: any): void {
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'partner', orgType: 'commercial', appSection: 'partner', type: 'properties', editMode: 'true' } });
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }

@@ -6,7 +6,7 @@ import { MilitaryComponent } from './military/military.component';
 import { FirstResponderComponent } from './first-responder/first-responder.component';
 import { ChaplainComponent } from './chaplain/chaplain.component';
 import { OtherComponent } from './other/other.component';
-import { CardModule, GridModule, TableModule } from '@coreui/angular';
+import { ButtonModule, CardModule, GridModule, TableModule } from '@coreui/angular';
 import { AdminRoutingModule } from '../admin/admin-routing.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -48,7 +48,8 @@ const routes: Routes = [
     MatTooltipModule,
     GridModule,
     TableModule,
-    SharedAdminModule
+    SharedAdminModule,
+    ButtonModule
   ]
 })
 export class NonProfitsModule { }

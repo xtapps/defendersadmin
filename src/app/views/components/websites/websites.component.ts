@@ -42,6 +42,10 @@ export class WebsitesComponent implements OnInit, OnDestroy {
     this.router.navigate(['/admin/add-new'], { queryParams: { type: 'website' } });
   }
 
+  editItem(ev: any): void {
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'website', orgType: 'commercial', appSection: 'partner', type: 'website', editMode: 'true' } });
+  }
+
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.websitesList[index]));

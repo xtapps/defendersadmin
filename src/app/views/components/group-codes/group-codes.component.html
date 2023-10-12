@@ -19,54 +19,34 @@
                 <!-- <th class="text-center">
                     <svg cIcon name="cilPeople"></svg>
                   </th> -->
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Zip</th>
-                <th>Phone</th>
-                <th>Branch</th>
-                <th>Activity</th>
+                <th>Group Name</th>
+                <th>Group Code</th>
+                <th>Discount Price</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of groupCodes; index as i">
-                <!-- <td class="text-center">
-                    <c-avatar
-                      size="md"
-                      src="{{ item.avatar }}"
-                      status="{{ item.status }}"
-                    ></c-avatar>
-                  </td> -->
                 <td>
-                  <div>{{ item.firstName }}</div>
+                  <div>{{ item.groupName }}</div>
                 </td>
                 <td>
-                  <div>{{ item.lastName }}</div>
+                  <div>{{ item.groupCode }}</div>
                 </td>
                 <td>
-                  <div>{{ item.defenderEmail }}</div>
+                  <div>{{ item.discountPrice }}</div>
                 </td>
-                <td>
-                  <div>{{ item.role }}</div>
-                </td>
-                <td>
-                  <div>{{ item.zipcode }}</div>
-                </td>
-                <td>
-                  <div>{{ item.contactPhone }}</div>
-                </td>
-                <td>
-                  <div>{{ item.branch }}</div>
-                </td>
+                
                 <!-- <td class="text-center">
                     <svg cIcon name="cibCc{{ item.payment }}" size="xl"></svg>
                   </td> -->
                 <td>
-                  <div>
-                    <span class="view-button" (click)="goToViePage()">View</span>
-                    <span style="margin-left: 10px;" class="view-button delete-btn"
-                      (click)="deleteItem(item._id)">Delete</span>
+                  <div style="display: flex;">
+                    <span class="view-button" (click)="goToViewPage(i)">View</span>
+                    <span class="edit-icon" (click)="editItem(item)"><img width="20px"
+                      src="../../../../assets/images/edit.svg" alt=""></span>
+                    <span style="margin-left: 10px;" class="" (click)="deleteItem(item._id)"><img width="20px"
+                        src="../../../../assets/images/trash.svg" alt=""></span>
                   </div>
                 </td>
               </tr>
