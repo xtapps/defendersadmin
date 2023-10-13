@@ -52,7 +52,6 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     var userResponse = confirm("Do you want to proceed?");
     if (userResponse) {
       alert("You chose to proceed!");
-      return;
       this.deleteCategoryItem(id);
     }
   }
@@ -66,7 +65,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
           }
         })
       })
-    )
+    );
   }
 
   goToViewPage(index: number): void {
@@ -90,11 +89,9 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     }
   }
 
-  editItem(item: any): void {
-    const encodedData = encodeURIComponent(JSON.stringify(item));
-    this.router.navigate(['admin/add-new'], { queryParams: { data: encodedData, type: 'franchises' } });
+  editItem(ev: any): void {
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { type: 'category', editMode: 'true' } });
   }
-
   ngOnDestroy(): void {
     this.subscription.forEach(el => { el.unsubscribe() });
   }

@@ -1,16 +1,16 @@
 import { Location } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, finalize } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
-  selector: 'app-add-new-website',
-  templateUrl: './add-new-website.component.html',
-  styleUrls: ['./add-new-website.component.scss']
+  selector: 'app-add-group-codes',
+  templateUrl: './add-group-codes.component.html',
+  styleUrls: ['./add-group-codes.component.scss']
 })
-export class AddNewWebsiteComponent {
+export class AddGroupCodesComponent implements OnInit {
 
   form!: FormGroup;
   propertyType!: string;
@@ -168,5 +168,7 @@ export class AddNewWebsiteComponent {
   ngOnDestroy(): void {
     this.subscription.forEach(el => { el.unsubscribe() });
   }
+
+
 
 }

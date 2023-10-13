@@ -25,8 +25,8 @@ export const navItems: INavData[] = [
         iconComponent: { name: 'cil-home' }
       },
       {
-        name: 'Locations',
-        url: '/admin/location',
+        name: 'Services',
+        url: '/admin/services',
         iconComponent: { name: 'cil-location-pin' }
       },
       {

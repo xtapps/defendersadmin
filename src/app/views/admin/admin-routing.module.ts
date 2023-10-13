@@ -23,7 +23,7 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'location', component: LocationComponent
+    path: 'services', component: LocationComponent
   },
   {
     path: 'websites', component: WebsitesComponent

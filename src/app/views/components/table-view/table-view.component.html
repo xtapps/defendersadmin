@@ -27,33 +27,34 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let user of partnersList; index as i">
+              <tr *ngFor="let item of partnersList; index as i">
                 <td>
-                  <div>{{ user.locationName }}</div>
+                  <div>{{ item.locationName }}</div>
                 </td>
                 <td>
-                  <div>{{ user.email }}</div>
+                  <div>{{ item.email }}</div>
                 </td>
                 <td>
-                  <div>{{ user.address1 }}</div>
+                  <div>{{ item.address1 }}</div>
                 </td>
                 <td>
-                  <div>{{ user.city }}</div>
+                  <div>{{ item.city }}</div>
                 </td>
                 <td>
-                  <div>{{ user.state }}</div>
+                  <div>{{ item.state }}</div>
                 </td>
                 <td>
-                  <div>{{ user.zip }}</div>
+                  <div>{{ item.zip }}</div>
                 </td>
                 <!-- <td class="text-center">
-                  <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg>
+                  <svg cIcon name="cibCc{{ item.payment }}" size="xl"></svg>
                 </td> -->
                 <td>
-                  <!-- <div><svg cIcon name="cil-eye"></svg></div> -->
-                  <div class="view-button" (click)="goToViewPage(i)">View</div>
-                  <!-- <i class="cil-eye"></i> -->
-                  <!-- <div class="fw-semibold text-nowrap">{{ user.chatPhoto }}</div> -->
+                  <div style="display: flex;">
+                    <span class="view-button" (click)="goToViewPage(i)">View</span>
+                    <span class="edit-icon" (click)="editItem(item)"><img width="20px"
+                        src="../../../../assets/images/edit.svg" alt=""></span>
+                  </div>
                 </td>
               </tr>
             </tbody>
