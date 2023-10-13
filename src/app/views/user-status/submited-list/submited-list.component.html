@@ -20,6 +20,8 @@
                   <th>First Name</th>
                   <th>last Name</th>
                   <th>Email</th>
+                  <th>Link</th>
+                  <th>Action</th>
                   <th></th>
                 </tr>
               </thead>
@@ -33,6 +35,16 @@
                   </td>
                   <td>
                     <div>{{ item.defenderEmail }}</div>
+                  </td>
+                  <td>
+                    <a [href]="'https://dg-defender-docs.s3.amazonaws.com/'+item.defenderDocument">Document Link</a>
+                  </td>
+                  <td>
+                    <select name="" id="" (change)="getChange($event, item)">
+                      <option value="" selected >select</option>
+                      <option value="approve">Approve</option>
+                      <option value="reject">Reject</option>
+                    </select>
                   </td>
                   <td>
                     <div style="display: flex;">

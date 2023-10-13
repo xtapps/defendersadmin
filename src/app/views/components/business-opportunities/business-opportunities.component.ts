@@ -11,6 +11,9 @@ export class BusinessOpportunitiesComponent implements OnInit {
   
   businessList: any[]= [];
   isLoading = true;
+  limit = 13;
+  offset = 0;
+  totalRecords = 0;
 
   constructor(
     private adminService: AdminService,
@@ -22,9 +25,11 @@ export class BusinessOpportunitiesComponent implements OnInit {
   }
 
   getBusinessOpportunities(): void {
-    this.adminService.getFranchises(12, 1).subscribe((res: any) => {
+    this.adminService.getFranchises(this.limit, this.offset).subscribe((res: any) => {
       this.isLoading = false;
       this.businessList = res.franchises;
+      this.totalRecords = res.totalCount;
+
     });
   }
 
@@ -32,6 +37,20 @@ export class BusinessOpportunitiesComponent implements OnInit {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.businessList[index]));
     this.router.navigate(['admin/view'], { queryParams: { data: encodedData } });
+  }
+
+  previousClickEvent(event: boolean): void {
+    if (this.offset > 0 && event) {
+      this.offset -= 1;
+      this.getBusinessOpportunities();
+    }
+  }
+
+  nextClickEvent(event: boolean): void {
+    if (event) {
+      this.offset += 1;
+      this.getBusinessOpportunities();
+    }
   }
 
 }

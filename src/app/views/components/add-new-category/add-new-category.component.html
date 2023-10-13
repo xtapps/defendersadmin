@@ -1,6 +1,7 @@
 <div class="main_container">
-    <div>
+    <div class="header_section">
         <h4>Add New Categories</h4>
+        <button cButton color="primary" (click)="goBack()">Back</button>
     </div>
 
 </div>
@@ -13,11 +14,11 @@
                 <form cForm [formGroup]="form">
                     <div class="flex">
                         <div class="mb-3 w-half">
-                            <label cLabel for="locatonName">Name</label>
-                            <input [ngClass]="{'invalid_field': checkValidation('name')}" cFormControl
-                                id="locatonName" formControlName="name" placeholder="Name"
+                            <label cLabel for="categoryName">Name</label>
+                            <input [ngClass]="{'invalid_field': checkValidation('categoryName')}" cFormControl
+                                id="categoryName" formControlName="categoryName" placeholder="Name"
                                 type="text" />
-                            <label class="error_msg" *ngIf="checkValidation('name')">This
+                            <label class="error_msg" *ngIf="checkValidation('categoryName')">This
                                 field is required</label>
                         </div>
                         <div class="mb-3 w-half">
@@ -29,13 +30,13 @@
                     </div>
 
                     <div class="container">
-                        <div class="file-upload-wrapper w-half"  [attr.data-text]="fileName ? fileName : 'Upload File!'" [ngClass]="{'invalid_field': checkValidation('image')}">
+                        <div class="file-upload-wrapper w-half"  [attr.data-text]="fileName ? fileName : 'Upload File!'" [ngClass]="{'invalid_field': checkValidation('categoryIcon')}">
                             <input name="file-upload-field" accept=".png" (change)="onFileChange($event)" type="file"
                                 class="file-upload-field" value="">
                         </div>
-                        <label class="error_msg" *ngIf="checkValidation('image')">This
+                        <label class="error_msg" *ngIf="checkValidation('categoryIcon')">This
                             field is required</label>
-                        <button cButton color="primary" (click)="onSubmit()">Submit</button>
+                        <button style="display: block;" cButton color="primary" (click)="onSubmit()">{{loading ? 'Update':  'Submit'}}</button>
                     </div>
                     <div>
                     </div>

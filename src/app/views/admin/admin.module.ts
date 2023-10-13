@@ -36,6 +36,7 @@ import { SharedAdminModule } from '../../shared/shared-admin.module'
 import { AddJobBoadrsComponent } from '../components/add-job-boadrs/add-job-boadrs.component';
 import { AddNewCategoryComponent } from '../components/add-new-category/add-new-category.component';
 import { AddNewPropertiesComponent } from '../components/add-new-froms/add-new-properties/add-new-properties.component';
+import { AddGroupCodesComponent } from '../components/add-new-froms/add-group-codes/add-group-codes.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { AddNewPropertiesComponent } from '../components/add-new-froms/add-new-p
     AddNewWebsiteComponent,
     AddNewCategoryComponent,
     AddJobBoadrsComponent,
-    AddNewPropertiesComponent
+    AddNewPropertiesComponent,
+    AddGroupCodesComponent
   ],
   imports: [
     CommonModule,

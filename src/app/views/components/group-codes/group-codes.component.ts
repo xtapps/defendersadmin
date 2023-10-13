@@ -80,6 +80,16 @@ export class GroupCodesComponent implements OnInit, OnDestroy {
     }
   }
 
+  goToViewPage(index: number): void {
+    // Encode the JSON data and navigate to ViewComponent with it as a query parameter
+    const encodedData = encodeURIComponent(JSON.stringify(this.groupCodes[index]));
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'group-code' } });
+  }
+
+  editItem(ev: any): void {
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { type: 'group-code', editMode: 'true' } });
+  }
+
   ngOnDestroy(): void {
     this.subscription.forEach(el => { el.unsubscribe() });
   }

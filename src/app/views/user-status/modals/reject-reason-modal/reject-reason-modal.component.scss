@@ -1,0 +1,25 @@
+.main_modal_container{
+    padding: 10px 15px;
+    .heder{
+        display: flex;
+        justify-content: space-between;
+
+        .name, .close{
+            font-size: 17px;
+            font-weight: 500;
+        }
+
+        .close{
+            p{
+                color: #b1b1b1;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .button_div{
+        button{
+            display: block;
+        }
+    }
+}

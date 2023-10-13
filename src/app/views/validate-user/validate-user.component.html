@@ -1,8 +1,9 @@
 <div id="top">
   <div id="content">
-    <img src="./../../../assets/images/banner_flag.jpg" alt="">
+    <img class="bnr-img" src="./../../../assets/images/banner_flag.jpg" alt="">
     <div class="wrapper">
-      <div class="primary-content"> <img src="./../../../assets/images/logo.jpg" style="float:left; margin-left:-19px;">
+      <div class="primary-content">
+        <img class="logo" src="./../../../assets/images/logo.jpg" style="float:left; margin-left:-19px;">
         <p>Welcome to the Defenders Gateway app and network. The app that honors our national Defenders and
           the network of businesses who support the Defenders app network.</p>
         <p>This app is specifically for current and former Military, First Responders, their Families and
@@ -114,7 +115,7 @@
           <div class="form-group col-md-12"> <label for="zipcode" class="col-form-label">Zip
               Code</label> <input type="text" [(ngModel)]="zipCode" maxlength="10"> </div>
         </div>
-        <div class="form-row" id="uploadView">
+        <div class="form-row" id="uploadView" *ngIf="userType !== '3'">
           <div class="form-group"> <label for="fileToUpload" class="col-form-label">Proof of Service
               Image</label>
             <div *ngIf="selectedImageUrl">

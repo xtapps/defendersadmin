@@ -18,7 +18,8 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = [];
   loading = false;
   fileName = '';
-  editMode = false
+  editMode = false;
+  isFileAdded = false;
 
   pageSize = 10;
   lastPage: number = 0;
@@ -152,7 +153,7 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
       } else {
         data[control] = this.form.controls[control].value;
         data['corpName'] = this.form.controls['locationName'].value
-        
+
       }
     }
 
@@ -177,13 +178,14 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
   }
 
   update(data: any): void {
-    data['propertyId'] =  window.history.state._id;
+    data['propertyId'] = window.history.state._id;
     this.subscription.push(
       this.adminService.updateProperties(data).pipe(
         finalize(() => { this.loading = false })
       ).subscribe(res => {
-        console.log(res);
-        this.uploadImage(res);
+        if (this.isFileAdded) {
+          this.uploadImage(res);
+        }
       })
     );
   }

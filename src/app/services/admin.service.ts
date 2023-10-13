@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { apiUrl } from '../../config/config'
 import { Observable } from 'rxjs';
 import { IApiRes } from '../models/model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   getAllProperties(limit: number, offset: number, text: string) {
     return this.http.get(`${apiUrl}/admin/partner/getAllProperties`, {
@@ -22,7 +23,7 @@ export class AdminService {
   }
 
   getLocations(limit: number, offset: number) {
-    const url = `${apiUrl}/properties/viewAll?reqParams=[{"value": "false", "key": "featured"}, {"value": "partner", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
+    const url = `${apiUrl}/properties/viewAll?reqParams=[ {"value": "partner", "key": "appSection"}, {"value": "service", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
     return this.http.get(url);
   }
 
@@ -87,6 +88,10 @@ export class AdminService {
 
   getUserStatus(status: number, limit: number, offset: number): Observable<any> {
     return this.http.get<any>(`${apiUrl}/getAllDefenders?userStatus=${status}&limit=${limit}&offset=${offset}`);
+  }
+
+  updateUserStatus(paylodData: any): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/paylodData`, paylodData);
   }
 
   validateUser(params: any) {
@@ -189,5 +194,25 @@ export class AdminService {
     return this.http.post<any>(`${apiUrl}/updateCategories`, body);
   }
 
+  createCategory(data: any): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/createCategories`, data);
+  }
+
+  updateCategory(data: any): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/updateCategories`, data);
+  }
+  login(payloadData: any) {
+    return this.http.post<any>(`${apiUrl}/defender/login`, payloadData);
+  }
+
+  updateUserDetails(data: any): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/admin/updateUser`, data);
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userDetails');
+    this.router.navigate(['/login']);
+  }
 
 }

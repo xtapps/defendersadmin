@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -20,32 +21,36 @@ export class AddNewFranchisesComponent implements OnInit, OnDestroy {
   private formBuilder = inject(FormBuilder);
   private adminService = inject(AdminService);
   private router = inject(Router);
-  private route = inject(ActivatedRoute);
+  private activatedRoute = inject(ActivatedRoute);
+  private location = inject(Location);
 
 
   ngOnInit(): void {
     this.initForm();
-    const encodedData = this.route.snapshot.queryParamMap.get('data');
-    if (encodedData) {
-      this.editMode = true;
-      this.receivedData = JSON.parse(decodeURIComponent(encodedData));
-      this.setFormValues(this.receivedData);
+    this.editMode = this.activatedRoute.snapshot.queryParams['editMode'];
+    if (this.activatedRoute.snapshot.queryParams['editMode'] === 'true') {
+      this.editMode = true
+      this.setFormValues();
+    } else {
+      this.editMode = false;
     }
   }
 
+
   initForm(): void {
     this.form = this.formBuilder.group({
-      name: ['', [Validators.required]],
+      franchiseName: ['', [Validators.required]],
       franchiseImage: [''],
       website: [''],
     })
   }
 
-  setFormValues(datas: any): void {
-    console.log(datas);
+  setFormValues(): void {
+    const datas = window.history.state;
+    this.fileName = datas.franchiseName;
 
     this.form.patchValue({
-      name: datas.franchiseName,
+      franchiseName: datas.franchiseName,
       website: datas.website,
       franchiseImage: datas.franchiseImage
     })
@@ -76,7 +81,6 @@ export class AddNewFranchisesComponent implements OnInit, OnDestroy {
     }
   }
 
-
   onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -92,7 +96,6 @@ export class AddNewFranchisesComponent implements OnInit, OnDestroy {
       }
     }
     console.log(data);
-    return;
     this.subscription.push(
       this.adminService.createFranchises(data).subscribe(res => {
         this.router.navigateByUrl('/admin/franchises');
@@ -122,6 +125,9 @@ export class AddNewFranchisesComponent implements OnInit, OnDestroy {
     )
   }
 
+  goBack() {
+    this.location.back();
+  }
 
   ngOnDestroy(): void {
     this.subscription.forEach(el => { el.unsubscribe() });

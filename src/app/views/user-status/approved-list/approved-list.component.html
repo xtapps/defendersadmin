@@ -20,6 +20,7 @@
                   <th>First Name</th>
                   <th>last Name</th>
                   <th>Email</th>
+                  <th>Action</th>
                   <th></th>
                 </tr>
               </thead>
@@ -33,6 +34,13 @@
                   </td>
                   <td>
                     <div>{{ item.defenderEmail }}</div>
+                  </td>
+                  <td>
+                    <select name="" id="" (change)="getChange($event, item)">
+                      <option value="" selected >select</option>
+                      <option value="3">Reject</option>
+                      <option value="4">Suspend</option>
+                    </select>
                   </td>
                   <td>
                     <div style="display: flex;">
