@@ -38,9 +38,11 @@ import {
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AdminModule } from './views/admin/admin.module';
 import { ValidateUserComponent } from './views/validate-user/validate-user.component';
+import { Interceptor } from './interceptor/interceptor';
+import { AuthGuard } from './services/auth-guard.service';
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -90,6 +92,12 @@ const APP_CONTAINERS = [
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true,
+    },
+    AuthGuard,
     IconSetService,
     Title
   ],
