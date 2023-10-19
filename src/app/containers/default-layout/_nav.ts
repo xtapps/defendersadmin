@@ -184,15 +184,15 @@ export const navItems: INavData[] = [
     ]
   },
 
-  {
-    name: 'Pages',
-    url: '/login',
-    iconComponent: { name: 'cil-star' },
-    children: [
-      {
-        name: 'Login',
-        url: '/login'
-      }
-    ]
-  },
+  // {
+  //   name: 'Pages',
+  //   url: '/login',
+  //   iconComponent: { name: 'cil-star' },
+  //   children: [
+  //     {
+  //       name: 'Login',
+  //       url: '/login'
+  //     }
+  //   ]
+  // },
 ];
