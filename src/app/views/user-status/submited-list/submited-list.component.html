@@ -37,7 +37,7 @@
                     <div>{{ item.defenderEmail }}</div>
                   </td>
                   <td>
-                    <a href="">Document Link</a>
+                    <a [href]="item.defenderDocument">Document Link</a>
                   </td>
                   <td>
                     <select name="" id="" (change)="getChange($event, item)">
