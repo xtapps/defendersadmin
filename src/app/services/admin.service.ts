@@ -194,6 +194,13 @@ export class AdminService {
     return this.http.post<any>(`${apiUrl}/updateCategories`, body);
   }
 
+  createCategory(data: any): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/createCategories`, data);
+  }
+
+  updateCategory(data: any): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/updateCategories`, data);
+  }
   login(payloadData: any) {
     return this.http.post<any>(`${apiUrl}/defender/login`, payloadData);
   }
@@ -206,14 +213,6 @@ export class AdminService {
     localStorage.removeItem('token');
     localStorage.removeItem('userDetails');
     this.router.navigate(['/login']);
-  }
-
-  createCategory(data: any): Observable<any>{
-    return this.http.post<any>(`${apiUrl}/createCategories`, data);
-  }
-
-  updateCategory(data: any): Observable<any>{
-    return this.http.post<any>(`${apiUrl}/updateCategories`, data);
   }
 
 }
