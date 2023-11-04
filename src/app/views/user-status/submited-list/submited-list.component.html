@@ -37,7 +37,7 @@
                     <div>{{ item.defenderEmail }}</div>
                   </td>
                   <td>
-                    <a [href]="item.defenderDocument">Document Link</a>
+                    <a class="cur-poin" *ngIf="item.defenderDocument" (click)="downloadDoc(item.defenderDocument)">Document Link</a>
                   </td>
                   <td>
                     <select name="" id="" (change)="getChange($event, item)">
