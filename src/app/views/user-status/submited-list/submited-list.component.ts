@@ -130,7 +130,15 @@ export class SubmitedListComponent implements OnInit, OnDestroy {
     );
   }
 
-  
+  downloadDoc(defenderDocument: string) {
+    const urlSub = this.adminService.getProtectedS3Url(defenderDocument).subscribe(res => {
+      window.open(res.newUrl);
+    }, err => {
+      console.log(err);
+    });
+
+    this.subscription.push(urlSub);
+  }
 
   ngOnDestroy(): void {
     this.subscription.forEach(el => { el.unsubscribe() });

@@ -215,4 +215,8 @@ export class AdminService {
     this.router.navigate(['/login']);
   }
 
+  getProtectedS3Url(data: any): Observable<any> {
+    return this.http.get<any>(`${apiUrl}/admin/protectedS3Url?url=${data}`);
+  }
+
 }
