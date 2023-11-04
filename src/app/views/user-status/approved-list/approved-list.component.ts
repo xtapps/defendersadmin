@@ -18,6 +18,7 @@ export class ApprovedListComponent {
   offset = 0;
   totalRecords = 0;
   isLoading = false
+  userType: number = 0;
 
   constructor(
     private adminService: AdminService,
@@ -32,7 +33,7 @@ export class ApprovedListComponent {
   getApprovedList(): void {
     this.isLoading = true;
     this.subscription.push(
-      this.adminService.getUserStatus(2, this.limit, this.offset).pipe(
+      this.adminService.getUserStatus(2, this.limit, this.offset, this.userType).pipe(
         finalize(() => { this.isLoading = false })
       ).subscribe(res => {
         this.approvedList = res.defendersList;
@@ -104,6 +105,12 @@ export class ApprovedListComponent {
         this.getApprovedList();
       }
     })
+  }
+
+  selectTab(userType: number) {
+    this.offset = 0;
+    this.userType = userType;
+    this.getApprovedList();
   }
 
   ngOnDestroy(): void {
