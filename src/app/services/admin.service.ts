@@ -91,7 +91,7 @@ export class AdminService {
   }
 
   updateUserStatus(paylodData: any): Observable<any>{
-    return this.http.post<any>(`${apiUrl}/paylodData`, paylodData);
+    return this.http.post<any>(`${apiUrl}/updateUser`, paylodData);
   }
 
   validateUser(params: any) {
