@@ -18,6 +18,7 @@ import { RejectReasonModalComponent } from './modals/reject-reason-modal/reject-
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ImageModalComponent } from './modals/image-modal/image-modal.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'processing', pathMatch: 'full' },
@@ -39,7 +40,8 @@ const routes: Routes = [
     SuspendedListComponent,
     PlusOneComponent,
     FamilyOfFallenComponent,
-    RejectReasonModalComponent
+    RejectReasonModalComponent,
+    ImageModalComponent
   ],
   imports: [
     CommonModule,

@@ -4,6 +4,7 @@ import { Subscription, finalize } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 import { RejectReasonModalComponent } from '../modals/reject-reason-modal/reject-reason-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ImageModalComponent } from '../modals/image-modal/image-modal.component';
 
 @Component({
   selector: 'app-submited-list',
@@ -123,16 +124,19 @@ export class SubmitedListComponent implements OnInit, OnDestroy {
   updateUserStatus(data: any): void {
     this.subscription.push(
       this.adminService.updateUserStatus(data).subscribe(res => {
-        if (res.success) {
-          this.getSubmitedList();
-        }
+        this.getSubmitedList();
       })
     );
   }
 
   downloadDoc(defenderDocument: string) {
     const urlSub = this.adminService.getProtectedS3Url(defenderDocument).subscribe(res => {
-      window.open(res.newUrl);
+      this.dialog.open(ImageModalComponent, {
+        width: '50%',
+        data: {
+          url: res.newUrl
+        }
+      });
     }, err => {
       console.log(err);
     });
