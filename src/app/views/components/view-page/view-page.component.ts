@@ -30,7 +30,7 @@ export class ViewPageComponent  implements OnInit{
   }
 
   getObjectKeyValues(obj: any): { key: string, value: any }[] {
-    return Object.keys(obj).map(key => ({ key, value: obj[key] }));
+    return Object.keys(obj).map(key => ({ key, value: obj[key]?.toString().trim() }));
   }
 
   goBack() {

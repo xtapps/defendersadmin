@@ -2,13 +2,14 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, finalize } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
+import { DefenderModel } from '../model/defender.model';
 
 @Component({
   selector: 'app-family-of-fallen',
   templateUrl: './family-of-fallen.component.html',
   styleUrls: ['./family-of-fallen.component.scss']
 })
-export class FamilyOfFallenComponent {
+export class FamilyOfFallenComponent extends DefenderModel implements OnInit, OnDestroy {
 
   subscription: Subscription[] = [];
   familyFallenList: any[] = [];
@@ -19,8 +20,10 @@ export class FamilyOfFallenComponent {
 
   constructor(
     private adminService: AdminService,
-    private router: Router
-  ) { }
+    public override router: Router
+  ) {
+    super(router)
+  }
 
   ngOnInit(): void {
     this.familyOfFallenList();
@@ -38,31 +41,10 @@ export class FamilyOfFallenComponent {
     );
   }
 
-  goToViewPage(index: number): void {
-    // Encode the JSON data and navigate to ViewComponent with it as a query parameter
-    const encodedData = encodeURIComponent(JSON.stringify(this.familyFallenList[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'processing' } });
-  }
-
-  previousClickEvent(event: boolean): void {
-    if (this.offset > 0 && event) {
-      this.offset -= 1;
-      this.familyOfFallenList();
-    }
-  }
-
-  nextClickEvent(event: boolean): void {
-    if (event) {
-      this.offset += 1;
-      this.familyOfFallenList();
-    }
-  }
-
   deleteItem(id: string): void {
     var userResponse = confirm("Do you want to proceed?");
     if (userResponse) {
       alert("You chose to proceed!");
-      return;
       this.onDelete(id);
     }
   }
@@ -70,14 +52,22 @@ export class FamilyOfFallenComponent {
   onDelete(id: string): void {
     this.isLoading = true;
     this.subscription.push(
-      this.adminService.deleteProperties(id).pipe(
+      this.adminService.deleteUser({id}).pipe(
         finalize(() => {this.isLoading = false;})
       ).subscribe(res => {
-        if(res.success){
+        this.familyOfFallenList();
+      }, err => {
+        if (err.status === 201) {
           this.familyOfFallenList();
         }
       })
     )
+  }
+
+  pageChangeEvent(event: any) {
+    this.offset = event.offSet;
+    this.limit = event.limit;
+    this.familyOfFallenList();
   }
 
   ngOnDestroy(): void {
