@@ -219,4 +219,8 @@ export class AdminService {
     return this.http.get<any>(`${apiUrl}/admin/protectedS3Url?url=${data}`);
   }
 
+  deleteUser(params: {id: string}) {
+    return this.http.delete(`${apiUrl}/admin/removeUser`, {body: params});
+  }
+
 }

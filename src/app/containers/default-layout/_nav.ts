@@ -179,7 +179,7 @@ export const navItems: INavData[] = [
       },
       {
         name: 'Family of Fallen',
-        url: '/user-status/familiy-of-fallen'
+        url: '/user-status/family-of-fallen'
       },
     ]
   },

@@ -1,17 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomPaginationComponent } from './custom-pagination/custom-pagination.component';
-
+import { PaginatorComponent } from './paginator/paginator.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
-    CustomPaginationComponent
+    CustomPaginationComponent,
+    PaginatorComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatPaginatorModule
   ],
   exports: [
-    CustomPaginationComponent
+    CustomPaginationComponent,
+    PaginatorComponent
   ]
 })
 export class SharedAdminModule { }
