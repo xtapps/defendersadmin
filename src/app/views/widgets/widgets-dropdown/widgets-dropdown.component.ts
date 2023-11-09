@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { getStyle } from '@coreui/utils';
 import { ChartjsComponent } from '@coreui/angular-chartjs';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-widgets-dropdown',
@@ -19,9 +20,11 @@ import { ChartjsComponent } from '@coreui/angular-chartjs';
 export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
 
   constructor(
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private adminService: AdminService
   ) {}
 
+  dashboardCountData: any = {};
   data: any[] = [];
   options: any[] = [];
   labels = [
@@ -117,6 +120,7 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
 
   ngOnInit(): void {
     this.setData();
+    this.getAllPropertiesCountByCategory();
   }
 
   ngAfterContentInit(): void {
@@ -167,6 +171,12 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
         }
       }
     }
+  }
+
+  getAllPropertiesCountByCategory() {
+    this.adminService.getAllPropertiesCountByCategory().subscribe(res => {
+      this.dashboardCountData = res;
+    });
   }
 }
 

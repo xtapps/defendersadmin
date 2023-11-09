@@ -53,9 +53,7 @@ export class RejectReasonModalComponent implements OnInit, OnDestroy {
       this.adminService.updateUserStatus(this.formBody()).pipe(
         finalize(() => { this.loading = false })
       ).subscribe(res => {
-        if (res.success) {
-          this._dialogRef.close({ success: true })
-        }
+        this._dialogRef.close({ success: true })
       })
     );
   }

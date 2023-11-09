@@ -179,20 +179,20 @@ export const navItems: INavData[] = [
       },
       {
         name: 'Family of Fallen',
-        url: '/user-status/familiy-of-fallen'
+        url: '/user-status/family-of-fallen'
       },
     ]
   },
 
-  {
-    name: 'Pages',
-    url: '/login',
-    iconComponent: { name: 'cil-star' },
-    children: [
-      {
-        name: 'Login',
-        url: '/login'
-      }
-    ]
-  },
+  // {
+  //   name: 'Pages',
+  //   url: '/login',
+  //   iconComponent: { name: 'cil-star' },
+  //   children: [
+  //     {
+  //       name: 'Login',
+  //       url: '/login'
+  //     }
+  //   ]
+  // },
 ];

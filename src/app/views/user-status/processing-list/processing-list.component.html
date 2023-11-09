@@ -38,12 +38,13 @@
                 <td>
                   <select name="" id="" (change)="getChange($event, item)">
                     <option value="" selected >select</option>
+                    <option value="2">Accept</option>
                     <option value="3">Reject</option>
                   </select>
                 </td>
                 <td>
                   <div style="display: flex;">
-                    <span class="view-button" (click)="goToViewPage(i)">View</span>
+                    <span class="view-button" (click)="parseDataAndNavigate(processingList[i], 'processing')">View</span>
                     <span style="margin-left: 10px;" class="" (click)="deleteItem(item._id)"><img width="20px"
                         src="../../../../assets/images/trash.svg" alt=""></span>
                   </div>
@@ -52,9 +53,7 @@
             </tbody>
           </table>
         </ng-template>
-        <app-custom-pagination [currentPage]="offset + 1" [totalRecords]="totalRecords" [pageSize]="limit"
-          (nextClickEvent)="nextClickEvent($event)" (previousClickEvent)="previousClickEvent($event)">
-        </app-custom-pagination>
+        <app-paginator [totalRecords]="totalRecords" (pageChangeEventEmit)="pageChangeEvent($event)"></app-paginator>
 
       </c-card-body>
     </c-card>

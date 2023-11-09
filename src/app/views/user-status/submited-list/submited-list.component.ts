@@ -4,13 +4,15 @@ import { Subscription, finalize } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 import { RejectReasonModalComponent } from '../modals/reject-reason-modal/reject-reason-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ImageModalComponent } from '../modals/image-modal/image-modal.component';
+import { DefenderModel } from '../model/defender.model';
 
 @Component({
   selector: 'app-submited-list',
   templateUrl: './submited-list.component.html',
   styleUrls: ['./submited-list.component.scss']
 })
-export class SubmitedListComponent implements OnInit, OnDestroy {
+export class SubmitedListComponent extends DefenderModel implements OnInit, OnDestroy {
 
   subscription: Subscription[] = [];
   submitedList: any[] = [];
@@ -21,9 +23,11 @@ export class SubmitedListComponent implements OnInit, OnDestroy {
 
   constructor(
     private adminService: AdminService,
-    private router: Router,
+    public override router: Router,
     private dialog: MatDialog
-  ) { }
+  ) {
+    super(router)
+  }
 
   ngOnInit(): void {
     this.getSubmitedList();
@@ -41,30 +45,9 @@ export class SubmitedListComponent implements OnInit, OnDestroy {
     );
   }
 
-  goToViewPage(index: number): void {
-    // Encode the JSON data and navigate to ViewComponent with it as a query parameter
-    const encodedData = encodeURIComponent(JSON.stringify(this.submitedList[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'submited' } });
-  }
-
-  previousClickEvent(event: boolean): void {
-    if (this.offset > 0 && event) {
-      this.offset -= 1;
-      this.getSubmitedList();
-    }
-  }
-
-  nextClickEvent(event: boolean): void {
-    if (event) {
-      this.offset += 1;
-      this.getSubmitedList();
-    }
-  }
-
   deleteItem(id: string): void {
     var userResponse = confirm("Do you want to proceed?");
     if (userResponse) {
-      alert("You chose to proceed!");
       this.onDelete(id);
     }
   }
@@ -72,10 +55,12 @@ export class SubmitedListComponent implements OnInit, OnDestroy {
   onDelete(id: string): void {
     this.isLoading = true;
     this.subscription.push(
-      this.adminService.deleteProperties(id).pipe(
+      this.adminService.deleteUser({id}).pipe(
         finalize(() => { this.isLoading = false; })
       ).subscribe(res => {
-        if (res.success) {
+        this.getSubmitedList();
+      }, err => {
+        if (err.status === 201) {
           this.getSubmitedList();
         }
       })
@@ -123,14 +108,31 @@ export class SubmitedListComponent implements OnInit, OnDestroy {
   updateUserStatus(data: any): void {
     this.subscription.push(
       this.adminService.updateUserStatus(data).subscribe(res => {
-        if (res.success) {
-          this.getSubmitedList();
-        }
+        this.getSubmitedList();
       })
     );
   }
 
-  
+  downloadDoc(defenderDocument: string) {
+    const urlSub = this.adminService.getProtectedS3Url(defenderDocument).subscribe(res => {
+      this.dialog.open(ImageModalComponent, {
+        width: '50%',
+        data: {
+          url: res.newUrl
+        }
+      });
+    }, err => {
+      console.log(err);
+    });
+
+    this.subscription.push(urlSub);
+  }
+
+  pageChangeEvent(event: any) {
+    this.offset = event.offSet;
+    this.limit = event.limit;
+    this.getSubmitedList();
+  }
 
   ngOnDestroy(): void {
     this.subscription.forEach(el => { el.unsubscribe() });

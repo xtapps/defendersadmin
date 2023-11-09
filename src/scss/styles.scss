@@ -26,3 +26,7 @@ $enable-rtl: true;
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
 @import './slim.min.css';
+
+.cur_pointer {
+    cursor: pointer;
+}

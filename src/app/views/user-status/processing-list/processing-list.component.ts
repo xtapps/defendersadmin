@@ -1,17 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ModalComponent, ModalDialogComponent } from '@coreui/angular';
 import { Subscription, finalize } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 import { RejectReasonModalComponent } from '../modals/reject-reason-modal/reject-reason-modal.component';
+import { DefenderModel } from '../model/defender.model';
 
 @Component({
   selector: 'app-processing-list',
   templateUrl: './processing-list.component.html',
   styleUrls: ['./processing-list.component.scss']
 })
-export class ProcessingListComponent implements OnInit, OnDestroy {
+export class ProcessingListComponent extends DefenderModel implements OnInit, OnDestroy {
 
   subscription: Subscription[] = [];
   processingList: any[] = [];
@@ -22,9 +22,11 @@ export class ProcessingListComponent implements OnInit, OnDestroy {
 
   constructor(
     private adminService: AdminService,
-    private router: Router,
+    public override router: Router,
     private dialog: MatDialog
-  ) { }
+  ) {
+    super(router)
+  }
 
   ngOnInit(): void {
     this.getProcessingList();
@@ -42,26 +44,6 @@ export class ProcessingListComponent implements OnInit, OnDestroy {
     );
   }
 
-  goToViewPage(index: number): void {
-    // Encode the JSON data and navigate to ViewComponent with it as a query parameter
-    const encodedData = encodeURIComponent(JSON.stringify(this.processingList[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'processing' } });
-  }
-
-  previousClickEvent(event: boolean): void {
-    if (this.offset > 0 && event) {
-      this.offset -= 1;
-      this.getProcessingList();
-    }
-  }
-
-  nextClickEvent(event: boolean): void {
-    if (event) {
-      this.offset += 1;
-      this.getProcessingList();
-    }
-  }
-
   deleteItem(id: string): void {
     var userResponse = confirm("Do you want to proceed?");
     if (userResponse) {
@@ -73,10 +55,12 @@ export class ProcessingListComponent implements OnInit, OnDestroy {
   onDelete(id: string): void {
     this.isLoading = true;
     this.subscription.push(
-      this.adminService.deleteProperties(id).pipe(
+      this.adminService.deleteUser({id}).pipe(
         finalize(() => { this.isLoading = false; })
       ).subscribe(res => {
-        if (res.success) {
+        this.getProcessingList();
+      }, err => {
+        if (err.status === 201) {
           this.getProcessingList();
         }
       })
@@ -104,6 +88,12 @@ export class ProcessingListComponent implements OnInit, OnDestroy {
         this.getProcessingList();
       }
     })
+  }
+
+  pageChangeEvent(event: any) {
+    this.offset = event.offSet;
+    this.limit = event.limit;
+    this.getProcessingList();
   }
 
   ngOnDestroy(): void {

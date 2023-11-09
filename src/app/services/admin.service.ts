@@ -86,12 +86,12 @@ export class AdminService {
     return this.http.get<IApiRes[]>(`${apiUrl}/properties/viewAll?reqParams=[{"key":"appSection","value":"${properties.appSection}"},{"key":"propertyType","value":"${properties.propertyType}"}]&limit=${limit}&offset=${offset}`);
   }
 
-  getUserStatus(status: number, limit: number, offset: number): Observable<any> {
-    return this.http.get<any>(`${apiUrl}/getAllDefenders?userStatus=${status}&limit=${limit}&offset=${offset}`);
+  getUserStatus(status: number, limit: number, offset: number, userType?: number): Observable<any> {
+    return this.http.get<any>(`${apiUrl}/getAllDefenders?userStatus=${status}&limit=${limit}&offset=${offset}&userType=${userType}`);
   }
 
   updateUserStatus(paylodData: any): Observable<any>{
-    return this.http.post<any>(`${apiUrl}/paylodData`, paylodData);
+    return this.http.post<any>(`${apiUrl}/updateUser`, paylodData);
   }
 
   validateUser(params: any) {
@@ -213,6 +213,18 @@ export class AdminService {
     localStorage.removeItem('token');
     localStorage.removeItem('userDetails');
     this.router.navigate(['/login']);
+  }
+
+  getProtectedS3Url(data: any): Observable<any> {
+    return this.http.get<any>(`${apiUrl}/admin/protectedS3Url?url=${data}`);
+  }
+
+  deleteUser(params: {id: string}) {
+    return this.http.delete(`${apiUrl}/admin/removeUser`, {body: params});
+  }
+
+  getAllPropertiesCountByCategory() {
+    return this.http.get<any>(`${apiUrl}/allPropertiesCountByCategory`);
   }
 
 }

@@ -2,13 +2,14 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, finalize } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
+import { DefenderModel } from '../model/defender.model';
 
 @Component({
   selector: 'app-plus-one',
   templateUrl: './plus-one.component.html',
   styleUrls: ['./plus-one.component.scss']
 })
-export class PlusOneComponent implements OnInit, OnDestroy{
+export class PlusOneComponent extends DefenderModel implements OnInit, OnDestroy{
 
   subscription: Subscription[] = [];
   plusOneList: any[] = [];
@@ -19,8 +20,10 @@ export class PlusOneComponent implements OnInit, OnDestroy{
 
   constructor(
     private adminService: AdminService,
-    private router: Router
-  ) { }
+    public override router: Router
+  ) {
+    super(router)
+  }
 
   ngOnInit(): void {
     this.getPlusOneList();
@@ -38,26 +41,6 @@ export class PlusOneComponent implements OnInit, OnDestroy{
     );
   }
 
-  goToViewPage(index: number): void {
-    // Encode the JSON data and navigate to ViewComponent with it as a query parameter
-    const encodedData = encodeURIComponent(JSON.stringify(this.plusOneList[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'plus one' } });
-  }
-
-  previousClickEvent(event: boolean): void {
-    if (this.offset > 0 && event) {
-      this.offset -= 1;
-      this.getPlusOneList();
-    }
-  }
-
-  nextClickEvent(event: boolean): void {
-    if (event) {
-      this.offset += 1;
-      this.getPlusOneList();
-    }
-  }
-  
   deleteItem(id: string): void {
     var userResponse = confirm("Do you want to proceed?");
     if (userResponse) {
@@ -69,14 +52,22 @@ export class PlusOneComponent implements OnInit, OnDestroy{
   onDelete(id: string): void {
     this.isLoading = true;
     this.subscription.push(
-      this.adminService.deleteProperties(id).pipe(
+      this.adminService.deleteUser({id}).pipe(
         finalize(() => {this.isLoading = false;})
       ).subscribe(res => {
-        if(res.success){
+        this.getPlusOneList();
+      }, err => {
+        if (err.status === 201) {
           this.getPlusOneList();
         }
       })
     )
+  }
+
+  pageChangeEvent(event: any) {
+    this.offset = event.offSet;
+    this.limit = event.limit;
+    this.getPlusOneList();
   }
 
   ngOnDestroy(): void {

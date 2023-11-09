@@ -119,15 +119,19 @@ export class AddNewPartnerComponent implements OnInit, OnDestroy {
       }
     }
 
-    console.log(data);
-    return;
+    const formData = new FormData()
+    for (const key in data) {
+      formData.append(key, data[key]);
+    }
     this.loading = true;
     this.subscription.push(
-      this.adminService.createPartner(data).pipe(
+      this.adminService.createPartner(formData).pipe(
         finalize(() => { this.loading = false })
       ).subscribe(res => {
         console.log(res);
-        this.uploadImage();
+        // this.uploadImage();
+      }, err => {
+        console.log(err);
       })
     )
 
