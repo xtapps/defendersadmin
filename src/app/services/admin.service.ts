@@ -223,4 +223,8 @@ export class AdminService {
     return this.http.delete(`${apiUrl}/admin/removeUser`, {body: params});
   }
 
+  getAllPropertiesCountByCategory() {
+    return this.http.get<any>(`${apiUrl}/allPropertiesCountByCategory`);
+  }
+
 }

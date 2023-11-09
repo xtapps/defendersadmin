@@ -167,8 +167,12 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
   }
 
   submit(data: any): void {
+    const formData = new FormData()
+    for (const key in data) {
+      formData.append(key, data[key]);
+    }
     this.subscription.push(
-      this.adminService.createProperties(data).pipe(
+      this.adminService.createProperties(formData).pipe(
         finalize(() => { this.loading = false })
       ).subscribe(res => {
         console.log(res);
@@ -179,8 +183,12 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
 
   update(data: any): void {
     data['propertyId'] = window.history.state._id;
+    const formData = new FormData()
+    for (const key in data) {
+      formData.append(key, data[key]);
+    }
     this.subscription.push(
-      this.adminService.updateProperties(data).pipe(
+      this.adminService.updateProperties(formData).pipe(
         finalize(() => { this.loading = false })
       ).subscribe(res => {
         if (this.isFileAdded) {

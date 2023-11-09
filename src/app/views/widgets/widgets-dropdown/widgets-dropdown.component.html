@@ -6,7 +6,7 @@
       title="Defenders"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-        1500
+        {{dashboardCountData.defenders}}
         <!-- <span class="fs-6 fw-normal">
           (-12.4% <svg cIcon name="cilArrowBottom"></svg>)
         </span> -->
@@ -41,7 +41,7 @@
       color="info"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-        <span>183535</span>
+        <span>{{dashboardCountData.partner}}</span>
         <!-- <span class="fs-6 fw-normal">
           (40.9%<svg cIcon name="cilArrowTop"></svg>)
         </span> -->
@@ -71,7 +71,7 @@
       color="warning"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-        <span>37</span>
+        <span>{{dashboardCountData.website}}</span>
         <!-- <span class="fs-6 fw-normal">
           (84.7% <svg cIcon name="cilArrowTop"></svg>)
         </span> -->
@@ -101,7 +101,7 @@
       color="danger"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-        <span>13</span>
+        <span>{{dashboardCountData.service}}</span>
         <!-- <span class="fs-6 fw-normal">
           (-23.6% <svg cIcon name="cilArrowBottom"></svg>)
         </span> -->
