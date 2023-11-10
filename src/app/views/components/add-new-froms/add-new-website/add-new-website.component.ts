@@ -66,14 +66,14 @@ export class AddNewWebsiteComponent {
   initForm(): void {
     this.form = this.formBuilder.group({
       locationName: ['', [Validators.required]],
-      images: ['', [Validators.required]],
+      image: ['', [Validators.required]],
       website: [''],
-      propertyType: [''],
+      propertyType: ['website'],
       orgType: ['commercial'],
       description: [''],
       discount: [''],
       discountDisclaimer: [''],
-      appSection: [''],
+      appSection: ['partner'],
       isVetOwned: [false],
       locationActive: [false]
     })
@@ -109,25 +109,33 @@ export class AddNewWebsiteComponent {
   }
 
   submit(data: any): void {
+    const formData = new FormData()
+    for (const key in data) {
+      formData.append(key, data[key]);
+    }
     this.subscription.push(
-      this.adminService.createProperties(data).pipe(
+      this.adminService.createProperties(formData).pipe(
         finalize(() => { this.loading = false })
       ).subscribe(res => {
         console.log(res);
-        this.uploadImage(res);
+        alert('Website added successfully.');
+        this.initForm();
+        this.fileName = '';
       })
     );
   }
 
   update(data: any): void {
     data['propertyId'] = window.history.state._id;
+    const formData = new FormData()
+    for (const key in data) {
+      formData.append(key, data[key]);
+    }
     this.subscription.push(
-      this.adminService.updateProperties(data).pipe(
+      this.adminService.updateProperties(formData).pipe(
         finalize(() => { this.loading = false })
       ).subscribe(res => {
-        if (this.isFileAdded) {
-          this.uploadImage(res);
-        }
+        alert('Website updated successfully.');
       })
     );
   }
@@ -153,11 +161,11 @@ export class AddNewWebsiteComponent {
     if (files && files.length > 0) {
       this.fileName = files[0].name;
       this.isFileAdded = true;
-      this.form.controls['images'].setValue(files[0]);
+      this.form.controls['image'].setValue(files[0]);
     } else {
       this.fileName = ''; // Reset if no file selected
       this.isFileAdded = false;
-      this.form.controls['images'].setValue('');
+      this.form.controls['image'].setValue('');
     }
   }
 

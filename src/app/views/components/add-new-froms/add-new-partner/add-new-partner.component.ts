@@ -69,7 +69,7 @@ export class AddNewPartnerComponent implements OnInit, OnDestroy {
       locationName: ['', [Validators.required]],
       corpName: [''],
       propertyType: ['partner'],
-      appSection: [''],
+      appSection: ['partner'],
       orgType: ['commercial'],
       androidUrl: [''],
       appleUrl: [''],
@@ -130,6 +130,9 @@ export class AddNewPartnerComponent implements OnInit, OnDestroy {
       ).subscribe(res => {
         console.log(res);
         // this.uploadImage();
+        alert('New partner added successfully.');
+        this.fileName = '';
+        this.initForm();
       }, err => {
         console.log(err);
       })

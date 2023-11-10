@@ -3,25 +3,29 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 import { Subscription, finalize } from 'rxjs';
+import { PAGINATION } from 'src/assets/app-constant';
+import { PropertiesModel } from '../model/properties.model';
 
 @Component({
   selector: 'app-websites',
   templateUrl: './websites.component.html',
   styleUrls: ['./websites.component.scss']
 })
-export class WebsitesComponent implements OnInit, OnDestroy {
+export class WebsitesComponent extends PropertiesModel implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
   websitesList: any[] = [];
   subscription: Subscription[] = [];
   isLoading = true;
-  public pageSize: number = 13;
-  public offset: number = 0;
+  public offset: number = PAGINATION.offset;
   totalRecords = 0;
-  limit = 13;
+  limit = PAGINATION.limit;
 
-  constructor(private adminService: AdminService,
-    private router: Router) {
+  constructor(
+    private adminService: AdminService,
+    public override router: Router
+  ) {
+    super(router);
   }
 
   ngOnInit(): void {
@@ -30,7 +34,7 @@ export class WebsitesComponent implements OnInit, OnDestroy {
 
   getWebsites(): void {
     this.isLoading = true;
-    this.adminService.getWebsites(this.pageSize, this.offset).subscribe((res: any) => {
+    this.adminService.getWebsites(this.limit, this.offset).subscribe((res: any) => {
       this.isLoading = false;
       this.websitesList = res[0]?.properties;
       this.totalRecords = res[0]?.totalRecords;
@@ -39,7 +43,7 @@ export class WebsitesComponent implements OnInit, OnDestroy {
 
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'website' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'website', type: 'website' } });
   }
 
   editItem(ev: any): void {
@@ -52,26 +56,15 @@ export class WebsitesComponent implements OnInit, OnDestroy {
     this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'website' } });
   }
 
-  previousClickEvent(event: boolean): void {
-    if (this.offset > 0 && event) {
-      this.offset -= 1;
-      // You can add any additional logic here when the "previous" button is clicked.
-      this.getWebsites();
-    }
-  }
-
-  nextClickEvent(event: boolean): void {
-    if (event) {
-      this.offset += 1;
-      this.getWebsites();
-    }
+  pageChangeEvent(event: any) {
+    this.offset = event.offSet;
+    this.limit = event.limit;
+    this.getWebsites();
   }
 
   deleteItem(id: string): void {
     var userResponse = confirm("Do you want to proceed?");
     if (userResponse) {
-      alert("You chose to proceed!");
-      return;
       this.onDelete(id);
     }
   }
@@ -82,7 +75,10 @@ export class WebsitesComponent implements OnInit, OnDestroy {
       this.adminService.deleteProperties(id).pipe(
         finalize(() => {this.isLoading = false;})
       ).subscribe(res => {
-        if(res.success){
+        this.getWebsites();
+      }, err => {
+        if (err.status === 201) {
+          alert('Website deleted Successfully!');
           this.getWebsites();
         }
       })

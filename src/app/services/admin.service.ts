@@ -28,7 +28,7 @@ export class AdminService {
   }
 
   getWebsites(limit: number, offset: number) {
-    const url = `${apiUrl}/properties/viewAll?reqParams=[{"value": "false", "key": "featured"}, {"value": "website", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
+    const url = `${apiUrl}/websites?reqParams=[{"value": "false", "key": "featured"}, {"value": "website", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
     return this.http.get(url);
   }
 
@@ -156,14 +156,14 @@ export class AdminService {
 
   deleteFranchises(id: string) {
     const deleteId = {
-      id: id
+      id
     };
     return this.http.delete(`${apiUrl}/admin/removeFranchises`, { body: deleteId });
   }
 
   deleteProperty(id: string) {
     const deleteId = {
-      id: id
+      id
     };
     return this.http.delete(`${apiUrl}/admin/removeProperty`, { body: deleteId })
   }
@@ -171,7 +171,7 @@ export class AdminService {
 
   deleteProperties(id: string): Observable<any> {
     const payload = {
-      id: id
+      id
     }
     return this.http.delete<any>(`${apiUrl}/admin/removeProperty`, { body: payload });
   }
@@ -225,6 +225,10 @@ export class AdminService {
 
   getAllPropertiesCountByCategory() {
     return this.http.get<any>(`${apiUrl}/allPropertiesCountByCategory`);
+  }
+
+  getPropertyById(id: string) {
+    return this.http.get<any>(`${apiUrl}/getPropertyById?id=${id}`);
   }
 
 }
