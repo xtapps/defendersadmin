@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -34,7 +35,8 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -176,7 +178,10 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
         finalize(() => { this.loading = false })
       ).subscribe(res => {
         console.log(res);
-        this.uploadImage(res);
+        // this.uploadImage(res);
+        alert('New partner added successfully.');
+        this.initForm();
+        this.fileName = '';
       })
     );
   }
@@ -191,11 +196,19 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
       this.adminService.updateProperties(formData).pipe(
         finalize(() => { this.loading = false })
       ).subscribe(res => {
-        if (this.isFileAdded) {
-          this.uploadImage(res);
-        }
+        alert('Partner updated successfully.');
+        this.getPropertyById(window.history.state._id);
       })
     );
+  }
+
+  getPropertyById(id: string) {
+    this.subscription.push(
+      this.adminService.getPropertyById(id).subscribe(res => {
+        this.location.replaceState(this.location.path(), '', res);
+        this.setFormValues();
+      })
+    )
   }
 
   uploadImage(data: any): void {
