@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { GamesComponent } from './games/games.component';
 import { BooksPlusComponent } from './books-plus/books-plus.component';
 import { RouterModule, Routes } from '@angular/router';
-import { CardModule, GridModule, TableModule } from '@coreui/angular';
+import { ButtonModule, CardModule, GridModule, TableModule } from '@coreui/angular';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -39,7 +39,8 @@ const routes: Routes = [
     MatTooltipModule,
     GridModule,
     TableModule,
-    SharedAdminModule
+    SharedAdminModule,
+    ButtonModule
   ]
 })
 export class KidsCornerModule { }

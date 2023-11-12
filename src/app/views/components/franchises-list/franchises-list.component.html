@@ -34,15 +34,15 @@
                   <div>{{ item.website }}</div>
                 </td>
                 <td>
-                  <span class="view-button" (click)="goToViewPage(i)">View</span>
-                  <span style="margin-left: 20px;" class=""(click)="editItem(item)"><img width="20px" src="../../../../assets/images/edit.svg" alt=""></span>
-                  <span style="margin-left: 20px;" class=""(click)="deleteItem(item._id)"><img width="20px" src="../../../../assets/images/trash.svg" alt=""></span>
+                  <span class="view-button" (click)="parseDataAndNavigate(franchisesList[i], 'Franchises')">View</span>
+                  <span style="margin-left: 20px;" class="cur_pointer"(click)="editItem(item)"><img width="20px" src="../../../../assets/images/edit.svg" alt=""></span>
+                  <span style="margin-left: 20px;" class="cur_pointer"(click)="deleteItem(item._id)"><img width="20px" src="../../../../assets/images/trash.svg" alt=""></span>
                 </td>
               </tr>
             </tbody>
           </table>
         </ng-template>
-        <app-custom-pagination [currentPage]="offset+1" (nextClickEvent)="nextClickEvent($event)" (previousClickEvent)="previousClickEvent($event)"></app-custom-pagination>
+        <app-paginator [totalRecords]="totalCount" (pageChangeEventEmit)="pageChangeEvent($event)"></app-paginator>
 
       </c-card-body>
     </c-card>

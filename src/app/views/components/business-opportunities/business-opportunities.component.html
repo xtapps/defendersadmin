@@ -39,7 +39,7 @@
                   </td>
                   <td>
                     <!-- <div><svg cIcon name="cil-eye"></svg></div> -->
-                    <div class="view-button" (click)="goToViewPage(i)">View</div>
+                    <div class="view-button" (click)="parseDataAndNavigate(businessList[i], 'business opportunities')">View</div>
                     <!-- <i class="cil-eye"></i> -->
                     <!-- <div class="fw-semibold text-nowrap">{{ item.chatPhoto }}</div> -->
                   </td>
@@ -47,9 +47,7 @@
               </tbody>
             </table>
           </ng-template>
-          <app-custom-pagination [currentPage]="offset + 1" [totalRecords]="totalRecords" [pageSize]="limit"
-          (nextClickEvent)="nextClickEvent($event)" (previousClickEvent)="previousClickEvent($event)">
-        </app-custom-pagination>
+          <app-paginator [totalRecords]="totalRecords" (pageChangeEventEmit)="pageChangeEvent($event)"></app-paginator>
         </c-card-body>
       </c-card>
     </c-col>
