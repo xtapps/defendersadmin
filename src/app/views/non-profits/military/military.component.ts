@@ -3,24 +3,29 @@ import { Router } from '@angular/router';
 import { Subscription, finalize } from 'rxjs';
 import { IApiRes } from 'src/app/models/model';
 import { AdminService } from 'src/app/services/admin.service';
+import { PAGINATION } from 'src/assets/app-constant';
+import { PropertiesModel } from '../../components/model/properties.model';
 
 @Component({
   selector: 'app-military',
   templateUrl: './military.component.html',
   styleUrls: ['./military.component.scss']
 })
-export class MilitaryComponent implements OnInit, OnDestroy {
+export class MilitaryComponent extends PropertiesModel implements OnInit, OnDestroy {
 
   militaryList: IApiRes['properties'] = [];
   isLoading = true;
   subscription: Subscription[] = [];
-  limit = 13;
-  offset = 0;
+  limit = PAGINATION.limit;
+  offset = PAGINATION.offset;
   totalRecords = 0;
 
   constructor(
     private adminService: AdminService,
-    private router: Router) { }
+    public override router: Router
+  ) {
+    super(router);
+  }
 
   ngOnInit(): void {
     this.getMilitaryList();
@@ -45,24 +50,15 @@ export class MilitaryComponent implements OnInit, OnDestroy {
     this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'military' } });
   }
 
-  previousClickEvent(event: boolean): void {
-    if (this.offset > 0 && event) {
-      this.offset -= 1;
-      this.getMilitaryList();
-    }
-  }
-
-  nextClickEvent(event: boolean): void {
-    if (event) {
-      this.offset += 1;
-      this.getMilitaryList();
-    }
+  pageChangeEvent(event: any) {
+    this.offset = event.offSet;
+    this.limit = event.limit;
+    this.getMilitaryList();
   }
 
   deleteItem(id: string): void {
     var userResponse = confirm("Do you want to proceed?");
     if (userResponse) {
-      alert("You chose to proceed!");
       this.onDelete(id);
     }
   }
@@ -73,7 +69,10 @@ export class MilitaryComponent implements OnInit, OnDestroy {
       this.adminService.deleteProperties(id).pipe(
         finalize(() => {this.isLoading = false;})
       ).subscribe(res => {
-        if(res.success){
+        this.getMilitaryList();
+      }, err => {
+        if (err.status === 201) {
+          alert('Military deleted Successfully!');
           this.getMilitaryList();
         }
       })

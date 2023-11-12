@@ -2,26 +2,30 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
+import { PAGINATION } from 'src/assets/app-constant';
+import { CategoryModel } from '../model/category.model'
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
-export class CategoriesComponent implements OnInit, OnDestroy {
+export class CategoriesComponent extends CategoryModel implements OnInit, OnDestroy {
 
   categories: any[] = [];
   subscription: Subscription[] = [];
   isLoading = true;
   isExpanded = false;
   index = 0;
-  public pageSize: number = 13;
-  public offset: number = 0;
+  public offset: number = PAGINATION.offset;
   totalRecords = 0;
-  limit = 13;
+  limit = PAGINATION.limit;
 
-  constructor(private adminService: AdminService,
-    private router: Router) {
+  constructor(
+    private adminService: AdminService,
+    public override router: Router
+  ) {
+    super(router);
   }
 
   ngOnInit(): void {
@@ -31,7 +35,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   getAllCategories(): void {
     this.isLoading = true;
     this.subscription.push(
-      this.adminService.getAllCategories(this.pageSize, this.offset).subscribe((res: any) => {
+      this.adminService.getAllCategories(this.limit, this.offset).subscribe((res: any) => {
         this.isLoading = false;
         this.categories = res?.categories;
         this.totalRecords = res?.totalCount;
@@ -51,7 +55,6 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   deleteItem(id: string): void {
     var userResponse = confirm("Do you want to proceed?");
     if (userResponse) {
-      alert("You chose to proceed!");
       this.deleteCategoryItem(id);
     }
   }
@@ -60,8 +63,13 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     this.subscription.push(
       this.adminService.deleteCategory(id).subscribe({
         next: (res => {
-          if (res) {
-            alert('Category item deleted Successfully!');
+          alert('Category deleted Successfully!');
+          this.getAllCategories();
+        }),
+        error: (err => {
+          if (err.status === 201) {
+            alert('Category deleted Successfully!');
+            this.getAllCategories();
           }
         })
       })
@@ -74,19 +82,10 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'category' } });
   }
 
-  previousClickEvent(event: boolean): void {
-    if (this.offset > 0 && event) {
-      this.offset -= 1;
-      // You can add any additional logic here when the "previous" button is clicked.
-      this.getAllCategories();
-    }
-  }
-
-  nextClickEvent(event: boolean): void {
-    if (event) {
-      this.offset += 1;
-      this.getAllCategories();
-    }
+  pageChangeEvent(event: any) {
+    this.offset = event.offSet;
+    this.limit = event.limit;
+    this.getAllCategories();
   }
 
   editItem(ev: any): void {

@@ -41,8 +41,8 @@
                                 </td>
                                 <td>
                                     <div style="display: flex;">
-                                        <span class="view-button" (click)="goToViewPage(i)">View</span>
-                                        <span style="margin-left: 10px;" class="" (click)="deleteItem(item._id)"><img width="20px"
+                                        <span class="view-button" (click)="parseDataAndNavigate(jobOpportunities[i], 'job opportunities')">View</span>
+                                        <span style="margin-left: 10px;" class="cur_pointer" (click)="deleteItem(item._id)"><img width="20px"
                                             src="../../../../assets/images/trash.svg" alt=""></span>
                                       </div>
                                 </td>
@@ -50,6 +50,7 @@
                         </tbody>
                     </table>
                 </ng-template>
+                <app-paginator [totalRecords]="totalRecords" (pageChangeEventEmit)="pageChangeEvent($event)"></app-paginator>
             </c-card-body>
         </c-card>
     </c-col>

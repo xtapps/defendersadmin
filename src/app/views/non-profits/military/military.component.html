@@ -32,7 +32,7 @@
                 </td>
                 <td>
                   <div style="display: flex;">
-                    <span class="view-button" (click)="goToViewPage(i)">View</span>
+                    <span class="view-button" (click)="parseDataAndNavigate(militaryList[i], 'military')">View</span>
                     <span class="edit-icon" (click)="editItem(item)"><img width="20px"
                         src="../../../../assets/images/edit.svg" alt=""></span>
 
@@ -44,9 +44,7 @@
             </tbody>
           </table>
         </ng-template>
-        <app-custom-pagination [currentPage]="offset + 1" [totalRecords]="totalRecords" [pageSize]="limit"
-          (nextClickEvent)="nextClickEvent($event)" (previousClickEvent)="previousClickEvent($event)">
-        </app-custom-pagination>
+        <app-paginator [totalRecords]="totalRecords" (pageChangeEventEmit)="pageChangeEvent($event)"></app-paginator>
 
       </c-card-body>
     </c-card>

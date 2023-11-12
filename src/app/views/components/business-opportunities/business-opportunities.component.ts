@@ -1,23 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
+import { PAGINATION } from 'src/assets/app-constant';
+import { BusinessModel } from '../model/business.model';
 
 @Component({
   selector: 'app-business-opportunities',
   templateUrl: './business-opportunities.component.html',
   styleUrls: ['./business-opportunities.component.scss']
 })
-export class BusinessOpportunitiesComponent implements OnInit {
+export class BusinessOpportunitiesComponent extends BusinessModel implements OnInit, OnDestroy {
   
   businessList: any[]= [];
   isLoading = true;
-  limit = 13;
-  offset = 0;
+  limit = PAGINATION.limit;
+  offset = PAGINATION.offset;
   totalRecords = 0;
+  subscriptions: Subscription[] = [];
 
   constructor(
     private adminService: AdminService,
-    private router: Router) {
+    public override router: Router
+  ) {
+    super(router);
   }
 
   ngOnInit(): void {
@@ -25,12 +31,13 @@ export class BusinessOpportunitiesComponent implements OnInit {
   }
 
   getBusinessOpportunities(): void {
-    this.adminService.getFranchises(this.limit, this.offset).subscribe((res: any) => {
-      this.isLoading = false;
-      this.businessList = res.franchises;
-      this.totalRecords = res.totalCount;
-
-    });
+    this.subscriptions.push(
+      this.adminService.getFranchises(this.limit, this.offset).subscribe((res: any) => {
+        this.isLoading = false;
+        this.businessList = res.franchises;
+        this.totalRecords = res.totalCount;
+      })
+    );
   }
 
   goToViewPage(index:number): void {
@@ -39,18 +46,14 @@ export class BusinessOpportunitiesComponent implements OnInit {
     this.router.navigate(['admin/view'], { queryParams: { data: encodedData } });
   }
 
-  previousClickEvent(event: boolean): void {
-    if (this.offset > 0 && event) {
-      this.offset -= 1;
-      this.getBusinessOpportunities();
-    }
+  pageChangeEvent(event: any) {
+    this.offset = event.offSet;
+    this.limit = event.limit;
+    this.getBusinessOpportunities();
   }
 
-  nextClickEvent(event: boolean): void {
-    if (event) {
-      this.offset += 1;
-      this.getBusinessOpportunities();
-    }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
 }

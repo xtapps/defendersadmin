@@ -40,12 +40,12 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.initForm();
     this.getCategories();
     this.propertyType = this.activatedRoute.snapshot.queryParams['propertyType'];
     this.orgType = this.activatedRoute.snapshot.queryParams['orgType'];
     this.appSection = this.activatedRoute.snapshot.queryParams['appSection'];
     this.editMode = this.activatedRoute.snapshot.queryParams['editMode'];
+    this.initForm();
     if (this.activatedRoute.snapshot.queryParams['editMode'] === 'true') {
       this.editMode = true
       this.setFormValues();
@@ -74,7 +74,8 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
       secondaryCategory: datas.secondaryCategory ? datas.secondaryCategory : null,
       discount: datas.discount,
       description: datas.description,
-      image: datas.image
+      image: datas.image,
+      locationActive: datas.locationActive
     });
   }
 
@@ -82,9 +83,9 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       locationName: ['', [Validators.required]],
       corpName: [''],
-      propertyType: [''],
-      appSection: [''],
-      orgType: [''],
+      propertyType: [this.propertyType],
+      appSection: [this.appSection],
+      orgType: [this.orgType],
       androidUrl: [''],
       appleUrl: [''],
       address1: [''],
@@ -109,8 +110,9 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
       description: [''],
       image: [''],
       isVetOwned: [false],
-      isActive: [true]
-    })
+      isActive: [true],
+      locationActive: [true]
+    });
   }
 
   getCategories(): void {
@@ -151,7 +153,7 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
     const data: any = {};
     for (const control in this.form.controls) {
       if (this.form.controls[control].value === '' || this.form.controls[control].value === null) {
-        data[control] = ' ';
+        data[control] = '';
       } else {
         data[control] = this.form.controls[control].value;
         data['corpName'] = this.form.controls['locationName'].value

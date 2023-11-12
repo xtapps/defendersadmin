@@ -56,7 +56,7 @@ export class AdminService {
   }
 
   getJobOpportunities(limit: number, offset: number) {
-    return this.http.get(`${apiUrl}/getJobs?limit=${limit}&offset=${offset}`);
+    return this.http.get(`${apiUrl}/defender/jobs?limit=${limit}&offset=${offset}`);
   }
 
   getJobBoards(limit: number, offset: number) {
@@ -130,6 +130,10 @@ export class AdminService {
     return this.http.post<any>(`${apiUrl}/createJobBoard`, payloadData);
   }
 
+  updateJobBoard(payloadData: FormData): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/updateJobBoard`, payloadData);
+  }
+
   createProperties(payloadData: any): Observable<any>{
     return this.http.post<any>(`${apiUrl}/createProperties`, payloadData);
   }
@@ -177,11 +181,17 @@ export class AdminService {
   }
 
   deleteJobBoads(id: string): Observable<any> {
-    return this.http.post<any>(`${apiUrl}/removeJobBoard`, { id: id });
+    const payload = {
+      id
+    }
+    return this.http.delete<any>(`${apiUrl}/removeJobBoard`, { body: payload });
   }
 
   deleteJob(id: string): Observable<any> {
-    return this.http.post<any>(`${apiUrl}/removeJob`, { id: id });
+    const payload = {
+      id
+    }
+    return this.http.delete<any>(`${apiUrl}/removeJob`, { body: payload });
   }
 
   // updated Section
