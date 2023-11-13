@@ -2,26 +2,29 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
+import { PAGINATION } from 'src/assets/app-constant';
+import { GroupCodeModel } from '../model/groupCode.model';
 
 @Component({
   selector: 'app-group-codes',
   templateUrl: './group-codes.component.html',
   styleUrls: ['./group-codes.component.scss']
 })
-export class GroupCodesComponent implements OnInit, OnDestroy {
+export class GroupCodesComponent extends GroupCodeModel implements OnInit, OnDestroy {
 
   groupCodes: any[] = []
   subscription: Subscription[] = [];
   isLoading = true;
-  totalCount = 0;
-  limit = 13;
-  offset = 0;
+  limit = PAGINATION.limit;
+  offset = PAGINATION.offset;
   totalRecords = 0;
 
   constructor(
     private adminService: AdminService,
-    private router: Router
-  ) { }
+    public override router: Router
+  ) {
+    super(router);
+  }
 
   ngOnInit(): void {
     this.getGroupCodes();
@@ -33,7 +36,7 @@ export class GroupCodesComponent implements OnInit, OnDestroy {
       this.adminService.getGroupCodes(this.limit, this.offset).subscribe((res: any) => {
         this.isLoading = false;
         this.groupCodes = res?.groupCodes;
-        this.totalCount = res?.totalCount;
+        this.totalRecords = res?.totalCount;
       })
     );
   }
@@ -49,7 +52,6 @@ export class GroupCodesComponent implements OnInit, OnDestroy {
   deleteItem(id: string): void {
     var userResponse = confirm("Do you want to proceed?");
     if (userResponse) {
-      return;
       this.deleteGroupodeItem(id);
     }
   }
@@ -58,26 +60,23 @@ export class GroupCodesComponent implements OnInit, OnDestroy {
     this.subscription.push(
       this.adminService.deleteGroupCode(id).subscribe({
         next: (res => {
-          if (res) {
-            alert('Group Code item deleted Successfully!');
+          alert('Group Code deleted Successfully!');
+          this.getGroupCodes();
+        }),
+        error: (err => {
+          if (err.status === 201) {
+            alert('Location deleted Successfully!');
+            this.getGroupCodes();
           }
         })
       })
     )
   }
 
-  previousClickEvent(event: boolean): void {
-    if (this.offset > 0 && event) {
-      this.offset -= 1;
-      this.getGroupCodes();
-    }
-  }
-
-  nextClickEvent(event: boolean): void {
-    if (event) {
-      this.offset += 1;
-      this.getGroupCodes();
-    }
+  pageChangeEvent(event: any) {
+    this.offset = event.offSet;
+    this.limit = event.limit;
+    this.getGroupCodes();
   }
 
   goToViewPage(index: number): void {

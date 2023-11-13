@@ -37,6 +37,7 @@ import { AddJobBoadrsComponent } from '../components/add-job-boadrs/add-job-boad
 import { AddNewCategoryComponent } from '../components/add-new-category/add-new-category.component';
 import { AddNewPropertiesComponent } from '../components/add-new-froms/add-new-properties/add-new-properties.component';
 import { AddGroupCodesComponent } from '../components/add-new-froms/add-group-codes/add-group-codes.component';
+import { AdminUsersComponent } from '../components/admin-users/admin-users.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { AddGroupCodesComponent } from '../components/add-new-froms/add-group-co
     AddNewCategoryComponent,
     AddJobBoadrsComponent,
     AddNewPropertiesComponent,
-    AddGroupCodesComponent
+    AddGroupCodesComponent,
+    AdminUsersComponent
   ],
   imports: [
     CommonModule,
