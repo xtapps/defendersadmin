@@ -13,6 +13,7 @@ import { ViewPageComponent } from '../components/view-page/view-page.component';
 import { JobBoardsComponent } from '../components/job-boards/job-boards.component';
 import { JobOpportunitiesComponent } from '../components/job-opportunities/job-opportunities.component';
 import { BusinessOpportunitiesComponent } from '../components/business-opportunities/business-opportunities.component';
+import { AdminUsersComponent } from '../components/admin-users/admin-users.component';
 
 const routes: Routes = [
   {
@@ -55,6 +56,9 @@ const routes: Routes = [
   {
     path: 'business-opportunities', component: BusinessOpportunitiesComponent
   },
+  {
+    path: 'admin-users', component: AdminUsersComponent
+  }
  
 ];
 

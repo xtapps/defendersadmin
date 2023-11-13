@@ -13,14 +13,9 @@ import { AdminService } from 'src/app/services/admin.service';
 export class AddGroupCodesComponent implements OnInit {
 
   form!: FormGroup;
-  propertyType!: string;
   loading = false;
   subscription: Subscription[] = [];
-  fileName = '';
-  appSection!: string;
-  orgType!: string;
   editMode = false
-  isFileAdded = false;
 
   private formBuilder = inject(FormBuilder);
   private activatedRoute = inject(ActivatedRoute);
@@ -30,13 +25,7 @@ export class AddGroupCodesComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.propertyType = this.activatedRoute.snapshot.queryParams['propertyType'];
-    this.orgType = this.activatedRoute.snapshot.queryParams['orgType'];
-    this.appSection = this.activatedRoute.snapshot.queryParams['appSection'];
     this.editMode = this.activatedRoute.snapshot.queryParams['editMode'];
-    this.form.patchValue({
-      propertyType: this.propertyType
-    })
     if (this.activatedRoute.snapshot.queryParams['editMode'] === 'true') {
       this.editMode = true
       this.setFormValues();
@@ -46,36 +35,19 @@ export class AddGroupCodesComponent implements OnInit {
   }
 
   setFormValues(): void {
-    const datas = window.history.state;
-    this.fileName = datas.images;
+    const data = window.history.state;
     this.form.patchValue({
-      locationName: datas.locationName,
-      image: datas.images,
-      website: datas.website,
-      propertyType: this.propertyType,
-      orgType: this.orgType,
-      description: datas.description,
-      discount: datas.discount,
-      discountDisclaimer: datas.discountDisclaimer,
-      appSection: this.appSection,
-      isVetOwned: datas.isVetOwned,
-      locationActive: datas.locationActive
+      groupName: data.groupName,
+      groupCode: data.groupCode,
+      discountPrice: data.discountPrice
     })
   }
 
   initForm(): void {
     this.form = this.formBuilder.group({
-      locationName: ['', [Validators.required]],
-      images: ['', [Validators.required]],
-      website: [''],
-      propertyType: [''],
-      orgType: ['commercial'],
-      description: [''],
-      discount: [''],
-      discountDisclaimer: [''],
-      appSection: [''],
-      isVetOwned: [false],
-      locationActive: [false]
+      groupName: ['', [Validators.required]],
+      groupCode: ['', [Validators.required]],
+      discountPrice: ['', [Validators.required]]
     })
   }
 
@@ -95,7 +67,6 @@ export class AddGroupCodesComponent implements OnInit {
         data[control] = ' ';
       } else {
         data[control] = this.form.controls[control].value;
-        data['corpName'] = this.form.controls['locationName'].value
       }
     }
 
@@ -110,55 +81,25 @@ export class AddGroupCodesComponent implements OnInit {
 
   submit(data: any): void {
     this.subscription.push(
-      this.adminService.createProperties(data).pipe(
+      this.adminService.createGroupCode(data).pipe(
         finalize(() => { this.loading = false })
       ).subscribe(res => {
         console.log(res);
-        this.uploadImage(res);
+        alert('Group code added successfully.');
+        this.initForm();        
       })
     );
   }
 
   update(data: any): void {
-    data['propertyId'] = window.history.state._id;
+    data['id'] = window.history.state._id;
     this.subscription.push(
-      this.adminService.updateProperties(data).pipe(
+      this.adminService.updateGroupCode(data).pipe(
         finalize(() => { this.loading = false })
       ).subscribe(res => {
-        if (this.isFileAdded) {
-          this.uploadImage(res);
-        }
+        alert('Group code updated successfully.');
       })
     );
-  }
-
-  uploadImage(data: any): void {
-    const fromValue = this.form.value;
-    const formData = new FormData();
-    formData.append('propertyId', data._id);
-    formData.append('image', fromValue.image);
-    this.subscription.push(
-      this.adminService.uploadProfile(formData).subscribe(res => {
-        console.log(res);
-        alert('Success')
-        this.router.navigateByUrl('/admin/websites');
-      })
-    );
-  }
-
-  onFileChange(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    const files = inputElement?.files;
-
-    if (files && files.length > 0) {
-      this.fileName = files[0].name;
-      this.isFileAdded = true;
-      this.form.controls['images'].setValue(files[0]);
-    } else {
-      this.fileName = ''; // Reset if no file selected
-      this.isFileAdded = false;
-      this.form.controls['images'].setValue('');
-    }
   }
 
   goBack() {
@@ -168,7 +109,5 @@ export class AddGroupCodesComponent implements OnInit {
   ngOnDestroy(): void {
     this.subscription.forEach(el => { el.unsubscribe() });
   }
-
-
 
 }

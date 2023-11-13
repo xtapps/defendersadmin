@@ -241,4 +241,16 @@ export class AdminService {
     return this.http.get<any>(`${apiUrl}/getPropertyById?id=${id}`);
   }
 
+  createGroupCode(payloadData: any): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/createGroupCode`, payloadData);
+  }
+
+  updateGroupCode(body: any): Observable<any> {
+    return this.http.post<any>(`${apiUrl}/updateGroupCodes`, body);
+  }
+
+  getAdminUsers() {
+    return this.http.get(`${apiUrl}/getAdminUsers`);
+  }
+
 }
