@@ -2,21 +2,28 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, finalize } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
+import { PAGINATION } from 'src/assets/app-constant';
+import { JobModel } from '../model/job.model';
 
 @Component({
   selector: 'app-job-opportunities',
   templateUrl: './job-opportunities.component.html',
   styleUrls: ['./job-opportunities.component.scss']
 })
-export class JobOpportunitiesComponent implements OnInit, OnDestroy {
+export class JobOpportunitiesComponent extends JobModel implements OnInit, OnDestroy {
 
   jobOpportunities: any[]= [];
   subscription: Subscription[] = [];
   isLoading = true;
+  limit: number = PAGINATION.limit;
+  offset: number = PAGINATION.offset;
+  totalRecords: number = 0;
 
   constructor(
     private adminService: AdminService,
-    private router: Router) {
+    public override router: Router
+  ) {
+    super(router);
   }
 
   ngOnInit(): void {
@@ -24,9 +31,10 @@ export class JobOpportunitiesComponent implements OnInit, OnDestroy {
   }
 
   getJobOpportunities(): void {
-    this.adminService.getJobOpportunities(13, 0).subscribe((res: any) => {
+    this.adminService.getJobOpportunities(this.limit, this.offset).subscribe((res: any) => {
       this.isLoading = false;
       this.jobOpportunities = res.jobs;
+      this.totalRecords = res.totalRecords;
     });
   }
 
@@ -36,11 +44,15 @@ export class JobOpportunitiesComponent implements OnInit, OnDestroy {
     this.router.navigate(['admin/view'], { queryParams: { data: encodedData } });
   }
 
+  pageChangeEvent(event: any) {
+    this.offset = event.offSet;
+    this.limit = event.limit;
+    this.getJobOpportunities();
+  }
+
   deleteItem(id: string): void {
     var userResponse = confirm("Do you want to proceed?");
     if (userResponse) {
-      alert("You chose to proceed!");
-      return;
       this.onDelete(id);
     }
   }
@@ -51,7 +63,9 @@ export class JobOpportunitiesComponent implements OnInit, OnDestroy {
       this.adminService.deleteJob(id).pipe(
         finalize(() => {this.isLoading = false;})
       ).subscribe(res => {
-        if(res.success){
+        this.getJobOpportunities();
+      }, err => {
+        if (err.status === 201) {
           this.getJobOpportunities();
         }
       })

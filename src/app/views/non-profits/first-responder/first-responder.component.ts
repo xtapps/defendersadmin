@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Subscription, finalize } from 'rxjs';
 import { IApiRes } from 'src/app/models/model';
 import { AdminService } from 'src/app/services/admin.service';
+import { PAGINATION } from 'src/assets/app-constant';
+import { PropertiesModel } from '../../components/model/properties.model';
 
 
 @Component({
@@ -10,18 +12,20 @@ import { AdminService } from 'src/app/services/admin.service';
   templateUrl: './first-responder.component.html',
   styleUrls: ['./first-responder.component.scss']
 })
-export class FirstResponderComponent implements OnInit, OnDestroy {
+export class FirstResponderComponent extends PropertiesModel implements OnInit, OnDestroy {
 
   firstResponderList: IApiRes['properties'] | any = [];
   isLoading = true;
   subscription: Subscription[] = [];
-  limit = 13;
-  offset = 0;
+  limit = PAGINATION.limit;
+  offset = PAGINATION.offset;
   totalRecords = 0;
 
   constructor(
     private adminService: AdminService,
-    private router: Router) {
+    public override router: Router
+  ) {
+    super(router);
   }
 
   ngOnInit(): void {
@@ -55,25 +59,15 @@ export class FirstResponderComponent implements OnInit, OnDestroy {
     this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'job-boards' } });
   }
 
-  previousClickEvent(event: boolean): void {
-    if (this.offset > 0 && event) {
-      this.offset -= 1;
-      this.getFirstResponderList();
-    }
-  }
-
-  nextClickEvent(event: boolean): void {
-    if (event) {
-      this.offset += 1;
-      this.getFirstResponderList();
-    }
+  pageChangeEvent(event: any) {
+    this.offset = event.offSet;
+    this.limit = event.limit;
+    this.getFirstResponderList();
   }
 
   deleteItem(id: string): void {
     var userResponse = confirm("Do you want to proceed?");
     if (userResponse) {
-      alert("You chose to proceed!");
-      return;
       this.onDelete(id);
     }
   }
@@ -84,7 +78,10 @@ export class FirstResponderComponent implements OnInit, OnDestroy {
       this.adminService.deleteProperties(id).pipe(
         finalize(() => {this.isLoading = false;})
       ).subscribe(res => {
-        if(res.success){
+        this.getFirstResponderList();
+      }, err => {
+        if (err.status === 201) {
+          alert('First responder deleted Successfully!');
           this.getFirstResponderList();
         }
       })

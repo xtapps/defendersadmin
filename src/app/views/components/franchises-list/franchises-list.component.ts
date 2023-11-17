@@ -2,25 +2,29 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
+import { PAGINATION } from 'src/assets/app-constant';
+import { BusinessModel } from '../model/business.model';
 
 @Component({
   selector: 'app-franchises-list',
   templateUrl: './franchises-list.component.html',
   styleUrls: ['./franchises-list.component.scss']
 })
-export class FranchisesListComponent implements OnInit, OnDestroy {
+export class FranchisesListComponent extends BusinessModel implements OnInit, OnDestroy {
 
   franchisesList: any[] = [];
   subscription: Subscription[] = [];
 
   isLoading = true;
-  public pageSize: number = 13;
-  public offset: number = 0;
+  public limit: number = PAGINATION.limit;
+  public offset: number = PAGINATION.offset;
   totalCount = 0;
 
   constructor(
     private adminService: AdminService,
-    private router: Router) {
+    public override router: Router
+  ) {
+    super(router);
   }
 
   ngOnInit(): void {
@@ -30,7 +34,7 @@ export class FranchisesListComponent implements OnInit, OnDestroy {
   getFranchisesList(): void {
     this.isLoading = true;
     this.subscription.push(
-      this.adminService.getFranchises(this.pageSize, this.offset).subscribe((res: any) => {
+      this.adminService.getFranchises(this.limit, this.offset).subscribe((res: any) => {
         this.isLoading = false;
         this.franchisesList = res.franchises;
         this.totalCount = res.totalCount;
@@ -49,30 +53,15 @@ export class FranchisesListComponent implements OnInit, OnDestroy {
     this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'franchises' } });
   }
 
-  previousClickEvent(event: boolean): void {
-    if (this.offset > 0 && event) {
-      this.offset -= 1;
-      // You can add any additional logic here when the "previous" button is clicked.
-      this.getFranchisesList();
-    }
-  }
-
-  nextClickEvent(event: boolean): void {
-    if (event) {
-      const lastPage = Math.ceil(this.totalCount / this.pageSize);
-      if (lastPage <= this.offset) {
-        return;
-      }
-      this.offset += 1;
-      this.getFranchisesList();
-    }
+  pageChangeEvent(event: any) {
+    this.offset = event.offSet;
+    this.limit = event.limit;
+    this.getFranchisesList();
   }
 
   deleteItem(id: string): void {
     var userResponse = confirm("Do you want to proceed?");
     if (userResponse) {
-      alert("You chose to proceed!");
-      return;
       this.deleteFranchises(id);
     }
   }
@@ -81,8 +70,13 @@ export class FranchisesListComponent implements OnInit, OnDestroy {
     this.subscription.push(
       this.adminService.deleteFranchises(id).subscribe({
         next: (res => {
-          if (res) {
-            alert('Franchises item deleted Successfully!');
+          alert('Franchises deleted Successfully!');
+          this.getFranchisesList();
+        }),
+        error: (err => {
+          if (err.status === 201) {
+            alert('Franchises deleted Successfully!');
+            this.getFranchisesList();
           }
         })
       })

@@ -47,7 +47,7 @@ export class AddNewFranchisesComponent implements OnInit, OnDestroy {
 
   setFormValues(): void {
     const datas = window.history.state;
-    this.fileName = datas.franchiseName;
+    this.fileName = datas.franchiseImage;
 
     this.form.patchValue({
       franchiseName: datas.franchiseName,
@@ -73,14 +73,6 @@ export class AddNewFranchisesComponent implements OnInit, OnDestroy {
     }
   }
 
-  submit(): void {
-    if (this.editMode) {
-      this.onUpdate();
-    } else {
-      this.onSubmit();
-    }
-  }
-
   onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -95,31 +87,49 @@ export class AddNewFranchisesComponent implements OnInit, OnDestroy {
         data[control] = this.form.controls[control].value;
       }
     }
-    console.log(data);
-    this.subscription.push(
-      this.adminService.createFranchises(data).subscribe(res => {
-        this.router.navigateByUrl('/admin/franchises');
-      })
-    )
 
+    if (this.editMode) {
+      this.update(data);
+    } else {
+      this.submit(data);
+    }
   }
 
-  onUpdate(): void {
-    const data: any = {};
-    // for (const control in this.form.controls) {
-    //   if (this.form.controls[control].value === '' || this.form.controls[control].value === null) {
-    //     data[control] = ' ';
-    //   } else {
-    //     data[control] = this.form.controls[control].value;
-    //   }
-    // }
-    data['id'] = this.receivedData._id;
-    data['name'] = 'test name'
+  submit(data: any): void {
     console.log(data);
+    const formData = new FormData();
+    for (const key in data) {
+      if (key === 'franchiseImage') {
+        formData.append('image', data[key]);  
+      } else {
+        formData.append(key, data[key]);
+      }
+    }
     this.subscription.push(
-      this.adminService.updateFranchises(data).subscribe(res => {
-        if (res.succeess) {
-          alert('Updated Successfully');
+      this.adminService.createFranchises(formData).subscribe(res => {
+        alert('Franchises added successfully.');
+        this.initForm();
+        this.fileName = '';
+      })
+    );
+  }
+
+  update(data: any): void {
+    data['id'] = window.history.state._id;
+    const formData = new FormData();
+    for (const key in data) {
+      if (key === 'franchiseImage') {
+        formData.append('image', data[key]);  
+      } else {
+        formData.append(key, data[key]);
+      }
+    }
+    this.subscription.push(
+      this.adminService.updateFranchises(formData).subscribe(res => {
+        alert('Franchises updated successfully.');
+      }, err => {
+        if (err.status === 201) {
+          alert('Franchises updated successfully.');
         }
       })
     )

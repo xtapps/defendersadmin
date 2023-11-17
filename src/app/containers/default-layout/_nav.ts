@@ -54,14 +54,14 @@ export const navItems: INavData[] = [
         url: '/admin/group-codes',
         iconComponent: { name: 'cil-home' }
       },
-      {
-        name: 'Defenders',
-        url: '/admin/defenders',
-        iconComponent: { name: 'cil-home' }
-      },
+      // {
+      //   name: 'Defenders',
+      //   url: '/admin/defenders',
+      //   iconComponent: { name: 'cil-home' }
+      // },
       {
         name: 'Admin Users',
-        url: 'admin-users',
+        url: '/admin/admin-users',
         iconComponent: { name: 'cil-user' }
       },
     ]

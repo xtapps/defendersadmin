@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -34,16 +35,17 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
-    this.initForm();
     this.getCategories();
     this.propertyType = this.activatedRoute.snapshot.queryParams['propertyType'];
     this.orgType = this.activatedRoute.snapshot.queryParams['orgType'];
     this.appSection = this.activatedRoute.snapshot.queryParams['appSection'];
     this.editMode = this.activatedRoute.snapshot.queryParams['editMode'];
+    this.initForm();
     if (this.activatedRoute.snapshot.queryParams['editMode'] === 'true') {
       this.editMode = true
       this.setFormValues();
@@ -72,7 +74,8 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
       secondaryCategory: datas.secondaryCategory ? datas.secondaryCategory : null,
       discount: datas.discount,
       description: datas.description,
-      image: datas.image
+      image: datas.image,
+      locationActive: datas.locationActive
     });
   }
 
@@ -80,9 +83,9 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       locationName: ['', [Validators.required]],
       corpName: [''],
-      propertyType: [''],
-      appSection: [''],
-      orgType: [''],
+      propertyType: [this.propertyType],
+      appSection: [this.appSection],
+      orgType: [this.orgType],
       androidUrl: [''],
       appleUrl: [''],
       address1: [''],
@@ -107,8 +110,9 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
       description: [''],
       image: [''],
       isVetOwned: [false],
-      isActive: [true]
-    })
+      isActive: [true],
+      locationActive: [true]
+    });
   }
 
   getCategories(): void {
@@ -149,7 +153,7 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
     const data: any = {};
     for (const control in this.form.controls) {
       if (this.form.controls[control].value === '' || this.form.controls[control].value === null) {
-        data[control] = ' ';
+        data[control] = '';
       } else {
         data[control] = this.form.controls[control].value;
         data['corpName'] = this.form.controls['locationName'].value
@@ -176,7 +180,10 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
         finalize(() => { this.loading = false })
       ).subscribe(res => {
         console.log(res);
-        this.uploadImage(res);
+        // this.uploadImage(res);
+        alert('New partner added successfully.');
+        this.initForm();
+        this.fileName = '';
       })
     );
   }
@@ -191,11 +198,19 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
       this.adminService.updateProperties(formData).pipe(
         finalize(() => { this.loading = false })
       ).subscribe(res => {
-        if (this.isFileAdded) {
-          this.uploadImage(res);
-        }
+        alert('Partner updated successfully.');
+        this.getPropertyById(window.history.state._id);
       })
     );
+  }
+
+  getPropertyById(id: string) {
+    this.subscription.push(
+      this.adminService.getPropertyById(id).subscribe(res => {
+        this.location.replaceState(this.location.path(), '', res);
+        this.setFormValues();
+      })
+    )
   }
 
   uploadImage(data: any): void {

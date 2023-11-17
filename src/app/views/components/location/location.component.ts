@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
+import { PAGINATION } from 'src/assets/app-constant';
+import { PropertiesModel } from '../model/properties.model';
 
 export interface PeriodicElement {
   name: string;
@@ -15,19 +17,20 @@ export interface PeriodicElement {
   templateUrl: './location.component.html',
   styleUrls: ['./location.component.scss'],
 })
-export class LocationComponent implements OnInit, OnDestroy {
+export class LocationComponent extends PropertiesModel implements OnInit, OnDestroy {
 
   locationList: any[] = [];
   subscription: Subscription[] = [];
   isLoading = true;
-  public pageSize: number = 13;
-  public offset: number = 0;
-  limit = 13;
+  public offset: number = PAGINATION.offset;
+  limit = PAGINATION.limit;
   totalRecords = 0;
 
   constructor(
     private adminService: AdminService,
-    private router: Router) {
+    public override router: Router
+  ) {
+    super(router);
   }
 
   ngOnInit(): void {
@@ -37,7 +40,7 @@ export class LocationComponent implements OnInit, OnDestroy {
   getAllLocation(): void {
     this.isLoading = true;
     this.subscription.push(
-      this.adminService.getLocations(this.pageSize, this.offset).subscribe((res: any) => {
+      this.adminService.getLocations(this.limit, this.offset).subscribe((res: any) => {
         this.isLoading = false;
         this.locationList = res[0]?.properties;
         this.totalRecords = res[0]?.totalRecords;
@@ -55,19 +58,10 @@ export class LocationComponent implements OnInit, OnDestroy {
     this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'location' } });
   }
 
-  previousClickEvent(event: boolean): void {
-    if (this.offset > 0 && event) {
-      this.offset -= 1;
-      // You can add any additional logic here when the "previous" button is clicked.
-      this.getAllLocation();
-    }
-  }
-
-  nextClickEvent(event: boolean): void {
-    if (event) {
-      this.offset += 1;
-      this.getAllLocation();
-    }
+  pageChangeEvent(event: any) {
+    this.offset = event.offSet;
+    this.limit = event.limit;
+    this.getAllLocation();
   }
 
   deleteItem(id: string): void {
@@ -81,10 +75,12 @@ export class LocationComponent implements OnInit, OnDestroy {
     this.subscription.push(
       this.adminService.deleteProperty(id).subscribe({
         next: (res => {
-          if (res) {
-            this.offset = 0;
+          this.getAllLocation();
+        }),
+        error: (err => {
+          if (err.status === 201) {
+            alert('Location deleted Successfully!');
             this.getAllLocation();
-            alert('Location item deleted Successfully!');
           }
         })
       })

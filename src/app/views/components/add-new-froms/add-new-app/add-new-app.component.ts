@@ -40,7 +40,7 @@ export class AddNewAppComponent implements OnInit, OnDestroy {
       androidURL: [''],
       appleURL: [''],
       email: [''],
-      propertyType: [''],
+      propertyType: ['app'],
       orgType: ['commercial'],
       corpName: [''],
       description: [''],
@@ -74,14 +74,21 @@ export class AddNewAppComponent implements OnInit, OnDestroy {
     }
 
     console.log(data);
+
+    const formData = new FormData()
+    for (const key in data) {
+      formData.append(key, data[key]);
+    }
     // return;
     this.loading = true;
     this.subscription.push(
-      this.adminService.createPartner(data).pipe(
+      this.adminService.createPartner(formData).pipe(
         finalize(() => { this.loading = false })
       ).subscribe(res => {
-        console.log(res);
-        this.uploadImage(res);
+        alert('App added successfully.');
+        this.initForm();
+        this.fileName = '';
+        // this.uploadImage(res);
       })
     )
 

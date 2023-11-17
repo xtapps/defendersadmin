@@ -22,6 +22,8 @@ export class AddNewPartnerComponent implements OnInit, OnDestroy {
   secondaryCategories: any[] = [];
   lastPage: number = 0;
   fileName = '';
+  appSection: string = '';
+  orgType: string = '';
 
   private router = inject(Router);
 
@@ -32,9 +34,11 @@ export class AddNewPartnerComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.initForm();
     this.getCategories();
     this.propertyType = this.activatedRoute.snapshot.queryParams['type'];
+    this.orgType = this.activatedRoute.snapshot.queryParams['orgType'];
+    this.appSection = this.activatedRoute.snapshot.queryParams['appSection'];
+    this.initForm();
     this.form.patchValue({
       propertyType: this.propertyType
     })
@@ -68,9 +72,9 @@ export class AddNewPartnerComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       locationName: ['', [Validators.required]],
       corpName: [''],
-      propertyType: ['partner'],
-      appSection: [''],
-      orgType: ['commercial'],
+      propertyType: [this.propertyType],
+      appSection: [this.appSection],
+      orgType: [this.orgType],
       androidUrl: [''],
       appleUrl: [''],
       address1: [''],
@@ -130,6 +134,9 @@ export class AddNewPartnerComponent implements OnInit, OnDestroy {
       ).subscribe(res => {
         console.log(res);
         // this.uploadImage();
+        alert('New partner added successfully.');
+        this.fileName = '';
+        this.initForm();
       }, err => {
         console.log(err);
       })

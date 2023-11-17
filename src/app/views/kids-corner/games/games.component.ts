@@ -2,13 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, finalize } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
+import { PropertiesModel } from '../../components/model/properties.model';
 
 @Component({
   selector: 'app-games',
   templateUrl: './games.component.html',
   styleUrls: ['./games.component.scss']
 })
-export class GamesComponent implements OnInit, OnDestroy {
+export class GamesComponent extends PropertiesModel implements OnInit, OnDestroy {
 
   gamesLists: any[] = [];
   isLoading = true;
@@ -19,7 +20,9 @@ export class GamesComponent implements OnInit, OnDestroy {
 
   constructor(
     private adminService: AdminService,
-    private router: Router) {
+    public override router: Router
+  ) {
+    super(router);
   }
 
   ngOnInit(): void {
@@ -53,25 +56,15 @@ export class GamesComponent implements OnInit, OnDestroy {
     this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'games' } });
   }
 
-  previousClickEvent(event: boolean): void {
-    if (this.offset > 0 && event) {
-      this.offset -= 1;
-      this.getGamesList();
-    }
-  }
-
-  nextClickEvent(event: boolean): void {
-    if (event) {
-      this.offset += 1;
-      this.getGamesList();
-    }
+  pageChangeEvent(event: any) {
+    this.offset = event.offSet;
+    this.limit = event.limit;
+    this.getGamesList();
   }
 
   deleteItem(id: string): void {
     var userResponse = confirm("Do you want to proceed?");
     if (userResponse) {
-      alert("You chose to proceed!");
-      return;
       this.onDelete(id);
     }
   }
@@ -82,7 +75,10 @@ export class GamesComponent implements OnInit, OnDestroy {
       this.adminService.deleteProperties(id).pipe(
         finalize(() => {this.isLoading = false;})
       ).subscribe(res => {
-        if(res.success){
+        this.getGamesList();
+      }, err => {
+        if (err.status === 201) {
+          alert('Book plus deleted Successfully!');
           this.getGamesList();
         }
       })

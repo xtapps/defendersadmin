@@ -28,7 +28,7 @@ export class AdminService {
   }
 
   getWebsites(limit: number, offset: number) {
-    const url = `${apiUrl}/properties/viewAll?reqParams=[{"value": "false", "key": "featured"}, {"value": "website", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
+    const url = `${apiUrl}/websites?reqParams=[{"value": "false", "key": "featured"}, {"value": "website", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
     return this.http.get(url);
   }
 
@@ -56,7 +56,7 @@ export class AdminService {
   }
 
   getJobOpportunities(limit: number, offset: number) {
-    return this.http.get(`${apiUrl}/getJobs?limit=${limit}&offset=${offset}`);
+    return this.http.get(`${apiUrl}/defender/jobs?limit=${limit}&offset=${offset}`);
   }
 
   getJobBoards(limit: number, offset: number) {
@@ -130,6 +130,10 @@ export class AdminService {
     return this.http.post<any>(`${apiUrl}/createJobBoard`, payloadData);
   }
 
+  updateJobBoard(payloadData: FormData): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/updateJobBoard`, payloadData);
+  }
+
   createProperties(payloadData: any): Observable<any>{
     return this.http.post<any>(`${apiUrl}/createProperties`, payloadData);
   }
@@ -156,14 +160,14 @@ export class AdminService {
 
   deleteFranchises(id: string) {
     const deleteId = {
-      id: id
+      id
     };
     return this.http.delete(`${apiUrl}/admin/removeFranchises`, { body: deleteId });
   }
 
   deleteProperty(id: string) {
     const deleteId = {
-      id: id
+      id
     };
     return this.http.delete(`${apiUrl}/admin/removeProperty`, { body: deleteId })
   }
@@ -171,17 +175,23 @@ export class AdminService {
 
   deleteProperties(id: string): Observable<any> {
     const payload = {
-      id: id
+      id
     }
     return this.http.delete<any>(`${apiUrl}/admin/removeProperty`, { body: payload });
   }
 
   deleteJobBoads(id: string): Observable<any> {
-    return this.http.post<any>(`${apiUrl}/removeJobBoard`, { id: id });
+    const payload = {
+      id
+    }
+    return this.http.delete<any>(`${apiUrl}/removeJobBoard`, { body: payload });
   }
 
   deleteJob(id: string): Observable<any> {
-    return this.http.post<any>(`${apiUrl}/removeJob`, { id: id });
+    const payload = {
+      id
+    }
+    return this.http.delete<any>(`${apiUrl}/removeJob`, { body: payload });
   }
 
   // updated Section
@@ -225,6 +235,22 @@ export class AdminService {
 
   getAllPropertiesCountByCategory() {
     return this.http.get<any>(`${apiUrl}/allPropertiesCountByCategory`);
+  }
+
+  getPropertyById(id: string) {
+    return this.http.get<any>(`${apiUrl}/getPropertyById?id=${id}`);
+  }
+
+  createGroupCode(payloadData: any): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/createGroupCode`, payloadData);
+  }
+
+  updateGroupCode(body: any): Observable<any> {
+    return this.http.post<any>(`${apiUrl}/updateGroupCodes`, body);
+  }
+
+  getAdminUsers() {
+    return this.http.get(`${apiUrl}/getAdminUsers`);
   }
 
 }

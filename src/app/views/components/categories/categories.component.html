@@ -54,11 +54,11 @@
               </td> -->
                 <td>
                   <div style="display: flex;">
-                    <span class="view-button" (click)="goToViewPage(i)">View</span>
-                    <span style="margin-left: 20px;" class="" (click)="editItem(item)"><img width="20px"
+                    <span class="view-button" (click)="parseDataAndNavigate(categories[i], 'category')">View</span>
+                    <span style="margin-left: 20px;" class="cur_pointer" (click)="editItem(item)"><img width="20px"
                         src="../../../../assets/images/edit.svg" alt=""></span>
 
-                    <span style="margin-left: 10px;" class="" (click)="deleteItem(item._id)"><img width="20px"
+                    <span style="margin-left: 10px;" class="cur_pointer" (click)="deleteItem(item._id)"><img width="20px"
                         src="../../../../assets/images/trash.svg" alt=""></span>
                   </div>
                 </td>
@@ -67,9 +67,7 @@
           </table>
         </ng-template>
 
-        <app-custom-pagination [currentPage]="offset" [totalRecords]="totalRecords" [pageSize]="limit"
-          (nextClickEvent)="nextClickEvent($event)" (previousClickEvent)="previousClickEvent($event)">
-        </app-custom-pagination>
+        <app-paginator [totalRecords]="totalRecords" (pageChangeEventEmit)="pageChangeEvent($event)"></app-paginator>
 
       </c-card-body>
     </c-card>

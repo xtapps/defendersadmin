@@ -1,26 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, finalize } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
+import { PAGINATION } from 'src/assets/app-constant';
+import { PropertiesModel } from '../../components/model/properties.model';
 
 @Component({
   selector: 'app-other',
   templateUrl: './other.component.html',
   styleUrls: ['./other.component.scss']
 })
-export class OtherComponent {
+export class OtherComponent extends PropertiesModel implements OnInit, OnDestroy {
 
   othersList: any[] = [];
   isLoading = true;
   subscription: Subscription[] = [];
-  limit = 13;
-  offset = 1;
+  limit = PAGINATION.limit;
+  offset = PAGINATION.offset;
   totalRecords = 0;
 
   constructor(
     private adminService: AdminService,
-    private router: Router
-  ) { }
+    public override router: Router
+  ) {
+    super(router);
+  }
 
   ngOnInit(): void {
     this.getOthersList();
@@ -53,25 +57,15 @@ export class OtherComponent {
     this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'others' } });
   }
 
-  previousClickEvent(event: boolean): void {
-    if (this.offset > 0 && event) {
-      this.offset -= 1;
-      this.getOthersList();
-    }
-  }
-
-  nextClickEvent(event: boolean): void {
-    if (event) {
-      this.offset += 1;
-      this.getOthersList();
-    }
+  pageChangeEvent(event: any) {
+    this.offset = event.offSet;
+    this.limit = event.limit;
+    this.getOthersList();
   }
 
   deleteItem(id: string): void {
     var userResponse = confirm("Do you want to proceed?");
     if (userResponse) {
-      alert("You chose to proceed!");
-      return;
       this.onDelete(id);
     }
   }
@@ -82,7 +76,10 @@ export class OtherComponent {
       this.adminService.deleteProperties(id).pipe(
         finalize(() => {this.isLoading = false;})
       ).subscribe(res => {
-        if(res.success){
+        this.getOthersList();
+      }, err => {
+        if (err.status === 201) {
+          alert('Other category deleted Successfully!');
           this.getOthersList();
         }
       })
