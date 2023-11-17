@@ -79,7 +79,7 @@ export class BooksPlusComponent extends PropertiesModel implements OnInit, OnDes
         this.getBooksPlusLists();
       }, err => {
         if (err.status === 201) {
-          alert('Book plus deleted Successfully!');
+          alert('Deleted Successfully!');
           this.getBooksPlusLists();
         }
       })

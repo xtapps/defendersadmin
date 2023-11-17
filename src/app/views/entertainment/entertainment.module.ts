@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GamesComponent } from './games/games.component';
-import { BooksPlusComponent } from './books-plus/books-plus.component';
-import { MoviesComponent} from './movies/movies.component';
+import { MusicComponent } from './music/music.component';
+import { PodcastsComponent } from './podcasts/podcasts.component';
+import { StreamingComponent} from './streaming/streaming.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ButtonModule, CardModule, GridModule, TableModule } from '@coreui/angular';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -14,25 +14,25 @@ import { SharedAdminModule } from 'src/app/shared/shared-admin.module';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'games', pathMatch: 'full',
+    path: '', redirectTo: 'music', pathMatch: 'full',
   },
   {
-    path: 'games', component: GamesComponent
+    path: 'music', component: MusicComponent
   },
   {
-    path: 'book-plus', component: BooksPlusComponent
+    path: 'podcasts', component: PodcastsComponent
   },
   {
-    path: 'movies', component: MoviesComponent
+    path: 'streaming', component: StreamingComponent
   }
 ]
 
 
 @NgModule({
   declarations: [
-    GamesComponent,
-    BooksPlusComponent,
-    MoviesComponent
+    MusicComponent,
+    StreamingComponent,
+    PodcastsComponent
   ],
   imports: [
     CommonModule,
@@ -48,4 +48,4 @@ const routes: Routes = [
     ButtonModule
   ]
 })
-export class KidsCornerModule { }
+export class EntertainmentModule { }

@@ -71,7 +71,7 @@ export const navItems: INavData[] = [
   //   title: true,
   //   name: 'Opportunities'
   // },
-  
+
   {
     name: 'Opportunities',
     url: '/',
@@ -144,6 +144,33 @@ export const navItems: INavData[] = [
       {
         name: 'Books Plus',
         url: '/kids-corner/book-plus',
+        iconComponent: { name: 'cil-user' }
+      },
+      {
+        name: 'Movies',
+        url: '/kids-corner/movies',
+        iconComponent: { name: 'cil-user' }
+      },
+    ]
+  },
+  {
+    name: 'Entertainment',
+    url: '/',
+    iconComponent: { name: '' },
+    children: [
+      {
+        name: 'Podcasts',
+        url: '/entertainment/podcasts',
+        iconComponent: { name: 'cil-user' }
+      },
+      {
+        name: 'Music',
+        url: '/entertainment/music',
+        iconComponent: { name: 'cil-user' }
+      },
+      {
+        name: 'Streaming',
+        url: '/entertainment/streaming',
         iconComponent: { name: 'cil-user' }
       },
     ]

@@ -1,5 +1,5 @@
 <div class="header_section">
-  <h4>Books Plus</h4>
+  <h4>Movies</h4>
   <button cButton color="primary" (click)="addNew()">Add</button>
 </div>
 
@@ -26,16 +26,16 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of bookPlusLists; index as i">
+              <tr *ngFor="let item of gamesLists; index as i">
                 <td>
                   <div>{{ item.corpName }}</div>
                 </td>
                 <td>
-                  <div><a [href]="item.website">{{item.website}}</a></div>
+                  <div>{{ item.website }}</div>
                 </td>
                 <td>
                   <div style="display: flex;">
-                    <span class="view-button" (click)="parseDataAndNavigate(bookPlusLists[i], 'books plus')">View</span>
+                    <span class="view-button" (click)="parseDataAndNavigate(gamesLists[i], 'games')">View</span>
                     <span class="edit-icon" (click)="editItem(item)"><img width="20px"
                       src="../../../../assets/images/edit.svg" alt=""></span>
                     <span class="delete-icon" (click)="deleteItem(item._id)"><img width="20px"
