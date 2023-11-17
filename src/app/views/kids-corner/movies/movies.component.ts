@@ -5,11 +5,11 @@ import { AdminService } from 'src/app/services/admin.service';
 import { PropertiesModel } from '../../components/model/properties.model';
 
 @Component({
-  selector: 'app-games',
-  templateUrl: './games.component.html',
-  styleUrls: ['./games.component.scss']
+  selector: 'app-movies',
+  templateUrl: './movies.component.html',
+  styleUrls: ['./movies.component.scss']
 })
-export class GamesComponent extends PropertiesModel implements OnInit, OnDestroy {
+export class MoviesComponent extends PropertiesModel implements OnInit, OnDestroy {
 
   gamesLists: any[] = [];
   isLoading = true;
@@ -31,7 +31,7 @@ export class GamesComponent extends PropertiesModel implements OnInit, OnDestroy
 
   getGamesList(): void {
     const properties = {
-      appSection: 'games',
+      appSection: 'movies',
       propertyType: 'kids'
     }
 
@@ -43,11 +43,11 @@ export class GamesComponent extends PropertiesModel implements OnInit, OnDestroy
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'kids', orgType: 'commercial', appSection: 'games', type: 'properties' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'kids', orgType: 'commercial', appSection: 'movies', type: 'properties' } });
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'kids', orgType: 'commercial', appSection: 'games', type: 'properties', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'kids', orgType: 'commercial', appSection: 'movies', type: 'properties', editMode: 'true' } });
   }
 
   goToViewPage(index: number): void {

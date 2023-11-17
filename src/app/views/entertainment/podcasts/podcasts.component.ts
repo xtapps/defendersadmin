@@ -2,20 +2,21 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, finalize } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
+import { PAGINATION } from 'src/assets/app-constant';
 import { PropertiesModel } from '../../components/model/properties.model';
 
 @Component({
-  selector: 'app-games',
-  templateUrl: './games.component.html',
-  styleUrls: ['./games.component.scss']
+  selector: 'app-podcasts',
+  templateUrl: './podcasts.component.html',
+  styleUrls: ['./podcasts.component.scss']
 })
-export class GamesComponent extends PropertiesModel implements OnInit, OnDestroy {
+export class PodcastsComponent extends PropertiesModel implements OnInit, OnDestroy {
 
-  gamesLists: any[] = [];
+  bookPlusLists: any[] = [];
   isLoading = true;
   subscription: Subscription[] = [];
-  limit = 13;
-  offset = 0;
+  limit = PAGINATION.limit;
+  offset = PAGINATION.offset;
   totalRecords = 0;
 
   constructor(
@@ -26,40 +27,40 @@ export class GamesComponent extends PropertiesModel implements OnInit, OnDestroy
   }
 
   ngOnInit(): void {
-    this.getGamesList();
+    this.getBooksPlusLists();
   }
 
-  getGamesList(): void {
+  getBooksPlusLists(): void {
     const properties = {
-      appSection: 'games',
-      propertyType: 'kids'
+      appSection: 'entertainment',
+      propertyType: 'podcast'
     }
 
     this.adminService.getProperties(properties, this.limit, this.offset).subscribe(res => {
       this.isLoading = false;
-      this.gamesLists = res[0]?.properties;
+      this.bookPlusLists = res[0]?.properties;
       this.totalRecords = res[0]?.totalRecords;
     });
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'kids', orgType: 'commercial', appSection: 'games', type: 'properties' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'podcast', orgType: 'commercial', appSection: 'entertainment', type: 'properties' } });
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'kids', orgType: 'commercial', appSection: 'games', type: 'properties', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'podcast', orgType: 'commercial', appSection: 'entertainment', type: 'properties', editMode: 'true' } });
   }
 
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
-    const encodedData = encodeURIComponent(JSON.stringify(this.gamesLists[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'games' } });
+    const encodedData = encodeURIComponent(JSON.stringify(this.bookPlusLists[index]));
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'books plus' } });
   }
 
   pageChangeEvent(event: any) {
     this.offset = event.offSet;
     this.limit = event.limit;
-    this.getGamesList();
+    this.getBooksPlusLists();
   }
 
   deleteItem(id: string): void {
@@ -75,11 +76,11 @@ export class GamesComponent extends PropertiesModel implements OnInit, OnDestroy
       this.adminService.deleteProperties(id).pipe(
         finalize(() => {this.isLoading = false;})
       ).subscribe(res => {
-        this.getGamesList();
+        this.getBooksPlusLists();
       }, err => {
         if (err.status === 201) {
           alert('Deleted Successfully!');
-          this.getGamesList();
+          this.getBooksPlusLists();
         }
       })
     )
