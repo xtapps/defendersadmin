@@ -2,17 +2,17 @@
     <h4>Business Opportunities</h4>
     <!-- <button cButton color="primary" (click)="addNew()">Add</button> -->
   </div>
-  
+
   <c-row>
     <c-col xs>
       <c-card class="mb-4">
         <!-- <c-card-header>Business Opportunities</c-card-header> -->
         <c-card-body>
-  
+
           <ng-container *ngIf="isLoading; else tableData">
             <div class="skeleton-loader"></div>
           </ng-container>
-  
+
           <ng-template #tableData>
             <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
               <thead cTableColor="light">
@@ -20,8 +20,8 @@
                   <!-- <th class="text-center">
                     <svg cIcon name="cilPeople"></svg>
                   </th> -->
-                  <th>Franch. Name</th>
-                  <th>Subscription Total</th>
+                  <th>Franchise Name</th>
+                  <!-- <th>Subscription Total</th> -->
                   <th>Website</th>
                   <th></th>
                 </tr>
@@ -31,9 +31,9 @@
                   <td>
                     <div>{{ item.franchiseName }}</div>
                   </td>
-                  <td>
+                  <!-- <td>
                     <div>{{ item.subscriptionTotal }}</div>
-                  </td>
+                  </td> -->
                   <td>
                       <div>{{ item.website }}</div>
                   </td>
