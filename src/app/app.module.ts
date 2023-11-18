@@ -43,6 +43,7 @@ import { AdminModule } from './views/admin/admin.module';
 import { ValidateUserComponent } from './views/validate-user/validate-user.component';
 import { Interceptor } from './interceptor/interceptor';
 import { AuthGuard } from './services/auth-guard.service';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -84,6 +85,7 @@ const APP_CONTAINERS = [
     TableModule,
     HttpClientModule,
     AdminModule,
+    MatDialogModule
     
     
   ],
