@@ -14,14 +14,22 @@
                             <tr *ngIf="pair?.value !== ''">
                                 <th>{{ pair.key }}</th>
                                 <td>{{
-                                    (pair.key === 'logo' ||
+                                    (pair.key === 'Logo' ||
                                     pair.key === 'chatPhoto' ||
-                                    pair.key === 'images' ||
-                                    pair.key === 'website' ||
+                                    pair.key === 'Images' ||
+                                    pair.key === 'Website' ||
                                     pair.key === 'appleIcon' ||
-                                    pair.key === 'androidIcon'
+                                    pair.key === 'androidIcon' ||
+                                    pair.key === 'Category Icon' ||
+                                    pair.key === 'Franchise Image'
                                     )
                                     ? '' : pair?.value }}
+
+                                    <div *ngFor="let image of pair.value.split(',')">
+                                        <img class="view_image"
+                                            *ngIf="(pair.key === 'Images' || pair.key === 'Logo' || pair.key === 'Category Icon' || pair.key === 'Franchise Image') && image !== 'placeholder.jpg'"
+                                            [src]="getImage(image)" alt="" (click)="viewImage(getImage(image))">
+                                    </div>
 
                                     <img style="width: 150px;" *ngIf="pair.key === 'logo' && type === 'job-boards'"
                                         [src]="pair.value" alt="">
@@ -34,7 +42,7 @@
                                      pair.key === 'androidIcon'
                                      " [src]="pair.value" alt="">
 
-                                    <a [href]="[pair?.value]" *ngIf="pair.key === 'website'">{{pair?.value}}</a>
+                                    <a [href]="[pair?.value]" *ngIf="pair.key === 'Website'">{{pair?.value}}</a>
                                 </td>
                             </tr>
                         </ng-container>
