@@ -16,7 +16,8 @@ export class RejectedListComponent extends DefenderModel implements OnInit, OnDe
   limit = 13;
   offset = 0;
   totalRecords = 0;
-  isLoading = false
+  isLoading = false;
+  searchText: any = '';
 
   constructor(
     private adminService: AdminService,
@@ -32,7 +33,7 @@ export class RejectedListComponent extends DefenderModel implements OnInit, OnDe
   getRejectedList(): void {
     this.isLoading = true;
     this.subscription.push(
-      this.adminService.getUserStatus(3, this.limit, this.offset).pipe(
+      this.adminService.getUserStatus(3, this.limit, this.offset, undefined, this.searchText).pipe(
         finalize(() => { this.isLoading = false })
       ).subscribe(res => {
         this.rejectedList = res.defendersList;
@@ -91,6 +92,11 @@ export class RejectedListComponent extends DefenderModel implements OnInit, OnDe
   pageChangeEvent(event: any) {
     this.offset = event.offSet;
     this.limit = event.limit;
+    this.getRejectedList();
+  }
+
+  applyFilter(text: any) {
+    this.searchText = text
     this.getRejectedList();
   }
 

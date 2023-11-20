@@ -18,6 +18,7 @@ export class OtherComponent extends PropertiesModel implements OnInit, OnDestroy
   limit = PAGINATION.limit;
   offset = PAGINATION.offset;
   totalRecords = 0;
+  searchText: any = '';
 
   constructor(
     private adminService: AdminService,
@@ -36,7 +37,7 @@ export class OtherComponent extends PropertiesModel implements OnInit, OnDestroy
       propertyType: 'charity'
     }
 
-    this.adminService.getProperties(properties, this.limit, this.offset).subscribe(res => {
+    this.adminService.getProperties(properties, this.limit, this.offset, this.searchText).subscribe(res => {
       this.isLoading = false;
       this.othersList = res[0]?.properties;
       this.totalRecords = res[0]?.totalRecords;
@@ -84,6 +85,11 @@ export class OtherComponent extends PropertiesModel implements OnInit, OnDestroy
         }
       })
     )
+  }
+
+  applyFilter(text: any) {
+    this.searchText = text
+    this.getOthersList();
   }
 
   ngOnDestroy(): void {

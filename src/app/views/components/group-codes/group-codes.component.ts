@@ -18,6 +18,7 @@ export class GroupCodesComponent extends GroupCodeModel implements OnInit, OnDes
   limit = PAGINATION.limit;
   offset = PAGINATION.offset;
   totalRecords = 0;
+  searchText: any = '';
 
   constructor(
     private adminService: AdminService,
@@ -33,7 +34,7 @@ export class GroupCodesComponent extends GroupCodeModel implements OnInit, OnDes
   getGroupCodes(): void {
     this.isLoading = true;
     this.subscription.push(
-      this.adminService.getGroupCodes(this.limit, this.offset).subscribe((res: any) => {
+      this.adminService.getGroupCodes(this.limit, this.offset, this.searchText).subscribe((res: any) => {
         this.isLoading = false;
         this.groupCodes = res?.groupCodes;
         this.totalRecords = res?.totalCount;
@@ -87,6 +88,11 @@ export class GroupCodesComponent extends GroupCodeModel implements OnInit, OnDes
 
   editItem(ev: any): void {
     this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { type: 'group-code', editMode: 'true' } });
+  }
+
+  applyFilter(text: any) {
+    this.searchText = text
+    this.getGroupCodes();
   }
 
   ngOnDestroy(): void {

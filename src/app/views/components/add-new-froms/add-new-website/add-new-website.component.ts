@@ -75,7 +75,7 @@ export class AddNewWebsiteComponent {
       discountDisclaimer: [''],
       appSection: ['partner'],
       isVetOwned: [false],
-      locationActive: [false]
+      locationActive: [true]
     })
   }
 

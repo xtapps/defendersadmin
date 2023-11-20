@@ -18,6 +18,7 @@ export class JobOpportunitiesComponent extends JobModel implements OnInit, OnDes
   limit: number = PAGINATION.limit;
   offset: number = PAGINATION.offset;
   totalRecords: number = 0;
+  searchText: any = '';
 
   constructor(
     private adminService: AdminService,
@@ -31,11 +32,12 @@ export class JobOpportunitiesComponent extends JobModel implements OnInit, OnDes
   }
 
   getJobOpportunities(): void {
-    this.adminService.getJobOpportunities(this.limit, this.offset).subscribe((res: any) => {
-      this.isLoading = false;
-      this.jobOpportunities = res.jobs;
-      this.totalRecords = res.totalRecords;
-    });
+    this.subscription.push(
+      this.adminService.getJobOpportunities(this.limit, this.offset, this.searchText).subscribe((res: any) => {
+        this.isLoading = false;
+        this.jobOpportunities = res.jobs;
+        this.totalRecords = res.totalRecords;
+      }));
   }
 
   goToViewPage(index:number): void {
@@ -70,6 +72,11 @@ export class JobOpportunitiesComponent extends JobModel implements OnInit, OnDes
         }
       })
     )
+  }
+
+  applyFilter(text: any) {
+    this.searchText = text
+    this.getJobOpportunities();
   }
 
   ngOnDestroy(): void {

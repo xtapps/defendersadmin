@@ -20,6 +20,7 @@ export class CategoriesComponent extends CategoryModel implements OnInit, OnDest
   public offset: number = PAGINATION.offset;
   totalRecords = 0;
   limit = PAGINATION.limit;
+  searchText: any = '';
 
   constructor(
     private adminService: AdminService,
@@ -35,7 +36,7 @@ export class CategoriesComponent extends CategoryModel implements OnInit, OnDest
   getAllCategories(): void {
     this.isLoading = true;
     this.subscription.push(
-      this.adminService.getAllCategories(this.limit, this.offset).subscribe((res: any) => {
+      this.adminService.getAllCategories(this.limit, this.offset, this.searchText).subscribe((res: any) => {
         this.isLoading = false;
         this.categories = res?.categories;
         this.totalRecords = res?.totalCount;
@@ -85,6 +86,11 @@ export class CategoriesComponent extends CategoryModel implements OnInit, OnDest
   pageChangeEvent(event: any) {
     this.offset = event.offSet;
     this.limit = event.limit;
+    this.getAllCategories();
+  }
+
+  applyFilter(text: any) {
+    this.searchText = text
     this.getAllCategories();
   }
 

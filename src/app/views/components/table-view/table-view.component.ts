@@ -33,7 +33,7 @@ export class TableViewComponent extends PropertiesModel implements OnInit, OnDes
   public offset: number = PAGINATION.offset;
   limit = PAGINATION.limit;
 
-  private searchText: string = '';
+  searchText: any = '';
 
   private subscriptions: Subscription[] = [];
 
@@ -59,17 +59,9 @@ export class TableViewComponent extends PropertiesModel implements OnInit, OnDes
     this.subscriptions.push(propSub);
   }
 
-  applyFilter(event: any) {
-    // const filterValue = (event.target as HTMLInputElement).value;
-    // this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    // if (this.dataSource.paginator) {
-    //   this.dataSource.paginator.firstPage();
-    // }
-    if (event.keyCode === 13) {
-      this.searchText = (event.target as HTMLInputElement).value;
-      this.getAllProperties();
-    }
+  applyFilter(text: any) {
+    this.searchText = text
+    this.getAllProperties();
   }
 
   addNew(): void {
