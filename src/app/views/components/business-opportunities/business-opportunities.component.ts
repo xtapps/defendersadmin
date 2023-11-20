@@ -17,6 +17,7 @@ export class BusinessOpportunitiesComponent extends BusinessModel implements OnI
   limit = PAGINATION.limit;
   offset = PAGINATION.offset;
   totalRecords = 0;
+  searchText: any = '';
   subscriptions: Subscription[] = [];
 
   constructor(
@@ -32,7 +33,7 @@ export class BusinessOpportunitiesComponent extends BusinessModel implements OnI
 
   getBusinessOpportunities(): void {
     this.subscriptions.push(
-      this.adminService.getFranchises(this.limit, this.offset).subscribe((res: any) => {
+      this.adminService.getFranchises(this.limit, this.offset, this.searchText).subscribe((res: any) => {
         this.isLoading = false;
         this.businessList = res.franchises;
         this.totalRecords = res.totalCount;
@@ -49,6 +50,11 @@ export class BusinessOpportunitiesComponent extends BusinessModel implements OnI
   pageChangeEvent(event: any) {
     this.offset = event.offSet;
     this.limit = event.limit;
+    this.getBusinessOpportunities();
+  }
+
+  applyFilter(text: any) {
+    this.searchText = text
     this.getBusinessOpportunities();
   }
 

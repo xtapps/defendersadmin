@@ -17,6 +17,7 @@ export class StreamingComponent extends PropertiesModel implements OnInit, OnDes
   limit = 13;
   offset = 0;
   totalRecords = 0;
+  searchText: any = '';
 
   constructor(
     private adminService: AdminService,
@@ -35,7 +36,7 @@ export class StreamingComponent extends PropertiesModel implements OnInit, OnDes
       propertyType: 'streaming'
     }
 
-    this.adminService.getProperties(properties, this.limit, this.offset).subscribe(res => {
+    this.adminService.getProperties(properties, this.limit, this.offset, this.searchText).subscribe(res => {
       this.isLoading = false;
       this.gamesLists = res[0]?.properties;
       this.totalRecords = res[0]?.totalRecords;
@@ -83,6 +84,11 @@ export class StreamingComponent extends PropertiesModel implements OnInit, OnDes
         }
       })
     )
+  }
+
+  applyFilter(text: any) {
+    this.searchText = text
+    this.getGamesList();
   }
 
   ngOnDestroy(): void {

@@ -18,6 +18,7 @@ export class AppsListComponent extends PropertiesModel implements OnInit, OnDest
   public offset: number = PAGINATION.offset;
   totalRecords = 0;
   limit = PAGINATION.limit;
+  searchText: any = '';
 
   constructor(
     private adminService: AdminService,
@@ -37,7 +38,7 @@ export class AppsListComponent extends PropertiesModel implements OnInit, OnDest
   getAppslIst(): void {
     this.isLoading = true;
     this.subscription.push(
-      this.adminService.getApps(this.limit, this.offset).subscribe((res: any) => {
+      this.adminService.getApps(this.limit, this.offset, this.searchText).subscribe((res: any) => {
         this.isLoading = false;
         this.appsList = res[0]?.properties;
         this.totalRecords = res[0]?.totalRecords;
@@ -78,6 +79,11 @@ export class AppsListComponent extends PropertiesModel implements OnInit, OnDest
         })
       })
     )
+  }
+
+  applyFilter(text: any) {
+    this.searchText = text
+    this.getAppslIst();
   }
 
   ngOnDestroy(): void {

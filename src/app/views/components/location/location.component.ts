@@ -25,6 +25,7 @@ export class LocationComponent extends PropertiesModel implements OnInit, OnDest
   public offset: number = PAGINATION.offset;
   limit = PAGINATION.limit;
   totalRecords = 0;
+  searchText: any = '';
 
   constructor(
     private adminService: AdminService,
@@ -37,10 +38,15 @@ export class LocationComponent extends PropertiesModel implements OnInit, OnDest
     this.getAllLocation();
   }
 
+  applyFilter(text: any) {
+    this.searchText = text
+    this.getAllLocation();
+  }
+
   getAllLocation(): void {
     this.isLoading = true;
     this.subscription.push(
-      this.adminService.getLocations(this.limit, this.offset).subscribe((res: any) => {
+      this.adminService.getLocations(this.limit, this.offset, this.searchText).subscribe((res: any) => {
         this.isLoading = false;
         this.locationList = res[0]?.properties;
         this.totalRecords = res[0]?.totalRecords;

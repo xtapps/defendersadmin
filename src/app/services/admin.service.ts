@@ -22,45 +22,45 @@ export class AdminService {
     });
   }
 
-  getLocations(limit: number, offset: number) {
-    const url = `${apiUrl}/properties/viewAll?reqParams=[ {"value": "partner", "key": "appSection"}, {"value": "service", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
+  getLocations(limit: number, offset: number, text: string) {
+    const url = `${apiUrl}/properties/viewAll?reqParams=[ {"value": "partner", "key": "appSection"}, {"value": "service", "key": "propertyType"}]&limit=${limit}&offset=${offset}&text=${text}`;
     return this.http.get(url);
   }
 
-  getWebsites(limit: number, offset: number) {
-    const url = `${apiUrl}/websites?reqParams=[{"value": "false", "key": "featured"}, {"value": "website", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
+  getWebsites(limit: number, offset: number, text: string) {
+    const url = `${apiUrl}/websites?reqParams=[{"value": "false", "key": "featured"}, {"value": "website", "key": "propertyType"}]&limit=${limit}&offset=${offset}&text=${text}`;
     return this.http.get(url);
   }
 
-  getApps(limit: number, offset: number) {
-    const url = `${apiUrl}/properties/viewAll?reqParams=[{"value": "false", "key": "featured"}, {"value": "app", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
+  getApps(limit: number, offset: number, text: string) {
+    const url = `${apiUrl}/properties/viewAll?reqParams=[{"value": "false", "key": "featured"}, {"value": "app", "key": "propertyType"}]&limit=${limit}&offset=${offset}&text=${text}`;
     return this.http.get(url);
   }
 
-  getFranchises(limit: number, offset: number) {
-    const url = `${apiUrl}/defender/franchises?reqParams=[{"value": "false", "key": "featured"}, {"value": "franchises", "key": "propertyType"}]&limit=${limit}&offset=${offset}`;
+  getFranchises(limit: number, offset: number, text: string) {
+    const url = `${apiUrl}/defender/franchises?reqParams=[{"value": "false", "key": "featured"}, {"value": "franchises", "key": "propertyType"}]&limit=${limit}&offset=${offset}&text=${text}`;
     return this.http.get(url);
   }
 
-  getAllCategories(limit: number, offset: number) {
-    return this.http.get(`${apiUrl}/getCategories?limit=${limit}&offset=${offset}`);
+  getAllCategories(limit: number, offset: number, text: string = '') {
+    return this.http.get(`${apiUrl}/getCategories?limit=${limit}&offset=${offset}&text=${text}`);
   }
 
 
-  getGroupCodes(limit: number, offset: number) {
-    return this.http.get(`${apiUrl}/getGroupCodes?limit=${limit}&offset=${offset}`);
+  getGroupCodes(limit: number, offset: number, text: string = '') {
+    return this.http.get(`${apiUrl}/getGroupCodes?limit=${limit}&offset=${offset}&text=${text}`);
   }
 
   getAllDefendersList(limit: number, offset: number) {
     return this.http.get(`${apiUrl}/getAllDefenders?userStatus=2&limit=${limit}&offset=${offset}`);
   }
 
-  getJobOpportunities(limit: number, offset: number) {
-    return this.http.get(`${apiUrl}/defender/jobs?limit=${limit}&offset=${offset}`);
+  getJobOpportunities(limit: number, offset: number, text: string = '') {
+    return this.http.get(`${apiUrl}/defender/jobs?limit=${limit}&offset=${offset}&text=${text}`);
   }
 
-  getJobBoards(limit: number, offset: number) {
-    return this.http.get(`${apiUrl}/getJobBoard?limit=${limit}&offset=${offset}`);
+  getJobBoards(limit: number, offset: number, text: string = '') {
+    return this.http.get(`${apiUrl}/getJobBoard?limit=${limit}&offset=${offset}&text=${text}`);
   }
 
   getMilitary(limit: number, offset: number) {
@@ -82,12 +82,12 @@ export class AdminService {
    * 
    * @returns {Observable<any>} An observable that emits the response containing the properties.
    */
-  getProperties(properties: { appSection: string, propertyType: string }, limit: number, offset: number): Observable<IApiRes[]> {
-    return this.http.get<IApiRes[]>(`${apiUrl}/properties/viewAll?reqParams=[{"key":"appSection","value":"${properties.appSection}"},{"key":"propertyType","value":"${properties.propertyType}"}]&limit=${limit}&offset=${offset}`);
+  getProperties(properties: { appSection: string, propertyType: string }, limit: number, offset: number, text: string = ''): Observable<IApiRes[]> {
+    return this.http.get<IApiRes[]>(`${apiUrl}/properties/viewAll?reqParams=[{"key":"appSection","value":"${properties.appSection}"},{"key":"propertyType","value":"${properties.propertyType}"}]&limit=${limit}&offset=${offset}&text=${text}`);
   }
 
-  getUserStatus(status: number, limit: number, offset: number, userType?: number): Observable<any> {
-    return this.http.get<any>(`${apiUrl}/getAllDefenders?userStatus=${status}&limit=${limit}&offset=${offset}&userType=${userType}`);
+  getUserStatus(status: number, limit: number, offset: number, userType?: number, text: string = ''): Observable<any> {
+    return this.http.get<any>(`${apiUrl}/getAllDefenders?userStatus=${status}&limit=${limit}&offset=${offset}&userType=${userType}&text=${text}`);
   }
 
   updateUserStatus(paylodData: any): Observable<any>{

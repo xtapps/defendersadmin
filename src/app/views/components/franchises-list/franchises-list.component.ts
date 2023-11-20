@@ -19,6 +19,7 @@ export class FranchisesListComponent extends BusinessModel implements OnInit, On
   public limit: number = PAGINATION.limit;
   public offset: number = PAGINATION.offset;
   totalCount = 0;
+  searchText: any = '';
 
   constructor(
     private adminService: AdminService,
@@ -34,7 +35,7 @@ export class FranchisesListComponent extends BusinessModel implements OnInit, On
   getFranchisesList(): void {
     this.isLoading = true;
     this.subscription.push(
-      this.adminService.getFranchises(this.limit, this.offset).subscribe((res: any) => {
+      this.adminService.getFranchises(this.limit, this.offset, this.searchText).subscribe((res: any) => {
         this.isLoading = false;
         this.franchisesList = res.franchises;
         this.totalCount = res.totalCount;
@@ -90,6 +91,11 @@ export class FranchisesListComponent extends BusinessModel implements OnInit, On
 
   editItem(ev: any): void {
     this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'franchises', orgType: 'commercial', appSection: 'partner', type: 'franchises', editMode: 'true' } });
+  }
+
+  applyFilter(text: any) {
+    this.searchText = text
+    this.getFranchisesList();
   }
 
   ngOnDestroy(): void {

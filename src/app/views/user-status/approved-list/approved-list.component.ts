@@ -21,6 +21,7 @@ export class ApprovedListComponent extends DefenderModel implements OnInit, OnDe
   totalRecords = 0;
   isLoading = false
   userType: number = 0;
+  searchText: any = '';
 
   constructor(
     private adminService: AdminService,
@@ -37,7 +38,7 @@ export class ApprovedListComponent extends DefenderModel implements OnInit, OnDe
   getApprovedList(): void {
     this.isLoading = true;
     this.subscription.push(
-      this.adminService.getUserStatus(2, this.limit, this.offset, this.userType).pipe(
+      this.adminService.getUserStatus(2, this.limit, this.offset, this.userType, this.searchText).pipe(
         finalize(() => { this.isLoading = false })
       ).subscribe(res => {
         this.approvedList = res.defendersList;
@@ -101,6 +102,11 @@ export class ApprovedListComponent extends DefenderModel implements OnInit, OnDe
   pageChangeEvent(event: any) {
     this.offset = event.offSet;
     this.limit = event.limit;
+    this.getApprovedList();
+  }
+
+  applyFilter(text: any) {
+    this.searchText = text
     this.getApprovedList();
   }
 

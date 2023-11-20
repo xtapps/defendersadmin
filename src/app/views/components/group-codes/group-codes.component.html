@@ -7,6 +7,7 @@
     <c-card class="mb-4">
       <!-- <c-card-header>Group Codes</c-card-header> -->
       <c-card-body>
+        <app-search-form (searchEmit)="applyFilter($event)"></app-search-form>
 
         <ng-container *ngIf="isLoading; else tableData">
           <div class="skeleton-loader"></div>
