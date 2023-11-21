@@ -58,6 +58,38 @@ export class BusinessOpportunitiesComponent extends BusinessModel implements OnI
     this.getBusinessOpportunities();
   }
 
+  deleteItem(id: string): void {
+    var userResponse = confirm("Do you want to proceed?");
+    if (userResponse) {
+      this.deleteFranchises(id);
+    }
+  }
+
+  deleteFranchises(id: string): void {
+    this.subscriptions.push(
+      this.adminService.deleteFranchises(id).subscribe({
+        next: (res => {
+          alert('Business opportunity deleted Successfully!');
+          this.getBusinessOpportunities();
+        }),
+        error: (err => {
+          if (err.status === 201) {
+            alert('Business opportunity deleted Successfully!');
+            this.getBusinessOpportunities();
+          }
+        })
+      })
+    )
+  }
+
+  addNew(): void {
+    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'franchises' } });
+  }
+
+  editItem(ev: any): void {
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'franchises', orgType: 'commercial', appSection: 'partner', type: 'franchises', editMode: 'true' } });
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
