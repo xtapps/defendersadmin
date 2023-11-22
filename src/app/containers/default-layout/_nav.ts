@@ -154,6 +154,28 @@ export const navItems: INavData[] = [
     ]
   },
   {
+    name: 'Health',
+    url: '/',
+    iconComponent: { name: '' },
+    children: [
+      {
+        name: 'Online',
+        url: '/health/online',
+        iconComponent: { name: 'cil-user' }
+      },
+      {
+        name: 'Mobile Apps',
+        url: '/health/mobileapps',
+        iconComponent: { name: 'cil-user' }
+      },
+      {
+        name: 'Locations',
+        url: '/health/locations',
+        iconComponent: { name: 'cil-user' }
+      },
+    ]
+  },
+  {
     name: 'Entertainment',
     url: '/',
     iconComponent: { name: '' },
