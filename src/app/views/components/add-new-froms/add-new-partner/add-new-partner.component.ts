@@ -73,7 +73,7 @@ export class AddNewPartnerComponent implements OnInit, OnDestroy {
       locationName: ['', [Validators.required]],
       corpName: [''],
       propertyType: [this.propertyType],
-      appSection: [this.appSection],
+      appSection: [this.appSection ? this.appSection : 'partner'],
       orgType: [this.orgType],
       androidUrl: [''],
       appleUrl: [''],
@@ -99,7 +99,7 @@ export class AddNewPartnerComponent implements OnInit, OnDestroy {
       description: [''],
       image: ['', [Validators.required]],
       isVetOwned: [false],
-      isActive: [true]
+      locationActive: [true]
     })
   }
 

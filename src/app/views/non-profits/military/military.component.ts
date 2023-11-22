@@ -19,6 +19,7 @@ export class MilitaryComponent extends PropertiesModel implements OnInit, OnDest
   limit = PAGINATION.limit;
   offset = PAGINATION.offset;
   totalRecords = 0;
+  searchText: any = '';
 
   constructor(
     private adminService: AdminService,
@@ -37,7 +38,7 @@ export class MilitaryComponent extends PropertiesModel implements OnInit, OnDest
       propertyType: 'charity'
     }
 
-    this.adminService.getProperties(properties, this.limit, this.offset).subscribe(res => {
+    this.adminService.getProperties(properties, this.limit, this.offset, this.searchText).subscribe(res => {
       this.isLoading = false;
       this.militaryList = res[0].properties;
       this.totalRecords = res[0].totalRecords;
@@ -89,6 +90,11 @@ export class MilitaryComponent extends PropertiesModel implements OnInit, OnDest
 
   editItem(ev: any): void {
     this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'military', type: 'properties', editMode: 'true' } });
+  }
+
+  applyFilter(text: any) {
+    this.searchText = text
+    this.getMilitaryList();
   }
 
 }

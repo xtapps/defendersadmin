@@ -16,7 +16,8 @@ export class SuspendedListComponent extends DefenderModel implements OnInit, OnD
   limit = 13;
   offset = 0;
   totalRecords = 0;
-  isLoading = false
+  isLoading = false;
+  searchText: any = '';
 
   constructor(
     private adminService: AdminService,
@@ -32,7 +33,7 @@ export class SuspendedListComponent extends DefenderModel implements OnInit, OnD
   getSuspendedList(): void {
     this.isLoading = true;
     this.subscription.push(
-      this.adminService.getUserStatus(4, this.limit, this.offset).pipe(
+      this.adminService.getUserStatus(4, this.limit, this.offset, undefined, this.searchText).pipe(
         finalize(() => { this.isLoading = false })
       ).subscribe(res => {
         this.suspendedList = res.defendersList;
@@ -90,6 +91,11 @@ export class SuspendedListComponent extends DefenderModel implements OnInit, OnD
   pageChangeEvent(event: any) {
     this.offset = event.offSet;
     this.limit = event.limit;
+    this.getSuspendedList();
+  }
+
+  applyFilter(text: any) {
+    this.searchText = text
     this.getSuspendedList();
   }
 

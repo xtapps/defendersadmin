@@ -18,6 +18,7 @@ export class JobBoardsComponent extends JobBoardModel implements OnInit, OnDestr
   limit = PAGINATION.limit;
   offset = PAGINATION.offset;
   totalRecords = 0;
+  searchText: any = '';
 
   constructor(
     private adminService: AdminService,
@@ -31,7 +32,7 @@ export class JobBoardsComponent extends JobBoardModel implements OnInit, OnDestr
   }
 
   getJobBoards(): void {
-    this.adminService.getJobBoards(this.limit, this.offset).subscribe((res: any) => {
+    this.adminService.getJobBoards(this.limit, this.offset, this.searchText).subscribe((res: any) => {
       this.isLoading = false;
       this.jodBoards = res.jobBoards;
       this.totalRecords = res.totalCount;
@@ -80,6 +81,11 @@ export class JobBoardsComponent extends JobBoardModel implements OnInit, OnDestr
   pageChangeEvent(event: any) {
     this.offset = event.offSet;
     this.limit = event.limit;
+    this.getJobBoards();
+  }
+
+  applyFilter(text: any) {
+    this.searchText = text
     this.getJobBoards();
   }
 

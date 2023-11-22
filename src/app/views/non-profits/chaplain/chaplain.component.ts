@@ -18,6 +18,7 @@ export class ChaplainComponent extends PropertiesModel implements OnInit, OnDest
   limit = PAGINATION.limit;
   offset = PAGINATION.offset;
   totalRecords = 0;
+  searchText: any = '';
 
   constructor(
     private adminService: AdminService,
@@ -36,7 +37,7 @@ export class ChaplainComponent extends PropertiesModel implements OnInit, OnDest
       propertyType: 'charity'
     }
 
-    this.adminService.getProperties(properties, this.limit, this.offset).subscribe(res => {
+    this.adminService.getProperties(properties, this.limit, this.offset, this.searchText).subscribe(res => {
       this.isLoading = false;
       this.chaplainList = res[0]?.properties;
       this.totalRecords = res[0]?.totalRecords;
@@ -84,6 +85,11 @@ export class ChaplainComponent extends PropertiesModel implements OnInit, OnDest
         }
       })
     )
+  }
+
+  applyFilter(text: any) {
+    this.searchText = text
+    this.getChaplainList();
   }
 
   ngOnDestroy(): void {

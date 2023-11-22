@@ -1,6 +1,9 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { s3Url } from 'src/config/config';
+import { ImageModalComponent } from '../../user-status/modals/image-modal/image-modal.component';
 
 @Component({
   selector: 'app-view-page',
@@ -16,7 +19,8 @@ export class ViewPageComponent  implements OnInit{
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private dialog: MatDialog
     ) {}
 
   ngOnInit() {
@@ -35,6 +39,22 @@ export class ViewPageComponent  implements OnInit{
 
   goBack() {
     this.location.back();
+  }
+
+  getImage(image: string) {
+    if (image.search('https') < 0) {
+      return `${s3Url}${image}`;
+    }
+    return image;
+  }
+
+  viewImage(url: string) {
+    this.dialog.open(ImageModalComponent, {
+      width: '50%',
+      data: {
+        url
+      }
+    });
   }
 
 }

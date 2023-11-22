@@ -20,6 +20,7 @@ export class WebsitesComponent extends PropertiesModel implements OnInit, OnDest
   public offset: number = PAGINATION.offset;
   totalRecords = 0;
   limit = PAGINATION.limit;
+  searchText: any = '';
 
   constructor(
     private adminService: AdminService,
@@ -34,7 +35,7 @@ export class WebsitesComponent extends PropertiesModel implements OnInit, OnDest
 
   getWebsites(): void {
     this.isLoading = true;
-    this.adminService.getWebsites(this.limit, this.offset).subscribe((res: any) => {
+    this.adminService.getWebsites(this.limit, this.offset, this.searchText).subscribe((res: any) => {
       this.isLoading = false;
       this.websitesList = res[0]?.properties;
       this.totalRecords = res[0]?.totalRecords;
@@ -83,6 +84,11 @@ export class WebsitesComponent extends PropertiesModel implements OnInit, OnDest
         }
       })
     )
+  }
+
+  applyFilter(text: any) {
+    this.searchText = text
+    this.getWebsites();
   }
 
   ngOnDestroy(): void {

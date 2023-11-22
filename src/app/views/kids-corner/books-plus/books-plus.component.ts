@@ -18,6 +18,7 @@ export class BooksPlusComponent extends PropertiesModel implements OnInit, OnDes
   limit = PAGINATION.limit;
   offset = PAGINATION.offset;
   totalRecords = 0;
+  searchText: any = '';
 
   constructor(
     private adminService: AdminService,
@@ -36,7 +37,7 @@ export class BooksPlusComponent extends PropertiesModel implements OnInit, OnDes
       propertyType: 'kids'
     }
 
-    this.adminService.getProperties(properties, this.limit, this.offset).subscribe(res => {
+    this.adminService.getProperties(properties, this.limit, this.offset, this.searchText).subscribe(res => {
       this.isLoading = false;
       this.bookPlusLists = res[0]?.properties;
       this.totalRecords = res[0]?.totalRecords;
@@ -84,6 +85,11 @@ export class BooksPlusComponent extends PropertiesModel implements OnInit, OnDes
         }
       })
     )
+  }
+
+  applyFilter(text: any) {
+    this.searchText = text
+    this.getBooksPlusLists();
   }
 
   ngOnDestroy(): void {
