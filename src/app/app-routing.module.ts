@@ -85,6 +85,11 @@ const routes: Routes = [
           import('./views/kids-corner/kids-corner.module').then((m) => m.KidsCornerModule)
       },
       {
+        path: 'health',
+        loadChildren: () =>
+          import('./views/health/health.module').then((m) => m.HealthModule)
+      },
+      {
         path: 'entertainment',
         loadChildren: () =>
           import('./views/entertainment/entertainment.module').then((m) => m.EntertainmentModule)

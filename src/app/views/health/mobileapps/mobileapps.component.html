@@ -1,0 +1,53 @@
+<div class="header_section">
+  <h4>Mobile Apps</h4>
+  <button cButton color="primary" (click)="addNew()">Add</button>
+</div>
+
+<c-row>
+  <c-col xs>
+    <c-card class="mb-4">
+      <!-- <c-card-header>Job Boards</c-card-header> -->
+      <c-card-body>
+        <app-search-form (searchEmit)="applyFilter($event)"></app-search-form>
+
+        <ng-container *ngIf="isLoading; else tableData">
+          <div class="skeleton-loader"></div>
+        </ng-container>
+
+        <ng-template #tableData>
+          <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+            <thead cTableColor="light">
+              <tr>
+                <th>Name</th>
+                <th>Location Name</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of militaryList; index as i">
+                <td>
+                  <div>{{ item.corpName }}</div>
+                </td>
+                <td>
+                  <div>{{ item.locationName }}</div>
+                </td>
+                <td>
+                  <div style="display: flex;">
+                    <span class="view-button" (click)="parseDataAndNavigate(militaryList[i], 'military')">View</span>
+                    <span class="edit-icon" (click)="editItem(item)"><img width="20px"
+                        src="../../../../assets/images/edit.svg" alt=""></span>
+
+                    <span class="delete-icon" (click)="deleteItem(item._id)"><img width="20px"
+                        src="../../../../assets/images/trash.svg" alt=""></span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+        <app-paginator [totalRecords]="totalRecords" (pageChangeEventEmit)="pageChangeEvent($event)"></app-paginator>
+
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
