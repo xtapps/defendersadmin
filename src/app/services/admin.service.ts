@@ -51,8 +51,8 @@ export class AdminService {
     return this.http.get(`${apiUrl}/getGroupCodes?limit=${limit}&offset=${offset}&text=${text}`);
   }
 
-  getAllDefendersList(limit: number, offset: number) {
-    return this.http.get(`${apiUrl}/getAllDefenders?userStatus=2&limit=${limit}&offset=${offset}`);
+  getAllDefendersList(limit: number, offset: number, sortOrder?: string) {
+    return this.http.get(`${apiUrl}/getAllDefenders?userStatus=2&limit=${limit}&offset=${offset}&sortOrder=${sortOrder}`);
   }
 
   getJobOpportunities(limit: number, offset: number, text: string = '') {
