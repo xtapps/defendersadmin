@@ -69,7 +69,7 @@ export class ProcessingListComponent extends DefenderModel implements OnInit, On
   }
 
   getChange(event: any, item: any): void {
-    const userResponse = confirm('Are you sure to reject?');
+    const userResponse = confirm(`Are you sure to ${event.target.value == 2 ? 'approve' : 'reject'}?`);
     if (userResponse) {
       this.openModal(event.target.value, item);
     }
