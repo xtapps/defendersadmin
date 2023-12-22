@@ -38,7 +38,7 @@ export class ApprovedListComponent extends DefenderModel implements OnInit, OnDe
   getApprovedList(): void {
     this.isLoading = true;
     this.subscription.push(
-      this.adminService.getUserStatus(2, this.limit, this.offset, this.userType, this.searchText).pipe(
+      this.adminService.getUserStatus(2, this.limit, this.offset, this.userType, this.searchText, 'desc-approved').pipe(
         finalize(() => { this.isLoading = false })
       ).subscribe(res => {
         this.approvedList = res.defendersList;

@@ -20,9 +20,9 @@
               </th> -->
               <th>User</th>
               <th class="text-center">Country</th>
-              <th>Usage</th>
+              <th>Defender Email</th>
               <!-- <th class="text-center">Payment Method</th> -->
-              <th>Activity</th>
+              <!-- <th>Activity</th> -->
             </tr>
           </thead>
           <tbody>
@@ -39,7 +39,7 @@
                 <div>{{usersList[i]?.firstName + ' ' + usersList[i]?.lastName }}</div>
                 <div class="small text-medium-emphasis text-nowrap">
                   <span>
-                    {{ user.state }} | Registered: {{ user.registered }}
+                    {{ usersList.length ? (usersList[i].userStatus | userStatus) : '' }} | Signed up on: {{ usersList.length ? (usersList[i].createdOn | date: 'MMM d, y') : '' }}
                   </span>
                 </div>
               </td>
@@ -52,7 +52,7 @@
                   title="{{ user.country }}"
                 ></svg>
               </td>
-              <td>
+              <!-- <td>
                 <div class="d-flex justify-content-between">
                   <div class="float-start">
                     <strong>{{ user.usage }}%</strong>
@@ -69,13 +69,13 @@
                     color="{{ user.color }}"
                   ></c-progress-bar>
                 </c-progress>
-              </td>
+              </td> -->
               <!-- <td class="text-center">
                 <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg>
               </td> -->
               <td>
-                <div class="small text-medium-emphasis">Last login</div>
-                <div class="fw-semibold text-nowrap">{{ user.activity }}</div>
+                <!-- <div class="small text-medium-emphasis">Last login</div> -->
+                <div class="fw-semibold text-nowrap">{{ usersList.length ? usersList[i].defenderEmail : '' }}</div>
               </td>
             </tr>
           </tbody>

@@ -86,8 +86,8 @@ export class AdminService {
     return this.http.get<IApiRes[]>(`${apiUrl}/properties/viewAll?reqParams=[{"key":"appSection","value":"${properties.appSection}"},{"key":"propertyType","value":"${properties.propertyType}"}]&limit=${limit}&offset=${offset}&text=${text}`);
   }
 
-  getUserStatus(status: number, limit: number, offset: number, userType?: number, text: string = ''): Observable<any> {
-    return this.http.get<any>(`${apiUrl}/getAllDefenders?userStatus=${status}&limit=${limit}&offset=${offset}&userType=${userType}&text=${text}`);
+  getUserStatus(status: number, limit: number, offset: number, userType?: number, text: string = '', sortOrder?: string): Observable<any> {
+    return this.http.get<any>(`${apiUrl}/getAllDefenders?userStatus=${status}&limit=${limit}&offset=${offset}&userType=${userType}&text=${text}&sortOrder=${sortOrder}`);
   }
 
   updateUserStatus(paylodData: any): Observable<any>{
