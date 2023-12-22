@@ -20,6 +20,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { WidgetsModule } from '../widgets/widgets.module';
 import { ChartjsModule } from '@coreui/angular-chartjs';
+import { UserStatusPipe } from '../../pipe/user-status.pipe';
 
 @NgModule({
   imports: [
@@ -41,7 +42,7 @@ import { ChartjsModule } from '@coreui/angular-chartjs';
     ChartjsModule,
     WidgetsModule
   ],
-  declarations: [DashboardComponent]
+  declarations: [DashboardComponent, UserStatusPipe]
 })
 export class DashboardModule {
 }
