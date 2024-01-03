@@ -72,6 +72,10 @@ export class ValidateUserComponent implements OnDestroy {
       this.dos = '';
       this.currentStatus = '';
     }
+    if (!this.selectedFile) {
+      alert('Please upload valid document');
+      return;
+    }
     const dob = (this.dob && this.dob !== '') ? new Date(this.dob).toString() : '';
     const doj = (this.doj && this.doj !== '') ? new Date(this.doj).toString() : '';
     const dos = (this.dos && this.dos !== '') ? new Date(this.dos).toString() : '';

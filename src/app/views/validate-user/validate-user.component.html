@@ -95,14 +95,14 @@
           <div class="form-group col-md-12"> <label id="doblabel" for="dob" class="col-form-label">Date of
               Birth<span class="red-text">*</span></label>
             <input type="date" [(ngModel)]="dob" placeholder="mm/dd/yyyy">
-            <span *ngIf="dobErrMsg">{{dobErrMsg}}</span>
+            <span class="errMsg" *ngIf="dobErrMsg">{{dobErrMsg}}</span>
           </div>
         </div>
         <div class="form-row" *ngIf="userType != '3'">
           <div id="datejoinedlabel" class="form-group col-md-12"> <label for="dob" class="col-form-label">Date
               Joined<span class="red-text">*</span></label>
             <input type="date" [(ngModel)]="doj" placeholder="mm/dd/yyyy">
-            <span *ngIf="dojErrMsg">{{dojErrMsg}}</span>
+            <span class="errMsg" *ngIf="dojErrMsg">{{dojErrMsg}}</span>
           </div>
         </div>
         <div class="form-row" *ngIf="userType != '3'">
