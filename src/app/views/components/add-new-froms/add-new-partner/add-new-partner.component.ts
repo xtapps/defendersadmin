@@ -16,7 +16,7 @@ export class AddNewPartnerComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = [];
   loading = false;
   pageSize = 10;
-  offset = 1;
+  offset = 0;
   allPrimaryCategories: any[] = []; // Array to hold all data
   parimaryCategories: any[] = []; // Array for current page data
   secondaryCategories: any[] = [];
@@ -48,7 +48,7 @@ export class AddNewPartnerComponent implements OnInit, OnDestroy {
   getCategories(): void {
     this.adminService.getAllCategories(this.pageSize, this.offset).subscribe((res: any) => {
       const newData = res.categories;
-      this.lastPage = Math.ceil(res.totalCount / this.pageSize);
+      this.lastPage = res.totalCount;
 
       this.allPrimaryCategories = [...this.allPrimaryCategories, ...newData];
       this.parimaryCategories = newData;
@@ -163,7 +163,7 @@ export class AddNewPartnerComponent implements OnInit, OnDestroy {
   onScrollToEnd(isScrollToEnd: boolean): void {
     console.log(isScrollToEnd, 'iiii');
     if (isScrollToEnd) {
-      this.offset += 1;
+      this.offset += this.pageSize;
       if (this.offset <= this.lastPage) {
         this.getCategories();
       }
@@ -181,6 +181,19 @@ export class AddNewPartnerComponent implements OnInit, OnDestroy {
     } else {
       this.fileName = ''; // Reset if no file selected
       this.form.controls['image'].setValue('');
+    }
+  }
+
+  selectPrimaryCategory(event: any) {
+    if (!event) {
+      this.secondaryCategories = [];
+      this.form.controls['secondaryCategory'].setValue('');
+    } else {
+      this.allPrimaryCategories.forEach(val => {
+        if (val._id === event) {
+          this.secondaryCategories = val.subCategories;
+        }
+      });
     }
   }
 
