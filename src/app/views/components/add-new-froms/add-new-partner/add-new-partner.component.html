@@ -177,7 +177,7 @@
                                 </option>
                             </select> -->
                             <ng-select placeholder="select" (scrollToEnd)="onScrollToEnd(true)"
-                                formControlName="primaryCategory">
+                                formControlName="primaryCategory" (ngModelChange)="selectPrimaryCategory($event)">
                                 <ng-option *ngFor="let item of allPrimaryCategories"
                                     [value]="item._id">{{item.categoryName}}</ng-option>
                             </ng-select>
