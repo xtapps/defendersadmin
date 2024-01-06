@@ -45,15 +45,15 @@ export class TableViewComponent extends PropertiesModel implements OnInit, OnDes
   }
 
   ngOnInit(): void {
-    this.getAllProperties();
+    this.getPartners();
   }
 
-  getAllProperties() {
+  getPartners() {
     this.isLoading = true;
-    const propSub = this.adminService.getAllProperties(this.limit, this.offset, this.searchText).subscribe((res: any) => {
+    const propSub = this.adminService.getPartners(this.limit, this.offset, this.searchText).subscribe((res: any) => {
       this.isLoading = false;
-      this.partnersList = res.properties;
-      this.totalRecords = res.totalRecords;
+      this.partnersList = res[0].properties;
+      this.totalRecords = res[0].totalRecords;
     });
 
     this.subscriptions.push(propSub);
@@ -61,7 +61,7 @@ export class TableViewComponent extends PropertiesModel implements OnInit, OnDes
 
   applyFilter(text: any) {
     this.searchText = text
-    this.getAllProperties();
+    this.getPartners();
   }
 
   addNew(): void {
@@ -75,7 +75,7 @@ export class TableViewComponent extends PropertiesModel implements OnInit, OnDes
   pageChangeEvent(event: any) {
     this.offset = event.offSet;
     this.limit = event.limit;
-    this.getAllProperties();
+    this.getPartners();
   }
 
   ngOnDestroy(): void {
