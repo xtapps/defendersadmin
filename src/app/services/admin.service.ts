@@ -72,6 +72,11 @@ export class AdminService {
     return this.http.get(url);
   }
 
+  getPartners(limit: number, offset: number, text: string) {
+    const url = `${apiUrl}/properties/viewAll?reqParams=[{"key":"appSection","value":"partner"},{"key":"propertyType","value":"partner"}]&limit=${limit}&offset=${offset}&text=${text}`;
+    return this.http.get(url);
+  }
+
   /**
    * Retrieves properties based on the specified application section, property type, limit, and offset.
    *
