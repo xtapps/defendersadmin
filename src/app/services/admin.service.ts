@@ -46,6 +46,10 @@ export class AdminService {
     return this.http.get(`${apiUrl}/getCategories?limit=${limit}&offset=${offset}&text=${text}`);
   }
 
+  getAllCategoryById(id: string = '') {
+    return this.http.get(`${apiUrl}/getCategoryById?id=${id}`);
+  }
+
 
   getGroupCodes(limit: number, offset: number, text: string = '') {
     return this.http.get(`${apiUrl}/getGroupCodes?limit=${limit}&offset=${offset}&text=${text}`);
