@@ -56,6 +56,9 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
 
   setFormValues(): void {
     const datas = window.history.state;
+    if (datas.primaryCategory.length && datas.primaryCategory !== ' ') {
+      this.getCategoryById(datas.primaryCategory);
+    }
     this.form.patchValue({
       propertyType: this.propertyType,
       orgType: this.orgType,
@@ -70,8 +73,8 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
       county: datas.county,
       phone: datas.phone,
       website: datas.website,
-      primaryCategory: datas.primaryCategory ? datas.primaryCategory : null,
-      secondaryCategory: datas.secondaryCategory ? datas.secondaryCategory : null,
+      primaryCategory: (datas.primaryCategory && datas.primaryCategory !== ' ') ? datas.primaryCategory : null,
+      secondaryCategory: (datas.secondaryCategory && datas.secondaryCategory !== ' ') ? datas.secondaryCategory : null,
       discount: datas.discount,
       description: datas.description,
       image: datas.image,
@@ -115,6 +118,37 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
     });
   }
 
+  getCategoryById(id: string): void {
+    this.subscription.push(
+      this.adminService.getAllCategoryById(id).subscribe((res: any) => {
+        if (res) {
+          this.allPrimaryCategories = [...this.allPrimaryCategories, ...[res]];
+          this.form.controls['primaryCategory'].setValue(res._id);
+          res.subCategories.forEach((val: any) => {
+            if (val._id.toString() === this.form.controls['secondaryCategory'].value.toString()) {
+              this.form.controls['secondaryCategory'].setValue(val._id);
+            }
+          });
+        } else {
+          this.form.controls['primaryCategory'].setValue(null);
+        }
+      })
+    );
+  }
+
+  selectPrimaryCategory(event: any) {
+    if (!event) {
+      this.secondaryCategories = [];
+      this.form.controls['secondaryCategory'].setValue(null);
+    } else {
+      this.allPrimaryCategories.forEach(val => {
+        if (val._id === event) {
+          this.secondaryCategories = val.subCategories;
+        }
+      });
+    }
+  }
+
   getCategories(): void {
     this.subscription.push(
       this.adminService.getAllCategories(this.pageSize, this.offset).subscribe((res: any) => {
@@ -129,7 +163,7 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
   }
 
   getPrimaryCategory(item: any): void {
-    this.form.controls['secondaryCategory'].setValue('');
+    this.form.controls['secondaryCategory'].setValue(null);
     this.parimaryCategories.forEach(el => {
       if (el._id === item.value) {
         this.secondaryCategories = el.subCategories;
