@@ -1,0 +1,54 @@
+<div class="main_container">
+    <div class="header_section">
+        <h4>{{editMode ? 'Update' : 'Add New'}} {{'Education' | titlecase}}</h4>
+        <button cButton color="primary" (click)="goBack()">Back</button>
+
+    </div>
+
+</div>
+
+<c-row>
+    <c-col xs>
+        <c-card class="mb-4">
+            <!-- <c-card-header>Business Opportunities</c-card-header> -->
+            <c-card-body>
+                <form cForm [formGroup]="form">
+                    <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="title">Title</label>
+                            <input [ngClass]="{'invalid_field': checkValidation('title')}" cFormControl id="title"
+                                formControlName="title" placeholder="Name" type="text" />
+                            <label class="error_msg" *ngIf="checkValidation('title')">This
+                                field is required</label>
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="website">Website</label>
+                            <input cFormControl id="website" formControlName="website"
+                                placeholder="www.website-name.com" type="email" />
+                        </div>
+
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label cLabel for="description">Description</label>
+                        <textarea cFormControl id="description" formControlName="description" rows="3"></textarea>
+                    </div>
+
+                    <div class="container">
+                        <div class="file-upload-wrapper w-half" [attr.data-text]="fileName ? fileName : 'Upload File!'"
+                            [ngClass]="{'invalid_field': checkValidation('logo')}">
+                            <input name="file-upload-field" accept=".png" (change)="onFileChange($event)" type="file"
+                                class="file-upload-field" value="">
+                        </div>
+                        <label class="error_msg" *ngIf="checkValidation('logo')">This
+                            field is required</label>
+                    </div>
+                    <div>
+                        <button cButton color="primary" (click)="onSubmit()">{{editMode ? 'Update' : 'Submit'}}</button>
+                    </div>
+                </form>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>

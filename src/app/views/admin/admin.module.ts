@@ -38,6 +38,8 @@ import { AddNewCategoryComponent } from '../components/add-new-category/add-new-
 import { AddNewPropertiesComponent } from '../components/add-new-froms/add-new-properties/add-new-properties.component';
 import { AddGroupCodesComponent } from '../components/add-new-froms/add-group-codes/add-group-codes.component';
 import { AdminUsersComponent } from '../components/admin-users/admin-users.component';
+import { EducationComponent } from '../components/education/education.component';
+import { AddEducationComponent } from '../components/add-education/add-education.component';
 
 
 @NgModule({
@@ -64,7 +66,9 @@ import { AdminUsersComponent } from '../components/admin-users/admin-users.compo
     AddJobBoadrsComponent,
     AddNewPropertiesComponent,
     AddGroupCodesComponent,
-    AdminUsersComponent
+    AdminUsersComponent,
+    EducationComponent,
+    AddEducationComponent
   ],
   imports: [
     CommonModule,

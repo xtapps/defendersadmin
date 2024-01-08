@@ -14,6 +14,7 @@ import { JobBoardsComponent } from '../components/job-boards/job-boards.componen
 import { JobOpportunitiesComponent } from '../components/job-opportunities/job-opportunities.component';
 import { BusinessOpportunitiesComponent } from '../components/business-opportunities/business-opportunities.component';
 import { AdminUsersComponent } from '../components/admin-users/admin-users.component';
+import { EducationComponent } from '../components/education/education.component';
 
 const routes: Routes = [
   {
@@ -58,6 +59,9 @@ const routes: Routes = [
   },
   {
     path: 'admin-users', component: AdminUsersComponent
+  },
+  {
+    path: 'education', component: EducationComponent
   }
  
 ];
