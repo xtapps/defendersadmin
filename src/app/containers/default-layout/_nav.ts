@@ -92,6 +92,11 @@ export const navItems: INavData[] = [
         url: '/admin/business-opportunities',
         iconComponent: { name: 'cil-user' }
       },
+      {
+        name: 'Education',
+        url: '/admin/education',
+        iconComponent: { name: 'cil-user' }
+      }
     ]
   },
 

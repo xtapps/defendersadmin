@@ -1,6 +1,6 @@
-<div class="header_section">
-  <h4>Submited List</h4>
-  <!-- <button cButton color="primary" (click)="addNew()">Add</button> -->
+<div class="header_section ">
+  <h4>Education</h4>
+  <button cButton color="primary" (click)="addNew()">Add</button>
 </div>
 
 <c-row>
@@ -18,39 +18,28 @@
           <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
             <thead cTableColor="light">
               <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Link</th>
-                <th>Action</th>
+                <!-- <th class="text-center">
+                    <svg cIcon name="cilPeople"></svg>
+                  </th> -->
+                <th>Title</th>
+                <th>Website</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of submitedList; index as i">
+              <tr *ngFor="let item of educations; index as i">
                 <td>
-                  <div>{{ item.firstName }}</div>
+                  <div>{{ item.title }}</div>
                 </td>
                 <td>
-                  <div>{{ item.lastName }}</div>
-                </td>
-                <td>
-                  <div>{{ item.defenderEmail }}</div>
-                </td>
-                <td>
-                  <a class="cur-poin" *ngIf="item.defenderDocument"
-                    (click)="downloadDoc(item.defenderDocument)">Document Link</a>
-                </td>
-                <td>
-                  <select name="" id="" (change)="getChange($event, item)">
-                    <option value="" selected>select</option>
-                    <option value="approve">Approve</option>
-                    <option value="reject">Reject</option>
-                  </select>
+                  <div>{{ item.website }}</div>
                 </td>
                 <td>
                   <div style="display: flex;">
-                    <span class="view-button" (click)="parseDataAndNavigate(submitedList[i], 'submited')">View</span>
+                    <span class="view-button" (click)="parseDataAndNavigate(educations[i], 'job boards')">View</span>
+                    <span style="margin-left: 20px;" class="cur_pointer" (click)="editItem(item)"><img width="20px"
+                        src="../../../../assets/images/edit.svg" alt=""></span>
+
                     <span style="margin-left: 10px;" class="cur_pointer" (click)="deleteItem(item._id)"><img width="20px"
                         src="../../../../assets/images/trash.svg" alt=""></span>
                   </div>
@@ -60,7 +49,6 @@
           </table>
         </ng-template>
         <app-paginator [totalRecords]="totalRecords" (pageChangeEventEmit)="pageChangeEvent($event)"></app-paginator>
-
       </c-card-body>
     </c-card>
   </c-col>

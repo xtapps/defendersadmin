@@ -262,4 +262,25 @@ export class AdminService {
     return this.http.get(`${apiUrl}/getAdminUsers`);
   }
 
+  // Educations
+
+  getEducations(limit: number, offset: number, text: string = '') {
+    return this.http.get(`${apiUrl}/getEducations?limit=${limit}&offset=${offset}&text=${text}`);
+  }
+
+  deleteEducation(id: string): Observable<any> {
+    const payload = {
+      id
+    }
+    return this.http.delete<any>(`${apiUrl}/removeEducation`, { body: payload });
+  }
+
+  createEducation(payloadData: FormData): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/createEducation`, payloadData);
+  }
+
+  updateEducation(payloadData: FormData): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/updateEducation`, payloadData);
+  }
+
 }
