@@ -59,6 +59,7 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
     if (datas.primaryCategory.length && datas.primaryCategory !== ' ') {
       this.getCategoryById(datas.primaryCategory);
     }
+    this.fileName = datas.images[0];
     this.form.patchValue({
       propertyType: this.propertyType,
       orgType: this.orgType,
