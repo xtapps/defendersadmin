@@ -180,7 +180,7 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
     console.log(this.form.value);
     console.log(window.history.state._id);
 
-    if (this.form.invalid) {
+    if (this.form.invalid && !this.editMode) {
       this.form.markAllAsTouched();
       return;
     }
