@@ -76,8 +76,8 @@ export class AdminService {
     return this.http.get(url);
   }
 
-  getPartners(limit: number, offset: number, text: string) {
-    const url = `${apiUrl}/properties/viewAll?reqParams=[{"key":"appSection","value":"partner"},{"key":"propertyType","value":"partner"}]&limit=${limit}&offset=${offset}&text=${text}`;
+  getPartners(limit: number, offset: number, text: string, sortOrder?: string) {
+    const url = `${apiUrl}/properties/viewAll?reqParams=[{"key":"appSection","value":"partner"},{"key":"propertyType","value":"partner"}]&limit=${limit}&offset=${offset}&text=${text}&sortOrder=${sortOrder}`;
     return this.http.get(url);
   }
 

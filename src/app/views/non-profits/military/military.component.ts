@@ -40,8 +40,8 @@ export class MilitaryComponent extends PropertiesModel implements OnInit, OnDest
 
     this.adminService.getProperties(properties, this.limit, this.offset, this.searchText).subscribe(res => {
       this.isLoading = false;
-      this.militaryList = res[0].properties;
-      this.totalRecords = res[0].totalRecords;
+      this.militaryList = res[0]?.properties;
+      this.totalRecords = res[0]?.totalRecords;
     });
   }
 
