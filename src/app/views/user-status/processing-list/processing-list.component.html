@@ -21,6 +21,7 @@
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
+                <th>Date</th>
                 <th>Action</th>
                 <th></th>
               </tr>
@@ -35,6 +36,9 @@
                 </td>
                 <td>
                   <div>{{ item.defenderEmail }}</div>
+                </td>
+                <td>
+                  <div>{{ item.updatedOn | date }}</div>
                 </td>
                 <td>
                   <select name="" id="" (change)="getChange($event, item)">
