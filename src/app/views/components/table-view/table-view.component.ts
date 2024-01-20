@@ -50,10 +50,10 @@ export class TableViewComponent extends PropertiesModel implements OnInit, OnDes
 
   getPartners() {
     this.isLoading = true;
-    const propSub = this.adminService.getPartners(this.limit, this.offset, this.searchText).subscribe((res: any) => {
+    const propSub = this.adminService.getPartners(this.limit, this.offset, this.searchText, 'desc').subscribe((res: any) => {
       this.isLoading = false;
-      this.partnersList = res[0].properties;
-      this.totalRecords = res[0].totalRecords;
+      this.partnersList = res[0]?.properties;
+      this.totalRecords = res[0]?.totalRecords;
     });
 
     this.subscriptions.push(propSub);
