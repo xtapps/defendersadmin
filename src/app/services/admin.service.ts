@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { apiUrl } from '../../config/config'
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { IApiRes } from '../models/model';
 import { Router } from '@angular/router';
 
@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AdminService {
+
+  public searchTextChanged: Subject<boolean> = new Subject();
 
   constructor(private http: HttpClient, private router: Router) { }
 
