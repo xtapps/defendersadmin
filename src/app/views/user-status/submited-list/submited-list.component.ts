@@ -37,7 +37,7 @@ export class SubmitedListComponent extends DefenderModel implements OnInit, OnDe
   getSubmitedList(): void {
     this.isLoading = true;
     this.subscription.push(
-      this.adminService.getUserStatus(1, this.limit, this.offset, undefined, this.searchText).pipe(
+      this.adminService.getUserStatus(1, this.limit, this.offset, undefined, this.searchText, 'asc-processing').pipe(
         finalize(() => { this.isLoading = false })
       ).subscribe(res => {
         this.submitedList = res.defendersList;
@@ -136,7 +136,9 @@ export class SubmitedListComponent extends DefenderModel implements OnInit, OnDe
   }
 
   applyFilter(text: any) {
-    this.searchText = text
+    this.searchText = text;
+    this.offset = 0;
+    this.adminService.searchTextChanged.next(true);
     this.getSubmitedList();
   }
 

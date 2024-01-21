@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { Subscription } from 'rxjs';
+import { AdminService } from 'src/app/services/admin.service';
 import { PAGINATION } from '../../../assets/app-constant';
 
 @Component({
@@ -7,7 +9,7 @@ import { PAGINATION } from '../../../assets/app-constant';
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss']
 })
-export class PaginatorComponent {
+export class PaginatorComponent implements OnInit, OnDestroy {
 
   pageSize: number = PAGINATION.pageSize;
 
@@ -19,6 +21,20 @@ export class PaginatorComponent {
 
   @Output() pageChangeEventEmit: EventEmitter<any> = new EventEmitter();
 
+  subscriptions: Subscription[] = [];
+
+  constructor(private adminService: AdminService) {}
+
+  ngOnInit(): void {
+    this.subscriptions.push(
+      this.adminService.searchTextChanged.subscribe(res => {
+        if (res) {
+          this.paginator?.firstPage();
+        }
+      })
+    );
+  }
+
   pageChange(event: any) {
     const offSet = event.pageIndex * event.pageSize;
     if (offSet >= this.totalRecords) {
@@ -29,6 +45,10 @@ export class PaginatorComponent {
       limit: event.pageSize
     }
     this.pageChangeEventEmit.emit(data);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
 }

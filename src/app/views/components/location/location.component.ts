@@ -39,17 +39,20 @@ export class LocationComponent extends PropertiesModel implements OnInit, OnDest
   }
 
   applyFilter(text: any) {
-    this.searchText = text
+    this.searchText = text;
+    this.offset = 0;
+    this.adminService.searchTextChanged.next(true);
     this.getAllLocation();
   }
 
   getAllLocation(): void {
     this.isLoading = true;
+    this.searchText = `searchFromADMIN:${this.searchText}`;
     this.subscription.push(
       this.adminService.getLocations(this.limit, this.offset, this.searchText).subscribe((res: any) => {
         this.isLoading = false;
-        this.locationList = res[0]?.properties;
-        this.totalRecords = res[0]?.totalRecords;
+        this.locationList = res[0]?.properties || res.properties;
+        this.totalRecords = res[0]?.totalRecords || res.count;
       })
     );
   }

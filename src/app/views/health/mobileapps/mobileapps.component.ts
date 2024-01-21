@@ -93,7 +93,9 @@ export class MobileAppsComponent extends PropertiesModel implements OnInit, OnDe
   }
 
   applyFilter(text: any) {
-    this.searchText = text
+    this.searchText = text;
+    this.offset = 0;
+    this.adminService.searchTextChanged.next(true);
     this.getMilitaryList();
   }
 

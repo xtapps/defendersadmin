@@ -95,7 +95,9 @@ export class SuspendedListComponent extends DefenderModel implements OnInit, OnD
   }
 
   applyFilter(text: any) {
-    this.searchText = text
+    this.searchText = text;
+    this.offset = 0;
+    this.adminService.searchTextChanged.next(true);
     this.getSuspendedList();
   }
 

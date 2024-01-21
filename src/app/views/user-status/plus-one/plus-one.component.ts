@@ -72,7 +72,9 @@ export class PlusOneComponent extends DefenderModel implements OnInit, OnDestroy
   }
 
   applyFilter(text: any) {
-    this.searchText = text
+    this.searchText = text;
+    this.offset = 0;
+    this.adminService.searchTextChanged.next(true);
     this.getPlusOneList();
   }
 
