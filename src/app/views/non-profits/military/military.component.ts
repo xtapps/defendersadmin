@@ -38,17 +38,13 @@ export class MilitaryComponent extends PropertiesModel implements OnInit, OnDest
       propertyType: 'charity'
     }
 
-    this.adminService.getProperties(properties, this.limit, this.offset, this.searchText).subscribe(res => {
-      this.isLoading = false;
-      this.militaryList = res[0]?.properties;
-      this.totalRecords = res[0]?.totalRecords;
-    });
-  }
-
-  goToViewPage(index: number): void {
-    // Encode the JSON data and navigate to ViewComponent with it as a query parameter
-    const encodedData = encodeURIComponent(JSON.stringify(this.militaryList[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'military' } });
+    this.subscription.push(
+      this.adminService.getProperties(properties, this.limit, this.offset, this.searchText).subscribe(res => {
+        this.isLoading = false;
+        this.militaryList = res[0]?.properties;
+        this.totalRecords = res[0]?.totalRecords;
+      })
+    );
   }
 
   pageChangeEvent(event: any) {
@@ -81,7 +77,7 @@ export class MilitaryComponent extends PropertiesModel implements OnInit, OnDest
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'military', type: 'properties' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'veteran', type: 'properties' } });
   }
 
   ngOnDestroy(): void {
@@ -89,7 +85,7 @@ export class MilitaryComponent extends PropertiesModel implements OnInit, OnDest
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'military', type: 'properties', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'veteran', type: 'properties', editMode: 'true' } });
   }
 
   applyFilter(text: any) {
