@@ -39,11 +39,13 @@ export class FirstResponderComponent extends PropertiesModel implements OnInit, 
       propertyType: 'charity'
     }
 
-    this.adminService.getProperties(properties, this.limit, this.offset, this.searchText).subscribe(res => {
-      this.isLoading = false;
-      this.firstResponderList = res[0]?.properties;
-      this.totalRecords = res[0]?.totalRecords;
-    });
+    this.subscription.push(
+      this.adminService.getProperties(properties, this.limit, this.offset, this.searchText).subscribe(res => {
+        this.isLoading = false;
+        this.firstResponderList = res[0]?.properties;
+        this.totalRecords = res[0]?.totalRecords;
+      })
+    );
   }
 
   addNew(): void {
@@ -52,12 +54,6 @@ export class FirstResponderComponent extends PropertiesModel implements OnInit, 
 
   editItem(ev: any): void {
     this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'firstResponder', type: 'properties', editMode: 'true' } });
-  }
-
-  goToViewPage(index: number): void {
-    // Encode the JSON data and navigate to ViewComponent with it as a query parameter
-    const encodedData = encodeURIComponent(JSON.stringify(this.firstResponderList[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'job-boards' } });
   }
 
   pageChangeEvent(event: any) {
