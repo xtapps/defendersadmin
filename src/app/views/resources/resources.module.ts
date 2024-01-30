@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MilitaryComponent } from './military/military.component';
 import { FirstResponderComponent } from './first-responder/first-responder.component';
-import { OtherComponent } from './other/other.component';
+import { ChaplainComponent } from './chaplain/chaplain.component';
 import { ButtonModule, CardModule, GridModule, TableModule } from '@coreui/angular';
 import { AdminRoutingModule } from '../admin/admin-routing.module';
 import { MatInputModule } from '@angular/material/input';
@@ -23,15 +23,16 @@ const routes: Routes = [
     path: 'first-responder', component: FirstResponderComponent
   },
   {
-    path: 'other', component: OtherComponent
-  },
+    path: 'chaplain', component: ChaplainComponent
+  }
 ]
 
 @NgModule({
   declarations: [
     MilitaryComponent,
     FirstResponderComponent,
-    OtherComponent  ],
+    ChaplainComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -46,4 +47,4 @@ const routes: Routes = [
     ButtonModule
   ]
 })
-export class NonProfitsModule { }
+export class ResourcesModule { }
