@@ -120,13 +120,30 @@ export const navItems: INavData[] = [
         iconComponent: { name: 'cil-user' }
       },
       {
-        name: 'Chaplain',
-        url: '/non-profits/chaplain',
+        name: 'Other',
+        url: '/non-profits/other',
+        iconComponent: { name: 'cil-user' }
+      },
+    ]
+  },
+  {
+    name: 'Resources',
+    url: '/',
+    iconComponent: { name: '' },
+    children: [
+      {
+        name: 'Military',
+        url: '/resources/military',
         iconComponent: { name: 'cil-user' }
       },
       {
-        name: 'Other',
-        url: '/non-profits/other',
+        name: 'First Responder',
+        url: '/resources/first-responder',
+        iconComponent: { name: 'cil-user' }
+      },
+      {
+        name: 'Chaplain',
+        url: '/resources/chaplain',
         iconComponent: { name: 'cil-user' }
       },
     ]

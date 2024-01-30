@@ -80,6 +80,11 @@ const routes: Routes = [
           import('./views/non-profits/non-profits.module').then((m) => m.NonProfitsModule)
       },
       {
+        path: 'resources',
+        loadChildren: () =>
+          import('./views/resources/resources.module').then((m) => m.ResourcesModule)
+      },
+      {
         path: 'kids-corner',
         loadChildren: () =>
           import('./views/kids-corner/kids-corner.module').then((m) => m.KidsCornerModule)
