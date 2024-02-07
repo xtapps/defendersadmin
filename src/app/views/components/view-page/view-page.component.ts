@@ -1,7 +1,9 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AdminService } from 'src/app/services/admin.service';
 import { s3Url } from 'src/config/config';
 import { ImageModalComponent } from '../../user-status/modals/image-modal/image-modal.component';
 
@@ -10,17 +12,20 @@ import { ImageModalComponent } from '../../user-status/modals/image-modal/image-
   templateUrl: './view-page.component.html',
   styleUrls: ['./view-page.component.scss']
 })
-export class ViewPageComponent  implements OnInit{
+export class ViewPageComponent  implements OnInit, OnDestroy {
 
   appsList: any[]=[];
   receivedData: any;
   type!: string;
+  subscriptions: Subscription[] = [];
+  imageName: string = '';
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private adminService: AdminService
     ) {}
 
   ngOnInit() {
@@ -29,7 +34,10 @@ export class ViewPageComponent  implements OnInit{
     this.type = this.route.snapshot.queryParamMap.get('type') || '';
     if (encodedData) {
       this.receivedData = JSON.parse(decodeURIComponent(encodedData));
-      console.log(this.receivedData);
+      if (this.receivedData['Defender Document']) {
+        this.imageName = this.receivedData['Defender Document'];
+        this.downloadDoc(this.receivedData['Defender Document']);
+      }
     }
   }
 
@@ -55,6 +63,20 @@ export class ViewPageComponent  implements OnInit{
         url
       }
     });
+  }
+
+  downloadDoc(defenderDocument: string) {
+    this.subscriptions.push(
+      this.adminService.getProtectedS3Url(defenderDocument).subscribe(res => {
+        this.receivedData['Defender Document'] = res.newUrl;
+      }, err => {
+        this.receivedData['Defender Document'] = this.imageName;
+      })
+    )
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
 }
