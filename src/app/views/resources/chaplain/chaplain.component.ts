@@ -35,8 +35,8 @@ export class ChaplainComponent extends PropertiesModel implements OnInit, OnDest
     this.subscription.push(
       this.adminService.getResourcesForAdmin(this.limit, this.offset, this.searchText, 'chaplain').subscribe(res => {
         this.isLoading = false;
-        this.chaplainList = res[0]?.properties;
-        this.totalRecords = res[0]?.totalRecords;
+        this.chaplainList = res?.properties;
+        this.totalRecords = res?.totalRecords;
       })
     );
   }
