@@ -83,8 +83,8 @@ export class AdminService {
     return this.http.get(url);
   }
 
-  getResourcesForAdmin(limit: number, offset: number, text: string = '', appSection: string): Observable<any> {
-    return this.http.get<any>(`${apiUrl}/partner/getSupportForAdmin?limit=${limit}&offset=${offset}&text=${text}&appSection=${appSection}`);
+  getResourcesForAdmin(limit: number, offset: number, text: string = '', appSection: string, propertyType?: string): Observable<any> {
+    return this.http.get<any>(`${apiUrl}/partner/getSupportForAdmin?limit=${limit}&offset=${offset}&text=${text}&appSection=${appSection}&propertyType=${propertyType ?? ''}`);
   }
 
   /**
