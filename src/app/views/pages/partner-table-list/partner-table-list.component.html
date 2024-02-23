@@ -1,0 +1,68 @@
+<div class="header_section">
+    <h4>Properties</h4>
+    <!-- <button cButton color="primary" (click)="addNew()">Add</button> -->
+  </div>
+  
+  <c-row>
+    <c-col xs>
+      <c-card class="mb-4">
+        <!-- <c-card-header>Partners</c-card-header> -->
+        <c-card-body>
+          <app-search-form (searchEmit)="applyFilter($event)"></app-search-form>
+  
+          <ng-container *ngIf="isLoading; else tableData">
+            <div class="skeleton-loader"></div>
+          </ng-container>
+  
+          <ng-template #tableData>
+            <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+              <thead cTableColor="light">
+                <tr>
+                  <th>Property Name</th>
+                  <th>Email</th>
+                  <th>Address</th>
+                  <th>City</th>
+                  <th>State</th>
+                  <th>Zip</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of partnersList; index as i">
+                  <td>
+                    <div>{{ item.locationName }}</div>
+                  </td>
+                  <td>
+                    <div>{{ item.email }}</div>
+                  </td>
+                  <td>
+                    <div>{{ item.address1 }}</div>
+                  </td>
+                  <td>
+                    <div>{{ item.city }}</div>
+                  </td>
+                  <td>
+                    <div>{{ item.state }}</div>
+                  </td>
+                  <td>
+                    <div>{{ item.zip }}</div>
+                  </td>
+                  <!-- <td class="text-center">
+                    <svg cIcon name="cibCc{{ item.payment }}" size="xl"></svg>
+                  </td> -->
+                  <td>
+                    <div style="display: flex;">
+                      <span class="view-button" (click)="parseDataAndNavigate(partnersList[i], 'property')">View</span>
+                      <span class="edit-icon" (click)="editItem(item)"><img width="20px"
+                          src="../../../../assets/images/edit.svg" alt=""></span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </ng-template>
+          <app-paginator [totalRecords]="totalRecords" (pageChangeEventEmit)="pageChangeEvent($event)"></app-paginator>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>

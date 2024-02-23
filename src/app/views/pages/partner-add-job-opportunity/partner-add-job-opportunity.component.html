@@ -1,0 +1,198 @@
+<div class="main_container">
+    <div>
+        <h4>{{ jobId ? 'Update ' : 'Add '}} Job Opportunity</h4>
+        <button style="display: block;" cButton color="primary" (click)="goBack()">Back</button>
+    </div>
+
+</div>
+
+<c-row>
+    <c-col xs>
+        <c-card class="mb-4">
+            <c-card-body>
+                <form cForm [formGroup]="form">
+                    <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="locatonName">Job title</label>
+                            <input [ngClass]="{'invalid_field': checkValidation('title')}" cFormControl id="locatonName"
+                                formControlName="title" placeholder="Job title" type="text" />
+                            <label class="error_msg" *ngIf="checkValidation('title')">This
+                                field is required</label>
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="experience">Experience</label>
+                            <input [ngClass]="{'invalid_field': checkValidation('experience')}" cFormControl id="experience" formControlName="experience" placeholder="1-3 Years"
+                                type="text" />
+                            <label class="error_msg" *ngIf="checkValidation('experience')">This
+                                field is required</label>
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="education">Education</label>
+                            <input [ngClass]="{'invalid_field': checkValidation('education')}" cFormControl id="education" formControlName="education" placeholder="any"
+                                type="text" />
+                            <label class="error_msg" *ngIf="checkValidation('education')">This
+                                field is required</label>
+                        </div>
+
+                    </div>
+
+                    <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="salaryRangeLow">Salary range from per year in USD</label>
+                            <input cFormControl id="salaryRangeLow" formControlName="salaryRangeLow" placeholder="10000"
+                                type="number" [ngClass]="{'invalid_field': checkValidation('salaryRangeLow')}" />
+                            <label class="error_msg" *ngIf="checkValidation('salaryRangeLow')">This
+                                field is required</label>
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="salaryRangeHigh">Salary range to per year in USD</label>
+                            <input cFormControl id="salaryRangeHigh" formControlName="salaryRangeHigh"
+                                placeholder="60000" type="number" [ngClass]="{'invalid_field': checkValidation('salaryRangeHigh')}" />
+                            <label class="error_msg" *ngIf="checkValidation('salaryRangeHigh')">This
+                                field is required</label>
+                        </div>
+
+                        <div class="mb-3 w-half">
+                            <label cLabel for="jobType">Job Type</label>
+                            <ng-select placeholder="select" formControlName="jobType" [ngClass]="{'invalid_field': checkValidation('jobType')}">
+                                <ng-option value="Part time">Part Time</ng-option>
+                                <ng-option value="Full time">Full Time</ng-option>
+                                <ng-option value="Remote">Remote</ng-option>
+                            </ng-select>
+                            <label class="error_msg" *ngIf="checkValidation('jobType')">This
+                                field is required</label>
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+                        <label cLabel for="description">Description</label>
+                        <textarea cFormControl [ngClass]="{'invalid_field': checkValidation('description')}" id="description" formControlName="description" rows="3"></textarea>
+                        <label class="error_msg" *ngIf="checkValidation('description')">This
+                            field is required</label>
+                    </div>
+
+                    <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="city">City</label>
+                            <input cFormControl id="city" [ngClass]="{'invalid_field': checkValidation('city')}" formControlName="city" placeholder="City" type="text" />
+                            <label class="error_msg" *ngIf="checkValidation('city')">This
+                                field is required</label>
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="state">State</label>
+                            <input cFormControl id="state" [ngClass]="{'invalid_field': checkValidation('state')}" formControlName="state" placeholder="State" maxlength="2"
+                                type="text" />
+                            <label class="error_msg" *ngIf="checkValidation('state')">This
+                                field is required</label>
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="zip">Zip</label>
+                            <input cFormControl id="zip" formControlName="zip" placeholder="Zip" maxlength="5"
+                                type="text" [ngClass]="{'invalid_field': checkValidation('zip')}" />
+                            <label class="error_msg" *ngIf="checkValidation('zip')">This
+                                field is required</label>
+                        </div>
+                    </div>
+
+
+                    <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="primeryCategory">Category</label>
+                            <ng-select placeholder="select" (scrollToEnd)="onScrollToEnd(true)"
+                                formControlName="category" [ngClass]="{'invalid_field': checkValidation('category')}">
+                                <ng-option *ngFor="let item of allPrimaryCategories"
+                                    [value]="item._id">{{item.categoryName}}</ng-option>
+                            </ng-select>
+                            <label class="error_msg" *ngIf="checkValidation('category')">This
+                                field is required</label>
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="notes">Notes</label>
+                            <input cFormControl [ngClass]="{'invalid_field': checkValidation('notes')}" id="notes" formControlName="notes" placeholder="Notes" type="text" />
+                            <label class="error_msg" *ngIf="checkValidation('notes')">This
+                                field is required</label>
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="applyLink">Link to apply</label>
+                            <input cFormControl id="applyLink" formControlName="applyLink" placeholder="Link to apply"
+                                type="text" [ngClass]="{'invalid_field': checkValidation('applyLink')}" />
+                            <label class="error_msg" *ngIf="checkValidation('applyLink')">This
+                                field is required</label>
+                        </div>
+                    </div>
+
+                    <div class="flex">
+                        <div class="mb-3 w-half">
+                            <mat-form-field class="example-chip-list">
+                                <mat-label>Skills</mat-label>
+                                <mat-chip-grid #chipGrid aria-label="Enter skills">
+                                    <mat-chip-row
+                                      *ngFor="let skill of skills"
+                                      (removed)="remove(skill, skills, 'skills')"
+                                      [editable]="true"
+                                      (edited)="edit(skill, $event, skills, 'skills')"
+                                      [aria-description]="'press enter to edit ' + skill">
+                                      {{skill}}
+                                      <button matChipRemove style="margin-top: 10px !important;" [attr.aria-label]="'remove ' + skill">
+                                        <mat-icon>cancel</mat-icon>
+                                      </button>
+                                    </mat-chip-row>
+                                  <input placeholder="New skill..."
+                                         [matChipInputFor]="chipGrid"
+                                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                         [matChipInputAddOnBlur]="addOnBlur"
+                                         (matChipInputTokenEnd)="add($event, skills, 'skills')"/>
+                                </mat-chip-grid>
+                              </mat-form-field>
+                              <label class="error_msg" *ngIf="checkValidation('skills')">This
+                                field is required</label>
+                        </div>
+                        <div class="mb-3 w-half">
+                            <mat-form-field class="example-chip-list">
+                                <mat-label>Responsibilities</mat-label>
+                                <mat-chip-grid #chipGrid1 aria-label="Enter responsibilities">
+                                    <mat-chip-row
+                                      *ngFor="let responsibility of responsibilities"
+                                      (removed)="remove(responsibility, responsibilities, 'responsibilities')"
+                                      [editable]="true"
+                                      (edited)="edit(responsibility, $event, responsibilities, 'responsibilities')"
+                                      [aria-description]="'press enter to edit ' + responsibility">
+                                      {{responsibility}}
+                                      <button matChipRemove style="margin-top: 10px !important;" [attr.aria-label]="'remove ' + responsibility">
+                                        <mat-icon>cancel</mat-icon>
+                                      </button>
+                                    </mat-chip-row>
+                                  <input placeholder="New responsibility..."
+                                         [matChipInputFor]="chipGrid1"
+                                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                         [matChipInputAddOnBlur]="addOnBlur"
+                                         (matChipInputTokenEnd)="add($event, responsibilities, 'responsibilities')"/>
+                                </mat-chip-grid>
+                              </mat-form-field>
+                              <label class="error_msg" *ngIf="checkValidation('responsibilities')">This
+                                field is required</label>
+                        </div>
+                    </div>
+
+                    <div class="flex">
+                        <div class="mb-3 cusStyle">
+                            <input type="checkbox" style="margin-right: 5px;" formControlName="expired" name="expired"
+                                id="expired">
+                            <label for="expired">Expired</label>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <label cLabel for="logo">Logo</label>
+                        <app-file-upload [fileName]="fileName"
+                            (onFileChangeEvent)="onFileChange($event)"></app-file-upload>
+                    </div>
+                    <div class="updateButton">
+                        <button style="display: block;" cButton color="primary" (click)="onSubmit()">Publish</button>
+                    </div>
+                </form>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>

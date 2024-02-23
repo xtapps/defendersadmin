@@ -34,3 +34,7 @@ $enable-rtl: true;
 .search-form {
     text-align: end;
 }
+
+.bg-light {
+    background-color: rgba(var(--cui-light-rgb),var(--cui-bg-opacity))!important;
+}

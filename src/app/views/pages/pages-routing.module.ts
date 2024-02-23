@@ -4,6 +4,13 @@ import { Page404Component } from './page404/page404.component';
 import { Page500Component } from './page500/page500.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { PartnerLoginComponent } from './partner-login/partner-login.component';
+import { PartnerTableListComponent } from './partner-table-list/partner-table-list.component';
+import { PartnerPropertyEditFormComponent } from './partner-property-edit-form/partner-property-edit-form.component';
+import { PartnerAddJobOpportunityComponent } from './partner-add-job-opportunity/partner-add-job-opportunity.component';
+import { PartnerViewPageComponent } from './partner-view-page/partner-view-page.component';
+import { PartnerJobOpportunitiesListComponent } from './partner-job-opportunities-list/partner-job-opportunities-list.component';
+import { PartnerAuthGuard } from './../../services/auth-guard-partner.service';
 
 const routes: Routes = [
   {
@@ -32,6 +39,46 @@ const routes: Routes = [
     component: RegisterComponent,
     data: {
       title: 'Register Page'
+    }
+  },
+  {
+    path: 'propertiesList',
+    component: PartnerTableListComponent,
+    canActivate: [PartnerAuthGuard],
+    data: {
+      title: 'Properties list'
+    }
+  },
+  {
+    path: 'jobOpportunitiesList',
+    component: PartnerJobOpportunitiesListComponent,
+    canActivate: [PartnerAuthGuard],
+    data: {
+      title: 'Job opportunities list'
+    }
+  },
+  {
+    path: 'property',
+    component: PartnerPropertyEditFormComponent,
+    canActivate: [PartnerAuthGuard],
+    data: {
+      title: 'Property'
+    }
+  },
+  {
+    path: 'job',
+    component: PartnerAddJobOpportunityComponent,
+    canActivate: [PartnerAuthGuard],
+    data: {
+      title: 'Job opportunity'
+    }
+  },
+  {
+    path: 'viewDetails',
+    component: PartnerViewPageComponent,
+    canActivate: [PartnerAuthGuard],
+    data: {
+      title: 'Property details'
     }
   }
 ];

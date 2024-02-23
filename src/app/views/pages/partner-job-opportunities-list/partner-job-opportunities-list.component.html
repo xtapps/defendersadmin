@@ -1,0 +1,76 @@
+<div class="header_section">
+    <h4>Job opportunities</h4>
+    <!-- <button cButton color="primary" (click)="addNew()">Add</button> -->
+  </div>
+  
+  <c-row>
+    <c-col xs>
+      <c-card class="mb-4">
+        <!-- <c-card-header>Partners</c-card-header> -->
+        <c-card-body>
+          <app-search-form (searchEmit)="applyFilter($event)"></app-search-form>
+  
+          <ng-container *ngIf="isLoading; else tableData">
+            <div class="skeleton-loader"></div>
+          </ng-container>
+  
+          <ng-template #tableData>
+            <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+              <thead cTableColor="light">
+                <tr>
+                  <th>Title</th>
+                  <th>Experience</th>
+                  <th>Company Name</th>
+                  <th>Description</th>
+                  <th>Job type</th>
+                  <th>Link</th>
+                  <th>Expired</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of jobList; index as i">
+                  <td>
+                    <div>{{ item.title }}</div>
+                  </td>
+                  <td>
+                    <div>{{ item.experience }}</div>
+                  </td>
+                  <td>
+                    <div>{{ item.jobCompanyName }}</div>
+                  </td>
+                  <td>
+                    <div>{{ item.description }}</div>
+                  </td>
+                  <td>
+                    <div>{{ item.jobType }}</div>
+                  </td>
+                  <td>
+                    <div>
+                        <a [href]="item.applyLink">{{item.applyLink}}</a>
+                    </div>
+                  </td>
+                  <td>
+                    <div>{{ item.expired ? 'Yes' : 'No' }}</div>
+                  </td>
+                  <!-- <td class="text-center">
+                    <svg cIcon name="cibCc{{ item.payment }}" size="xl"></svg>
+                  </td> -->
+                  <td>
+                    <div style="display: flex;">
+                      <span class="view-button" (click)="viewJob(item)">View</span>
+                      <span class="edit-icon" (click)="editItem(item)"><img width="20px"
+                          src="../../../../assets/images/edit.svg" alt=""></span>
+                      <span style="margin-left: 10px;" class="cur_pointer" (click)="deleteItem(item._id)"><img width="20px"
+                        src="../../../../assets/images/trash.svg" alt=""></span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </ng-template>
+          <app-paginator [totalRecords]="totalRecords" (pageChangeEventEmit)="pageChangeEvent($event)"></app-paginator>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>

@@ -6,9 +6,10 @@ import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';
 import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
-import { AdminModule } from './views/admin/admin.module'
 import { ValidateUserComponent } from './views/validate-user/validate-user.component';
 import { AuthGuard } from './services/auth-guard.service';
+import { PartnerLoginComponent } from './views/pages/partner-login/partner-login.component';
+import { PartnerDashboardComponent } from './views/pages/partner-dashboard/partner-dashboard.component';
 
 const routes: Routes = [
   {
@@ -126,6 +127,21 @@ const routes: Routes = [
     data: {
       title: 'Login Page'
     }
+  },
+  {
+    path: 'partnerLogin',
+    component: PartnerLoginComponent,
+    data: {
+      title: 'Partner Login Page'
+    }
+  },
+  {
+    path: 'partnerDashboard',
+    component: PartnerDashboardComponent,
+    data: {
+      title: 'Partner Dashboard'
+    },
+    loadChildren: () => import('./views/pages/pages.module').then((m) => m.PagesModule)
   },
   {
     path: 'register',

@@ -8,11 +8,11 @@ import { s3Url } from 'src/config/config';
 import { ImageModalComponent } from '../../user-status/modals/image-modal/image-modal.component';
 
 @Component({
-  selector: 'app-view-page',
-  templateUrl: './view-page.component.html',
-  styleUrls: ['./view-page.component.scss']
+  selector: 'app-partner-view-page',
+  templateUrl: './partner-view-page.component.html',
+  styleUrls: ['./partner-view-page.component.scss']
 })
-export class ViewPageComponent  implements OnInit, OnDestroy {
+export class PartnerViewPageComponent  implements OnInit, OnDestroy {
 
   appsList: any[]=[];
   receivedData: any;
