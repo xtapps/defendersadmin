@@ -1,6 +1,5 @@
 <div class="header_section">
     <h4>{{type | titlecase}} Details</h4>
-    <button cButton color="primary" class="login_but" *ngIf="type === 'partners' && receivedData['Location Name'].search('XTAPPS') >= 0" (click)="openSendPartnerLoginDialog()">Send partner login link</button>
     <button cButton color="primary" (click)="goBack()">Back</button>
 </div>
 
@@ -23,7 +22,9 @@
                                     pair.key === 'androidIcon' ||
                                     pair.key === 'Category Icon' ||
                                     pair.key === 'Franchise Image' ||
-                                    pair.key === 'Defender Document')
+                                    pair.key === 'Defender Document' ||
+                                    pair.key === 'Company Logo' ||
+                                    pair.key === 'Link')
                                     ? '' : pair?.value }}
 
                                     <div *ngFor="let image of pair.value.split(',')">
@@ -41,10 +42,11 @@
                                      pair.key === 'images' ||
                                      pair.key === 'appleIcon' ||
                                      pair.key === 'androidIcon' ||
-                                     pair.key === 'Defender Document'
+                                     pair.key === 'Defender Document' ||
+                                     pair.key === 'Company Logo'
                                      " [src]="pair.value" alt="{{imageName}}" (click)="viewImage(pair.value)">
 
-                                    <a [href]="[pair?.value]" *ngIf="pair.key === 'Website'">{{pair?.value}}</a>
+                                    <a [href]="[pair?.value]" *ngIf="pair.key === 'Website' || pair.key === 'Link'">{{pair?.value}}</a>
                                 </td>
                             </tr>
                         </ng-container>

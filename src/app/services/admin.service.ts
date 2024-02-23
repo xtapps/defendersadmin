@@ -12,6 +12,8 @@ export class AdminService {
 
   public searchTextChanged: Subject<boolean> = new Subject();
 
+  public imageValidation: Subject<boolean> = new Subject();
+
   constructor(private http: HttpClient, private router: Router) { }
 
   getAllProperties(limit: number, offset: number, text: string) {
@@ -287,6 +289,53 @@ export class AdminService {
 
   updateEducation(payloadData: FormData): Observable<any>{
     return this.http.post<any>(`${apiUrl}/updateEducation`, payloadData);
+  }
+
+  sendPartnerLogin(payload: any): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/createPartnerLogin`, payload);
+  }
+
+  partnerLogin(payload: any): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/partnerLogin`, payload);
+  }
+
+  getPropertiesListByPartnerId(limit: number, offset: number, searchText: string = ''): Observable<any>{
+    return this.http.get<any>(`${apiUrl}/partner/getPropertiesListByPartnerId?limit=${limit}&offset=${offset}&searchText=${searchText}`);
+  }
+
+  getPropertyByPartnerId(propertyId: any): Observable<any>{
+    return this.http.get<any>(`${apiUrl}/partner/getPropertyByPartnerId?propertyId=${propertyId}`);
+  }
+
+  updatePartnerProperty(payload: any): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/partner/updateProperty`, payload);
+  }
+
+  partnerLogout(payload: any): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/partner/partnerLogout`, payload);
+  }
+
+  createJobOpportunity(payloadData: FormData): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/createJob`, payloadData);
+  }
+
+  updateJobOpportunity(payloadData: FormData): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/partner/updateJob`, payloadData);
+  }
+
+  getJobOpportunitiesListByPropertyId(limit: number, offset: number, searchText: string = ''): Observable<any>{
+    return this.http.get<any>(`${apiUrl}/partner/getJobOpportunitiesListByPropertyId?limit=${limit}&offset=${offset}&searchText=${searchText}`);
+  }
+
+  getJobById(jobId: any): Observable<any>{
+    return this.http.get<any>(`${apiUrl}/partner/getJobById?jobId=${jobId}`);
+  }
+
+  deleteJobByPartner(id: string): Observable<any> {
+    const payload = {
+      id
+    }
+    return this.http.delete<any>(`${apiUrl}/partner/removeJob`, { body: payload });
   }
 
 }

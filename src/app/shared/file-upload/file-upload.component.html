@@ -1,0 +1,10 @@
+<div *ngIf="!fileName" class="file-upload-wrapper w-half"  [attr.data-text]="fileName ? fileName : 'Upload File!'" [ngClass]="{'invalid_field': imageValidation}">
+    <input name="file-upload-field" accept=".png" (change)="onFileChange($event)" type="file"
+        class="file-upload-field" value="">
+</div>
+<div *ngIf="fileName" class="imgContainer">
+    <!-- <p class="close" (click)="removeImage()"> -->
+        <!-- </p> -->
+    <img class="uploadedFile" [src]="fileName" alt="">
+    <img class="remove_icon" src="assets/images/trash-icon.png" title="Remove uploaded file" alt="" (click)="removeImage()">
+</div>

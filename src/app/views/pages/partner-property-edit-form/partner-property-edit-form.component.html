@@ -1,0 +1,131 @@
+<div class="main_container">
+    <div>
+        <h4>Edit your property</h4>
+        <button style="display: block;" cButton color="primary" (click)="addOpportunity()">Add Job Opportunity</button>
+    </div>
+
+</div>
+
+<c-row>
+    <c-col xs>
+        <c-card class="mb-4">
+            <!-- <c-card-header>Business Opportunities</c-card-header> -->
+            <c-card-body>
+                <form cForm [formGroup]="form">
+                    <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="locatonName">Organization Name</label>
+                            <input [ngClass]="{'invalid_field': checkValidation('locationName')}" cFormControl
+                                id="locatonName" formControlName="locationName" placeholder="Organization Name"
+                                type="text" />
+                            <label class="error_msg" *ngIf="checkValidation('locationName')">This
+                                field is required</label>
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="email">Email</label>
+                            <input cFormControl id="email" formControlName="email" placeholder="name@gmail.com"
+                                type="email" />
+                        </div>
+
+                    </div>
+
+                    <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="address1">Address Line 1</label>
+                            <input cFormControl id="address1" formControlName="address1" placeholder="Address Line 1"
+                                type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="address1">Address Line 2</label>
+                            <input cFormControl id="address1" formControlName="address2" placeholder="Address Line 2"
+                                type="text" />
+                        </div>
+                    </div>
+
+                    <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="city">City</label>
+                            <input cFormControl id="city" formControlName="city" placeholder="City" type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="state">State</label>
+                            <input cFormControl id="state" formControlName="state" placeholder="State" maxlength="2"
+                                type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="zip">Zip</label>
+                            <input cFormControl id="zip" formControlName="zip" placeholder="Zip" maxlength="5"
+                                type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="country">Country</label>
+                            <select formControlName="country" name="" id="appSection">
+                                <option value="us">US</option>
+                                <option value="canada">Canada</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="county">County</label>
+                            <input cFormControl id="county" formControlName="county" placeholder="County" type="text" />
+                        </div>
+                    </div>
+
+
+                    <div class="flex">
+                        <div class="mb-3 w-half">
+                            <label cLabel for="phone">Phone</label>
+                            <input cFormControl id="phone" formControlName="phone" placeholder="Phone" type="text" />
+                        </div>
+
+                        <div class="mb-3 w-half">
+                            <label cLabel for="website">Web Site</label>
+                            <input cFormControl id="website" formControlName="website" placeholder="Web Site"
+                                type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="localContact">Local Contact</label>
+                            <input cFormControl id="localContact" formControlName="localContact"
+                                placeholder="Local Contact" type="text" />
+                        </div>
+                    </div>
+
+                    <div class="flex">
+
+                        <div class="mb-3 w-half">
+                            <label cLabel for="discount">Discount</label>
+                            <input cFormControl id="discount" formControlName="discount" placeholder="Discount"
+                                type="text" />
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="primeryCategory">Primary Category</label>
+                            <ng-select placeholder="select" (scrollToEnd)="onScrollToEnd(true)"
+                                formControlName="primaryCategory" (ngModelChange)="selectPrimaryCategory($event)">
+                                <ng-option *ngFor="let item of allPrimaryCategories"
+                                    [value]="item._id">{{item.categoryName}}</ng-option>
+                            </ng-select>
+                        </div>
+                        <div class="mb-3 w-half">
+                            <label cLabel for="secondaryCategory">Secondary Category</label>
+                            <ng-select placeholder="select" formControlName="secondaryCategory">
+                                <ng-option *ngFor="let item of secondaryCategories"
+                                    [value]="item._id">{{item.category}}</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label cLabel for="description">Description</label>
+                        <textarea cFormControl id="description" formControlName="description" rows="3"></textarea>
+                    </div>
+
+                    <div class="container">
+                        <app-file-upload [fileName]="fileName" (onFileChangeEvent)="onFileChange($event)"></app-file-upload>
+                    </div>
+                    <div class="updateButton">
+                        <button style="display: block;" cButton color="primary" (click)="onSubmit()">Update</button>
+                    </div>
+                </form>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>
