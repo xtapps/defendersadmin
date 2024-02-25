@@ -23,10 +23,11 @@
                                     pair.key === 'androidIcon' ||
                                     pair.key === 'Category Icon' ||
                                     pair.key === 'Franchise Image' ||
-                                    pair.key === 'Defender Document')
+                                    pair.key === 'Defender Document' ||
+                                    pair.key === 'Document')
                                     ? '' : pair?.value }}
 
-                                    <div *ngFor="let image of pair.value.split(',')">
+                                    <div *ngFor="let image of pair.value?.split(',')">
                                         <img class="view_image"
                                             *ngIf="(pair.key === 'Images' || pair.key === 'Logo' || pair.key === 'Category Icon' || pair.key === 'Franchise Image') && image !== 'placeholder.jpg'"
                                             [src]="getImage(image)" alt="" (click)="viewImage(getImage(image))">
@@ -43,6 +44,8 @@
                                      pair.key === 'androidIcon' ||
                                      pair.key === 'Defender Document'
                                      " [src]="pair.value" alt="{{imageName}}" (click)="viewImage(pair.value)">
+
+                                     <img style="width: 150px; cursor: pointer;" *ngIf="pair.key === 'Document'" [src]="pair.value" alt="{{pair.value}}" (click)="viewImage(pair.value)">
 
                                     <a [href]="[pair?.value]" *ngIf="pair.key === 'Website'">{{pair?.value}}</a>
                                 </td>

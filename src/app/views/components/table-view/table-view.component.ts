@@ -80,6 +80,29 @@ export class TableViewComponent extends PropertiesModel implements OnInit, OnDes
     this.getPartners();
   }
 
+  deleteItem(id: any) {
+    const userResponse = confirm("Do you want to proceed?");
+    if (userResponse) {
+      this.onDelete(id);
+    }
+  }
+
+  onDelete(id: any) {
+    this.subscriptions.push(
+      this.adminService.deleteProperty(id).subscribe(res => {
+        this.offset = 0;
+        this.getPartners();
+      }, err => {
+        console.log(err)
+        if (err.status === 201) {
+          alert('Partner deleted successfully.');
+          this.offset = 0;
+          this.getPartners();
+        }
+      })
+    )
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }

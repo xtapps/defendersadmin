@@ -55,6 +55,8 @@
                     <span class="view-button" (click)="parseDataAndNavigate(partnersList[i], 'partners')">View</span>
                     <span class="edit-icon" (click)="editItem(item)"><img width="20px"
                         src="../../../../assets/images/edit.svg" alt=""></span>
+                    <span style="margin-left: 10px;" class="cur_pointer" (click)="deleteItem(item._id)"><img width="20px"
+                      src="../../../../assets/images/trash.svg" alt=""></span>
                   </div>
                 </td>
               </tr>

@@ -32,8 +32,12 @@ export class ViewPageComponent  implements OnInit, OnDestroy {
     // Retrieve the JSON data from the query parameter and decode it
     const encodedData = this.route.snapshot.queryParamMap.get('data');
     this.type = this.route.snapshot.queryParamMap.get('type') || '';
+    const user = this.route.snapshot.queryParamMap.get('user');
     if (encodedData) {
       this.receivedData = JSON.parse(decodeURIComponent(encodedData));
+      if (user) {
+        this.getDefenderImage(this.receivedData['Document']);
+      }
       this.partnerId = this.receivedData.id;
       delete this.receivedData.id;
       if (this.receivedData['Defender Document']) {
@@ -88,6 +92,16 @@ export class ViewPageComponent  implements OnInit, OnDestroy {
         this.receivedData['Defender Document'] = res.newUrl;
       }, err => {
         this.receivedData['Defender Document'] = this.imageName;
+      })
+    )
+  }
+
+  getDefenderImage(defenderDocument: string) {
+    this.subscriptions.push(
+      this.adminService.getProtectedS3Url(defenderDocument).subscribe(res => {
+        this.receivedData['Document'] = res.newUrl;
+      }, err => {
+        this.receivedData['Document'] = this.imageName;
       })
     )
   }
