@@ -44,6 +44,8 @@ import { ValidateUserComponent } from './views/validate-user/validate-user.compo
 import { Interceptor } from './interceptor/interceptor';
 import { AuthGuard } from './services/auth-guard.service';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AuthAdminUrlGuard } from './services/auth-admin-url-guard.service';
+import { AuthPartnerUrlGuard } from './services/auth-partner-url-guard.service';
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -100,6 +102,8 @@ const APP_CONTAINERS = [
       multi: true,
     },
     AuthGuard,
+    AuthAdminUrlGuard,
+    AuthPartnerUrlGuard,
     IconSetService,
     Title
   ],

@@ -22,14 +22,18 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    let data: any = localStorage.getItem('userDetails');
-    if (data) {
-      data = JSON.parse(data);
-      if (data.userType === "partnerLogin") {
-        this.router.navigate(['/partnerDashboard'])
-        return;
-      }
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.router.navigate(['dashboard']);
     }
+    // let data: any = localStorage.getItem('userDetails');
+    // if (data) {
+    //   data = JSON.parse(data);
+    //   if (data.userType === "partnerLogin") {
+    //     this.router.navigate(['/partnerDashboard'])
+    //     return;
+    //   }
+    // }
     this.initForm();
   }
 

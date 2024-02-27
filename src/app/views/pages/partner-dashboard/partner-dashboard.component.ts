@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { INavData } from '@coreui/angular';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-partner-dashboard',
   templateUrl: './partner-dashboard.component.html',
   styleUrls: ['./partner-dashboard.component.scss']
 })
-export class PartnerDashboardComponent implements OnInit {
+export class PartnerDashboardComponent implements OnInit, OnDestroy {
 
-  showPropertyPage: boolean = true;
+  // showPropertyPage: boolean = true;
+
+  subscriptions: Subscription[] = [];
 
   navItems: INavData[] = [
     {
@@ -29,14 +32,18 @@ export class PartnerDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (this.router.url === '/partnerDashboard') {
-      this.router.navigate(['/partnerDashboard/propertiesList']);
-    }
-    if (this.router.url.search('/partnerDashboard/propertiesList') >= 0) {
-      this.showPropertyPage = true;
-    } else {
-      this.showPropertyPage = false;
-    }
+    this.subscriptions.push(
+      this.router.events.subscribe((evt: any) => {
+        if (evt?.routerEvent?.url === '/partnerDashboard') {
+          this.router.navigate(['/partnerDashboard/propertiesList']);
+          return;
+        }
+      })
+    )
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
 }
