@@ -54,7 +54,7 @@ const routes: Routes = [
     component: PartnerJobOpportunitiesListComponent,
     canActivate: [PartnerAuthGuard],
     data: {
-      title: 'Job opportunities list'
+      title: 'My job list'
     }
   },
   {
