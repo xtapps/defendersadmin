@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 import { s3Url } from 'src/config/config';
@@ -25,7 +25,8 @@ export class PartnerViewPageComponent  implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private location: Location,
     private dialog: MatDialog,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private router: Router
     ) {}
 
   ngOnInit() {
@@ -90,6 +91,10 @@ export class PartnerViewPageComponent  implements OnInit, OnDestroy {
         this.receivedData['Defender Document'] = this.imageName;
       })
     )
+  }
+
+  addOpportunity() {
+    this.router.navigate(['partnerDashboard/job'], { queryParams: { propertyId: this.partnerId, jobCompanyName: this.receivedData['Location Name'] } });
   }
 
   ngOnDestroy(): void {

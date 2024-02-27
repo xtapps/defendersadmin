@@ -71,6 +71,10 @@ export class PartnerTableListComponent extends partnerPropertiesModel implements
     this.getPartners();
   }
 
+  addOpportunity(partner: any) {
+    this.router.navigate(['partnerDashboard/job'], { queryParams: { propertyId: partner._id, jobCompanyName: partner.locationName } });
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }

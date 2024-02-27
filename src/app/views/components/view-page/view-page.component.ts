@@ -85,10 +85,11 @@ export class ViewPageComponent  implements OnInit, OnDestroy {
         alert('Login link has been sent successfully.')
       }, err => {
         console.log(err)
+        if (err.status === 201) {
+          alert('Login link has been sent successfully.')
+        }
         if (err.error.errCode === "EMAIL_ALREADY_EXISTS") {
           alert('Login link has been sent already.')
-        } else {
-          alert('Something went wrong.')
         }
       })
     )

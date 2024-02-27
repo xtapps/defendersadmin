@@ -1,7 +1,9 @@
 <div class="header_section">
     <h4>{{type | titlecase}} Details</h4>
-    <button cButton color="primary" class="login_but" *ngIf="type === 'partners'" (click)="openSendPartnerLoginDialog()">Send partner login link</button>
-    <button cButton color="primary" (click)="goBack()">Back</button>
+    <div style="display: flex;">
+        <button cButton color="primary" *ngIf="type === 'partners'" (click)="openSendPartnerLoginDialog()">Send partner login link</button>
+        <button cButton color="primary" (click)="goBack()">Back</button>
+    </div>
 </div>
 
 <c-row>
