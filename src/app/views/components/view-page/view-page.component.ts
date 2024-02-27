@@ -82,6 +82,14 @@ export class ViewPageComponent  implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.adminService.sendPartnerLogin(data).subscribe(res => {
         console.log(res);
+        alert('Login link has been sent successfully.')
+      }, err => {
+        console.log(err)
+        if (err.error.errCode === "EMAIL_ALREADY_EXISTS") {
+          alert('Login link has been sent already.')
+        } else {
+          alert('Something went wrong.')
+        }
       })
     )
   }
