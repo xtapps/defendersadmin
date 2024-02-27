@@ -10,6 +10,8 @@ import { ValidateUserComponent } from './views/validate-user/validate-user.compo
 import { AuthGuard } from './services/auth-guard.service';
 import { PartnerLoginComponent } from './views/pages/partner-login/partner-login.component';
 import { PartnerDashboardComponent } from './views/pages/partner-dashboard/partner-dashboard.component';
+import { AuthAdminUrlGuard } from './services/auth-admin-url-guard.service';
+import { AuthPartnerUrlGuard } from './services/auth-partner-url-guard.service';
 
 const routes: Routes = [
   {
@@ -23,7 +25,7 @@ const routes: Routes = [
     data: {
       title: 'Home'
     },
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AuthAdminUrlGuard],
     children: [
       {
         path: 'dashboard',
@@ -110,6 +112,7 @@ const routes: Routes = [
   {
     path: '404',
     component: Page404Component,
+    canActivate: [AuthAdminUrlGuard],
     data: {
       title: 'Page 404'
     }
@@ -117,6 +120,7 @@ const routes: Routes = [
   {
     path: '500',
     component: Page500Component,
+    canActivate: [AuthAdminUrlGuard],
     data: {
       title: 'Page 500'
     }
@@ -124,6 +128,7 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [AuthAdminUrlGuard],
     data: {
       title: 'Login Page'
     }
@@ -131,6 +136,7 @@ const routes: Routes = [
   {
     path: 'partnerLogin',
     component: PartnerLoginComponent,
+    canActivate: [AuthPartnerUrlGuard],
     data: {
       title: 'Partner Login Page'
     }
@@ -138,6 +144,7 @@ const routes: Routes = [
   {
     path: 'partnerDashboard',
     component: PartnerDashboardComponent,
+    canActivate: [AuthPartnerUrlGuard],
     data: {
       title: 'Partner Dashboard'
     },
@@ -146,6 +153,7 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+    canActivate: [AuthAdminUrlGuard],
     data: {
       title: 'Register Page'
     }
@@ -153,6 +161,7 @@ const routes: Routes = [
   {
     path: 'validate/:defenderId',
     component: ValidateUserComponent,
+    canActivate: [AuthAdminUrlGuard],
     data: {
       title: 'Validate User Page'
     }
@@ -161,7 +170,7 @@ const routes: Routes = [
     path: 'admin',
     component: DefaultLayoutComponent,
     loadChildren: () => import('./views/admin/admin.module').then((m) => m.AdminModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, AuthAdminUrlGuard]
   },
   {path: '**', redirectTo: 'dashboard'}
 ];
