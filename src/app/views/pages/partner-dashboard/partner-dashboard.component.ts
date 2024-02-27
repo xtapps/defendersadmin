@@ -18,7 +18,7 @@ export class PartnerDashboardComponent implements OnInit {
       iconComponent: { name: 'cil-location-pin' }
     },
     {
-      name: 'Job Opportunities',
+      name: 'Jobs',
       url: '/partnerDashboard/jobOpportunitiesList',
       iconComponent: { name: 'cil-location-pin' }
     }
