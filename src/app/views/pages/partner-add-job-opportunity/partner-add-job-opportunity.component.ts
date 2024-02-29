@@ -28,6 +28,7 @@ export class PartnerAddJobOpportunityComponent implements OnInit, OnDestroy {
   propertyId: any;
   jobCompanyName: any;
   jobId: any;
+  curData: any;
 
   allPrimaryCategories: any[] = []; // Array to hold all data
   parimaryCategories: any[] = []; // Array for current page data
@@ -44,7 +45,7 @@ export class PartnerAddJobOpportunityComponent implements OnInit, OnDestroy {
     private adminService: AdminService,
     private location: Location,
     private router: Router,
-    private announcer: LiveAnnouncer
+    private announcer: LiveAnnouncer,
   ) { }
 
   ngOnInit(): void {
@@ -180,15 +181,14 @@ export class PartnerAddJobOpportunityComponent implements OnInit, OnDestroy {
     if (this.jobId) {
       this.update(data);
     } else {
-      const userResponse = confirm("Warning: Once you publish this job, it will go live. Do you want to proceed?");
-      if (userResponse) {
-        this.submit(data);
-      }
+      this.curData = data;
+      this.toggleDialog();
     }
-
   }
 
   submit(data: any): void {
+    this.curData = {};
+    this.toggleDialog();
     const formData = new FormData()
     for (const key in data) {
       formData.append(key, data[key]);
@@ -198,13 +198,23 @@ export class PartnerAddJobOpportunityComponent implements OnInit, OnDestroy {
         finalize(() => { this.loading = false })
       ).subscribe(res => {
         console.log(res);
-        alert('New job opportunity added successfully.');
+        // alert('New job opportunity added successfully.');
+        const data = {
+          type: 'success',
+          message: 'New job added successfully.'
+        };
+        this.adminService.alertMessage.next(data);
         this.initForm();
         this.skills = [];
         this.responsibilities = [];
         this.fileName = '';
       })
     );
+  }
+
+  toggleDialog() {
+    const button: any = document.getElementsByClassName('modalButton')[0];
+    button.click();
   }
 
   update(data: any): void {
@@ -217,11 +227,21 @@ export class PartnerAddJobOpportunityComponent implements OnInit, OnDestroy {
       this.adminService.updateJobOpportunity(formData).pipe(
         finalize(() => { this.loading = false })
       ).subscribe(res => {
-        alert('Job opportunity updated successfully.');
+        const data = {
+          type: 'success',
+          message: 'Job updated successfully.'
+        };
+        this.adminService.alertMessage.next(data);
+        // alert('Job opportunity updated successfully.');
       }, err => {
         console.log(err)
         if (err.status === 201) {
-          alert('Job opportunity updated successfully.');
+          const data = {
+            type: 'success',
+            message: 'Job updated successfully.'
+          };
+          this.adminService.alertMessage.next(data);
+          // alert('Job opportunity updated successfully.');
         }
       })
     );

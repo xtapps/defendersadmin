@@ -1,6 +1,6 @@
 <div class="main_container">
     <div>
-        <h4>{{ jobId ? 'Publish ' : 'Add '}} Listing</h4>
+        <h4>{{ jobId ? 'Publish ' : 'Add '}} Job</h4>
         <button style="display: block;" cButton color="primary" (click)="goBack()">Back</button>
     </div>
 
@@ -196,3 +196,21 @@
         </c-card>
     </c-col>
 </c-row>
+
+<button [cModalToggle]="verticallyCenteredModal.id" hidden class="modalButton" cButton></button>
+
+<c-modal #verticallyCenteredModal alignment="center" id="verticallyCenteredModal">
+    <c-modal-header>
+        <h5 cModalTitle>Warning</h5>
+        <button [cModalToggle]="verticallyCenteredModal.id" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        Once you publish this job, it will go live. Do you want to proceed?
+    </c-modal-body>
+    <c-modal-footer>
+        <button [cModalToggle]="verticallyCenteredModal.id" cButton color="secondary">
+            No
+        </button>
+        <button cButton color="primary" (click)="submit(curData)">Yes</button>
+    </c-modal-footer>
+</c-modal>

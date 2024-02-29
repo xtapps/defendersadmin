@@ -33,7 +33,10 @@ import {
   SidebarModule,
   TabsModule,
   UtilitiesModule,
-  TableModule
+  TableModule,
+  ToastModule,
+  ModalModule,
+  SpinnerModule
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
@@ -101,7 +104,10 @@ import { PartnerJobOpportunitiesListComponent } from './partner-job-opportunitie
     MatFormFieldModule,
     NgScrollbarModule,
     SharedAdminModule,
-    MatIconModule
+    MatIconModule,
+    ToastModule,
+    ModalModule,
+    SpinnerModule
   ],
   providers: [
     IconSetService

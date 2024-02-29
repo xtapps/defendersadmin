@@ -45,8 +45,24 @@
         <app-partner-add-job-opportunity *ngIf="!showPropertyPage"></app-partner-add-job-opportunity> -->
         <!-- <app-partner-table-list></app-partner-table-list> -->
         <router-outlet></router-outlet>
+        <!-- <c-toast #toast="cToast" [autohide]="false" [visible]="true" position="absolute" class="align-items-center">
+            <div class="d-flex">
+              <c-toast-body>
+                <span>Hello, world! This is a toast message.</span>
+              </c-toast-body>
+              <button aria-label="close" cButtonClose class="me-2 m-auto" (click)="toast.visible=false"></button>
+            </div>
+          </c-toast> -->
     </c-container>
   </div>
   <!--app footer-->
   <app-partner-footer/>
+</div>
+
+<div class="overlay">
+  <c-alert *ngIf="showAlertMessage" [dismissible]="true" fade [color]="alertMessage.type">{{alertMessage.message}}</c-alert>
+</div>
+
+<div class="spinnerContainer" *ngIf="showLoader">
+  <c-spinner color="primary"></c-spinner>
 </div>

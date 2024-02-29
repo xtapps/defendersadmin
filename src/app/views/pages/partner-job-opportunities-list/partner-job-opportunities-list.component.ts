@@ -16,6 +16,7 @@ export class PartnerJobOpportunitiesListComponent extends partnerPropertiesModel
 
   isLoading = true;
   jobList: any[] = [];
+  curId: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator = {} as MatPaginator;
   @ViewChild(MatSort) sort: MatSort = {} as MatSort;
@@ -76,14 +77,23 @@ export class PartnerJobOpportunitiesListComponent extends partnerPropertiesModel
     );
   }
 
+  toggleDialog() {
+    const button: any = document.getElementsByClassName('modalButton')[0];
+    button.click();
+  }
+
   deleteItem(id: any) {
-    const userResponse = confirm("Do you want to proceed?");
-    if (userResponse) {
-      this.onDelete(id);
-    }
+    this.curId = id;
+    this.toggleDialog();
+    // const userResponse = confirm("Do you want to proceed?");
+    // if (userResponse) {
+    //   this.onDelete(id);
+    // }
   }
 
   onDelete(id: any) {
+    this.toggleDialog();
+    this.curId = '';
     this.subscriptions.push(
       this.adminService.deleteJobByPartner(id).subscribe(res => {
         this.offset = 0;
@@ -91,7 +101,12 @@ export class PartnerJobOpportunitiesListComponent extends partnerPropertiesModel
       }, err => {
         console.log(err)
         if (err.status === 201) {
-          alert('Job deleted successfully.');
+          // alert('Job deleted successfully.');
+          const data = {
+            type: 'success',
+            message: 'Job deleted successfully.'
+          };
+          this.adminService.alertMessage.next(data);
           this.offset = 0;
           this.getJobs();
         }

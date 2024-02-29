@@ -233,8 +233,23 @@ export class PartnerPropertyEditFormComponent implements OnInit, OnDestroy {
       this.adminService.updatePartnerProperty(formData).pipe(
         finalize(() => { this.loading = false })
       ).subscribe(res => {
-        alert('Partner updated successfully.');
+        const data = {
+          type: 'success',
+          message: 'Partner updated successfully.'
+        };
+        this.adminService.alertMessage.next(data);
+        // alert('Partner updated successfully.');
         // this.getPropertyById(window.history.state._id);
+      }, err => {
+        console.log(err)
+        if (err.status === 201) {
+          const data = {
+            type: 'success',
+            message: 'Partner updated successfully.'
+          };
+          this.adminService.alertMessage.next(data);
+          // alert('Job opportunity updated successfully.');
+        }
       })
     );
   }
