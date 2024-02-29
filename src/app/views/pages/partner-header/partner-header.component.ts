@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -10,9 +10,11 @@ import { AdminService } from 'src/app/services/admin.service';
   selector: 'app-partner-header',
   templateUrl: './partner-header.component.html',
 })
-export class PartnerHeaderComponent extends HeaderComponent implements OnDestroy {
+export class PartnerHeaderComponent extends HeaderComponent implements OnInit, OnDestroy {
 
   @Input() sidebarId: string = "sidebar";
+
+  userDetails: any;
 
   public newMessages = new Array(4)
   public newTasks = new Array(5)
@@ -24,6 +26,11 @@ export class PartnerHeaderComponent extends HeaderComponent implements OnDestroy
     private router: Router
   ) {
     super();
+  }
+
+  ngOnInit(): void {
+    const userDetails: any = localStorage.getItem('userDetails');
+    this.userDetails = JSON.parse(userDetails);
   }
 
   logout() {

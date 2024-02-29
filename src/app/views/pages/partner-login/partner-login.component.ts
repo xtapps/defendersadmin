@@ -54,7 +54,8 @@ export class PartnerLoginComponent implements OnInit, OnDestroy {
           chatPhoto: res.chatPhoto,
           username: res.username,
           userId: res.userId,
-          userType: 'partnerLogin'
+          userType: 'partnerLogin',
+          logo: res.logo
         }
         localStorage.setItem('userDetails', JSON.stringify(userDetails));
         this.router.navigate(['partnerDashboard/properties']);
