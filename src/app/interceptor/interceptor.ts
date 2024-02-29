@@ -6,7 +6,7 @@ import {
   HttpEvent,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, finalize, Observable, throwError } from 'rxjs';
 import { AdminService } from '../services/admin.service';
 
 @Injectable()
@@ -18,6 +18,7 @@ export class Interceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     // Get the user's token from your authentication service or wherever it's stored
+    this.adminService.showLoader.next(true);
     const authToken = localStorage.getItem('token');
 
     // Clone the request and add the Authorization header with the token
@@ -34,7 +35,10 @@ export class Interceptor implements HttpInterceptor {
           this.adminService.logout();
         }
         return throwError(error);
-      })
+      }),
+			finalize(() => {
+				this.adminService.showLoader.next(false);
+			})
     );
   }
 }

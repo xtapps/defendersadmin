@@ -34,7 +34,8 @@ export class PropertiesModel {
 			"Description": partner.description,
 			"Discount": partner.discount,
 			"Discount Disclaimer": partner.discountDisclaimer,
-			"id": partner._id
+			"id": partner._id,
+			"partnerUserId": partner.partnerUserId
 		}
 		const encodedData = encodeURIComponent(JSON.stringify(tempData));
 		this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type } });

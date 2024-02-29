@@ -70,7 +70,11 @@ export class PartnerViewPageComponent  implements OnInit, OnDestroy {
 
   openSendPartnerLoginDialog() {
     if (this.receivedData.Email.length <= 2) {
-      alert('Email is not valid');
+      const data = {
+        type: 'danger',
+        message: 'Email is not valid.'
+      };
+      this.adminService.alertMessage.next(data);
       return;
     }
     const data = {

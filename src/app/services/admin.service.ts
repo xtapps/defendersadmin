@@ -14,6 +14,10 @@ export class AdminService {
 
   public imageValidation: Subject<boolean> = new Subject();
 
+  public alertMessage: Subject<any> = new Subject();
+
+  public showLoader: Subject<boolean> = new Subject();
+
   constructor(private http: HttpClient, private router: Router) { }
 
   getAllProperties(limit: number, offset: number, text: string) {
@@ -293,6 +297,10 @@ export class AdminService {
 
   sendPartnerLogin(payload: any): Observable<any>{
     return this.http.post<any>(`${apiUrl}/createPartnerLogin`, payload);
+  }
+
+  resendPartnerLogin(payload: any): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/resendPartnerLogin`, payload);
   }
 
   partnerLogin(payload: any): Observable<any>{

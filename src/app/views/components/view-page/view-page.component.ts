@@ -20,6 +20,7 @@ export class ViewPageComponent  implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   imageName: string = '';
   partnerId: string = '';
+  partnerUserId: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -39,7 +40,9 @@ export class ViewPageComponent  implements OnInit, OnDestroy {
         this.getDefenderImage(this.receivedData['Document']);
       }
       this.partnerId = this.receivedData.id;
+      this.partnerUserId = this.receivedData.partnerUserId;
       delete this.receivedData.id;
+      delete this.receivedData.partnerUserId;
       if (this.receivedData['Defender Document']) {
         this.imageName = this.receivedData['Defender Document'];
         this.downloadDoc(this.receivedData['Defender Document']);
@@ -76,20 +79,58 @@ export class ViewPageComponent  implements OnInit, OnDestroy {
       alert('Email is not valid');
       return;
     }
+    const userResponse = confirm("You are granting login authority to the partner. Do you want to proceed?");
+    if (userResponse) {
+      this.sendPartnerLink();
+    }
+  }
+
+  sendPartnerLink() {
     const data = {
       partnerId: this.partnerId
     }
     this.subscriptions.push(
       this.adminService.sendPartnerLogin(data).subscribe(res => {
         console.log(res);
-        alert('Login link has been sent successfully.')
+        alert('The login link has been sent successfully.')
       }, err => {
         console.log(err)
         if (err.status === 201) {
-          alert('Login link has been sent successfully.')
+          alert('The login link has been sent successfully.')
         }
         if (err.error.errCode === "EMAIL_ALREADY_EXISTS") {
-          alert('Login link has been sent already.')
+          alert('The login link has already been sent.')
+        }
+      })
+    )
+  }
+
+  openResendPartnerLoginDialog() {
+    if (this.receivedData.Email.length <= 2) {
+      alert('Email is not valid');
+      return;
+    }
+    const userResponse = confirm("Are you sure you want to resend the login credentials to the partner?");
+    if (userResponse) {
+      this.resendPartnerLink();
+    }
+  }
+
+  resendPartnerLink() {
+    const data = {
+      partnerId: this.partnerId
+    }
+    this.subscriptions.push(
+      this.adminService.resendPartnerLogin(data).subscribe(res => {
+        console.log(res);
+        alert('The login link has been sent successfully.')
+      }, err => {
+        console.log(err)
+        if (err.status === 201) {
+          alert('The login link has been sent successfully.')
+        }
+        if (err.error.errCode === "EMAIL_ALREADY_EXISTS") {
+          alert('The login link has already been sent.')
         }
       })
     )
