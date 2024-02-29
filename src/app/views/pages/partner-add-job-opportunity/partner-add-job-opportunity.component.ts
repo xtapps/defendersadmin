@@ -137,7 +137,7 @@ export class PartnerAddJobOpportunityComponent implements OnInit, OnDestroy {
     this.subscription.push(
       this.adminService.getAllCategories(this.pageSize, this.offset).subscribe((res: any) => {
         const newData = res.categories;
-        this.lastPage = Math.ceil(res.totalCount / this.pageSize);
+        this.lastPage = res.totalCount;
 
         this.allPrimaryCategories = [...this.allPrimaryCategories, ...newData];
         this.parimaryCategories = newData;
@@ -180,7 +180,10 @@ export class PartnerAddJobOpportunityComponent implements OnInit, OnDestroy {
     if (this.jobId) {
       this.update(data);
     } else {
-      this.submit(data);
+      const userResponse = confirm("Warning: Once you publish this job, it will go live. Do you want to proceed?");
+      if (userResponse) {
+        this.submit(data);
+      }
     }
 
   }
@@ -226,7 +229,7 @@ export class PartnerAddJobOpportunityComponent implements OnInit, OnDestroy {
 
   onScrollToEnd(isScrollToEnd: boolean): void {
     if (isScrollToEnd) {
-      this.offset += 1;
+      this.offset += this.pageSize;
       if (this.offset <= this.lastPage) {
         this.getCategories();
       }

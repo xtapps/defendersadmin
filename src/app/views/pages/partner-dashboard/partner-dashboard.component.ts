@@ -16,12 +16,12 @@ export class PartnerDashboardComponent implements OnInit, OnDestroy {
 
   navItems: INavData[] = [
     {
-      name: 'Properties',
+      name: 'Listings',
       url: '/partnerDashboard/propertiesList',
       iconComponent: { name: 'cil-location-pin' }
     },
     {
-      name: 'Jobs',
+      name: 'Job Listings',
       url: '/partnerDashboard/jobOpportunitiesList',
       iconComponent: { name: 'cil-location-pin' }
     }

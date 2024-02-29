@@ -14,6 +14,8 @@
       ></svg>
     </button> -->
     <c-header-nav class="d-none d-lg-flex me-auto">
+      <img style="width: 50px; height: 50px; object-fit: contain;" [src]="userDetails.logo" alt="">
+      <p style="margin-left: 15px; margin-top: 12px;">Hi {{userDetails.firstName}}!</p>
       <!-- <c-nav-item>
         <a cNavLink routerLink="/dashboard" routerLinkActive="active">
           Dashboard
@@ -51,10 +53,10 @@
     </c-header-nav>
 
   </c-container>
-  <c-header-divider></c-header-divider>
-  <c-container [fluid]="true">
+  <!-- <c-header-divider></c-header-divider> -->
+  <!-- <c-container [fluid]="true">
     <c-breadcrumb-router class="ms-2"></c-breadcrumb-router>
-  </c-container>
+  </c-container> -->
 </ng-container>
 <!-- </c-header> -->
 

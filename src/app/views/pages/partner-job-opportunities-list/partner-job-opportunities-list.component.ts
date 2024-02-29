@@ -71,7 +71,7 @@ export class PartnerJobOpportunitiesListComponent extends partnerPropertiesModel
     this.subscriptions.push(
       this.adminService.getAllCategoryById(job.category).subscribe((res: any) => {
         job.categoryName = res.categoryName;
-        this.parseDataAndNavigateForJob(job, 'Job details');
+        this.parseDataAndNavigateForJob(job, 'Job');
       })
     );
   }

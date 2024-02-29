@@ -1,5 +1,5 @@
 <div class="header_section">
-    <h4>Properties</h4>
+    <h4>Listings</h4>
     <!-- <button cButton color="primary" (click)="addNew()">Add</button> -->
   </div>
   
@@ -18,12 +18,11 @@
             <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
               <thead cTableColor="light">
                 <tr>
-                  <th>Property Name</th>
+                  <th>Listing Name</th>
                   <th>Email</th>
                   <th>Address</th>
                   <th>City</th>
                   <th>State</th>
-                  <th>Zip</th>
                   <th></th>
                 </tr>
               </thead>
@@ -44,16 +43,13 @@
                   <td>
                     <div>{{ item.state }}</div>
                   </td>
-                  <td>
-                    <div>{{ item.zip }}</div>
-                  </td>
                   <!-- <td class="text-center">
                     <svg cIcon name="cibCc{{ item.payment }}" size="xl"></svg>
                   </td> -->
                   <td>
                     <div style="display: flex;">
-                      <span class="view-button" (click)="addOpportunity(item)">Add job</span>
-                      <span class="view-button" (click)="parseDataAndNavigate(partnersList[i], 'property')">View</span>
+                      <span class="view-button" (click)="addOpportunity(item)">Upload job</span>
+                      <span class="view-button" (click)="parseDataAndNavigate(partnersList[i], 'listing')">View</span>
                       <span class="edit-icon" (click)="editItem(item)"><img width="20px"
                           src="../../../../assets/images/edit.svg" alt=""></span>
                     </div>

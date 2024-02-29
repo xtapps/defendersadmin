@@ -45,41 +45,41 @@ const routes: Routes = [
     path: 'propertiesList',
     component: PartnerTableListComponent,
     canActivate: [PartnerAuthGuard],
-    data: {
-      title: 'Properties list'
-    }
+    // data: {
+    //   title: 'Properties list'
+    // }
   },
   {
     path: 'jobOpportunitiesList',
     component: PartnerJobOpportunitiesListComponent,
     canActivate: [PartnerAuthGuard],
-    data: {
-      title: 'My job list'
-    }
+    // data: {
+    //   title: 'My job list'
+    // }
   },
   {
     path: 'property',
     component: PartnerPropertyEditFormComponent,
     canActivate: [PartnerAuthGuard],
-    data: {
-      title: 'Property'
-    }
+    // data: {
+    //   title: 'Property'
+    // }
   },
   {
     path: 'job',
     component: PartnerAddJobOpportunityComponent,
     canActivate: [PartnerAuthGuard],
-    data: {
-      title: 'Job opportunity'
-    }
+    // data: {
+    //   title: 'Job opportunity'
+    // }
   },
   {
     path: 'viewDetails',
     component: PartnerViewPageComponent,
     canActivate: [PartnerAuthGuard],
-    data: {
-      title: 'Property details'
-    }
+    // data: {
+    //   title: 'Property details'
+    // }
   }
 ];
 
