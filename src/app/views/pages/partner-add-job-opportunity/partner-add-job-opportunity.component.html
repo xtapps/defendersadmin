@@ -75,7 +75,9 @@
                     <div class="flex">
                         <div class="mb-3 w-half">
                             <label cLabel for="city">City</label>
-                            <input cFormControl id="city" [ngClass]="{'invalid_field': checkValidation('city')}" formControlName="city" placeholder="City" type="text" />
+                            <ng-select placeholder="select" formControlName="city" [ngClass]="{'invalid_field': checkValidation('city')}">
+                                <ng-option *ngFor="let city of availableLocations" [value]="city">{{city}}</ng-option>
+                            </ng-select>
                             <label class="error_msg" *ngIf="checkValidation('city')">This
                                 field is required</label>
                         </div>
