@@ -1,4 +1,4 @@
-<div *ngIf="!fileName" class="file-upload-wrapper w-half"  [attr.data-text]="fileName ? fileName : 'Upload File!'" [ngClass]="{'invalid_field': imageValidation}">
+<div *ngIf="!fileName" class="file-upload-wrapper w-half" [class]="addClass"  [attr.data-text]="fileName ? fileName : 'Upload File!'" [ngClass]="{'invalid_field': imageValidation}">
     <input name="file-upload-field" accept=".png" (change)="onFileChange($event)" type="file"
         class="file-upload-field" value="">
 </div>

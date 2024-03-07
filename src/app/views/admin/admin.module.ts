@@ -40,7 +40,8 @@ import { AddGroupCodesComponent } from '../components/add-new-froms/add-group-co
 import { AdminUsersComponent } from '../components/admin-users/admin-users.component';
 import { EducationComponent } from '../components/education/education.component';
 import { AddEducationComponent } from '../components/add-education/add-education.component';
-
+import { AddNewMobileAppComponent } from '../components/add-new-froms/add-new-mobile-app/add-new-mobile-app.component';
+import { PagesModule } from '../pages/pages.module';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { AddEducationComponent } from '../components/add-education/add-education
     AddGroupCodesComponent,
     AdminUsersComponent,
     EducationComponent,
-    AddEducationComponent
+    AddEducationComponent,
+    AddNewMobileAppComponent
   ],
   imports: [
     CommonModule,
@@ -96,7 +98,8 @@ import { AddEducationComponent } from '../components/add-education/add-education
     WidgetsModule,
     NgSelectModule,
     SharedModule,
-    SharedAdminModule
+    SharedAdminModule,
+    PagesModule
   ]
 })
 export class AdminModule { }
