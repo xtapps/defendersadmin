@@ -81,7 +81,7 @@ export class MobileAppsComponent extends PropertiesModel implements OnInit, OnDe
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new-mobile-app'], { queryParams: { propertyType: 'app', orgType: 'commercial', appSection: 'support', type: 'mobileApps' } });
+    this.router.navigate(['/admin/add-new-mobile-app'], { queryParams: { propertyType: 'app', orgType: 'health', appSection: 'support', type: 'mobileApps' } });
   }
 
   ngOnDestroy(): void {
@@ -89,7 +89,7 @@ export class MobileAppsComponent extends PropertiesModel implements OnInit, OnDe
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new-mobile-app'], {state: ev, queryParams: { propertyType: 'app', orgType: 'commercial', appSection: 'support', type: 'mobileApps', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new-mobile-app'], {state: ev, queryParams: { propertyType: 'app', orgType: 'health', appSection: 'support', type: 'mobileApps', editMode: 'true' } });
   }
 
   applyFilter(text: any) {

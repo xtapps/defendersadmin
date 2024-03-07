@@ -33,13 +33,19 @@
                         </div>
 
                         <div class="mb-3 w-half">
+                            <label cLabel for="androidURL">Android URL</label>
+                            <input cFormControl id="androidURL" formControlName="androidURL" placeholder="Android URL"
+                                type="text" />
+                        </div>
+
+                        <!-- <div class="mb-3 w-half">
                             <label cLabel for="appleIcon">Apple Icon</label>
                             <app-file-upload class="fileHandler" [addClass]="'w-100'" [fileName]="appleIcon"
                                 (onFileChangeEvent)="onFileChangeAppleIcon($event)"></app-file-upload>
-                        </div>
+                        </div> -->
                     </div>
 
-                    <div class="flex">
+                    <!-- <div class="flex">
                         <div class="mb-3 w-half">
                             <label cLabel for="androidURL">Android URL</label>
                             <input cFormControl id="androidURL" formControlName="androidURL" placeholder="Android URL"
@@ -50,7 +56,7 @@
                             <app-file-upload class="fileHandler" [addClass]="'w-100'" [fileName]="androidIcon"
                                 (onFileChangeEvent)="onFileChangeAndroidIcon($event)"></app-file-upload>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="flex">
                         <div class="mb-3 w-half">
@@ -129,7 +135,13 @@
                         <textarea cFormControl id="description" formControlName="description" rows="3"></textarea>
                     </div>
 
-                    <div>
+                    <div class="container">
+                        <div class="file-upload-wrapper w-half"  [attr.data-text]="fileName ? fileName : 'Upload File!'" [ngClass]="{'invalid_field': checkValidation('image')}">
+                            <input name="file-upload-field" accept=".png" (change)="onFileChange($event)" type="file"
+                                class="file-upload-field" value="">
+                        </div>
+                        <label class="error_msg" *ngIf="checkValidation('image')">This
+                            field is required</label>
                         <button cButton color="primary" (click)="onSubmit()">Submit</button>
                     </div>
                 </form>

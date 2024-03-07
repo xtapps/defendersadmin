@@ -22,6 +22,7 @@ export class AddNewMobileAppComponent implements OnInit, OnDestroy {
   androidIcon = '';
   editMode = false;
   isFileAdded = false;
+  fileName = '';
 
   pageSize = 10;
   lastPage: number = 0;
@@ -58,6 +59,7 @@ export class AddNewMobileAppComponent implements OnInit, OnDestroy {
     if (data.primaryCategory.length && data.primaryCategory !== ' ') {
       this.getCategoryById(data.primaryCategory);
     }
+    this.fileName = data.images[0];
     this.appleIcon = data.appleIcon;
     this.androidIcon = data.androidIcon;
     this.form.patchValue({
@@ -81,9 +83,7 @@ export class AddNewMobileAppComponent implements OnInit, OnDestroy {
       image: data.image,
       locationActive: data.locationActive,
       appleURL: data.appleURL,
-      androidURL: data.androidURL,
-      appleIcon: data.appleIcon,
-      androidIcon: data.androidIcon
+      androidURL: data.androidURL
     });
   }
 
@@ -116,12 +116,10 @@ export class AddNewMobileAppComponent implements OnInit, OnDestroy {
       primaryCategory: [null],
       secondaryCategory: [''],
       description: [''],
-      image: [''],
+      image: ['', [Validators.required]],
       isVetOwned: [false],
       isActive: [true],
-      locationActive: [true],
-      appleIcon: [''],
-      androidIcon: ['']
+      locationActive: [true]
     });
   }
 
@@ -218,8 +216,7 @@ export class AddNewMobileAppComponent implements OnInit, OnDestroy {
         console.log(res);
         alert('New mobile app added successfully.');
         this.initForm();
-        this.appleIcon = '';
-        this.androidIcon = '';
+        this.fileName = '';
       })
     );
   }
@@ -258,23 +255,16 @@ export class AddNewMobileAppComponent implements OnInit, OnDestroy {
     }
   }
 
-  onFileChangeAppleIcon(file: any) {
-    if (file) {
-      this.appleIcon = file;
-      this.form.controls['appleIcon'].setValue(file);
-    } else {
-      this.appleIcon = ''; // Reset if no file selected
-      this.form.controls['appleIcon'].setValue('');
-    }
-  }
+  onFileChange(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const files = inputElement?.files;
 
-  onFileChangeAndroidIcon(file: any) {
-    if (file) {
-      this.androidIcon = file;
-      this.form.controls['androidIcon'].setValue(file);
+    if (files && files.length > 0) {
+      this.fileName = files[0].name;
+      this.form.controls['image'].setValue(files[0]);
     } else {
-      this.androidIcon = ''; // Reset if no file selected
-      this.form.controls['androidIcon'].setValue('');
+      this.fileName = ''; // Reset if no file selected
+      this.form.controls['image'].setValue('');
     }
   }
 
