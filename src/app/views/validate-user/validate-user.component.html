@@ -85,7 +85,6 @@
         <div id="areaSelect" class="form-row" *ngIf="userType === '1'">
           <div class="form-group col-md-12"> <label for="area" class="col-form-label">Area of
               Service</label> <select #area name="area" class="form-control" (change)="setArea(area.value)">
-              <option value="">Select Area of Service</option>
               <option value="0">National</option>
               <option value="1">State</option>
               <option value="2">Local</option>
