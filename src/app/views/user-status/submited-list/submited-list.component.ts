@@ -37,7 +37,7 @@ export class SubmitedListComponent extends DefenderModel implements OnInit, OnDe
   getSubmitedList(): void {
     this.isLoading = true;
     this.subscription.push(
-      this.adminService.getUserStatus(1, this.limit, this.offset, undefined, this.searchText, 'asc-processing').pipe(
+      this.adminService.getUserStatus(1, this.limit, this.offset, undefined, this.searchText, 'desc-approved').pipe(
         finalize(() => { this.isLoading = false })
       ).subscribe(res => {
         this.submitedList = res.defendersList;
