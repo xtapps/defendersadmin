@@ -14,6 +14,7 @@ export class FileUploadComponent implements OnDestroy {
   private subscriptions: Subscription[] = [];
 
   @Input() fileName: any = null;
+  @Input() addClass: any = null;
 
   @Output() onFileChangeEvent: EventEmitter<any> = new EventEmitter()
 

@@ -111,6 +111,9 @@ import { PartnerJobOpportunitiesListComponent } from './partner-job-opportunitie
   ],
   providers: [
     IconSetService
+  ],
+  exports: [
+    FileUploadComponent
   ]
 })
 export class PagesModule {

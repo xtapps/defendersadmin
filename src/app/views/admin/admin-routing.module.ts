@@ -15,6 +15,7 @@ import { JobOpportunitiesComponent } from '../components/job-opportunities/job-o
 import { BusinessOpportunitiesComponent } from '../components/business-opportunities/business-opportunities.component';
 import { AdminUsersComponent } from '../components/admin-users/admin-users.component';
 import { EducationComponent } from '../components/education/education.component';
+import { AddNewMobileAppComponent } from '../components/add-new-froms/add-new-mobile-app/add-new-mobile-app.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,9 @@ const routes: Routes = [
   },
   {
     path: 'add-new', component: AddNewComponent
+  },
+  {
+    path: 'add-new-mobile-app', component: AddNewMobileAppComponent
   },
   {
     path: 'franchises', component: FranchisesListComponent
