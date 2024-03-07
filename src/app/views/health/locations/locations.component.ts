@@ -45,11 +45,11 @@ export class LocationsComponent extends PropertiesModel implements OnInit, OnDes
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'partner', orgType: 'commercial', appSection: 'support', type: 'properties' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'partner', orgType: 'health', appSection: 'support', type: 'properties' } });
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'partner', orgType: 'commercial', appSection: 'support', type: 'properties', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'partner', orgType: 'health', appSection: 'support', type: 'properties', editMode: 'true' } });
   }
 
   goToViewPage(index: number): void {
