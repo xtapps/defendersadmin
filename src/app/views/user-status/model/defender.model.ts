@@ -11,7 +11,7 @@ export class DefenderModel {
 			"First Name": data.firstName,
 			"Last Name": data.lastName,
 			"User Name": data.username,
-			"Document": data.defenderDocument,
+			"Document": (type === 'submited' || type === 'plus one') ? data.defenderDocument : '',
 			"Defender Email": data.defenderEmail,
 			"Defender Number": data.defenderNumber,
 			"Defender Mil Email": data.defenderMilEmail,

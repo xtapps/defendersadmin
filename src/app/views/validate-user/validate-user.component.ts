@@ -12,7 +12,7 @@ export class ValidateUserComponent implements OnDestroy {
   public userType: string = '0';
   public branch: string = 'Army';
   public currentStatus: string = 'Active';
-  public area: string = '';
+  public area: string = '0';
   public heroName: string = '';
   public zipCode: string = '';
   public selectedFile: File | string = '';
@@ -29,9 +29,10 @@ export class ValidateUserComponent implements OnDestroy {
   setUserType(event: string) {
     this.userType = event;
     this.branch = 'Army';
-    if (this.userType === '1') {
+    if (this.userType === '1' || this.userType === '3') {
       this.branch = 'Law Enforcement';
     }
+    this.currentStatus = 'Active';
   }
 
   setBranches(branch: string) {
@@ -50,7 +51,7 @@ export class ValidateUserComponent implements OnDestroy {
     this.dobErrMsg = '';
     this.dojErrMsg = '';
     if (this.userType === '0') {
-      this.area = '';
+      this.area = '0';
     }
     let isErr: boolean = false;
     if (this.userType !== '3') {
@@ -72,7 +73,7 @@ export class ValidateUserComponent implements OnDestroy {
       this.dos = '';
       this.currentStatus = '';
     }
-    if (!this.selectedFile) {
+    if (!this.selectedFile && this.userType !== '3') {
       alert('Please upload valid document');
       return;
     }
@@ -86,15 +87,19 @@ export class ValidateUserComponent implements OnDestroy {
     const formData = new FormData();
     formData.append('userType', this.userType);
     formData.append('branch', this.branch);
+    if (this.userType == '1') {
+      formData.append('serviceArea', this.area);
+    }
     formData.append('serviceStatus', this.currentStatus);
-    formData.append('serviceArea', this.area);
     formData.append('heroname', this.heroName);
     formData.append('zipcode', this.zipCode);
     formData.append('separationDate', dos);
     formData.append('joinDate', doj);
     formData.append('birthDate', dob);
     formData.append('id', id);
-    formData.append('image', this.selectedFile);
+    if (this.userType !== '3') {
+      formData.append('image', this.selectedFile);
+    }
     const validateUser = this.adminService.validateUser(formData).subscribe((res: any) => {
       console.log(res);
     }, err => {
