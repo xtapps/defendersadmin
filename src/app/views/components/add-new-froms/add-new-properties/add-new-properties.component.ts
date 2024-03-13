@@ -25,6 +25,8 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
   pageSize = 10;
   lastPage: number = 0;
   offset = 1;
+  searchCategoryText: string = '';
+  categoryLoader: boolean = false;
 
   allPrimaryCategories: any[] = []; // Array to hold all data
   parimaryCategories: any[] = []; // Array for current page data
@@ -151,10 +153,12 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
   }
 
   getCategories(): void {
+    this.categoryLoader = true;
     this.subscription.push(
-      this.adminService.getAllCategories(this.pageSize, this.offset).subscribe((res: any) => {
+      this.adminService.getAllCategories(this.pageSize, this.offset, this.searchCategoryText).subscribe((res: any) => {
         const newData = res.categories;
-        this.lastPage = Math.ceil(res.totalCount / this.pageSize);
+        this.lastPage = res.totalCount;
+        this.categoryLoader = false;
 
         this.allPrimaryCategories = [...this.allPrimaryCategories, ...newData];
         this.parimaryCategories = newData;
@@ -182,6 +186,9 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
 
     if (this.form.invalid && !this.editMode) {
       this.form.markAllAsTouched();
+      if (!this.form.value.image || this.form.value.image === '') {
+        this.adminService.imageValidation.next(true);
+      }
       return;
     }
 
@@ -194,6 +201,10 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
         data['corpName'] = this.form.controls['locationName'].value
 
       }
+    }
+    if (!this.form.value.image || this.form.value.image === '') {
+      this.adminService.imageValidation.next(true);
+      return;
     }
 
     this.loading = true;
@@ -264,24 +275,25 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
     );
   }
 
-
+  onSearchCategory(event: any) {
+    this.searchCategoryText = event?.term ?? '';
+    this.allPrimaryCategories = [];
+    this.getCategories();
+  }
 
   onScrollToEnd(isScrollToEnd: boolean): void {
     if (isScrollToEnd) {
-      this.offset += 1;
+      this.offset += this.pageSize;
       if (this.offset <= this.lastPage) {
         this.getCategories();
       }
     }
   }
 
-  onFileChange(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    const files = inputElement?.files;
-
-    if (files && files.length > 0) {
-      this.fileName = files[0].name;
-      this.form.controls['image'].setValue(files[0]);
+  onFileChange(file: any) {
+    if (file) {
+      this.fileName = file.name;
+      this.form.controls['image'].setValue(file);
     } else {
       this.fileName = ''; // Reset if no file selected
       this.form.controls['image'].setValue('');

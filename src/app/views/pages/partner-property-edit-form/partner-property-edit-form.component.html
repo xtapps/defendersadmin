@@ -98,7 +98,7 @@
                         </div>
                         <div class="mb-3 w-half">
                             <label cLabel for="primeryCategory">Primary Category</label>
-                            <ng-select placeholder="select" (scrollToEnd)="onScrollToEnd(true)"
+                            <ng-select placeholder="select" [loading]="categoryLoader" (close)="onSearchCategory($event)" (scrollToEnd)="onScrollToEnd(true)" (search)="onSearchCategory($event)"
                                 formControlName="primaryCategory" (ngModelChange)="selectPrimaryCategory($event)">
                                 <ng-option *ngFor="let item of allPrimaryCategories"
                                     [value]="item._id">{{item.categoryName}}</ng-option>

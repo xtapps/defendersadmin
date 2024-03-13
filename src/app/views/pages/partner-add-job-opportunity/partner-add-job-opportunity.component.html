@@ -101,7 +101,7 @@
                     <div class="flex">
                         <div class="mb-3 w-half">
                             <label cLabel for="primeryCategory">Category</label>
-                            <ng-select placeholder="select" (scrollToEnd)="onScrollToEnd(true)"
+                            <ng-select placeholder="select" [loading]="categoryLoader" (close)="onSearchCategory($event)" (scrollToEnd)="onScrollToEnd(true)" (search)="onSearchCategory($event)"
                                 formControlName="category" [ngClass]="{'invalid_field': checkValidation('category')}">
                                 <ng-option *ngFor="let item of allPrimaryCategories"
                                     [value]="item._id">{{item.categoryName}}</ng-option>

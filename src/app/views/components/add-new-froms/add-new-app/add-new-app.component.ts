@@ -110,15 +110,10 @@ export class AddNewAppComponent implements OnInit, OnDestroy {
     );
   }
 
-
-
-  onFileChange(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    const files = inputElement?.files;
-
-    if (files && files.length > 0) {
-      this.fileName = files[0].name;
-      this.form.controls['image'].setValue(files[0]);
+  onFileChange(file: any) {
+    if (file) {
+      this.fileName = file.name;
+      this.form.controls['image'].setValue(file);
     } else {
       this.fileName = ''; // Reset if no file selected
       this.form.controls['image'].setValue('');

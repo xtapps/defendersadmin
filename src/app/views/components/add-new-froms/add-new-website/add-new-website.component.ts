@@ -47,7 +47,8 @@ export class AddNewWebsiteComponent {
 
   setFormValues(): void {
     const datas = window.history.state;
-    this.fileName = datas.images;
+
+    this.fileName = datas.images[0];
     this.form.patchValue({
       locationName: datas.locationName,
       image: datas.images,
@@ -86,6 +87,9 @@ export class AddNewWebsiteComponent {
   onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
+      if (!this.form.value.image || this.form.value.image === '') {
+        this.adminService.imageValidation.next(true);
+      }
       return;
     }
 
@@ -97,6 +101,10 @@ export class AddNewWebsiteComponent {
         data[control] = this.form.controls[control].value;
         data['corpName'] = this.form.controls['locationName'].value
       }
+    }
+    if (!this.form.value.image || this.form.value.image === '') {
+      this.adminService.imageValidation.next(true);
+      return;
     }
 
     this.loading = true;
@@ -154,17 +162,12 @@ export class AddNewWebsiteComponent {
     );
   }
 
-  onFileChange(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    const files = inputElement?.files;
-
-    if (files && files.length > 0) {
-      this.fileName = files[0].name;
-      this.isFileAdded = true;
-      this.form.controls['image'].setValue(files[0]);
+  onFileChange(file: any) {
+    if (file) {
+      this.fileName = file.name;
+      this.form.controls['image'].setValue(file);
     } else {
       this.fileName = ''; // Reset if no file selected
-      this.isFileAdded = false;
       this.form.controls['image'].setValue('');
     }
   }
