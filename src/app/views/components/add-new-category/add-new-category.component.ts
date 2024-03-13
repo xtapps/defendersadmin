@@ -61,18 +61,28 @@ export class AddNewCategoryComponent implements OnInit, OnDestroy {
     return this.form.controls[fieldName].invalid && this.form.controls[fieldName].touched
   }
 
-  onFileChange(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    const files = inputElement?.files;
-
-    if (files && files.length > 0) {
-      this.fileName = files[0].name;
-      this.form.controls['categoryIcon'].setValue(files[0]);
+  onFileChange(file: any) {
+    if (file) {
+      this.fileName = file.name;
+      this.form.controls['image'].setValue(file);
     } else {
       this.fileName = ''; // Reset if no file selected
-      this.form.controls['categoryIcon'].setValue('');
+      this.form.controls['image'].setValue('');
     }
   }
+
+  // onFileChange(event: Event) {
+  //   const inputElement = event.target as HTMLInputElement;
+  //   const files = inputElement?.files;
+
+  //   if (files && files.length > 0) {
+  //     this.fileName = files[0].name;
+  //     this.form.controls['categoryIcon'].setValue(files[0]);
+  //   } else {
+  //     this.fileName = ''; // Reset if no file selected
+  //     this.form.controls['categoryIcon'].setValue('');
+  //   }
+  // }
 
   onSubmit(): void {
     if (this.form.invalid) {

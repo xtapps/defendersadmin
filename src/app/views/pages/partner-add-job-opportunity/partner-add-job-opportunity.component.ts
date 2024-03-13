@@ -29,6 +29,8 @@ export class PartnerAddJobOpportunityComponent implements OnInit, OnDestroy {
   jobCompanyName: any;
   jobId: any;
   curData: any;
+  searchCategoryText: string = '';
+  categoryLoader: boolean = false;
 
   allPrimaryCategories: any[] = []; // Array to hold all data
   parimaryCategories: any[] = []; // Array for current page data
@@ -137,10 +139,12 @@ export class PartnerAddJobOpportunityComponent implements OnInit, OnDestroy {
   }
 
   getCategories(): void {
+    this.categoryLoader = true;
     this.subscription.push(
       this.adminService.getAllCategories(this.pageSize, this.offset).subscribe((res: any) => {
         const newData = res.categories;
         this.lastPage = res.totalCount;
+        this.categoryLoader = false;
 
         this.allPrimaryCategories = [...this.allPrimaryCategories, ...newData];
         this.parimaryCategories = newData;
@@ -247,6 +251,12 @@ export class PartnerAddJobOpportunityComponent implements OnInit, OnDestroy {
         }
       })
     );
+  }
+
+  onSearchCategory(event: any) {
+    this.searchCategoryText = event?.term ?? '';
+    this.allPrimaryCategories = [];
+    this.getCategories();
   }
 
   onScrollToEnd(isScrollToEnd: boolean): void {

@@ -27,6 +27,8 @@ export class PartnerPropertyEditFormComponent implements OnInit, OnDestroy {
   parimaryCategories: any[] = []; // Array for current page data
   secondaryCategories: any[] = [];
   propertyId: any;
+  searchCategoryText: string = '';
+  categoryLoader: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -148,10 +150,12 @@ export class PartnerPropertyEditFormComponent implements OnInit, OnDestroy {
   }
 
   getCategories(): void {
+    this.categoryLoader = true;
     this.subscription.push(
       this.adminService.getAllCategories(this.pageSize, this.offset).subscribe((res: any) => {
         const newData = res.categories;
-        this.lastPage = Math.ceil(res.totalCount / this.pageSize);
+        this.lastPage = res.totalCount;
+        this.categoryLoader = false;
 
         this.allPrimaryCategories = [...this.allPrimaryCategories, ...newData];
         this.parimaryCategories = newData;
@@ -176,6 +180,9 @@ export class PartnerPropertyEditFormComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
+      if (!this.form.value.image || this.form.value.image === '') {
+        this.adminService.imageValidation.next(true);
+      }
       return;
     }
 
@@ -279,11 +286,15 @@ export class PartnerPropertyEditFormComponent implements OnInit, OnDestroy {
   //   );
   // }
 
-
+  onSearchCategory(event: any) {
+    this.searchCategoryText = event?.term ?? '';
+    this.allPrimaryCategories = [];
+    this.getCategories();
+  }
 
   onScrollToEnd(isScrollToEnd: boolean): void {
     if (isScrollToEnd) {
-      this.offset += 1;
+      this.offset += this.pageSize;
       if (this.offset <= this.lastPage) {
         this.getCategories();
       }

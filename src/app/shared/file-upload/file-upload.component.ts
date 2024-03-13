@@ -1,13 +1,14 @@
-import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
+import { s3Url } from 'src/config/config';
 
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss']
 })
-export class FileUploadComponent implements OnDestroy {
+export class FileUploadComponent implements OnInit, OnDestroy {
 
   public imageValidation: boolean = false;
 
@@ -24,6 +25,12 @@ export class FileUploadComponent implements OnDestroy {
         this.imageValidation = res;
       })
     )
+  }
+
+  ngOnInit(): void {
+    if (this.fileName.length > 0 && this.fileName.search('https') < 0) {
+      this.fileName = `${s3Url}${this.fileName}`;
+    }
   }
 
   onFileChange(event: Event) {

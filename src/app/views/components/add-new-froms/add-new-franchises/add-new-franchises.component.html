@@ -30,13 +30,7 @@
                     </div>
 
                     <div class="container">
-                        <div class="file-upload-wrapper w-half" [attr.data-text]="fileName ? fileName : 'Upload File!'"
-                            [ngClass]="{'invalid_field': checkValidation('franchiseImage')}">
-                            <input name="file-upload-field" accept=".png" (change)="onFileChange($event)" type="file"
-                                class="file-upload-field" value="">
-                        </div>
-                        <label class="error_msg" *ngIf="checkValidation('franchiseImage')">This
-                            field is required</label>
+                        <app-file-upload [fileName]="fileName" (onFileChangeEvent)="onFileChange($event)"></app-file-upload>
                         <button cButton color="primary" (click)="onSubmit()">{{editMode? "Update" : "Submit" }}</button>
                     </div>
                     <div>

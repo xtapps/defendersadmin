@@ -24,6 +24,8 @@ export class AddNewPartnerComponent implements OnInit, OnDestroy {
   fileName = '';
   appSection: string = '';
   orgType: string = '';
+  searchCategoryText: string = '';
+  categoryLoader: boolean = false;
 
   private router = inject(Router);
 
@@ -46,9 +48,11 @@ export class AddNewPartnerComponent implements OnInit, OnDestroy {
 
 
   getCategories(): void {
-    this.adminService.getAllCategories(this.pageSize, this.offset).subscribe((res: any) => {
+    this.categoryLoader = true;
+    this.adminService.getAllCategories(this.pageSize, this.offset, this.searchCategoryText).subscribe((res: any) => {
       const newData = res.categories;
       this.lastPage = res.totalCount;
+      this.categoryLoader = false;
 
       this.allPrimaryCategories = [...this.allPrimaryCategories, ...newData];
       this.parimaryCategories = newData;
@@ -110,6 +114,9 @@ export class AddNewPartnerComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
+      if (!this.form.value.image || this.form.value.image === '') {
+        this.adminService.imageValidation.next(true);
+      }
       return;
     }
 
@@ -121,6 +128,10 @@ export class AddNewPartnerComponent implements OnInit, OnDestroy {
         data[control] = this.form.controls[control].value;
         data['corpName'] = this.form.controls['locationName'].value
       }
+    }
+    if (!this.form.value.image || this.form.value.image === '') {
+      this.adminService.imageValidation.next(true);
+      return;
     }
 
     const formData = new FormData()
@@ -161,7 +172,6 @@ export class AddNewPartnerComponent implements OnInit, OnDestroy {
   }
 
   onScrollToEnd(isScrollToEnd: boolean): void {
-    console.log(isScrollToEnd, 'iiii');
     if (isScrollToEnd) {
       this.offset += this.pageSize;
       if (this.offset <= this.lastPage) {
@@ -170,14 +180,16 @@ export class AddNewPartnerComponent implements OnInit, OnDestroy {
     }
   }
 
+  onSearchCategory(event: any) {
+    this.searchCategoryText = event?.term ?? '';
+    this.allPrimaryCategories = [];
+    this.getCategories();
+  }
 
-  onFileChange(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    const files = inputElement?.files;
-
-    if (files && files.length > 0) {
-      this.fileName = files[0].name;
-      this.form.controls['image'].setValue(files[0]);
+  onFileChange(file: any) {
+    if (file) {
+      this.fileName = file.name;
+      this.form.controls['image'].setValue(file);
     } else {
       this.fileName = ''; // Reset if no file selected
       this.form.controls['image'].setValue('');
