@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AdminRoutingModule } from '../admin/admin-routing.module';
 import { SharedAdminModule } from 'src/app/shared/shared-admin.module';
+import { AppsListComponent } from './apps-list/apps-list.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,9 @@ const routes: Routes = [
   },
   {
     path: 'streaming', component: StreamingComponent
+  },
+  {
+    path: 'entertainment-apps', component: AppsListComponent
   }
 ]
 
@@ -32,7 +36,8 @@ const routes: Routes = [
   declarations: [
     MusicComponent,
     StreamingComponent,
-    PodcastsComponent
+    PodcastsComponent,
+    AppsListComponent
   ],
   imports: [
     CommonModule,

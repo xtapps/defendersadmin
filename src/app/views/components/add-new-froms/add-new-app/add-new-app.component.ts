@@ -16,6 +16,7 @@ export class AddNewAppComponent implements OnInit, OnDestroy {
   loading = false;
   subscription: Subscription[] = [];
   fileName = '';
+  appSection: string = 'partner';
 
 
   private formBuilder = inject(FormBuilder);
@@ -25,8 +26,9 @@ export class AddNewAppComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.initForm();
     this.propertyType = this.activatedRoute.snapshot.queryParams['type'];
+    this.appSection = this.activatedRoute.snapshot.queryParams['appSection'];
+    this.initForm();
     this.form.patchValue({
       propertyType: this.propertyType
     })
@@ -44,7 +46,7 @@ export class AddNewAppComponent implements OnInit, OnDestroy {
       orgType: ['commercial'],
       corpName: [''],
       description: [''],
-      appSection: ['entertainment'],
+      appSection: [this.appSection],
       website: ['www.gmail.com'],
       isActive: [true],
       isVetOwned: [false],
@@ -59,6 +61,9 @@ export class AddNewAppComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
+      if (!this.form.value.image || this.form.value.image === '') {
+        this.adminService.imageValidation.next(true);
+      }
       return;
     }
 
@@ -71,6 +76,10 @@ export class AddNewAppComponent implements OnInit, OnDestroy {
         data['corpName'] = this.form.controls['name'].value
         data['locationName'] = this.form.controls['name'].value
       }
+    }
+    if (!this.form.value.image || this.form.value.image === '') {
+      this.adminService.imageValidation.next(true);
+      return;
     }
 
     console.log(data);

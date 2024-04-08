@@ -217,6 +217,11 @@ export const navItems: INavData[] = [
         url: '/entertainment/streaming',
         iconComponent: { name: 'cil-user' }
       },
+      {
+        name: 'Apps',
+        url: '/entertainment/entertainment-apps',
+        iconComponent: { name: 'cil-home' }
+      }
     ]
   },
   {
