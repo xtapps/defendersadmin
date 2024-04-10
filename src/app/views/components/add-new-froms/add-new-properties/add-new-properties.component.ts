@@ -80,7 +80,7 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
       secondaryCategory: (datas.secondaryCategory && datas.secondaryCategory !== ' ') ? datas.secondaryCategory : null,
       discount: datas.discount,
       description: datas.description,
-      image: datas.image,
+      image: this.fileName,
       locationActive: datas.locationActive
     });
   }
