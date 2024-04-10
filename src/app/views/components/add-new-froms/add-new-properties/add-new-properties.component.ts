@@ -27,6 +27,7 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
   offset = 1;
   searchCategoryText: string = '';
   categoryLoader: boolean = false;
+  appSectionTitle: any;
 
   allPrimaryCategories: any[] = []; // Array to hold all data
   parimaryCategories: any[] = []; // Array for current page data
@@ -47,12 +48,43 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
     this.orgType = this.activatedRoute.snapshot.queryParams['orgType'];
     this.appSection = this.activatedRoute.snapshot.queryParams['appSection'];
     this.editMode = this.activatedRoute.snapshot.queryParams['editMode'];
+    this.setAppSectionTitle();
     this.initForm();
     if (this.activatedRoute.snapshot.queryParams['editMode'] === 'true') {
       this.editMode = true
       this.setFormValues();
     } else {
       this.editMode = false;
+    }
+  }
+
+  setAppSectionTitle() {
+    switch(this.appSection) {
+      case 'military':
+        this.appSectionTitle = 'Veteran';
+        break;
+        case 'firstResponder':
+          this.appSectionTitle = 'First Responder';
+          if (this.propertyType === 'charity') {
+            this.appSectionTitle = 'First Responder Nonprofit';
+          }
+        break;
+      case 'entertainment':
+        this.appSectionTitle = this.propertyType;
+        break;
+      case 'veteran':
+        if (this.propertyType === 'charity') {
+          this.appSectionTitle = 'Military Nonprofit';
+        }
+        break;
+      case 'other':
+        if (this.propertyType === 'charity') {
+          this.appSectionTitle = 'Nonprofit Other';
+        }
+        break;
+      default:
+        this.appSectionTitle = null;
+        break;
     }
   }
 

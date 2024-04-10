@@ -36,7 +36,7 @@ export class ProcessingListComponent extends DefenderModel implements OnInit, On
   getProcessingList(): void {
     this.isLoading = true;
     this.subscription.push(
-      this.adminService.getUserStatus(0, this.limit, this.offset, undefined, this.searchText, 'asc-processing').pipe(
+      this.adminService.getUserStatus(0, this.limit, this.offset, undefined, this.searchText, 'desc').pipe(
         finalize(() => { this.isLoading = false })
       ).subscribe(res => {
         this.processingList = res.defendersList;
