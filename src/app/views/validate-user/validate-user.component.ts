@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 
@@ -7,12 +7,13 @@ import { AdminService } from 'src/app/services/admin.service';
   templateUrl: './validate-user.component.html',
   styleUrls: ['./validate-user.component.scss']
 })
-export class ValidateUserComponent implements OnDestroy {
+export class ValidateUserComponent implements OnDestroy, OnInit {
 
-  public userType: string = '0';
-  public branch: string = 'Army';
-  public currentStatus: string = 'Active';
-  public area: string = '0';
+  public submitButtonClicked: boolean = false;
+  public userType: string = '';
+  public branch: string = '';
+  public currentStatus: string = '';
+  public area: string = '';
   public heroName: string = '';
   public zipCode: string = '';
   public selectedFile: File | string = '';
@@ -23,8 +24,21 @@ export class ValidateUserComponent implements OnDestroy {
   public doj: Date | string = '';
   public dos: Date | string = '';
   public subscriptions: Subscription[] = [];
+  public errObj: any = {};
 
-  constructor(private adminService: AdminService) { }
+  constructor(
+    private adminService: AdminService
+  ) { }
+
+  ngOnInit(): void {
+    const hash = window.location.hash.split('/');
+    const id = hash[2];
+    this.subscriptions.push(
+      this.adminService.getDefenderById(id).subscribe(res => {
+        this.userType = res.userType;
+      })
+    );
+  }
 
   setUserType(event: string) {
     this.userType = event;
@@ -48,6 +62,7 @@ export class ValidateUserComponent implements OnDestroy {
   }
 
   updateDetails() {
+    this.submitButtonClicked = true;
     this.dobErrMsg = '';
     this.dojErrMsg = '';
     if (this.userType === '0') {
@@ -103,6 +118,7 @@ export class ValidateUserComponent implements OnDestroy {
     const validateUser = this.adminService.validateUser(formData).subscribe((res: any) => {
       console.log(res);
     }, err => {
+      this.submitButtonClicked = false;
       console.log(err);
       if (err.status === 201) {
         alert(err.error.text);

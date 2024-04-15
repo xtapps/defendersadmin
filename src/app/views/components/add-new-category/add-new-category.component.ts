@@ -51,7 +51,7 @@ export class AddNewCategoryComponent implements OnInit, OnDestroy {
   setFormValues(): void {
     const datas = window.history.state;
     this.form.patchValue({
-      categoryName: datas.franchiseName,
+      categoryName: datas.categoryName,
       website: datas.website,
       categoryIcon: datas.categoryIcon
     })

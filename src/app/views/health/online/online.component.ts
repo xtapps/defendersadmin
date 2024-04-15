@@ -47,11 +47,11 @@ export class OnlineComponent extends PropertiesModel implements OnInit, OnDestro
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'website', orgType: 'health', appSection: 'support', type: 'properties' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'website', orgType: 'health', appSection: 'support', type: 'properties', title: 'Online' } });
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'website', orgType: 'health', appSection: 'support', type: 'properties', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'website', orgType: 'health', appSection: 'support', type: 'properties', editMode: 'true', title: 'Online' } });
   }
 
   goToViewPage(index: number): void {

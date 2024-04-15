@@ -44,7 +44,7 @@ export class FranchisesListComponent extends BusinessModel implements OnInit, On
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'franchises' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'franchises', title: 'Franchise' } });
   }
 
 
@@ -90,7 +90,7 @@ export class FranchisesListComponent extends BusinessModel implements OnInit, On
   // }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'franchises', orgType: 'commercial', appSection: 'partner', type: 'franchises', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'franchises', title: 'Franchise', orgType: 'commercial', appSection: 'partner', type: 'franchises', editMode: 'true' } });
   }
 
   applyFilter(text: any) {

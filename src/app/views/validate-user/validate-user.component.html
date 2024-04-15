@@ -18,13 +18,17 @@
           services and more.</p>
         <div class="form-row">
           <div class="form-group col-md-12"> <label for="userType" class="col-form-label">What is your
-              Defender Status?</label> <select #userTypes name="userType" (change)="setUserType(userTypes.value)"
+              Defender Status?</label> <select #userTypes name="userType" [value]="userType" (change)="setUserType(userTypes.value)"
               class="form-control">
+              <option value="">Select</option>
               <option value="0">Veteran/Active Duty</option>
               <option value="1">First Responder</option>
               <option value="2">Both</option>
               <option value="3">Family of the Fallen</option>
-            </select> </div>
+              <option value="4">Business Owner</option>
+            </select>
+            <span class="errMsg" *ngIf="!userType && submitButtonClicked">Select user type</span>
+          </div>
         </div>
         <div class="form-row" *ngIf="userType === '3'">
           <div class="form-group col-md-12"> <label id="heronamelabel" for="heroname" class="col-form-label">Your Hero's
@@ -33,7 +37,8 @@
         <div class="form-row">
           <div class="form-group col-md-6" *ngIf="userType === '3'"> <label for="branch"
               class="col-form-label">Branch</label>
-            <select #branch1 name="branch" class="form-control" (change)="setBranches(branch1.value)">
+            <select #branch1 name="branch" class="form-control" [value]="branch" (change)="setBranches(branch1.value)">
+              <option value="">Select</option>
               <option value="Law Enforcement">Law Enforcement</option>
               <option value="Firefighter">Firefighter</option>
               <option value="EMT/Healthcare">EMT/Healthcare</option>
@@ -44,51 +49,65 @@
               <option value="Air force">Air Force</option>
               <option value="Coast Guard">Coast Guard</option>
             </select>
+            <span class="errMsg" *ngIf="!branch && submitButtonClicked">Select branch</span>
           </div>
           <div class="form-group col-md-6" *ngIf="userType === '0' || userType === '2'"> <label for="branch"
               class="col-form-label">Branch</label>
-            <select #branch2 name="branch" class="form-control" (change)="setBranches(branch2.value)">
+            <select #branch2 name="branch" class="form-control" [value]="branch" (change)="setBranches(branch2.value)">
+              <option value="">Select</option>
               <option value="Army">Army</option>
               <option value="Navy">Navy</option>
               <option value="Marines">Marines</option>
               <option value="Air Force">Air Force</option>
               <option value="Coast Guard">Coast Guard</option>
             </select>
+            <span class="errMsg" *ngIf="!branch && submitButtonClicked">Select branch</span>
           </div>
           <div class="form-group col-md-6" *ngIf="userType === '1'"> <label for="branch"
               class="col-form-label">Branch</label>
-            <select #branch3 name="branch" class="form-control" (change)="setBranches(branch3.value)">
+            <select #branch3 name="branch" class="form-control" [value]="branch" (change)="setBranches(branch3.value)">
+              <option value="">Select</option>
               <option value="Law Enforcement">Law Enforcement</option>
               <option value="Firefighter">Firefighter</option>
               <option value="EMT/Healthcare">EMT/Healthcare</option>
               <option value="Government">Government</option>
             </select>
+            <span class="errMsg" *ngIf="!branch && submitButtonClicked">Select branch</span>
           </div>
           <div class="form-group col-md-6" *ngIf="userType === '0' || userType === '2'"> <label id="statusLabel"
               for="status" class="col-form-label">Current
-              Status</label> <select #status1 name="status" class="form-control" (change)="setStatuses(status1.value)">
+              Status</label> <select #status1 name="status" class="form-control" [value]="currentStatus" (change)="setStatuses(status1.value)">
+                <option value="">Select</option>
               <option value="Active">Active</option>
               <option value="Reserve">Reserve</option>
               <option value="National Guard">National Guard</option>
               <option value="Retired">Retired</option>
               <option value="Veteran">Veteran</option>
-            </select> </div>
+            </select>
+            <span class="errMsg" *ngIf="!currentStatus && submitButtonClicked">Select status</span>
+          </div>
           <div class="form-group col-md-6" *ngIf="userType === '1'"> <label id="statusLabel" for="status"
-              class="col-form-label">Current Status</label> <select #status2 name="status" class="form-control"
+              class="col-form-label">Current Status</label> <select #status2 name="status" class="form-control" [value]="currentStatus"
               (change)="setStatuses(status2.value)">
+              <option value="">Select</option>
               <option value="Active">Active</option>
               <option value="Retired">Retired</option>
               <option value="Volunteer">Volunteer</option>
               <option value="Former">Former</option>
-            </select> </div>
+            </select>
+            <span class="errMsg" *ngIf="!currentStatus && submitButtonClicked">Select status</span>
+          </div>
         </div>
         <div id="areaSelect" class="form-row" *ngIf="userType === '1'">
           <div class="form-group col-md-12"> <label for="area" class="col-form-label">Area of
-              Service</label> <select #area name="area" class="form-control" (change)="setArea(area.value)">
+              Service</label> <select #area1 name="area" class="form-control" [value]="area" (change)="setArea(area1.value)">
+                <option value="">Select</option>
               <option value="0">National</option>
               <option value="1">State</option>
               <option value="2">Local</option>
-            </select> </div>
+            </select>
+            <span class="errMsg" *ngIf="!area && submitButtonClicked">Select area</span>
+          </div>
         </div>
         <div class="form-row" *ngIf="userType != '3'">
           <div class="form-group col-md-12"> <label id="doblabel" for="dob" class="col-form-label">Date of

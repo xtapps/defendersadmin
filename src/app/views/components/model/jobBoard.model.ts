@@ -8,7 +8,7 @@ export class JobBoardModel {
 
 	parseDataAndNavigate(data: any, type: string) {
 		const tempData = {
-			"Website": data.website,
+			"Website": data.website || data?.websites[0],
 			"Logo": data.logo,
 			"Title": data.title,
 			"description": data.description

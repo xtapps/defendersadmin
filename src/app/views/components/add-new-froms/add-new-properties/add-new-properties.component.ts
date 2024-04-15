@@ -16,6 +16,7 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
   propertyType!: string;
   appSection!: string;
   orgType!: string;
+  title!: string;
   subscription: Subscription[] = [];
   loading = false;
   fileName = '';
@@ -48,6 +49,7 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
     this.orgType = this.activatedRoute.snapshot.queryParams['orgType'];
     this.appSection = this.activatedRoute.snapshot.queryParams['appSection'];
     this.editMode = this.activatedRoute.snapshot.queryParams['editMode'];
+    this.title = this.activatedRoute.snapshot.queryParams['title'];
     this.setAppSectionTitle();
     this.initForm();
     if (this.activatedRoute.snapshot.queryParams['editMode'] === 'true') {
@@ -59,6 +61,10 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
   }
 
   setAppSectionTitle() {
+    if (this.title) {
+      this.appSectionTitle = this.title;
+      return;
+    }
     switch(this.appSection) {
       case 'military':
         this.appSectionTitle = 'Veteran';
