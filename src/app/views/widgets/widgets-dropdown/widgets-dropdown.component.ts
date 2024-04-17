@@ -10,6 +10,7 @@ import {
 import { getStyle } from '@coreui/utils';
 import { ChartjsComponent } from '@coreui/angular-chartjs';
 import { AdminService } from 'src/app/services/admin.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-widgets-dropdown',
@@ -21,7 +22,8 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private router: Router
   ) {}
 
   dashboardCountData: any = {};
@@ -177,6 +179,10 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
     this.adminService.getAllPropertiesCountByCategory().subscribe(res => {
       this.dashboardCountData = res;
     });
+  }
+
+  goToPage() {
+    this.router.navigate(['/user-status/approved'], {queryParams: {selectedTab: 4}});
   }
 }
 

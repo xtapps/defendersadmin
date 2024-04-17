@@ -350,4 +350,8 @@ export class AdminService {
     return this.http.delete<any>(`${apiUrl}/partner/removeJob`, { body: payload });
   }
 
+  getDefenderById(id: string) {
+    return this.http.get<any>(`${apiUrl}/getDefenderById?id=${id}`);
+  }
+
 }

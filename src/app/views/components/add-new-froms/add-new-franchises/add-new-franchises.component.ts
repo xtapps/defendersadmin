@@ -17,6 +17,7 @@ export class AddNewFranchisesComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = [];
   receivedData: any;
   editMode = false;
+  title: string = '';
 
   private formBuilder = inject(FormBuilder);
   private adminService = inject(AdminService);
@@ -28,6 +29,7 @@ export class AddNewFranchisesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initForm();
     this.editMode = this.activatedRoute.snapshot.queryParams['editMode'];
+    this.title = this.activatedRoute.snapshot.queryParams['title'];
     if (this.activatedRoute.snapshot.queryParams['editMode'] === 'true') {
       this.editMode = true
       this.setFormValues();

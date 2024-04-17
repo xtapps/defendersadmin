@@ -85,11 +85,11 @@ export class BusinessOpportunitiesComponent extends BusinessModel implements OnI
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'franchises' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'franchises', title: 'Business Opportunity' } });
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'franchises', orgType: 'commercial', appSection: 'partner', type: 'franchises', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'franchises', title: 'Business Opportunity', orgType: 'commercial', appSection: 'partner', type: 'franchises', editMode: 'true' } });
   }
 
   ngOnDestroy(): void {

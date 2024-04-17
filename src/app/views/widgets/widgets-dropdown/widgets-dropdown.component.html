@@ -11,7 +11,7 @@
           (-12.4% <svg cIcon name="cilArrowBottom"></svg>)
         </span> -->
       </ng-template>
-      <ng-template cTemplateId="widgetActionTemplate">
+      <!-- <ng-template cTemplateId="widgetActionTemplate">
         <c-dropdown alignment="end" variant="btn-group">
           <button [caret]="false" cButton cDropdownToggle class="p-0" color="transparent">
             <svg cIcon class="text-high-emphasis-inverse" name="cilOptions"></svg>
@@ -28,7 +28,7 @@
             </li>
           </ul>
         </c-dropdown>
-      </ng-template>
+      </ng-template> -->
       <ng-template cTemplateId="widgetChartTemplate">
         <c-chart [data]="data[0]" [options]="options[0]" class="mt-3 mx-3" height="70" [type]="'line'"></c-chart>
       </ng-template>
@@ -46,7 +46,7 @@
           (40.9%<svg cIcon name="cilArrowTop"></svg>)
         </span> -->
       </ng-template>
-      <ng-template cTemplateId="widgetActionTemplate">
+      <!-- <ng-template cTemplateId="widgetActionTemplate">
         <c-dropdown alignment="end" variant="btn-group">
           <button [caret]="false" cButton cDropdownToggle class="p-0" color="transparent">
             <svg cIcon class="text-high-emphasis-inverse" name="cilOptions"></svg>
@@ -58,7 +58,7 @@
             <li><a [disabled]="true" routerLink="./" cDropdownItem>Disabled</a></li>
           </ul>
         </c-dropdown>
-      </ng-template>
+      </ng-template> -->
       <ng-template cTemplateId="widgetChartTemplate">
         <c-chart [data]="data[1]" [options]="options[1]" class="mt-3 mx-3" height="70" type="line"></c-chart>
       </ng-template>
@@ -66,17 +66,18 @@
   </c-col>
   <c-col sm="6" xl="3">
     <c-widget-stat-a
-      [title]="'Franchises'"
+      [title]="'Business Owners'"
       class="mb-4"
       color="warning"
+      (click)="goToPage()" style="cursor: pointer;"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-        <span>{{dashboardCountData.franchises}}</span>
+        <span>{{dashboardCountData.businessOwners}}</span>
         <!-- <span class="fs-6 fw-normal">
           (84.7% <svg cIcon name="cilArrowTop"></svg>)
         </span> -->
       </ng-template>
-      <ng-template cTemplateId="widgetActionTemplate">
+      <!-- <ng-template cTemplateId="widgetActionTemplate">
         <c-dropdown alignment="end" variant="btn-group">
           <button [caret]="false" cButton cDropdownToggle class="p-0" color="transparent">
             <svg cIcon class="text-high-emphasis-inverse" name="cilOptions"></svg>
@@ -88,7 +89,7 @@
             <li><a [disabled]="true" routerLink="./" cDropdownItem>Disabled</a></li>
           </ul>
         </c-dropdown>
-      </ng-template>
+      </ng-template> -->
       <ng-template cTemplateId="widgetChartTemplate">
         <c-chart [data]="data[2]" [options]="options[2]" class="mt-3" height="70" type="line"></c-chart>
       </ng-template>
@@ -106,7 +107,7 @@
           (-23.6% <svg cIcon name="cilArrowBottom"></svg>)
         </span> -->
       </ng-template>
-      <ng-template cTemplateId="widgetActionTemplate">
+      <!-- <ng-template cTemplateId="widgetActionTemplate">
         <c-dropdown alignment="end" variant="btn-group">
           <button [caret]="false" cButton cDropdownToggle class="p-0" color="transparent">
             <svg cIcon class="text-high-emphasis-inverse" name="cilOptions"></svg>
@@ -118,7 +119,7 @@
             <li><a [disabled]="true" routerLink="./" cDropdownItem>Disabled</a></li>
           </ul>
         </c-dropdown>
-      </ng-template>
+      </ng-template> -->
       <ng-template cTemplateId="widgetChartTemplate">
         <c-chart [data]="data[3]" [options]="options[3]" class="mt-3 mx-3" height="70" type="bar"></c-chart>
       </ng-template>

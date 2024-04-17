@@ -24,7 +24,7 @@ export class PropertiesModel {
 			"Country": partner.country,
 			"Zip": partner.zip,
 			"Phone": partner.phone,
-			"Website": partner.website,
+			"Website": partner?.website[0] || partner?.websites[0],
 			"Email": partner.email,
 			"Local Contact": partner.localContact,
 			"Franchise Tag": partner.franchiseTag,

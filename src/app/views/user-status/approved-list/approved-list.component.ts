@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, finalize } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 import { RejectReasonModalComponent } from '../modals/reject-reason-modal/reject-reason-modal.component';
@@ -26,12 +26,15 @@ export class ApprovedListComponent extends DefenderModel implements OnInit, OnDe
   constructor(
     private adminService: AdminService,
     public override router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private route: ActivatedRoute
   ) {
     super(router)
   }
 
   ngOnInit(): void {
+    const userType = this.route.snapshot.queryParamMap.get('selectedTab');
+    this.userType = Number(userType);
     this.getApprovedList();
   }
 
