@@ -66,15 +66,15 @@ export class AddNewPropertiesComponent implements OnInit, OnDestroy {
       return;
     }
     switch(this.appSection) {
-      case 'military':
-        this.appSectionTitle = 'Veteran';
-        break;
-        case 'firstResponder':
-          this.appSectionTitle = 'First Responder';
-          if (this.propertyType === 'charity') {
-            this.appSectionTitle = 'First Responder Nonprofit';
-          }
-        break;
+      // case 'military':
+      //   this.appSectionTitle = 'Veteran';
+      //   break;
+      case 'firstResponder':
+        this.appSectionTitle = 'First Responder';
+        if (this.propertyType === 'charity') {
+          this.appSectionTitle = 'First Responder Nonprofit';
+        }
+      break;
       case 'entertainment':
         this.appSectionTitle = this.propertyType;
         break;
