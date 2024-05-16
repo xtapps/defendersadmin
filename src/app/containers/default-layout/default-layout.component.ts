@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 import { navItems } from './_nav';
 
@@ -16,15 +16,17 @@ export class DefaultLayoutComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      this.highlightSideMenu()
+      this.resetElementStyles();
+      this.highlightSideMenu();
     }, 500);
-    // this.router.events.subscribe((event: any) => {
-    //   if (event instanceof NavigationEnd) {
-    //     setTimeout(() => {
-    //       this.highlightSideMenu()
-    //     }, 500);
-    //   }
-    // });
+    this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd) {
+        setTimeout(() => {
+          this.resetElementStyles();
+          this.highlightSideMenu();
+        }, 500);
+      }
+    });
   }
 
   highlightSideMenu() {
@@ -34,21 +36,33 @@ export class DefaultLayoutComponent implements OnInit {
       if (item.url === curUrl) {
         this.updateElement(idx);
       } else {
-        item.children?.forEach(child => {
+        item.children?.forEach((child, childIdx) => {
           if (child.url === curUrl) {
-            this.updateElement(idx);
+            this.updateElement(idx, childIdx);
           }
         })
       }
     })
   }
 
-  updateElement(idx: number) {
+  updateElement(idx: number, childIdx: number = 0) {
     if (idx <= 0) return;
     const navGrp = document.getElementsByTagName('c-sidebar-nav-group')[idx - 1];
     navGrp.classList.add('show');
     const sideNav = document.getElementsByTagName('c-sidebar-nav-group')[idx - 1].getElementsByTagName('c-sidebar-nav')[0];
     sideNav.setAttribute('style', 'height: auto; display: block;')
+    const a = document.getElementsByTagName('c-sidebar-nav-group')[idx - 1]?.getElementsByTagName('c-sidebar-nav')[0]?.getElementsByTagName('c-sidebar-nav-link')[childIdx]?.getElementsByTagName('a')[0];
+    if (!a) return;
+    a.setAttribute('style', 'color: rgb(0 0 0) !important; background: rgb(255 255 255 / 85%) !important;');
+  }
+
+  resetElementStyles() {
+    const navLinks = document.getElementsByTagName('c-sidebar-nav-link');
+    for (let i = 0; i < navLinks.length; i++) {
+      const element = navLinks[i];
+      const a = element.getElementsByTagName('a')[0];
+      a.setAttribute('style', 'color: #ffffff99; background: #00000000')
+    }
   }
 
 }
