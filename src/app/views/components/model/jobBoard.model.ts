@@ -6,7 +6,7 @@ export class JobBoardModel {
 		public router: Router
 	) { }
 
-	parseDataAndNavigate(data: any, type: string) {
+	parseDataAndNavigate(data: any, type: string, from: string) {
 		const tempData = {
 			"Website": data.website || data?.websites[0],
 			"Logo": data.logo,
@@ -14,7 +14,7 @@ export class JobBoardModel {
 			"description": data.description
 		}
 		const encodedData = encodeURIComponent(JSON.stringify(tempData));
-		this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type } });
+		this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type, from } });
 	}
 
 }

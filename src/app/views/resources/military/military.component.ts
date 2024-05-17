@@ -72,7 +72,7 @@ export class MilitaryComponent extends PropertiesModel implements OnInit, OnDest
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'military', type: 'properties' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'military', type: 'properties', from: '/resources/military' } });
   }
 
   ngOnDestroy(): void {
@@ -80,7 +80,7 @@ export class MilitaryComponent extends PropertiesModel implements OnInit, OnDest
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'military', type: 'properties', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'military', type: 'properties', editMode: 'true', from: '/resources/military' } });
   }
 
   applyFilter(text: any) {

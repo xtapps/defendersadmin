@@ -6,7 +6,7 @@ export class DefenderModel {
 		public router: Router
 	) { }
 
-	parseDataAndNavigate(data: any, type: string, user?: any) {
+	parseDataAndNavigate(data: any, type: string, from: string, user?: any) {
 		const tempData = {
 			"First Name": data.firstName,
 			"Last Name": data.lastName,
@@ -32,7 +32,7 @@ export class DefenderModel {
 			"Validated": data.validated ? 'Yes' : 'No'
 		}
 		const encodedData = encodeURIComponent(JSON.stringify(tempData));
-		this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type, user } });
+		this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type, user, from } });
 	}
 
 	getUserType(userType: any) {

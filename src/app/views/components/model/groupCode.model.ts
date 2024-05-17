@@ -6,7 +6,7 @@ export class GroupCodeModel {
 		public router: Router
 	) { }
 
-	parseDataAndNavigate(data: any, type: string) {
+	parseDataAndNavigate(data: any, type: string, from: string) {
 		const tempData = {
 			"Used Time": data.usedTime,
 			"Group Name": data.groupName,
@@ -14,7 +14,7 @@ export class GroupCodeModel {
 			"Discount Price": data.discountPrice
 		};
 		const encodedData = encodeURIComponent(JSON.stringify(tempData));
-		this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type } });
+		this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type, from } });
 	}
 
 }

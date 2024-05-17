@@ -45,17 +45,17 @@ export class LocationsComponent extends PropertiesModel implements OnInit, OnDes
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'partner', orgType: 'health', appSection: 'support', type: 'properties', title: 'Location' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'partner', orgType: 'health', appSection: 'support', type: 'properties', title: 'Location', from: '/health/locations' } });
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'partner', orgType: 'health', appSection: 'support', type: 'properties', editMode: 'true', title: 'Location' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'partner', orgType: 'health', appSection: 'support', type: 'properties', editMode: 'true', title: 'Location', from: '/health/locations' } });
   }
 
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.chaplainList[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'chaplain' } });
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'chaplain', from: '/health/locations' } });
   }
 
   pageChangeEvent(event: any) {

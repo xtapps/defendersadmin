@@ -6,7 +6,7 @@ export class UsersModel {
 		public router: Router
 	) { }
 
-	parseDataAndNavigate(data: any, type: string) {
+	parseDataAndNavigate(data: any, type: string, from: string) {
 		const tempData = {
 			"First Name": data.firstName,
 			"Last Name": data.lastName,
@@ -18,7 +18,7 @@ export class UsersModel {
 			"Defender Mil Email": data.defenderMilEmail
 		};
 		const encodedData = encodeURIComponent(JSON.stringify(tempData));
-		this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type } });
+		this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type, from } });
 	}
 
 }

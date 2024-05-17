@@ -44,17 +44,17 @@ export class MusicComponent extends PropertiesModel implements OnInit, OnDestroy
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'music', orgType: 'commercial', appSection: 'entertainment', type: 'properties' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'music', orgType: 'commercial', appSection: 'entertainment', type: 'properties', from: '/entertainment/music' } });
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'music', orgType: 'commercial', appSection: 'entertainment', type: 'properties', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'music', orgType: 'commercial', appSection: 'entertainment', type: 'properties', editMode: 'true', from: '/entertainment/music' } });
   }
 
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.gamesLists[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'games' } });
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'games', from: '/entertainment/music' } });
   }
 
   pageChangeEvent(event: any) {

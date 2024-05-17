@@ -6,7 +6,7 @@ export class BusinessModel {
 		public router: Router
 	) { }
 
-	parseDataAndNavigate(data: any, type: string) {
+	parseDataAndNavigate(data: any, type: string, from: string) {
 		console.log(data)
 		const tempData = {
 			"Franchise Image": data.franchiseImage,
@@ -14,7 +14,7 @@ export class BusinessModel {
 			"Website": data.website || (data?.websites?.length && data?.websites[0])
 		}
 		const encodedData = encodeURIComponent(JSON.stringify(tempData));
-		this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type } });
+		this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type, from } });
 	}
 
 }

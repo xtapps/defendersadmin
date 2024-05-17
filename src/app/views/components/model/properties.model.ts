@@ -6,7 +6,7 @@ export class PropertiesModel {
 		public router: Router
 	) { }
 
-	parseDataAndNavigate(partner: any, type: string) {
+	parseDataAndNavigate(partner: any, type: string, from?: string) {
 		const tempData = {
 			"Location Name": partner.locationName,
 			"Location Image": partner.locationImage,
@@ -24,7 +24,7 @@ export class PropertiesModel {
 			"Country": partner.country,
 			"Zip": partner.zip,
 			"Phone": partner.phone,
-			"Website": partner?.website[0] || partner?.websites[0],
+			"Website": partner?.website[0] || (partner?.websites?.length && partner?.websites[0]),
 			"Email": partner.email,
 			"Local Contact": partner.localContact,
 			"Franchise Tag": partner.franchiseTag,
@@ -38,7 +38,7 @@ export class PropertiesModel {
 			"partnerUserId": partner.partnerUserId
 		}
 		const encodedData = encodeURIComponent(JSON.stringify(tempData));
-		this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type } });
+		this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type, from } });
 	}
 
 }

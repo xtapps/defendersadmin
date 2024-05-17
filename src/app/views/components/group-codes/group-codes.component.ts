@@ -43,7 +43,7 @@ export class GroupCodesComponent extends GroupCodeModel implements OnInit, OnDes
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'group-code' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'group-code', from: '/admin/group-codes' } });
   }
 
   goToViePage(): void {
@@ -83,11 +83,11 @@ export class GroupCodesComponent extends GroupCodeModel implements OnInit, OnDes
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.groupCodes[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'group-code' } });
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'group-code', from: '/admin/group-codes' } });
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { type: 'group-code', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { type: 'group-code', editMode: 'true', from: '/admin/group-codes' } });
   }
 
   applyFilter(text: any) {

@@ -44,7 +44,7 @@ export class BusinessOpportunitiesComponent extends BusinessModel implements OnI
   goToViewPage(index:number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.businessList[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData } });
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, from: '/admin/business-opportunities' } });
   }
 
   pageChangeEvent(event: any) {
@@ -85,11 +85,11 @@ export class BusinessOpportunitiesComponent extends BusinessModel implements OnI
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'franchises', title: 'Business Opportunity' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'franchises', title: 'Business Opportunity', from: '/admin/business-opportunities' } });
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'franchises', title: 'Business Opportunity', orgType: 'commercial', appSection: 'partner', type: 'franchises', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'franchises', title: 'Business Opportunity', orgType: 'commercial', appSection: 'partner', type: 'franchises', editMode: 'true', from: '/admin/business-opportunities' } });
   }
 
   ngOnDestroy(): void {

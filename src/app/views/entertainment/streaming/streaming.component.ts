@@ -44,17 +44,17 @@ export class StreamingComponent extends PropertiesModel implements OnInit, OnDes
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'streaming', orgType: 'commercial', appSection: 'entertainment', type: 'properties' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'streaming', orgType: 'commercial', appSection: 'entertainment', type: 'properties', from: '/entertainment/streaming' } });
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'streaming', orgType: 'commercial', appSection: 'entertainment', type: 'properties', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'streaming', orgType: 'commercial', appSection: 'entertainment', type: 'properties', editMode: 'true', from: '/entertainment/streaming' } });
   }
 
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.gamesLists[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'games' } });
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'games', from: '/entertainment/streaming' } });
   }
 
   pageChangeEvent(event: any) {

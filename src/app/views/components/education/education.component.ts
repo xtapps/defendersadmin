@@ -44,7 +44,7 @@ export class EducationComponent extends EducationModel implements OnInit, OnDest
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.educations[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'education' } });
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'education', from: '/admin/education' } });
   }
 
   deleteItem(id: string): void {
@@ -71,12 +71,12 @@ export class EducationComponent extends EducationModel implements OnInit, OnDest
   }  
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'education' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'education', from: '/admin/education' } });
   }
 
   editItem(item: any): void {
     const encodedData = encodeURIComponent(JSON.stringify(item));
-    this.router.navigate(['admin/add-new'], { state: item, queryParams: { data: encodedData, type: 'education' } });
+    this.router.navigate(['admin/add-new'], { state: item, queryParams: { data: encodedData, type: 'education', from: '/admin/education' } });
   }
 
   pageChangeEvent(event: any) {

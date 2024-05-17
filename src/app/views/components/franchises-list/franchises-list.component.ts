@@ -44,14 +44,14 @@ export class FranchisesListComponent extends BusinessModel implements OnInit, On
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'franchises', title: 'Franchise' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'franchises', title: 'Franchise', from: '/admin/franchises' } });
   }
 
 
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.franchisesList[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'franchises' } });
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'franchises', from: '/admin/franchises' } });
   }
 
   pageChangeEvent(event: any) {
@@ -90,7 +90,7 @@ export class FranchisesListComponent extends BusinessModel implements OnInit, On
   // }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'franchises', title: 'Franchise', orgType: 'commercial', appSection: 'partner', type: 'franchises', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'franchises', title: 'Franchise', orgType: 'commercial', appSection: 'partner', type: 'franchises', editMode: 'true', from: '/admin/franchises' } });
   }
 
   applyFilter(text: any) {

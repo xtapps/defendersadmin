@@ -42,11 +42,11 @@ export class ChaplainComponent extends PropertiesModel implements OnInit, OnDest
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'chaplain', type: 'properties' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'chaplain', type: 'properties', from: '/resources/chaplain' } });
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'chaplain', type: 'properties', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'chaplain', type: 'properties', editMode: 'true', from: '/resources/chaplain' } });
   }
 
   pageChangeEvent(event: any) {
