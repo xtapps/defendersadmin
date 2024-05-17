@@ -44,6 +44,7 @@ export class AddNewFranchisesComponent implements OnInit, OnDestroy {
       franchiseName: ['', [Validators.required]],
       franchiseImage: [''],
       website: [''],
+      image: ['']
     })
   }
 
@@ -54,7 +55,8 @@ export class AddNewFranchisesComponent implements OnInit, OnDestroy {
     this.form.patchValue({
       franchiseName: datas.franchiseName,
       website: datas.website,
-      franchiseImage: datas.franchiseImage
+      franchiseImage: datas.franchiseImage,
+      image: datas.franchiseImage
     })
   }
 
