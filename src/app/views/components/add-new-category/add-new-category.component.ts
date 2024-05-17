@@ -45,6 +45,7 @@ export class AddNewCategoryComponent implements OnInit, OnDestroy {
       website: [''],
       appSection: ['partner'],
       categoryIcon: [''],
+      image: ['']
     })
   }
 
@@ -53,7 +54,8 @@ export class AddNewCategoryComponent implements OnInit, OnDestroy {
     this.form.patchValue({
       categoryName: datas.categoryName,
       website: datas.website,
-      categoryIcon: datas.categoryIcon
+      categoryIcon: datas.categoryIcon,
+      image: datas.categoryIcon
     })
   }
 
