@@ -45,17 +45,17 @@ export class BooksPlusComponent extends PropertiesModel implements OnInit, OnDes
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'kids', orgType: 'commercial', appSection: 'books', type: 'properties' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'kids', orgType: 'commercial', appSection: 'books', type: 'properties', from: '/kids-corner/book-plus' } });
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'kids', orgType: 'commercial', appSection: 'books', type: 'properties', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'kids', orgType: 'commercial', appSection: 'books', type: 'properties', editMode: 'true', from: '/kids-corner/book-plus' } });
   }
 
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.bookPlusLists[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'books plus' } });
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'books plus', from: '/kids-corner/book-plus' } });
   }
 
   pageChangeEvent(event: any) {

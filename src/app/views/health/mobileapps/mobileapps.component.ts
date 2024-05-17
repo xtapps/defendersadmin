@@ -48,7 +48,7 @@ export class MobileAppsComponent extends PropertiesModel implements OnInit, OnDe
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.militaryList[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'military' } });
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'military', from: '/health/mobileapps' } });
   }
 
   pageChangeEvent(event: any) {
@@ -81,7 +81,7 @@ export class MobileAppsComponent extends PropertiesModel implements OnInit, OnDe
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new-mobile-app'], { queryParams: { propertyType: 'app', orgType: 'health', appSection: 'support', type: 'mobileApps' } });
+    this.router.navigate(['/admin/add-new-mobile-app'], { queryParams: { propertyType: 'app', orgType: 'health', appSection: 'support', type: 'mobileApps', from: '/health/mobileapps' } });
   }
 
   ngOnDestroy(): void {
@@ -89,7 +89,7 @@ export class MobileAppsComponent extends PropertiesModel implements OnInit, OnDe
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new-mobile-app'], {state: ev, queryParams: { propertyType: 'app', orgType: 'health', appSection: 'support', type: 'mobileApps', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new-mobile-app'], {state: ev, queryParams: { propertyType: 'app', orgType: 'health', appSection: 'support', type: 'mobileApps', editMode: 'true', from: '/health/mobileapps' } });
   }
 
   applyFilter(text: any) {

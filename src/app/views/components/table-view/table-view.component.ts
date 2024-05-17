@@ -67,11 +67,11 @@ export class TableViewComponent extends PropertiesModel implements OnInit, OnDes
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], {queryParams:{type: 'partner'}});
+    this.router.navigate(['/admin/add-new'], {queryParams:{type: 'partner', from: '/admin/home'}});
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'partner', orgType: 'commercial', appSection: 'partner', type: 'properties', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'partner', orgType: 'commercial', appSection: 'partner', type: 'properties', editMode: 'true', from: '/admin/home' } });
   }
 
   pageChangeEvent(event: any) {

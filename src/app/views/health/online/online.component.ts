@@ -47,17 +47,17 @@ export class OnlineComponent extends PropertiesModel implements OnInit, OnDestro
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'website', orgType: 'health', appSection: 'support', type: 'properties', title: 'Online' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'website', orgType: 'health', appSection: 'support', type: 'properties', title: 'Online', from: '/health/online' } });
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'website', orgType: 'health', appSection: 'support', type: 'properties', editMode: 'true', title: 'Online' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'website', orgType: 'health', appSection: 'support', type: 'properties', editMode: 'true', title: 'Online', from: '/health/online' } });
   }
 
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.firstResponderList[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'job-boards' } });
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'job-boards', from: '/health/online' } });
   }
 
   pageChangeEvent(event: any) {

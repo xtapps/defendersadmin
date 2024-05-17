@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 import { navItems } from './_nav';
 
@@ -12,7 +12,7 @@ export class DefaultLayoutComponent implements OnInit {
 
   public navItems = navItems;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     setTimeout(() => {
@@ -31,13 +31,14 @@ export class DefaultLayoutComponent implements OnInit {
 
   highlightSideMenu() {
     const curUrl = this.router.url;
+    const from = this.activatedRoute.snapshot.queryParams['from'];
     this.navItems.forEach((item, idx) => {
       const title = document.getElementsByTagName('c-sidebar-nav-group')[idx]?.getElementsByTagName('a')[0].text;
-      if (item.url === curUrl) {
+      if (item.url === curUrl || item.url === from) {
         this.updateElement(idx);
       } else {
         item.children?.forEach((child, childIdx) => {
-          if (child.url === curUrl) {
+          if (child.url === curUrl || child.url === from) {
             this.updateElement(idx, childIdx);
           }
         })
@@ -62,6 +63,13 @@ export class DefaultLayoutComponent implements OnInit {
       const element = navLinks[i];
       const a = element.getElementsByTagName('a')[0];
       a.setAttribute('style', 'color: #ffffff99; background: #00000000')
+    }
+    const navGroup = document.getElementsByTagName('c-sidebar-nav-group');
+    for (let i = 0; i < navGroup.length; i++) {
+      const element = navGroup[i];
+      element.classList.remove('show');
+      const a = element.getElementsByTagName('c-sidebar-nav')[0];
+      a.setAttribute('style', 'height: 0px')
     }
   }
 

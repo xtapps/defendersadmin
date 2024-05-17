@@ -45,17 +45,17 @@ export class PodcastsComponent extends PropertiesModel implements OnInit, OnDest
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'podcast', orgType: 'commercial', appSection: 'entertainment', type: 'properties' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'podcast', orgType: 'commercial', appSection: 'entertainment', type: 'properties', from: '/entertainment/podcasts' } });
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'podcast', orgType: 'commercial', appSection: 'entertainment', type: 'properties', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'podcast', orgType: 'commercial', appSection: 'entertainment', type: 'properties', editMode: 'true', from: '/entertainment/podcasts' } });
   }
 
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.bookPlusLists[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'books plus' } });
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'books plus', from: '/entertainment/podcasts' } });
   }
 
   pageChangeEvent(event: any) {

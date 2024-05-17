@@ -49,11 +49,11 @@ export class FirstResponderComponent extends PropertiesModel implements OnInit, 
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'firstResponder', type: 'properties' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'firstResponder', type: 'properties', from: '/non-profits/first-responder' } });
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'firstResponder', type: 'properties', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'charity', orgType: 'commercial', appSection: 'firstResponder', type: 'properties', editMode: 'true', from: '/non-profits/first-responder' } });
   }
 
   pageChangeEvent(event: any) {

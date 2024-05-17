@@ -45,7 +45,7 @@ export class CategoriesComponent extends CategoryModel implements OnInit, OnDest
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'category' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'category', from: '/admin/categories' } });
   }
 
   showAll(index: number): void {
@@ -80,7 +80,7 @@ export class CategoriesComponent extends CategoryModel implements OnInit, OnDest
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.categories[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'category' } });
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'category', from: '/admin/categories' } });
   }
 
   pageChangeEvent(event: any) {
@@ -97,7 +97,7 @@ export class CategoriesComponent extends CategoryModel implements OnInit, OnDest
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { type: 'category', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { type: 'category', editMode: 'true', from: '/admin/categories' } });
   }
   ngOnDestroy(): void {
     this.subscription.forEach(el => { el.unsubscribe() });

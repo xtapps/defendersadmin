@@ -6,7 +6,7 @@ export class JobModel {
 		public router: Router
 	) { }
 
-	parseDataAndNavigate(data: any, type: string) {
+	parseDataAndNavigate(data: any, type: string, from: string) {
 		const tempData = {
 			"Job Company": data.jobCompany,
 			"Job Company Name": data.jobCompanyName,
@@ -34,7 +34,7 @@ export class JobModel {
 		};
 
 		const encodedData = encodeURIComponent(JSON.stringify(tempData));
-		this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type } });
+		this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type, from } });
 	}
 
 }

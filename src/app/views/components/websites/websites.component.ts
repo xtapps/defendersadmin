@@ -44,17 +44,17 @@ export class WebsitesComponent extends PropertiesModel implements OnInit, OnDest
 
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'website', type: 'website' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'website', type: 'website', from: '/admin/websites' } });
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'website', orgType: 'commercial', appSection: 'partner', type: 'website', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'website', orgType: 'commercial', appSection: 'partner', type: 'website', editMode: 'true', from: '/admin/websites' } });
   }
 
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.websitesList[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'website' } });
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'website', from: '/admin/websites' } });
   }
 
   pageChangeEvent(event: any) {

@@ -43,7 +43,7 @@ export class JobOpportunitiesComponent extends JobModel implements OnInit, OnDes
   goToViewPage(index:number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.jobOpportunities[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData } });
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, from: '/admin/job-opportunities' } });
   }
 
   pageChangeEvent(event: any) {

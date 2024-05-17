@@ -44,17 +44,17 @@ export class MoviesComponent extends PropertiesModel implements OnInit, OnDestro
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'kids', orgType: 'commercial', appSection: 'movies', type: 'properties' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { propertyType: 'kids', orgType: 'commercial', appSection: 'movies', type: 'properties', from: '/kids-corner/movies' } });
   }
 
   editItem(ev: any): void {
-    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'kids', orgType: 'commercial', appSection: 'movies', type: 'properties', editMode: 'true' } });
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { propertyType: 'kids', orgType: 'commercial', appSection: 'movies', type: 'properties', editMode: 'true', from: '/kids-corner/movies' } });
   }
 
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.gamesLists[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'games' } });
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'games', from: '/kids-corner/movies' } });
   }
 
   pageChangeEvent(event: any) {

@@ -6,7 +6,7 @@ export class partnerPropertiesModel {
 		public router: Router
 	) { }
 
-	parseDataAndNavigate(partner: any, type: string) {
+	parseDataAndNavigate(partner: any, type: string, from?: string) {
 		const tempData = {
 			"Location Name": partner.locationName,
 			"Location Image": partner.locationImage,
@@ -37,7 +37,7 @@ export class partnerPropertiesModel {
 			"id": partner._id
 		}
 		const encodedData = encodeURIComponent(JSON.stringify(tempData));
-		this.router.navigate(['partnerDashboard/viewDetails'], { queryParams: { data: encodedData, type } });
+		this.router.navigate(['partnerDashboard/viewDetails'], { queryParams: { data: encodedData, type, from } });
 	}
 
 	parseDataAndNavigateForJob(job: any, type: string) {

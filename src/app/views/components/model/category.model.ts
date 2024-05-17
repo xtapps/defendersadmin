@@ -6,7 +6,7 @@ export class CategoryModel {
 		public router: Router
 	) { }
 
-	parseDataAndNavigate(data: any, type: string) {
+	parseDataAndNavigate(data: any, type: string, from: string) {
 		let subCategories = data.subCategories?.map((val: { category: string; }) => {
 			return ' ' + val.category
 		});
@@ -18,7 +18,7 @@ export class CategoryModel {
 			"Sub Categories": subCategories
 		}
 		const encodedData = encodeURIComponent(JSON.stringify(tempData));
-		this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type } });
+		this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type, from } });
 	}
 
 }

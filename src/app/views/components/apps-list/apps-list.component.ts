@@ -32,7 +32,7 @@ export class AppsListComponent extends PropertiesModel implements OnInit, OnDest
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'app' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'app', from: '/admin/apps' } });
   }
 
   getAppslIst(): void {
@@ -49,7 +49,7 @@ export class AppsListComponent extends PropertiesModel implements OnInit, OnDest
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.appsList[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'apps' } });
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'apps', from: '/admin/apps' } });
   }
 
   pageChangeEvent(event: any) {

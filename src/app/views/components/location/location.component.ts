@@ -58,7 +58,7 @@ export class LocationComponent extends PropertiesModel implements OnInit, OnDest
   }
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'location' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'location', from: '/admin/services' } });
   }
 
   goToViewPage(index: number): void {

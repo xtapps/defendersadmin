@@ -43,7 +43,7 @@ export class JobBoardsComponent extends JobBoardModel implements OnInit, OnDestr
   goToViewPage(index: number): void {
     // Encode the JSON data and navigate to ViewComponent with it as a query parameter
     const encodedData = encodeURIComponent(JSON.stringify(this.jodBoards[index]));
-    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'job-boards' } });
+    this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type: 'job-boards', from: '/admin/job-boards' } });
   }
 
   deleteItem(id: string): void {
@@ -70,12 +70,12 @@ export class JobBoardsComponent extends JobBoardModel implements OnInit, OnDestr
   }  
 
   addNew(): void {
-    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'job-boards' } });
+    this.router.navigate(['/admin/add-new'], { queryParams: { type: 'job-boards', from: '/admin/job-boards' } });
   }
 
   editItem(item: any): void {
     const encodedData = encodeURIComponent(JSON.stringify(item));
-    this.router.navigate(['admin/add-new'], { state: item, queryParams: { data: encodedData, type: 'job-boards' } });
+    this.router.navigate(['admin/add-new'], { state: item, queryParams: { data: encodedData, type: 'job-boards', from: '/admin/job-boards' } });
   }
 
   pageChangeEvent(event: any) {
