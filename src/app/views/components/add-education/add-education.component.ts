@@ -38,7 +38,8 @@ export class AddEducationComponent implements OnInit, OnDestroy {
       title: ['', [Validators.required]],
       logo: ['', [Validators.required]],
       website: [''],
-      description: ['']
+      description: [''],
+      image: ['']
     });
   }
 
@@ -49,7 +50,8 @@ export class AddEducationComponent implements OnInit, OnDestroy {
       title: data.title,
       logo: data.logo,
       website: data.website,
-      description: data.description
+      description: data.description,
+      image: data.logo
     })
   }
 
