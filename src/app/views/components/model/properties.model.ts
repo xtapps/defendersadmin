@@ -20,6 +20,7 @@ export class PropertiesModel {
 			"Address 1": partner.address1,
 			"Address 2": partner.address2,
 			"County": partner.county,
+			"City": partner.city,
 			"State": partner.state,
 			"Country": partner.country,
 			"Zip": partner.zip,
