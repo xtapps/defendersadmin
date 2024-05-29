@@ -31,7 +31,7 @@ export class AdminService {
   }
 
   getLocations(limit: number, offset: number, text: string) {
-    const url = `${apiUrl}/properties/viewAll?reqParams=[ {"value": "partner", "key": "appSection"}, {"value": "service", "key": "propertyType"}]&limit=${limit}&offset=${offset}&text=${text}`;
+    const url = `${apiUrl}/properties/viewAll?reqParams=[ {"value": "partner", "key": "appSection"}, {"value": "service", "key": "propertyType"}]&limit=${limit}&offset=${offset}&text=${text}&sortOrder=desc`;
     return this.http.get(url);
   }
 

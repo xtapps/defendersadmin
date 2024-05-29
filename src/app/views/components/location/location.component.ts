@@ -96,6 +96,10 @@ export class LocationComponent extends PropertiesModel implements OnInit, OnDest
     )
   }
 
+  editItem(ev: any): void {
+    this.router.navigate(['/admin/add-new'], {state: ev, queryParams: { type: 'location', editMode: 'true', from: '/admin/services' } });
+  }
+
   ngOnDestroy(): void {
     this.subscription.forEach(el => el.unsubscribe());
   }

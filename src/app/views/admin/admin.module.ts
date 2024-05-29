@@ -42,6 +42,7 @@ import { EducationComponent } from '../components/education/education.component'
 import { AddEducationComponent } from '../components/add-education/add-education.component';
 import { AddNewMobileAppComponent } from '../components/add-new-froms/add-new-mobile-app/add-new-mobile-app.component';
 import { PagesModule } from '../pages/pages.module';
+import { AddNewServiceComponent } from '../components/add-new-froms/add-new-service/add-new-service.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { PagesModule } from '../pages/pages.module';
     AdminUsersComponent,
     EducationComponent,
     AddEducationComponent,
-    AddNewMobileAppComponent
+    AddNewMobileAppComponent,
+    AddNewServiceComponent
   ],
   imports: [
     CommonModule,
