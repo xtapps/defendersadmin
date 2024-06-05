@@ -354,4 +354,8 @@ export class AdminService {
     return this.http.get<any>(`${apiUrl}/getDefenderById?id=${id}`);
   }
 
+  sendNotification(payloadData: FormData): Observable<any>{
+    return this.http.post<any>(`${apiUrl}/sendNotification`, payloadData);
+  }
+
 }

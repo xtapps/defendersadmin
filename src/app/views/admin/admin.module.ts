@@ -43,6 +43,8 @@ import { AddEducationComponent } from '../components/add-education/add-education
 import { AddNewMobileAppComponent } from '../components/add-new-froms/add-new-mobile-app/add-new-mobile-app.component';
 import { PagesModule } from '../pages/pages.module';
 import { AddNewServiceComponent } from '../components/add-new-froms/add-new-service/add-new-service.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -86,7 +88,6 @@ import { AddNewServiceComponent } from '../components/add-new-froms/add-new-serv
     NavModule,
     IconModule,
     TabsModule,
-    CommonModule,
     GridModule,
     ProgressModule,
     ReactiveFormsModule,
@@ -101,7 +102,9 @@ import { AddNewServiceComponent } from '../components/add-new-froms/add-new-serv
     NgSelectModule,
     SharedModule,
     SharedAdminModule,
-    PagesModule
+    PagesModule,
+    MatDialogModule,
+    MatButtonModule
   ]
 })
 export class AdminModule { }

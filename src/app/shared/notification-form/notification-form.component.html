@@ -1,0 +1,32 @@
+<div class="main_modal_container">
+	<div class="heder">
+		<div class="name">
+			Notification
+		</div>
+		<div class="close">
+			<p (click)="close()">X</p>
+		</div>
+	</div>
+	<form [formGroup]="form" class="example-form">
+		<mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
+			<mat-label>Title</mat-label>
+			<input type="text" formControlName="title" matInput placeholder="Title">
+			<mat-error>This field is required</mat-error>
+		</mat-form-field>
+		<mat-form-field style="width: 100%;" class="example-full-width" appearance="outline">
+			<mat-label>Description</mat-label>
+			<input type="text" formControlName="description" matInput
+				placeholder="Description">
+			<mat-error>This field is required</mat-error>
+		</mat-form-field>
+		<div class="image">
+			<app-file-upload [fileName]="fileName" (onFileChangeEvent)="onFileChange($event)"></app-file-upload>
+		</div>
+	</form>
+	<div class="button_div">
+		<button (click)="close()" [disabled]="loading" mat-raised-button color="secondary">{{loading ? 'Loading...' :
+			'Cancel'}}</button>
+		<button (click)="onSubmit()" [disabled]="loading" mat-raised-button color="primary">{{loading ? 'Loading...' :
+			'Submit'}}</button>
+	</div>
+</div>
