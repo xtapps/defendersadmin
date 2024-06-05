@@ -139,8 +139,8 @@ export class AddNewServiceComponent implements OnInit, OnDestroy {
       county: data.county,
       phone: data.phone,
       websites: data?.website[0] || (data?.websites?.length && data?.websites[0]),
-      primaryCategory: (data.primaryCategory && data.primaryCategory !== ' ') ? data.primaryCategory : null,
-      secondaryCategory: (data.secondaryCategory && data.secondaryCategory !== ' ') ? data.secondaryCategory : null,
+      primaryCategory: (data.primaryCategory && data.primaryCategory !== ' ') ? data.primaryCategory : '',
+      secondaryCategory: (data.secondaryCategory && data.secondaryCategory !== ' ') ? data.secondaryCategory : '',
       discount: data.discount,
       description: data.description,
       image: this.fileName,
@@ -330,7 +330,7 @@ export class AddNewServiceComponent implements OnInit, OnDestroy {
           this.allPrimaryCategories = [...this.allPrimaryCategories, ...[res]];
           this.form.controls['primaryCategory'].setValue(res._id);
           res.subCategories.forEach((val: any) => {
-            if (val._id.toString() === this.form.controls['secondaryCategory'].value.toString()) {
+            if (val._id.toString() === this.form.controls['secondaryCategory'].value?.toString()) {
               this.form.controls['secondaryCategory'].setValue(val._id);
             }
           });

@@ -186,7 +186,7 @@
                         <div class="mb-3 w-half">
                             <label cLabel for="secondaryCategory">Secondary Category</label>
                             <select name="" id="secondaryCategory" formControlName="secondaryCategory">
-                                <option value="" selected disabled>select</option>
+                                <option value="" selected>select</option>
                                 <option *ngFor="let item of secondaryCategories" [value]="item._id">{{item.category}}
                                 </option>
                             </select>

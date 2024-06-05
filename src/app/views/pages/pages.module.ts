@@ -50,6 +50,9 @@ import { SharedAdminModule } from 'src/app/shared/shared-admin.module';
 import { PartnerViewPageComponent } from './partner-view-page/partner-view-page.component';
 import { MatIconModule } from '@angular/material/icon';
 import { PartnerJobOpportunitiesListComponent } from './partner-job-opportunities-list/partner-job-opportunities-list.component';
+import { NotificationFormComponent } from 'src/app/shared/notification-form/notification-form.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -66,7 +69,8 @@ import { PartnerJobOpportunitiesListComponent } from './partner-job-opportunitie
     PartnerAddJobOpportunityComponent,
     PartnerTableListComponent,
     PartnerViewPageComponent,
-    PartnerJobOpportunitiesListComponent
+    PartnerJobOpportunitiesListComponent,
+    NotificationFormComponent
   ],
   imports: [
     CommonModule,
@@ -107,13 +111,16 @@ import { PartnerJobOpportunitiesListComponent } from './partner-job-opportunitie
     MatIconModule,
     ToastModule,
     ModalModule,
-    SpinnerModule
+    SpinnerModule,
+    MatInputModule,
+    MatButtonModule
   ],
   providers: [
     IconSetService
   ],
   exports: [
-    FileUploadComponent
+    FileUploadComponent,
+    NotificationFormComponent
   ]
 })
 export class PagesModule {

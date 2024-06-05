@@ -6,6 +6,7 @@ import { RejectReasonModalComponent } from '../modals/reject-reason-modal/reject
 import { MatDialog } from '@angular/material/dialog';
 import { PAGINATION } from 'src/assets/app-constant';
 import { DefenderModel } from '../model/defender.model';
+import { NotificationFormComponent } from 'src/app/shared/notification-form/notification-form.component';
 
 @Component({
   selector: 'app-approved-list',
@@ -113,6 +114,15 @@ export class ApprovedListComponent extends DefenderModel implements OnInit, OnDe
     this.offset = 0;
     this.adminService.searchTextChanged.next(true);
     this.getApprovedList();
+  }
+
+  openNotificationForm(userId: string) {
+    this.dialog.open(NotificationFormComponent, {
+      width: '50%',
+      data: {
+        id: userId
+      }
+    });
   }
 
   ngOnDestroy(): void {

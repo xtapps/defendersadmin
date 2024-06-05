@@ -1,9 +1,11 @@
 import { Component, Input, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 
 import { ClassToggleService, HeaderComponent } from '@coreui/angular';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
+import { NotificationFormComponent } from 'src/app/shared/notification-form/notification-form.component';
 
 @Component({
   selector: 'app-default-header',
@@ -18,7 +20,7 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnDestroy
   public newNotifications = new Array(5)
   subscriptions: Subscription[] = [];
 
-  constructor(private classToggler: ClassToggleService, private adminService: AdminService) {
+  constructor(private classToggler: ClassToggleService, private adminService: AdminService, private dialog: MatDialog) {
     super();
   }
 
@@ -33,6 +35,15 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnDestroy
       this.adminService.logout();
     });
     this.subscriptions.push(userDetailsSub);
+  }
+
+  openNotificationForm() {
+    this.dialog.open(NotificationFormComponent, {
+      width: '50%',
+      data: {
+        id: 'defender-mobile'
+      }
+    });
   }
 
   ngOnDestroy(): void {
