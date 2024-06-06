@@ -47,9 +47,9 @@ export class LocationComponent extends PropertiesModel implements OnInit, OnDest
 
   getAllLocation(): void {
     this.isLoading = true;
-    this.searchText = `searchFromADMIN:${this.searchText}`;
+    const searchText = `searchFromADMIN:${this.searchText}`;
     this.subscription.push(
-      this.adminService.getLocations(this.limit, this.offset, this.searchText).subscribe((res: any) => {
+      this.adminService.getLocations(this.limit, this.offset, searchText).subscribe((res: any) => {
         this.isLoading = false;
         this.locationList = res[0]?.properties || res.properties;
         this.totalRecords = res[0]?.totalRecords || res.count;
