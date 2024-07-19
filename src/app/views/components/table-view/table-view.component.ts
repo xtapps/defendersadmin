@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Subscription } from 'rxjs';
 import { AdminService } from '../../../services/admin.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { PropertiesModel } from '../model/properties.model';
 import { PAGINATION } from 'src/assets/app-constant';
 
@@ -35,17 +35,41 @@ export class TableViewComponent extends PropertiesModel implements OnInit, OnDes
 
   searchText: any = '';
 
+  isCategory: boolean = false;
+  categoryId: any = '';
+
   private subscriptions: Subscription[] = [];
 
   constructor(
     private adminService: AdminService,
-    public override router: Router
+    public override router: Router,
+    private route: ActivatedRoute
   ) {
     super(router);
   }
 
   ngOnInit(): void {
-    this.getPartners();
+    this.initFun();
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        console.log(event)
+        this.initFun();
+      }
+    });
+  }
+
+  initFun() {
+    this.isCategory = (this.route.snapshot.queryParamMap.get('isCategory') === 'true');
+    this.categoryId = this.route.snapshot.queryParamMap.get('categoryId');
+    this.selectProperFunctionToFetchData();
+  }
+
+  selectProperFunctionToFetchData() {
+    if (this.isCategory) {
+      this.getPartnersByCategories();      
+    } else {
+      this.getPartners();
+    }
   }
 
   getPartners() {
@@ -59,11 +83,22 @@ export class TableViewComponent extends PropertiesModel implements OnInit, OnDes
     this.subscriptions.push(propSub);
   }
 
+  getPartnersByCategories() {
+    this.isLoading = true;
+    const propSub = this.adminService.getPartnersByCategories(this.limit, this.offset, this.searchText, this.categoryId).subscribe((res: any) => {
+      this.isLoading = false;
+      this.partnersList = res?.properties;
+      this.totalRecords = res?.totalRecords;
+    });
+
+    this.subscriptions.push(propSub);
+  }
+
   applyFilter(text: any) {
     this.searchText = text;
     this.offset = 0;
     this.adminService.searchTextChanged.next(true);
-    this.getPartners();
+    this.selectProperFunctionToFetchData();
   }
 
   addNew(): void {
@@ -77,7 +112,7 @@ export class TableViewComponent extends PropertiesModel implements OnInit, OnDes
   pageChangeEvent(event: any) {
     this.offset = event.offSet;
     this.limit = event.limit;
-    this.getPartners();
+    this.selectProperFunctionToFetchData();
   }
 
   deleteItem(id: any) {
@@ -91,13 +126,13 @@ export class TableViewComponent extends PropertiesModel implements OnInit, OnDes
     this.subscriptions.push(
       this.adminService.deleteProperty(id).subscribe(res => {
         this.offset = 0;
-        this.getPartners();
+        this.selectProperFunctionToFetchData();
       }, err => {
         console.log(err)
         if (err.status === 201) {
           alert('Partner deleted successfully.');
           this.offset = 0;
-          this.getPartners();
+          this.selectProperFunctionToFetchData();
         }
       })
     )

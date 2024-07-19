@@ -18,7 +18,7 @@ export class CategoryModel {
 			"Sub Categories": subCategories
 		}
 		const encodedData = encodeURIComponent(JSON.stringify(tempData));
-		this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type, from } });
+		this.router.navigate(['admin/view'], { queryParams: { data: encodedData, type, from, _id: data._id, isCategory: true } });
 	}
 
 }

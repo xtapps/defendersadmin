@@ -93,6 +93,11 @@ export class AdminService {
     return this.http.get(url);
   }
 
+  getPartnersByCategories(limit: number, offset: number, text: string, categoryId: string) {
+    const url = `${apiUrl}/properties/getPartnersByCategories?limit=${limit}&offset=${offset}&text=${text}&categoryId=${categoryId}`;
+    return this.http.get(url);
+  }
+
   getResourcesForAdmin(limit: number, offset: number, text: string = '', appSection: string, propertyType?: string): Observable<any> {
     return this.http.get<any>(`${apiUrl}/partner/getSupportForAdmin?limit=${limit}&offset=${offset}&text=${text}&appSection=${appSection}&propertyType=${propertyType ?? ''}`);
   }

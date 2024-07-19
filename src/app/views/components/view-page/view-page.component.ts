@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 import { s3Url } from 'src/config/config';
@@ -21,12 +21,14 @@ export class ViewPageComponent  implements OnInit, OnDestroy {
   imageName: string = '';
   partnerId: string = '';
   partnerUserId: string = '';
+  isCategory: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
     private dialog: MatDialog,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private router: Router
     ) {}
 
   ngOnInit() {
@@ -34,6 +36,8 @@ export class ViewPageComponent  implements OnInit, OnDestroy {
     const encodedData = this.route.snapshot.queryParamMap.get('data');
     this.type = this.route.snapshot.queryParamMap.get('type') || '';
     const user = this.route.snapshot.queryParamMap.get('user');
+    const isCategory = this.route.snapshot.queryParamMap.get('isCategory');
+    this.isCategory = (isCategory === 'true')
     if (encodedData) {
       this.receivedData = JSON.parse(decodeURIComponent(encodedData));
       if (user) {
@@ -48,6 +52,11 @@ export class ViewPageComponent  implements OnInit, OnDestroy {
         this.downloadDoc(this.receivedData['Defender Document']);
       }
     }
+  }
+
+  seePartners() {
+    const _id = this.route.snapshot.queryParamMap.get('_id');
+    this.router.navigate(['/admin/home'], { queryParams: { isCategory: true, categoryId: _id, from: '/admin/home' } });
   }
 
   getObjectKeyValues(obj: any): { key: string, value: any }[] {
