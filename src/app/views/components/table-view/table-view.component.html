@@ -1,5 +1,5 @@
 <div class="header_section">
-  <h4>Partners</h4>
+  <h4>Partners {{(category?.categoryName ? 'of ' + category.categoryName : '')}}</h4>
   <button cButton color="primary" *ngIf="!isCategory" (click)="addNew()">Add</button>
 </div>
 

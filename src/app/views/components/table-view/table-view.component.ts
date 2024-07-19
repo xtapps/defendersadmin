@@ -37,6 +37,7 @@ export class TableViewComponent extends PropertiesModel implements OnInit, OnDes
 
   isCategory: boolean = false;
   categoryId: any = '';
+  category: any;
 
   private subscriptions: Subscription[] = [];
 
@@ -49,16 +50,16 @@ export class TableViewComponent extends PropertiesModel implements OnInit, OnDes
   }
 
   ngOnInit(): void {
-    this.initFun();
+    this.initFunc();
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         console.log(event)
-        this.initFun();
+        this.initFunc();
       }
     });
   }
 
-  initFun() {
+  initFunc() {
     this.isCategory = (this.route.snapshot.queryParamMap.get('isCategory') === 'true');
     this.categoryId = this.route.snapshot.queryParamMap.get('categoryId');
     this.selectProperFunctionToFetchData();
@@ -78,6 +79,7 @@ export class TableViewComponent extends PropertiesModel implements OnInit, OnDes
       this.isLoading = false;
       this.partnersList = res[0]?.properties;
       this.totalRecords = res[0]?.totalRecords;
+      this.category = null;
     });
 
     this.subscriptions.push(propSub);
@@ -89,6 +91,7 @@ export class TableViewComponent extends PropertiesModel implements OnInit, OnDes
       this.isLoading = false;
       this.partnersList = res?.properties;
       this.totalRecords = res?.totalRecords;
+      this.category = res?.category;
     });
 
     this.subscriptions.push(propSub);
