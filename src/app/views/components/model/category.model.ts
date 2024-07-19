@@ -13,7 +13,7 @@ export class CategoryModel {
 		const tempData = {
 			"Category Type": data.categoryType,
 			"App Section": data.appSection,
-			"Category Icon": data.categoryIcon,
+			// "Category Icon": data.categoryIcon,
 			"Category Name": data.categoryName,
 			"Sub Categories": subCategories
 		}
