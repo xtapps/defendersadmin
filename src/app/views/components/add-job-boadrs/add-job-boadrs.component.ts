@@ -37,7 +37,7 @@ export class AddJobBoadrsComponent implements OnInit, OnDestroy {
   initForm(): void {
     this.form = this.formBuilder.group({
       title: ['', [Validators.required]],
-      logo: ['', [Validators.required]],
+      logo: [''],
       website: [''],
       description: [''],
       image: ['']
